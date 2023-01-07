@@ -20,9 +20,8 @@ namespace Unit
         public void Move()
         {
             Vector3 direction = inputService.GetMoveDirection();
-            //Debug.Log(direction);
-            Rotate(direction);
             playerModel.Transform.position += direction * movementModel.MoveSpeed * Time.deltaTime;
+            Rotate(direction);
         }
 
         private void Rotate(Vector3 direction)

@@ -6,13 +6,18 @@ using Zenject;
 public class PlayerInstaller : MonoInstaller
 {
     [SerializeField] private Settings settings;
+    [SerializeField] private HealthSettings healthSettings;
 
     public override void InstallBindings()
     {
+        SignalBusInstaller.Install(Container);
         Container.Bind<InputService>().AsSingle()
             .WithArguments(settings.Joystick);
         Container.Bind<PlayerModel>().AsSingle()
             .WithArguments(settings.Transform);
+        Container.Bind<HealthModel>().AsSingle()
+            .WithArguments(healthSettings);
+        Container.Bind<IHealth>().To<HealthPresentor>().AsTransient();
         Container.Bind<IMovement>().To<PlayerMovement>().AsTransient();
         Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle();
     }

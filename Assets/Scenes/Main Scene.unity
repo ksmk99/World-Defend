@@ -943,6 +943,12 @@ MonoBehaviour:
   settings:
     <Transform>k__BackingField: {fileID: 1118262720}
     <Joystick>k__BackingField: {fileID: 1213732808}
+  healthSettings:
+    MaxHealth: 1000
+    IsAutoHeal: 1
+    HealDelay: 3
+    HealRate: 0.5
+    HealCount: 50
 --- !u!1 &1198086821
 GameObject:
   m_ObjectHideFlags: 0
