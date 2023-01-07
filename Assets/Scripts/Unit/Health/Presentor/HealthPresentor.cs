@@ -10,17 +10,27 @@ namespace Unit
 
     public interface ISignalOnHealthChange
     {
-        public float Percent { get; set; }
+        public float Percent { get; }
     }
 
-    public struct SignalOnUnitDamage : ISignalOnHealthChange
+    public class SignalOnUnitDamage : ISignalOnHealthChange
     {
-        public float Percent { get; set; }
+        public float Percent { get; }
+
+        public SignalOnUnitDamage(float percent)
+        {
+            Percent = percent;  
+        }
     }
 
-    public struct SignalOnUnitHeal : ISignalOnHealthChange
+    public class SignalOnUnitHeal : ISignalOnHealthChange
     {
-        public float Percent { get; set; }
+        public float Percent { get; }
+
+        public SignalOnUnitHeal(float percent)
+        {
+            Percent = percent;
+        }
     }
     #endregion
 
@@ -42,15 +52,12 @@ namespace Unit
 
             if (model.Health == 0)
             {
-                signalBus.Fire(new SignalOnUnitDied());
+                signalBus.TryFire(new SignalOnUnitDied());
             }
             else
             {
-                var signal = new SignalOnUnitDamage()
-                {
-                    Percent = model.Health / model.Settings.MaxHealth
-                };
-                signalBus.Fire(signal);
+                var signal = new SignalOnUnitDamage(model.Health / model.Settings.MaxHealth);
+                signalBus.TryFire(signal);
 
                 Debug.Log("Damage - " + signal.Percent);
             }
@@ -61,11 +68,8 @@ namespace Unit
             model.Health += count;
             model.Health = Math.Clamp(model.Health, 0, model.Settings.MaxHealth);
 
-            var signal = new SignalOnUnitHeal()
-            {
-                Percent = model.Health / model.Settings.MaxHealth
-            };
-            signalBus.Fire(signal);
+            var signal = new SignalOnUnitHeal(model.Health / model.Settings.MaxHealth);
+            signalBus.TryFire(signal);
 
             Debug.Log("Health count - " + signal.Percent);
         }

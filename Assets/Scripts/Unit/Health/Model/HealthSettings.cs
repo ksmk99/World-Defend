@@ -10,7 +10,7 @@ namespace Unit
     [Serializable]
     public class HealthSettings
     {
-        public int MaxHealth;
+        public float MaxHealth;
         [Space]
         public bool IsAutoHeal;
         public float HealDelay;

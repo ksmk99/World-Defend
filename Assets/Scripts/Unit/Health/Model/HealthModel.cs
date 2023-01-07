@@ -10,13 +10,13 @@ namespace Unit
     {
         public HealthSettings Settings { get; private set; }
 
-        public int Health;
+        public float Health;
         public float NextHealTime;
 
         public HealthModel(HealthSettings settings)
         {
             Settings = settings;
-            Health = settings.MaxHealth;
+            Health = settings.MaxHealth / 5f;
         }
     }
 }
