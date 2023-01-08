@@ -11,12 +11,12 @@ namespace Unit
 {
     public class EnemySpawner : ITickable
     {
-        private readonly EnemyFacade.Factory factory;
+        private readonly EnemyView.Factory factory;
         private readonly EnemySpawnerSettings settings;
         private float nextSpawnTime;
 
 
-        public EnemySpawner(EnemyFacade.Factory factory, EnemySpawnerSettings settings)
+        public EnemySpawner(EnemyView.Factory factory, EnemySpawnerSettings settings)
         {
             this.factory = factory;
             this.settings = settings;
@@ -26,7 +26,7 @@ namespace Unit
         {
             if(nextSpawnTime <= Time.time)
             {
-                EnemyFacade enemy = factory.Create();
+                EnemyView enemy = factory.Create();
                 Vector3 randomPosition = new Vector3(
                     Random.Range(-settings.Offset.x, settings.Offset.x), 0,
                     Random.Range(-settings.Offset.z, settings.Offset.z));

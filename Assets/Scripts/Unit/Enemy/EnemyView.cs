@@ -2,15 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 
-public class EnemyFacade : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
+public class EnemyView : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
 {
+    public NavMeshAgent Agent;
+
     private IMemoryPool pool;
-    private EnemyController enemyController;
+    private EnemyPresentor enemyController;
 
     [Inject]
-    public void Construct(EnemyController enemyController)
+    public void Construct(EnemyPresentor enemyController)
     {
         this.enemyController = enemyController;
     }
@@ -30,7 +33,7 @@ public class EnemyFacade : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
         this.pool = pool;
     }
 
-    public class Factory : PlaceholderFactory<EnemyFacade>
+    public class Factory : PlaceholderFactory<EnemyView>
     {
     }
 }

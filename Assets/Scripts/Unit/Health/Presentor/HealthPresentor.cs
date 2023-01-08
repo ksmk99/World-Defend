@@ -52,6 +52,7 @@ namespace Unit
 
             if (model.Health == 0)
             {
+                model.IsDeath = true;
                 signalBus.TryFire(new SignalOnUnitDied());
             }
             else
@@ -59,7 +60,7 @@ namespace Unit
                 var signal = new SignalOnUnitDamage(model.Health / model.Settings.MaxHealth);
                 signalBus.TryFire(signal);
 
-                Debug.Log("Damage - " + signal.Percent);
+                model.NextHealTime = Time.time + model.Settings.HealDelay;
             }
         }
 
@@ -70,8 +71,6 @@ namespace Unit
 
             var signal = new SignalOnUnitHeal(model.Health / model.Settings.MaxHealth);
             signalBus.TryFire(signal);
-
-            Debug.Log("Health count - " + signal.Percent);
         }
 
         public void AutoHeal()

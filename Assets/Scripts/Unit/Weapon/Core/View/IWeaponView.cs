@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GUIRotator : MonoBehaviour
+namespace Unit
 {
+    public interface IWeaponView
+    {
 
+    }
 }

@@ -31,7 +31,7 @@ namespace Unit
         }
 
         public void Heal(SignalOnUnitHeal data)
-        {
+        {   
             healthBar.fillAmount = data.Percent;
         }
 

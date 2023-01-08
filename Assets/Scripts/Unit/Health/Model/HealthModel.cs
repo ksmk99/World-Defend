@@ -13,6 +13,8 @@ namespace Unit
         public float Health;
         public float NextHealTime;
 
+        public bool IsDeath;
+
         public HealthModel(HealthSettings settings)
         {
             Settings = settings;

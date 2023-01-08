@@ -1,10 +1,10 @@
 using Zenject;
 
-public class EnemyController : ITickable
+public class EnemyPresentor : ITickable
 {
     private IMovement movement;
 
-    public EnemyController(IMovement movement)
+    public EnemyPresentor(IMovement movement)
     {
         this.movement = movement;
     }

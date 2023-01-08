@@ -11,8 +11,8 @@ public class GameInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Container.BindFactory<EnemyFacade, EnemyFacade.Factory>()
-            .FromPoolableMemoryPool<EnemyFacade, EnemyFacadePool>(poolBinder => poolBinder
+        Container.BindFactory<EnemyView, EnemyView.Factory>()
+            .FromPoolableMemoryPool<EnemyView, EnemyFacadePool>(poolBinder => poolBinder
             .WithInitialSize(5)
             .FromSubContainerResolve()
             .ByNewPrefabInstaller<EnemyInstaller>(enemy)
@@ -21,7 +21,7 @@ public class GameInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<EnemySpawner>().AsSingle();
     }
 
-    public class EnemyFacadePool : MonoPoolableMemoryPool<IMemoryPool, EnemyFacade>
+    public class EnemyFacadePool : MonoPoolableMemoryPool<IMemoryPool, EnemyView>
     {
     }
 }

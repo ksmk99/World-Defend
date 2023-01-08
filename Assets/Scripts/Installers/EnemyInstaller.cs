@@ -14,7 +14,7 @@ namespace Installers
         {
             Container.Bind<IMovement>().To<EnemyMovement>().AsSingle();
             Container.Bind<EnemyModel>().AsSingle();
-            Container.BindInterfacesAndSelfTo<EnemyController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EnemyPresentor>().AsSingle();
         }
     }
 }
