@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Unit
 {
-    public interface IHealth
+    public interface IHealthPresentor
     {
         void Heal(int count);
         void Damage(int count);
         void AutoHeal();
+        bool IsDeath();
     }
 }

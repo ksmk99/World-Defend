@@ -30,12 +30,12 @@ namespace Unit
             signalBus.Unsubscribe<SignalOnUnitDamage>(Damage);
         }
 
-        public void Heal(SignalOnUnitHeal data)
+        private void Heal(SignalOnUnitHeal data)
         {   
             healthBar.fillAmount = data.Percent;
         }
 
-        public void Damage(SignalOnUnitDamage data)
+        private void Damage(SignalOnUnitDamage data)
         {
             healthBar.fillAmount = data.Percent;
         }

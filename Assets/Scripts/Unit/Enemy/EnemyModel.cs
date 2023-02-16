@@ -10,8 +10,11 @@ public class EnemyModel
 
     private EnemyView enemyFacade;
 
-    public EnemyModel(EnemyView enemyFacade)
+    public readonly IMovement Movement;
+
+    public EnemyModel(EnemyView enemyFacade, IMovement movement)
     {
         this.enemyFacade = enemyFacade;
+        Movement = movement;
     }
 }

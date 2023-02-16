@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unit.Bullet;
 using UnityEngine;
 
 namespace Unit
@@ -11,17 +12,30 @@ namespace Unit
     {
         private readonly PlayerModel playerModel;
         private readonly WeaponSettings settings;
-        private readonly IWeaponModel model;
+        private readonly WeaponModel model;
 
         public WeaponPresentor(PlayerModel playerModel, IWeaponModel model)
         {
             this.playerModel = playerModel;
-            this.model = model;
+            this.model = (WeaponModel)model;
             settings = (WeaponSettings)model.Settings;
         }
 
         public void Update()
         {
+            for (int i = 0; i < model.Bullets.Count; i++)
+            {
+                if (model.Bullets[i].CheckEnd())
+                {
+                    model.Bullets[i].Dispose();
+                    model.Bullets.Remove(model.Bullets[i]);
+                }
+                else
+                {
+                    model.Bullets[i].Move();
+                }
+            }
+
             if (IsReloading())
             {
                 return;
@@ -65,6 +79,11 @@ namespace Unit
 
         public void Attack()
         {
+            if (model.IsActing)
+            {
+                playerModel.Transform.LookAt(model.Target.position);
+            }
+
             if (model.ActionTimer >= settings.BulletDelay)
             {
                 CreateBullet(playerModel.Transform);
@@ -82,7 +101,12 @@ namespace Unit
 
         private void CreateBullet(Transform transform)
         {
-            Debug.Log("Create Bullet at " + transform.position);
+            var bulletSettings = new BulletRuntimeSettings(
+                settings.Distance, transform.rotation,
+                transform.position, model.Team,
+                settings.Effects);
+            var bullet = model.BulletFactory.Create(bulletSettings);
+            model.Bullets.Add(bullet);
         }
     }
 }

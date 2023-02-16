@@ -1529,7 +1529,7 @@ PrefabInstance:
     - target: {fileID: 1317563628391675526, guid: 4a07f8b92e297114ab47976224bf94c4,
         type: 3}
       propertyPath: m_Name
-      value: Health
+      value: Health View
       objectReference: {fileID: 0}
     - target: {fileID: 1317563628391675527, guid: 4a07f8b92e297114ab47976224bf94c4,
         type: 3}
@@ -1604,12 +1604,12 @@ PrefabInstance:
     - target: {fileID: 1317563628391675527, guid: 4a07f8b92e297114ab47976224bf94c4,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1317563628391675527, guid: 4a07f8b92e297114ab47976224bf94c4,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1317563628391675527, guid: 4a07f8b92e297114ab47976224bf94c4,
         type: 3}

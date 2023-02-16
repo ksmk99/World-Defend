@@ -1,13 +1,13 @@
+using Installers;
 using System;
 using Unit;
+using Unit.Bullet;
 using UnityEngine;
 using Zenject;
 using static Zenject.CheatSheet;
 
 public class PlayerInstaller : MonoInstaller
 {
-    [Header("References")]
-    //[SerializeField] private HealthView healthView;
     [Header("Settings")]
     [SerializeField] private Settings settings;
     [SerializeField] private HealthSettings healthSettings;
@@ -23,22 +23,28 @@ public class PlayerInstaller : MonoInstaller
         Container.Bind<InputService>()
             .AsSingle()
             .WithArguments(settings.Joystick);
-        Container.Bind<PlayerModel>()
-            .AsSingle()
-            .WithArguments(settings.Transform);
         Container.Bind<HealthModel>()
             .AsSingle()
             .WithArguments(healthSettings);
         Container.Bind<IWeaponModel>()
             .To<WeaponModel>()
             .AsSingle()
-            .WithArguments(weaponSettings);
+            .WithArguments(Team.Ally, weaponSettings);
+
+        Container.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
+            .FromMonoPoolableMemoryPool(
+                x => x.WithInitialSize(weaponSettings.BulletCount)
+                .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
+                .UnderTransformGroup("Bullet Pool"));
 
         Container.Bind<IWeapon>().To(weaponSettings.WeaponType).AsTransient();
-        Container.Bind<IHealth>().To<HealthPresentor>().AsTransient();
+        Container.Bind<IHealthPresentor>().To<HealthPresentor>().AsTransient();
         Container.Bind<IMovement>().To<PlayerMovement>().AsTransient();
 
-        Container.BindInterfacesAndSelfTo<PlayerPresentor>().AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerModel>()
+            .AsSingle()
+            .WithArguments(settings.Transform);
+        Container.Bind<PlayerPresentor>().AsSingle();
         Container.BindInterfacesAndSelfTo<HealthView>()
             .FromComponentInHierarchy().AsSingle();
     }
@@ -46,7 +52,9 @@ public class PlayerInstaller : MonoInstaller
     [Serializable]
     public class Settings
     {
-        [field: SerializeField] public Transform Transform { get; private set; }
-        [field: SerializeField] public Joystick Joystick { get; private set; }
+        [field: SerializeField] 
+        public Transform Transform { get; private set; }
+        [field: SerializeField] 
+        public Joystick Joystick { get; private set; }
     }
 }

@@ -18,7 +18,7 @@ namespace Unit
         public HealthModel(HealthSettings settings)
         {
             Settings = settings;
-            Health = settings.MaxHealth / 5f;
+            Health = settings.MaxHealth;
         }
     }
 }

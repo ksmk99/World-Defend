@@ -34,7 +34,7 @@ namespace Unit
     }
     #endregion
 
-    public class HealthPresentor : IHealth
+    public class HealthPresentor : IHealthPresentor
     {
         private readonly SignalBus signalBus;
         private readonly HealthModel model;
@@ -43,6 +43,11 @@ namespace Unit
         {
             this.model = model;
             this.signalBus = signalBus;
+        }
+
+        public bool IsDeath()
+        {
+            return model.Health <= 0; 
         }
 
         public void Damage(int count)

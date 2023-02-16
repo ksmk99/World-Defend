@@ -17,5 +17,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   BulletCount: 2
-  ReloadTime: 5
+  BulletPrefab: {fileID: 5865941083765694682, guid: 8bba4bfc0d3211f4fa1c0ab571a28188,
+    type: 3}
+  ReloadTime: 0.75
   BulletDelay: 0.25
