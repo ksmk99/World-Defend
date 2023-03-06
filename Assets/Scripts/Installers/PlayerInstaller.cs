@@ -25,27 +25,38 @@ public class PlayerInstaller : MonoInstaller
             AsSingle().WithArguments(settings.Joystick);
         Container.Bind<HealthModel>()
             .AsTransient().WithArguments(healthSettings);
-        Container.Bind<IWeaponModel>().To<WeaponModel>()
-            .AsTransient().WithArguments(Team.Ally, weaponSettings);
+
+        //Container.Bind<IWeaponPresentor>()
+        //    .FromSubContainerResolve()
+        //    .ByMethod(BindWeapon)
+        //    .AsTransient()
+        //    .WhenInjectedInto<PlayerModel>(); 
 
         Container.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
-            .FromMonoPoolableMemoryPool(
-                x => x.WithInitialSize(weaponSettings.BulletCount)
-                .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
-                .UnderTransformGroup("Bullet Pool"));
-
-
-        Container.BindInstance(settings.Transform).WhenInjectedInto<PlayerModel>();
-        Container.Bind<IWeapon>().To(weaponSettings.WeaponType)
+        .FromMonoPoolableMemoryPool(
+             x => x.WithInitialSize(weaponSettings.BulletCount)
+            .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
+            .UnderTransformGroup("Bullet Pool"));
+        Container.Bind<IWeaponModel>()
+            .To<WeaponModel>()
             .AsTransient()
-            .WithArguments(settings.Transform)
-            .WhenInjectedInto<PlayerModel>(); 
-        Container.Bind<IHealthPresentor>().To<HealthPresentor>().AsTransient().WhenInjectedInto<PlayerModel>(); ;
+            .WithArguments(Team.Ally, weaponSettings);
+        Container.Bind<IWeaponPresentor>()
+            .To(weaponSettings.WeaponType)
+            .AsTransient()
+            .WhenInjectedInto<PlayerModel>();
+
+
+        Container.Bind<IHealthPresentor>().To<HealthPresentor>()
+            .AsTransient()
+            .WhenInjectedInto<PlayerModel>(); ;
         Container.Bind<IMovement>().To<PlayerMovement>()
             .AsTransient()
             .WithArguments(settings.Transform)
-            .WhenInjectedInto<PlayerModel>(); 
+            .WhenInjectedInto<PlayerModel>();
 
+
+        Container.BindInstance(settings.Transform).WhenInjectedInto<PlayerModel>();
         Container.Bind<IUnitModel>().To<PlayerModel>()
             .AsSingle()
             .WhenInjectedInto<PlayerPresentor>();
@@ -58,7 +69,24 @@ public class PlayerInstaller : MonoInstaller
             .AsTransient();
     }
 
-    [Serializable]
+    private void BindWeapon(DiContainer subContainer)
+    {
+        subContainer.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
+                .FromMonoPoolableMemoryPool(
+                     x => x.WithInitialSize(weaponSettings.BulletCount)
+                    .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
+                    .UnderTransformGroup("Bullet Pool"));
+        subContainer.Bind<IWeaponModel>()
+            .To<WeaponModel>()
+            .AsTransient()
+            .WithArguments(Team.Ally, weaponSettings);
+        subContainer.Bind<IWeaponPresentor>()
+            .To(weaponSettings.WeaponType)
+            .AsTransient()
+            .WhenInjectedInto<PlayerModel>();
+    }
+
+        [Serializable]
     public class Settings
     {
         [field: SerializeField] 

@@ -560,11 +560,11 @@ MonoBehaviour:
   enemy: {fileID: 1105396708260317832, guid: eaf9cd4a669739d47ad3b691157b5958, type: 3}
   healthSettings:
     MaxHealth: 100
-    IsAutoHeal: 0
-    HealDelay: 0
-    HealRate: 0
-    HealCount: 0
-  weaponSettings: {fileID: 11400000, guid: 4851361856ca003448c211b2d6bf2df0, type: 2}
+    IsAutoHeal: 1
+    HealDelay: 1
+    HealRate: 1
+    HealCount: 10
+  weaponSettings: {fileID: 11400000, guid: e2ecfd870eda3b54f8544dbe557e2afd, type: 2}
   enemyMovement:
     MoveSpeed: 0
     RotateSpeed: 0

@@ -26,7 +26,7 @@ namespace Unit
         public Transform Target { get; set; }
 
         public WeaponModel(IWeaponSettings settings, Team team,
-            BulletView.Factory factory)
+                BulletView.Factory factory)
         {
             Settings = settings;
             CanUse = true;

@@ -8,20 +8,18 @@ using UnityEngine;
 
 namespace Unit
 {
-    public class WeaponPresentor : IWeapon
+    public class WeaponPresentor : IWeaponPresentor
     {
-        private readonly Transform player;
         private readonly WeaponSettings settings;
         private readonly WeaponModel model;
 
-        public WeaponPresentor(Transform player, IWeaponModel model)
+        public WeaponPresentor(IWeaponModel model)
         {
-            this.player = player;
             this.model = (WeaponModel)model;
             settings = (WeaponSettings)model.Settings;
         }
 
-        public void Update()
+        public void Update(Transform transform)
         {
             for (int i = 0; i < model.Bullets.Count; i++)
             {
@@ -41,9 +39,9 @@ namespace Unit
                 return;
             }
 
-            if (SetAction())
+            if (SetAction(transform))
             {
-                Attack();
+                Attack(transform);
             }
         }
 
@@ -54,14 +52,14 @@ namespace Unit
                     model.NextUseTime > Time.time;
         }
 
-        public bool SetAction()
+        public bool SetAction(Transform transform)
         {
             if (model.IsActing)
             {
                 return true;
             }
 
-            EnemyView enemy = WeaponHelper.GetNearestEnemy(player.position, model.Settings);
+            EnemyView enemy = WeaponHelper.GetNearestEnemy(transform.position, model.Settings);
             if (enemy == default)
             {
                 return false;
@@ -77,16 +75,16 @@ namespace Unit
             return true;
         }
 
-        public void Attack()
+        public void Attack(Transform transform)
         {
             if (model.IsActing)
             {
-                player.LookAt(model.Target.position);
+                transform.LookAt(model.Target.position);
             }
 
             if (model.ActionTimer >= settings.BulletDelay)
             {
-                CreateBullet(player);
+                CreateBullet(transform);
                 model.ActionTimer = 0;
             }
 

@@ -21,14 +21,14 @@ public class EnemyPresentor : ITickable
             return;
         }
 
-        //foreach (var effect in model.Effects)
-        //{
-        //    effect.Update();
-        //}
+        foreach (var effect in model.Effects)
+        {
+            effect.Update();
+        }
 
         model.Movement.Move();
         model.Health.AutoHeal();
-        //model.Weapon.Update();
+        model.Weapon.Update(model.Transform);
     }
 
     public void AddEffects(List<IEffectSettings> effects, Team team)

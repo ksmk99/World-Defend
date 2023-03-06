@@ -29,7 +29,7 @@ public class PlayerPresentor : ITickable
 
         model.Movement.Move();
         model.Health.AutoHeal();
-        model.Weapon.Update();
+        model.Weapon.Update(model.Transform);
     }
 
     public void AddEffects(List<IEffectSettings> effects, Team team)

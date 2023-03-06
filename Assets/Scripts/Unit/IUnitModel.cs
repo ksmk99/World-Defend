@@ -13,7 +13,7 @@ namespace Unit
         Transform Transform { get; }
         IMovement Movement { get; }
         IHealthPresentor Health { get; }
-        IWeapon Weapon { get; }
+        IWeaponPresentor Weapon { get; }
 
         List<IEffectPresentor> Effects { get; }
 

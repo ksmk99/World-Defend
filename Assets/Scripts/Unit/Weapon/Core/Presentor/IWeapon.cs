@@ -2,11 +2,11 @@
 
 namespace Unit
 {
-    public interface IWeapon
+    public interface IWeaponPresentor
     {
         bool IsReloading();
-        bool SetAction();
-        void Attack();
-        void Update();   
+        bool SetAction(Transform transform);
+        void Attack(Transform transform);
+        void Update(Transform transform);   
     }
 }

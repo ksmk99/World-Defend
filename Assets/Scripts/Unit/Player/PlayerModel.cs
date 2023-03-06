@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using Unit;
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
 public class PlayerModel : IUnitModel
 {
     public Transform Transform { get; }
     public IMovement Movement { get; }
     public IHealthPresentor Health { get; }
-    public IWeapon Weapon { get; }
+    public IWeaponPresentor Weapon { get; }
 
     public List<IEffectPresentor> Effects { get; }
 
@@ -17,7 +18,7 @@ public class PlayerModel : IUnitModel
     public NavMeshAgent Agent { get; }
 
     public PlayerModel(IMovement movement,
-        IHealthPresentor health, IWeapon weapon, Transform transform)
+        IHealthPresentor health, IWeaponPresentor weapon, Transform transform)
     {
         Transform = transform;
         Movement = movement;

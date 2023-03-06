@@ -40,6 +40,19 @@ public class GameInstaller : MonoInstaller
         subContainer.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
         subContainer.DeclareSignal<SignalOnUnitDied>();
 
+        subContainer.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
+            .FromMonoPoolableMemoryPool(
+                x => x.WithInitialSize(weaponSettings.BulletCount)
+                .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
+                .UnderTransformGroup("Bullet Pool"));
+
+        subContainer.Bind<IWeaponModel>().To<WeaponModel>()
+            .AsTransient()
+            .WithArguments(Team.Enemy, weaponSettings);
+        subContainer.Bind<IWeaponPresentor>()
+            .To(weaponSettings.WeaponType)
+            .AsTransient();
+
 
         subContainer.Bind<EnemyModel>().AsSingle();
         subContainer.BindInterfacesAndSelfTo<EnemyPresentor>().AsSingle();

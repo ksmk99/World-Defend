@@ -18,7 +18,6 @@ namespace Unit
 
         public HealthModel(HealthSettings settings)
         {
-            Debug.Log("Init Model");
             Settings = settings;
             Health = settings.MaxHealth / 5f;
         }
