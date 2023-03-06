@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Unit
 {
     [Serializable]
-    public class HealthSettings
+    public struct HealthSettings
     {
         public float MaxHealth;
         [Space]

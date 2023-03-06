@@ -2,6 +2,7 @@ using Installers;
 using System;
 using Unit;
 using Unit.Bullet;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 using Zenject;
 using static Zenject.CheatSheet;
@@ -20,16 +21,12 @@ public class PlayerInstaller : MonoInstaller
         Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
         Container.DeclareSignal<SignalOnUnitDied>();
 
-        Container.Bind<InputService>()
-            .AsSingle()
-            .WithArguments(settings.Joystick);
+        Container.Bind<InputService>().
+            AsSingle().WithArguments(settings.Joystick);
         Container.Bind<HealthModel>()
-            .AsSingle()
-            .WithArguments(healthSettings);
-        Container.Bind<IWeaponModel>()
-            .To<WeaponModel>()
-            .AsSingle()
-            .WithArguments(Team.Ally, weaponSettings);
+            .AsTransient().WithArguments(healthSettings);
+        Container.Bind<IWeaponModel>().To<WeaponModel>()
+            .AsTransient().WithArguments(Team.Ally, weaponSettings);
 
         Container.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
             .FromMonoPoolableMemoryPool(
@@ -37,16 +34,28 @@ public class PlayerInstaller : MonoInstaller
                 .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
                 .UnderTransformGroup("Bullet Pool"));
 
-        Container.Bind<IWeapon>().To(weaponSettings.WeaponType).AsTransient();
-        Container.Bind<IHealthPresentor>().To<HealthPresentor>().AsTransient();
-        Container.Bind<IMovement>().To<PlayerMovement>().AsTransient();
 
-        Container.BindInterfacesAndSelfTo<PlayerModel>()
+        Container.BindInstance(settings.Transform).WhenInjectedInto<PlayerModel>();
+        Container.Bind<IWeapon>().To(weaponSettings.WeaponType)
+            .AsTransient()
+            .WithArguments(settings.Transform)
+            .WhenInjectedInto<PlayerModel>(); 
+        Container.Bind<IHealthPresentor>().To<HealthPresentor>().AsTransient().WhenInjectedInto<PlayerModel>(); ;
+        Container.Bind<IMovement>().To<PlayerMovement>()
+            .AsTransient()
+            .WithArguments(settings.Transform)
+            .WhenInjectedInto<PlayerModel>(); 
+
+        Container.Bind<IUnitModel>().To<PlayerModel>()
             .AsSingle()
-            .WithArguments(settings.Transform);
-        Container.Bind<PlayerPresentor>().AsSingle();
+            .WhenInjectedInto<PlayerPresentor>();
+        Container.BindInterfacesAndSelfTo<PlayerPresentor>().AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerView>()
+            .FromComponentInHierarchy()
+            .AsSingle();
         Container.BindInterfacesAndSelfTo<HealthView>()
-            .FromComponentInHierarchy().AsSingle();
+            .FromComponentInHierarchy()
+            .AsTransient();
     }
 
     [Serializable]

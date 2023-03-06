@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unit;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -10,13 +11,6 @@ public class EnemyView : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
     public NavMeshAgent Agent;
 
     private IMemoryPool pool;
-    private EnemyPresentor enemyController;
-
-    [Inject]
-    public void Construct(EnemyPresentor enemyController)
-    {
-        this.enemyController = enemyController;
-    }
 
     public void Dispose()
     {

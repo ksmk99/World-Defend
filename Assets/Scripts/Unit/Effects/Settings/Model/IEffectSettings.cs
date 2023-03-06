@@ -9,6 +9,6 @@ namespace Unit
     public interface IEffectSettings
     {
         float Value { get; }
-        IEffectPresentor GetPresentor(PlayerModel player, EffectModel model);
+        IEffectPresentor GetPresentor(IUnitModel player, EffectModel model);
     }
 }

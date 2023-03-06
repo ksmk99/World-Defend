@@ -18,7 +18,7 @@ MonoBehaviour:
   enemyMS:
     MoveSpeed: 3
     RotateSpeed: 0.8
-    MaxDistance: 5
+    MaxDistance: 999
   spawnerSettings:
     SpawnRate: 1
     Offset: {x: 15, y: 0, z: 15}

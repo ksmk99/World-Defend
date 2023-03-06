@@ -8,8 +8,7 @@ namespace Unit
 {
     public class DamageEP : EffectPresentor
     {
-        public DamageEP(PlayerModel player, EffectModel model) 
-            : base(player, model) { }
+        public DamageEP(IUnitModel unit, EffectModel model) : base(unit, model) { }
 
 
         public override void Update()

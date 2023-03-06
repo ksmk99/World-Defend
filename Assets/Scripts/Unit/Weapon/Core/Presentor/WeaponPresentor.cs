@@ -10,13 +10,13 @@ namespace Unit
 {
     public class WeaponPresentor : IWeapon
     {
-        private readonly PlayerModel playerModel;
+        private readonly Transform player;
         private readonly WeaponSettings settings;
         private readonly WeaponModel model;
 
-        public WeaponPresentor(PlayerModel playerModel, IWeaponModel model)
+        public WeaponPresentor(Transform player, IWeaponModel model)
         {
-            this.playerModel = playerModel;
+            this.player = player;
             this.model = (WeaponModel)model;
             settings = (WeaponSettings)model.Settings;
         }
@@ -61,7 +61,7 @@ namespace Unit
                 return true;
             }
 
-            EnemyView enemy = WeaponHelper.GetNearestEnemy(playerModel.Transform.position, model.Settings);
+            EnemyView enemy = WeaponHelper.GetNearestEnemy(player.position, model.Settings);
             if (enemy == default)
             {
                 return false;
@@ -81,12 +81,12 @@ namespace Unit
         {
             if (model.IsActing)
             {
-                playerModel.Transform.LookAt(model.Target.position);
+                player.LookAt(model.Target.position);
             }
 
             if (model.ActionTimer >= settings.BulletDelay)
             {
-                CreateBullet(playerModel.Transform);
+                CreateBullet(player);
                 model.ActionTimer = 0;
             }
 

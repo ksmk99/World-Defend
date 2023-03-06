@@ -9,9 +9,9 @@ namespace Unit
         [field: SerializeField]
         public float Value { get; }
 
-        public IEffectPresentor GetPresentor(PlayerModel player, EffectModel model)
+        public IEffectPresentor GetPresentor(IUnitModel unit, EffectModel model)
         {
-            return new DamageEP(player, model);
+            return new DamageEP(unit, model);
         }
     }
 }

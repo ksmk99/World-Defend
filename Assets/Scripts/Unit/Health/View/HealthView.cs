@@ -20,6 +20,7 @@ namespace Unit
 
         public void Initialize()
         {
+            Debug.Log("Init view");
             signalBus.Subscribe<SignalOnUnitHeal>(Heal);
             signalBus.Subscribe<SignalOnUnitDamage>(Damage);
         }
@@ -33,6 +34,7 @@ namespace Unit
         private void Heal(SignalOnUnitHeal data)
         {   
             healthBar.fillAmount = data.Percent;
+            Debug.Log("Heal Event");
         }
 
         private void Damage(SignalOnUnitDamage data)

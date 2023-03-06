@@ -8,14 +8,14 @@ namespace Unit
 {
     public abstract class EffectPresentor : IEffectPresentor
     {
-        protected readonly PlayerModel player;
+        protected readonly IUnitModel player;
         protected readonly EffectModel model;
 
         public virtual event Action<IEffectPresentor> OnEffectEnd;
 
-        public EffectPresentor(PlayerModel player, EffectModel model)
+        public EffectPresentor(IUnitModel unit, EffectModel model)
         {
-            this.player = player;
+            this.player = unit;
             this.model = model;
         }
 

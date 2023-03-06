@@ -15,16 +15,21 @@ namespace Unit
         private readonly EnemySpawnerSettings settings;
         private float nextSpawnTime;
 
+        private HealthSettings healthSettings;
+        private WeaponSettings weaponSettings;
 
         public EnemySpawner(EnemyView.Factory factory, EnemySpawnerSettings settings)
+            //HealthSettings healthSettings, WeaponSettings weaponSettings)
         {
             this.factory = factory;
             this.settings = settings;
+            //this.healthSettings = healthSettings;
+            //this.weaponSettings = weaponSettings;
         }
 
         public void Tick()
         {
-            if(nextSpawnTime <= Time.time)
+            if (nextSpawnTime <= Time.time)
             {
                 EnemyView enemy = factory.Create();
                 Vector3 randomPosition = new Vector3(
@@ -32,7 +37,7 @@ namespace Unit
                     Random.Range(-settings.Offset.z, settings.Offset.z));
                 enemy.transform.position = randomPosition;
 
-                nextSpawnTime = Time.time + settings.SpawnRate; 
+                nextSpawnTime = Time.time + settings.SpawnRate;
             }
         }
     }

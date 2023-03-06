@@ -12,11 +12,11 @@ namespace Unit
     public class WeaponSettings : ScriptableObject, IWeaponSettings
     {
         [field: SerializeField]
-        public float Distance { get; }
+        public float Distance { get; set; }
         [field: SerializeField]
-        public LayerMask TargetLayer { get;  }
+        public LayerMask TargetLayer { get; set; }
         [field: SerializeField]
-        public List<IEffectSettings> Effects { get; }
+        public List<IEffectSettings> Effects { get; set; }
 
         public Type WeaponType => typeof(WeaponPresentor);
 

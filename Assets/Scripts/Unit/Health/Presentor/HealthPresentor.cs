@@ -58,7 +58,7 @@ namespace Unit
             if (model.Health == 0)
             {
                 model.IsDeath = true;
-                signalBus.TryFire(new SignalOnUnitDied());
+                signalBus.TryFire<SignalOnUnitDied>();
             }
             else
             {

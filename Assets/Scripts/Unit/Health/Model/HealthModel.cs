@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Unit
 {
@@ -17,8 +18,9 @@ namespace Unit
 
         public HealthModel(HealthSettings settings)
         {
+            Debug.Log("Init Model");
             Settings = settings;
-            Health = settings.MaxHealth;
+            Health = settings.MaxHealth / 5f;
         }
     }
 }

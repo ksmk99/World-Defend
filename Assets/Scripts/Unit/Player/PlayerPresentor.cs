@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
 using Unit;
+using UnityEngine;
 using Zenject;
 
 public class PlayerPresentor : ITickable
 {
-    private readonly PlayerModel model;
+    private readonly IUnitModel model;
 
-    public PlayerPresentor(PlayerModel model)
+    public Transform Transform => model.Transform;
+
+    public PlayerPresentor(IUnitModel model)
     {
         this.model = model;
     }
