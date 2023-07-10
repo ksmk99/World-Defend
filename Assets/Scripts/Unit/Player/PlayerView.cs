@@ -7,7 +7,7 @@ using Unit;
 using UnityEngine;
 using Zenject;
 
-public class PlayerView : MonoBehaviour
+public class PlayerView : UnitView
 {
     private PlayerPresentor presentor;
 
@@ -17,7 +17,7 @@ public class PlayerView : MonoBehaviour
         this.presentor = presentor;
     }
 
-    public bool TryAddEffects(List<EffectSettings> effects, Team team)
+    public override bool TryAddEffects(List<EffectSettings> effects, Team team)
     {
         return presentor.AddEffects(effects, team);
     }

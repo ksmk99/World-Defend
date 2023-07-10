@@ -13,6 +13,7 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private HealthSettings healthSettings;
     [SerializeField] private WeaponSettings weaponSettings;
     [SerializeField] private MovementSettings enemyMovement;
+    [SerializeField] private Transform bulletParent;
 
     public override void InstallBindings()
     {
@@ -44,7 +45,7 @@ public class GameInstaller : MonoInstaller
             .FromMonoPoolableMemoryPool(
                 x => x.WithInitialSize(weaponSettings.BulletCount)
                 .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
-                .UnderTransformGroup("Bullet Pool"));
+                .UnderTransform(bulletParent));
 
         subContainer.Bind<IWeaponModel>().To<WeaponModel>()
             .AsTransient()

@@ -19,7 +19,7 @@ namespace Unit
 
         public SignalOnUnitDamage(float percent)
         {
-            Percent = percent;  
+            Percent = percent;
         }
     }
 
@@ -47,7 +47,7 @@ namespace Unit
 
         public bool IsDeath()
         {
-            return model.Health <= 0; 
+            return model.Health <= 0;
         }
 
         public void Damage(int count)
@@ -60,13 +60,11 @@ namespace Unit
                 model.IsDeath = true;
                 signalBus.TryFire<SignalOnUnitDied>();
             }
-            else
-            {
-                var signal = new SignalOnUnitDamage(model.Health / model.Settings.MaxHealth);
-                signalBus.TryFire(signal);
 
-                model.NextHealTime = Time.time + model.Settings.HealDelay;
-            }
+            var signal = new SignalOnUnitDamage(model.Health / model.Settings.MaxHealth);
+            signalBus.TryFire(signal);
+
+            model.NextHealTime = Time.time + model.Settings.HealDelay;
         }
 
         public void Heal(int count)
@@ -78,9 +76,9 @@ namespace Unit
             signalBus.TryFire(signal);
         }
 
-        public void AutoHeal()
+        public void AutoHeal(bool isDead)
         {
-            if (!model.Settings.IsAutoHeal || model.Health.Equals(model.Settings.MaxHealth))
+            if (!model.Settings.IsAutoHeal || model.Health.Equals(model.Settings.MaxHealth) || isDead)
             {
                 return;
             }

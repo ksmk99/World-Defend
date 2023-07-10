@@ -17,7 +17,10 @@ public class PlayerPresentor : ITickable
 
     public void Tick()
     {
-        if (model.Health.IsDeath())
+        var isDead = model.Health.IsDeath();
+        model.Health.AutoHeal(isDead);
+        model.Weapon.Update(model.Transform, isDead);
+        if (isDead)
         {
             return;
         }
@@ -28,8 +31,6 @@ public class PlayerPresentor : ITickable
         }
 
         model.Movement.Move();
-        model.Health.AutoHeal();
-        model.Weapon.Update(model.Transform);
     }
 
     public bool AddEffects(List<EffectSettings> effects, Team team)

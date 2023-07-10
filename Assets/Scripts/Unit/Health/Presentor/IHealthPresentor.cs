@@ -10,7 +10,7 @@ namespace Unit
     {
         void Heal(int count);
         void Damage(int count);
-        void AutoHeal();
+        void AutoHeal(bool isDead);
         bool IsDeath();
     }
 }

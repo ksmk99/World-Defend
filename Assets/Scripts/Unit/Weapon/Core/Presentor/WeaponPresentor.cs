@@ -19,7 +19,7 @@ namespace Unit
             settings = (WeaponSettings)model.Settings;
         }
 
-        public void Update(Transform transform)
+        public void Update(Transform transform, bool isDead)
         {
             for (int i = 0; i < model.Bullets.Count; i++)
             {
@@ -32,6 +32,11 @@ namespace Unit
                 {
                     model.Bullets[i].Move();
                 }
+            }
+
+            if (isDead)
+            {
+                return;
             }
 
             if (IsReloading())

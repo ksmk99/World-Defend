@@ -6,11 +6,24 @@ using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-public class EnemyView : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
+public class EnemyView : UnitView, IPoolable<IMemoryPool>, IDisposable
 {
     public NavMeshAgent Agent;
 
     private IMemoryPool pool;
+
+    private EnemyPresentor presentor;
+
+    [Inject]
+    public void Init(EnemyPresentor presentor)
+    {
+        this.presentor = presentor;
+    }
+
+    public override bool TryAddEffects(List<EffectSettings> effects, Team team)
+    {
+        return presentor.AddEffects(effects, team);
+    }
 
     public void Dispose()
     {

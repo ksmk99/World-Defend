@@ -21,7 +21,7 @@ namespace Unit.Bullet
 
         public void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<PlayerView>(out var view))
+            if (other.TryGetComponent<UnitView>(out var view))
             {
                 var isSuccess = view.TryAddEffects(settings.Effects, settings.Team);
                 canCollide = !isSuccess;
