@@ -11,7 +11,6 @@ public class EnemyView : UnitView, IPoolable<IMemoryPool>, IDisposable
     public NavMeshAgent Agent;
 
     private IMemoryPool pool;
-
     private EnemyPresentor presentor;
 
     [Inject]
@@ -20,13 +19,28 @@ public class EnemyView : UnitView, IPoolable<IMemoryPool>, IDisposable
         this.presentor = presentor;
     }
 
+    public void Respawn()
+    {
+        presentor.Respawn();
+    }
+
     public override bool TryAddEffects(List<EffectSettings> effects, Team team)
     {
         return presentor.AddEffects(effects, team);
     }
 
+    public override void Death()
+    {
+        Dispose();
+    }
+
     public void Dispose()
     {
+        if (pool == null)
+        {
+            return;
+        }
+
         pool.Despawn(this);
     }
 

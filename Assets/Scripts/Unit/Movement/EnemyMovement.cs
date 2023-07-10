@@ -27,8 +27,14 @@ namespace Unit
             ClampPos();
         }
 
-        public void Move()
+        public void Move(bool isDead)
         {
+            if(isDead)
+            {
+                agent.velocity = Vector3.zero;
+                return;
+            }
+
             var distance = Vector3.Distance(transform.position, player.Transform.position);
             if (distance < settings.MaxDistance && distance > agent.stoppingDistance)
             {

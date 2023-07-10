@@ -8,6 +8,7 @@ namespace Unit
         Team GetTeam();
         bool SetAction(Transform transform);
         void Attack(Transform transform);
-        void Update(Transform transform, bool isDead);   
+        void Update(Transform transform, bool isDead);
+        void Reset();
     }
 }

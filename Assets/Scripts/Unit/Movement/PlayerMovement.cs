@@ -17,7 +17,7 @@ namespace Unit
             this.movementModel = movementModel;
         }
 
-        public void Move()
+        public void Move(bool isDead)
         {
             Vector3 direction = inputService.GetMoveDirection();
             transform.position += direction * movementModel.MoveSpeed * Time.deltaTime;

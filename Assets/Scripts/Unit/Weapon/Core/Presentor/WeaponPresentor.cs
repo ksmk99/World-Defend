@@ -116,5 +116,12 @@ namespace Unit
         {
             return model.Team;
         }
+
+        public void Reset()
+        {
+            model.ActionTimer = 0;
+            model.TTL = 0;
+            model.IsActing = false;
+        }
     }
 }

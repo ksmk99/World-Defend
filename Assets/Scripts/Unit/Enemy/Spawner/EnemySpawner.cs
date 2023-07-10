@@ -32,6 +32,7 @@ namespace Unit
             if (nextSpawnTime <= Time.time)
             {
                 EnemyView enemy = factory.Create();
+                enemy.Respawn();
                 Vector3 randomPosition = new Vector3(
                     Random.Range(-settings.Offset.x, settings.Offset.x), 0,
                     Random.Range(-settings.Offset.z, settings.Offset.z));

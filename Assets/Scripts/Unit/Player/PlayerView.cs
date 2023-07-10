@@ -11,6 +11,11 @@ public class PlayerView : UnitView
 {
     private PlayerPresentor presentor;
 
+    public override void Death()
+    {
+        return;
+    }
+
     [Inject]
     public void Init(PlayerPresentor presentor)
     {

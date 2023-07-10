@@ -1,5 +1,5 @@
 ﻿
 public interface IMovement
 {
-    void Move();
+    void Move(bool isDead);
 }
