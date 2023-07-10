@@ -4,12 +4,12 @@ using UnityEngine;
 namespace Unit
 {
     [CreateAssetMenu()]
-    public class DamageSettings : IEffectSettings
+    public class DamageSettings : EffectSettings
     {
         [field: SerializeField]
-        public float Value { get; }
+        public override float Value { get; set; }
 
-        public IEffectPresentor GetPresentor(IUnitModel unit, EffectModel model)
+        public override IEffectPresentor GetPresentor(IUnitModel unit, EffectModel model)
         {
             return new DamageEP(unit, model);
         }

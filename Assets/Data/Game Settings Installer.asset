@@ -20,5 +20,5 @@ MonoBehaviour:
     RotateSpeed: 0.8
     MaxDistance: 999
   spawnerSettings:
-    SpawnRate: 1
+    SpawnRate: 10
     Offset: {x: 15, y: 0, z: 15}

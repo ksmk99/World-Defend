@@ -17,8 +17,8 @@ public class PlayerView : MonoBehaviour
         this.presentor = presentor;
     }
 
-    public void AddEffects(List<IEffectSettings> effects, Team team)
+    public bool TryAddEffects(List<EffectSettings> effects, Team team)
     {
-        presentor.AddEffects(effects, team);
+        return presentor.AddEffects(effects, team);
     }
 }

@@ -106,5 +106,10 @@ namespace Unit
             var bullet = model.BulletFactory.Create(bulletSettings);
             model.Bullets.Add(bullet);
         }
+
+        public Team GetTeam()
+        {
+            return model.Team;
+        }
     }
 }

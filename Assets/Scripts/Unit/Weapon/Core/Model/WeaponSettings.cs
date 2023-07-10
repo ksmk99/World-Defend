@@ -16,7 +16,7 @@ namespace Unit
         [field: SerializeField]
         public LayerMask TargetLayer { get; set; }
         [field: SerializeField]
-        public List<IEffectSettings> Effects { get; set; }
+        public List<EffectSettings> Effects { get; set; }
 
         public Type WeaponType => typeof(WeaponPresentor);
 

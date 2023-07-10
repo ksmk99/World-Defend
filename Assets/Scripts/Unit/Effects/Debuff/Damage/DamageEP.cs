@@ -10,7 +10,6 @@ namespace Unit
     {
         public DamageEP(IUnitModel unit, EffectModel model) : base(unit, model) { }
 
-
         public override void Update()
         {
             MakeAction();

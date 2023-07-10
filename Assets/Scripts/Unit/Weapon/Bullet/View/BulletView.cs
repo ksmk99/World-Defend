@@ -21,17 +21,17 @@ namespace Unit.Bullet
 
         public void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<PlayerView>(out var presentor))
+            if (other.TryGetComponent<PlayerView>(out var view))
             {
-                canCollide = false;
-                presentor.AddEffects(settings.Effects, settings.Team);
+                var isSuccess = view.TryAddEffects(settings.Effects, settings.Team);
+                canCollide = !isSuccess;
             }
         }
 
         public bool CheckEnd()
         {
             var distance = Vector3.Distance(settings.Position, transform.position);
-            return distance > settings.Distance;
+            return distance > settings.Distance && canCollide;
         }
 
         public void Move()

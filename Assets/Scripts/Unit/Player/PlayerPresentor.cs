@@ -17,14 +17,14 @@ public class PlayerPresentor : ITickable
 
     public void Tick()
     {
-        if(model.Health.IsDeath())
+        if (model.Health.IsDeath())
         {
             return;
         }
 
-        foreach (var effect in model.Effects)
+        for (var i = 0; i < model.Effects.Count; i++)
         {
-            effect.Update();
+            model.Effects[i].Update();
         }
 
         model.Movement.Move();
@@ -32,14 +32,21 @@ public class PlayerPresentor : ITickable
         model.Weapon.Update(model.Transform);
     }
 
-    public void AddEffects(List<IEffectSettings> effects, Team team)
+    public bool AddEffects(List<EffectSettings> effects, Team team)
     {
-        foreach (var effect in effects)
+        if(model.Weapon.GetTeam() == team)
         {
-            var effectModel = new EffectModel(effect);
+            return false;
+        }
+
+        for (var i = 0; i < effects.Count; i++)
+        {
+            var effectModel = new EffectModel(effects[i]);
             var presentor = effectModel.Settings.GetPresentor(model, effectModel);
             model.Effects.Add(presentor);
             presentor.OnEffectEnd += (x) => model.Effects.Remove(x);
         }
+
+        return true;
     }
 }
