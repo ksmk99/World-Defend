@@ -22,13 +22,18 @@ namespace Unit.Bullet
             {
                 var isSuccess = view.TryAddEffects(settings.Effects, settings.Team);
                 canCollide = !isSuccess;
+                Debug.Log(isSuccess);
             }
         }
 
         public bool CheckEnd()
         {
+            if(!canCollide)
+            {
+                return true;
+            }
             var distance = Vector3.Distance(settings.Position, transform.position);
-            return distance > settings.Distance && canCollide;
+            return distance > settings.Distance || !canCollide;
         }
 
         public void Move()

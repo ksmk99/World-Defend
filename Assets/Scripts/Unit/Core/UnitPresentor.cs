@@ -26,7 +26,6 @@ public abstract class UnitPresentor : ITickable
     {
         if (model.Health.IsDeath())
         {
-            Debug.Log("Check Death");
             Transform.GetComponent<UnitView>().Death();
         }
     }
