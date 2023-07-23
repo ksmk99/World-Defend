@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
 
@@ -19,7 +14,7 @@ namespace Unit
         private WeaponSettings weaponSettings;
 
         public EnemySpawner(EnemyView.Factory factory, EnemySpawnerSettings settings)
-            //HealthSettings healthSettings, WeaponSettings weaponSettings)
+        //HealthSettings healthSettings, WeaponSettings weaponSettings)
         {
             this.factory = factory;
             this.settings = settings;

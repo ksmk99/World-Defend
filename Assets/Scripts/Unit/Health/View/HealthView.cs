@@ -1,6 +1,4 @@
-﻿using System;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
@@ -31,7 +29,7 @@ namespace Unit
         }
 
         private void Heal(SignalOnUnitHeal data)
-        {   
+        {
             healthBar.fillAmount = data.Percent;
         }
 

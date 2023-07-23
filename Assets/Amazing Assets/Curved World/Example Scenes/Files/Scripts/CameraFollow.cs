@@ -12,20 +12,20 @@ namespace AmazingAssets.CurvedWorld.Example
         Vector3 offset;                     // The initial offset from the target.
 
 
-        void Start ()
+        void Start()
         {
             // Calculate initial offset.
             offset = transform.position - target.position;
         }
 
 
-        void LateUpdate ()
+        void LateUpdate()
         {
             // Create a postion the camera is aiming for based on the offset from the target.
             Vector3 targetCamPos = target.position + offset;
 
             // Smoothly interpolate between camera's current position and it's target position.
-            transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
         }
     }
 }

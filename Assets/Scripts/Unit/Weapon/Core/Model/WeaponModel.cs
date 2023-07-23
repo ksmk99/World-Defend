@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Unit.Bullet;
-using Unity.VisualScripting;
 using UnityEngine;
-using static Zenject.CheatSheet;
 
 namespace Unit
 {
     public class WeaponModel : IWeaponModel
     {
         public IWeaponSettings Settings { get; set; }
-        public BulletView.Factory BulletFactory { get;  set; }
+        public BulletView.Factory BulletFactory { get; set; }
         public List<BulletView> Bullets { get; set; }
-        public Team Team { get;  set; }
+        public Team Team { get; set; }
 
         public bool IsActing { get; set; }
         public bool CanUse { get; set; }

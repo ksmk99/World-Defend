@@ -23,7 +23,7 @@ namespace AmazingAssets.CurvedWorld.Example
         [Space(10)]
         public float zMin = 0;
         public float zMax = 0;
-        
+
 
         private void FixedUpdate()
         {

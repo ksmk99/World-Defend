@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Unit;
 using UnityEngine;
@@ -31,6 +30,7 @@ public class EnemyView : UnitView, IPoolable<IMemoryPool>, IDisposable
 
     public override void Death()
     {
+        transform.localScale = Vector3.zero;
         Dispose();
     }
 
@@ -52,6 +52,7 @@ public class EnemyView : UnitView, IPoolable<IMemoryPool>, IDisposable
     public void OnSpawned(IMemoryPool pool)
     {
         this.pool = pool;
+        transform.localScale = Vector3.one;
     }
 
     public class Factory : PlaceholderFactory<EnemyView>

@@ -1,11 +1,8 @@
-using Installers;
 using System;
 using Unit;
 using Unit.Bullet;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 using Zenject;
-using static Zenject.CheatSheet;
 
 public class PlayerInstaller : MonoInstaller
 {
@@ -25,13 +22,6 @@ public class PlayerInstaller : MonoInstaller
             AsSingle().WithArguments(settings.Joystick);
         Container.Bind<HealthModel>()
             .AsTransient().WithArguments(healthSettings);
-
-        //Container.Bind<IWeaponPresentor>()
-        //    .FromSubContainerResolve()
-        //    .ByMethod(BindWeapon)
-        //    .AsTransient()
-        //    .WhenInjectedInto<PlayerModel>(); 
-
         Container.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
         .FromMonoPoolableMemoryPool(
              x => x.WithInitialSize(weaponSettings.BulletCount)
@@ -45,8 +35,6 @@ public class PlayerInstaller : MonoInstaller
             .To(weaponSettings.WeaponType)
             .AsTransient()
             .WhenInjectedInto<PlayerModel>();
-
-
         Container.Bind<IHealthPresentor>().To<HealthPresentor>()
             .AsTransient()
             .WhenInjectedInto<PlayerModel>(); ;
@@ -54,8 +42,6 @@ public class PlayerInstaller : MonoInstaller
             .AsTransient()
             .WithArguments(settings.Transform)
             .WhenInjectedInto<PlayerModel>();
-
-
         Container.BindInstance(settings.Transform).WhenInjectedInto<PlayerModel>();
         Container.Bind<IUnitModel>().To<PlayerModel>()
             .AsSingle()
@@ -67,6 +53,8 @@ public class PlayerInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<HealthView>()
             .FromComponentInHierarchy()
             .AsTransient();
+
+        Container.BindSignal<SignalOnUnitDied>().ToMethod<PlayerPresentor>(x => x.OnDeath).FromResolve();
     }
 
     private void BindWeapon(DiContainer subContainer)
@@ -86,12 +74,12 @@ public class PlayerInstaller : MonoInstaller
             .WhenInjectedInto<PlayerModel>();
     }
 
-        [Serializable]
+    [Serializable]
     public class Settings
     {
-        [field: SerializeField] 
+        [field: SerializeField]
         public Transform Transform { get; private set; }
-        [field: SerializeField] 
+        [field: SerializeField]
         public Joystick Joystick { get; private set; }
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Unit;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -18,7 +17,7 @@ public class EnemyModel : IUnitModel
 
     public EnemyModel(//[Inject(Id = "EW")] 
         IWeaponPresentor weapon,
-        EnemyView view, 
+        EnemyView view,
         IMovement movement,
         IHealthPresentor health)
     {

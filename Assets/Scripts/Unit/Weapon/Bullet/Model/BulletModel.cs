@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unit.Bullet;
+﻿using Unit.Bullet;
 using UnityEngine;
 
 namespace Unit

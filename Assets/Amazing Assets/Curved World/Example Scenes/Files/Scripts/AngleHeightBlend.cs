@@ -6,7 +6,7 @@ namespace AmazingAssets.CurvedWorld.Example
     public class AngleHeightBlend : MonoBehaviour
     {
         public CurvedWorldController curvedWorldController;
-        float angle1 = 0;   
+        float angle1 = 0;
         float angle2 = 0;
 
         public Transform pivotPoint1;

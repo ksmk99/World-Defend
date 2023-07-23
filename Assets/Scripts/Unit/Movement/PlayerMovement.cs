@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using Zenject;
-using static UnityEngine.UI.CanvasScaler;
 
 namespace Unit
 {

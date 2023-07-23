@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 namespace Unit
 {
@@ -29,7 +23,7 @@ namespace Unit
 
         public void Move(bool isDead)
         {
-            if(isDead)
+            if (isDead)
             {
                 agent.velocity = Vector3.zero;
                 return;

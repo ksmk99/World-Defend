@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine.AI;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using Zenject;
 
 namespace Unit
 {

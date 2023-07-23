@@ -6,7 +6,9 @@ namespace Unit
 {
 
     #region Signals
-    public class SignalOnUnitDied { }
+    public class SignalOnUnitDied
+    {
+    }
 
     public interface ISignalOnHealthChange
     {
@@ -52,6 +54,11 @@ namespace Unit
 
         public void Damage(int count)
         {
+            if(IsDeath())
+            {
+                return;
+            }
+
             model.Health -= count;
             model.Health = Math.Clamp(model.Health, 0, model.Settings.MaxHealth);
 
@@ -76,9 +83,9 @@ namespace Unit
             signalBus.TryFire(signal);
         }
 
-        public void AutoHeal(bool isDead)
+        public void AutoHeal()
         {
-            if (!model.Settings.IsAutoHeal || model.Health.Equals(model.Settings.MaxHealth) || isDead)
+            if (!model.Settings.IsAutoHeal || model.Health.Equals(model.Settings.MaxHealth) || IsDeath())
             {
                 return;
             }

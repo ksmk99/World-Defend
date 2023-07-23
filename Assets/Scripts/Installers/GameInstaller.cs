@@ -1,7 +1,3 @@
-using Installers;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unit;
 using Unit.Bullet;
 using UnityEngine;
@@ -39,7 +35,6 @@ public class GameInstaller : MonoInstaller
 
         subContainer.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
         subContainer.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
-        subContainer.DeclareSignal<SignalOnUnitDied>();
 
         subContainer.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
             .FromMonoPoolableMemoryPool(
@@ -57,5 +52,7 @@ public class GameInstaller : MonoInstaller
 
         subContainer.Bind<EnemyModel>().AsSingle();
         subContainer.BindInterfacesAndSelfTo<EnemyPresentor>().AsSingle();
+
+        subContainer.BindSignal<SignalOnUnitDied>().ToMethod<EnemyPresentor>(x => x.OnDeath).FromResolve();
     }
 }

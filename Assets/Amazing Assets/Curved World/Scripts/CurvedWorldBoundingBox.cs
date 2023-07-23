@@ -33,7 +33,7 @@ namespace AmazingAssets.CurvedWorld
                 skinnedMeshRenderer.sharedMesh.bounds = originalBounds;
 
             else if (meshFilter != null && meshFilter.sharedMesh != null)
-                    meshFilter.sharedMesh.bounds = originalBounds;
+                meshFilter.sharedMesh.bounds = originalBounds;
         }
 
         void Start()

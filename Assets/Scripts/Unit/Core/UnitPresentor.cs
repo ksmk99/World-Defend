@@ -1,32 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Unit;
 using UnityEngine;
 using Zenject;
 
 public abstract class UnitPresentor : ITickable
 {
-    protected IUnitModel model;
-
     public Transform Transform => model.Transform;
+
+    protected IUnitModel model;
 
     public virtual void Tick()
     {
         var isDead = model.Health.IsDeath();
-        model.Health.AutoHeal(isDead);
+        model.Health.AutoHeal();
         model.Weapon.Update(model.Transform, isDead);
         model.Movement.Move(isDead);
-        if (isDead)
-        {
-            Transform.GetComponent<UnitView>().Death();
-            return;
-        }
 
         for (var i = 0; i < model.Effects.Count; i++)
         {
             model.Effects[i].Update();
         }
     }
+
+    public void OnDeath()
+    {
+        if (model.Health.IsDeath())
+        {
+            Debug.Log("Check Death");
+            Transform.GetComponent<UnitView>().Death();
+        }
+    }
+
     public void Respawn()
     {
         model.Health.Heal(int.MaxValue);

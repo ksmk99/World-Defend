@@ -16,17 +16,17 @@ namespace AmazingAssets.CurvedWorld.Example
         private Rigidbody m_Rigidbody;              // Reference used to move the tank.
         private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
 
-        private void Awake ()
+        private void Awake()
         {
-            m_Rigidbody = GetComponent<Rigidbody> ();
+            m_Rigidbody = GetComponent<Rigidbody>();
         }
 
 
-        private void OnEnable ()
+        private void OnEnable()
         {
             // When the tank is turned on, make sure it's not kinematic.
             m_Rigidbody.isKinematic = false;
-            
+
             // We grab all the Particle systems child of that Tank to be able to Stop/Play them on Deactivate/Activate
             // It is needed because we move the Tank when spawning it, and if the Particle System is playing while we do that
             // it "think" it move from (0,0,0) to the spawn point, creating a huge trail of smoke
@@ -38,28 +38,28 @@ namespace AmazingAssets.CurvedWorld.Example
         }
 
 
-        private void OnDisable ()
+        private void OnDisable()
         {
             // When the tank is turned off, set it to kinematic so it stops moving.
             m_Rigidbody.isKinematic = true;
 
             // Stop all particle system so it "reset" it's position to the actual one instead of thinking we moved when spawning
-            for(int i = 0; i < m_particleSystems.Length; ++i)
+            for (int i = 0; i < m_particleSystems.Length; ++i)
             {
                 m_particleSystems[i].Stop();
             }
         }
 
-        
-        private void FixedUpdate ()
+
+        private void FixedUpdate()
         {
             // Adjust the rigidbodies position and orientation in FixedUpdate.
-            Move ();
-            Turn ();
+            Move();
+            Turn();
         }
 
 
-        private void Move ()
+        private void Move()
         {
             // Create a vector in the direction the tank is facing with a magnitude based on the input, speed and the time between frames.
 
@@ -85,7 +85,7 @@ namespace AmazingAssets.CurvedWorld.Example
         }
 
 
-        private void Turn ()
+        private void Turn()
         {
             // Determine the number of degrees to be turned based on the input, speed and time between frames.
             float rotation = 0;
@@ -107,10 +107,10 @@ namespace AmazingAssets.CurvedWorld.Example
             float turn = rotation * m_TurnSpeed * Time.deltaTime;
 
             // Make this into a rotation in the y axis.
-            Quaternion turnRotation = Quaternion.Euler (0f, turn, 0f);
+            Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
 
             // Apply this rotation to the rigidbody's rotation.
-            m_Rigidbody.MoveRotation (m_Rigidbody.rotation * turnRotation);
+            m_Rigidbody.MoveRotation(m_Rigidbody.rotation * turnRotation);
         }
 
 
