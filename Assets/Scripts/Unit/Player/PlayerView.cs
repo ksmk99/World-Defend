@@ -4,8 +4,6 @@ using Zenject;
 
 public class PlayerView : UnitView
 {
-    private PlayerPresentor presentor;
-
     public override void Death()
     {
         return;

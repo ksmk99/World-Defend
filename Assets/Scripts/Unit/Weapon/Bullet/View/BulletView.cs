@@ -22,7 +22,6 @@ namespace Unit.Bullet
             {
                 var isSuccess = view.TryAddEffects(settings.Effects, settings.Team);
                 canCollide = !isSuccess;
-                Debug.Log(isSuccess);
             }
         }
 
@@ -32,8 +31,9 @@ namespace Unit.Bullet
             {
                 return true;
             }
+
             var distance = Vector3.Distance(settings.Position, transform.position);
-            return distance > settings.Distance || !canCollide;
+            return distance > settings.Distance;
         }
 
         public void Move()

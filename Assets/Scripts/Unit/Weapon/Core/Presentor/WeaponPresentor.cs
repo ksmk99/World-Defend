@@ -14,7 +14,13 @@ namespace Unit
             settings = (WeaponSettings)model.Settings;
         }
 
-        public void Update(Transform transform, bool isDead)
+        public void Update(Transform transform, bool isDead, Team team)
+        {
+            BulletsUpdate();
+            Attack(transform, isDead, team);
+        }
+
+        private void BulletsUpdate()
         {
             for (int i = 0; i < model.Bullets.Count; i++)
             {
@@ -28,16 +34,6 @@ namespace Unit
                     model.Bullets[i].Move();
                 }
             }
-
-            if (isDead || IsReloading())
-            {
-                return;
-            }
-
-            if (SetAction(transform))
-            {
-                Attack(transform);
-            }
         }
 
         public bool IsReloading()
@@ -47,14 +43,14 @@ namespace Unit
                     model.NextUseTime > Time.time;
         }
 
-        public bool SetAction(Transform transform)
+        public bool SetAction(Transform transform, Team team)
         {
             if (model.IsActing)
             {
                 return true;
             }
 
-            EnemyView enemy = WeaponHelper.GetNearestEnemy(transform.position, model.Settings);
+            UnitView enemy = WeaponHelper.GetNearestEnemy(transform.position, model.Settings, team);
             if (enemy == default)
             {
                 return false;
@@ -70,16 +66,17 @@ namespace Unit
             return true;
         }
 
-        public void Attack(Transform transform)
+        public void Attack(Transform transform, bool isDead, Team team)
         {
-            if (model.IsActing)
+            if (isDead || IsReloading() || !SetAction(transform, team))
             {
-                transform.LookAt(model.Target.position);
+                return;
             }
 
+            transform.LookAt(model.Target.position);
             if (model.ActionTimer >= settings.BulletDelay)
             {
-                CreateBullet(transform);
+                CreateBullet(transform, team);
                 model.ActionTimer = 0;
             }
 
@@ -92,19 +89,14 @@ namespace Unit
             model.TTL += Time.deltaTime;
         }
 
-        private void CreateBullet(Transform transform)
+        private void CreateBullet(Transform transform, Team team)
         {
             var bulletSettings = new BulletRuntimeSettings(
                 settings.Distance, transform.rotation,
-                transform.position, model.Team,
+                transform.position, team,
                 settings.Effects);
             var bullet = model.BulletFactory.Create(bulletSettings);
             model.Bullets.Add(bullet);
-        }
-
-        public Team GetTeam()
-        {
-            return model.Team;
         }
 
         public void Reset()

@@ -9,7 +9,6 @@ namespace Unit
         public IWeaponSettings Settings { get; set; }
         public BulletView.Factory BulletFactory { get; set; }
         public List<BulletView> Bullets { get; set; }
-        public Team Team { get; set; }
 
         public bool IsActing { get; set; }
         public bool CanUse { get; set; }
@@ -19,13 +18,11 @@ namespace Unit
         public float TTL { get; set; }
         public Transform Target { get; set; }
 
-        public WeaponModel(IWeaponSettings settings, Team team,
-                BulletView.Factory factory)
+        public WeaponModel(IWeaponSettings settings, BulletView.Factory factory)
         {
             Settings = settings;
             CanUse = true;
             BulletFactory = factory;
-            Team = team;
             Bullets = new List<BulletView>();
         }
     }

@@ -16,6 +16,7 @@ public class PlayerModel : IUnitModel
 
     public Vector3 Position => Transform.position;
     public NavMeshAgent Agent { get; }
+    public Team Team => Team.Ally;
 
     public PlayerModel(IMovement movement, IHealthPresentor health, IWeaponPresentor weapon, Transform transform)
     {

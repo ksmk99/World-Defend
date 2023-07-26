@@ -6,6 +6,7 @@ using Zenject;
 public abstract class UnitPresentor : ITickable
 {
     public Transform Transform => model.Transform;
+    public Team Team => model.Team;
 
     protected IUnitModel model;
 
@@ -13,7 +14,7 @@ public abstract class UnitPresentor : ITickable
     {
         var isDead = model.Health.IsDeath();
         model.Health.AutoHeal();
-        model.Weapon.Update(model.Transform, isDead);
+        model.Weapon.Update(model.Transform, isDead, model.Team);
         model.Movement.Move(isDead);
 
         for (var i = 0; i < model.Effects.Count; i++)
@@ -38,7 +39,7 @@ public abstract class UnitPresentor : ITickable
 
     public virtual bool AddEffects(List<EffectSettings> effects, Team team)
     {
-        if (model.Weapon.GetTeam() == team)
+        if (model.Team == team)
         {
             return false;
         }

@@ -7,7 +7,6 @@ namespace Unit
     {
         public IWeaponSettings Settings { get; set; }
         public BulletView.Factory BulletFactory { get; set; }
-        public Team Team { get; set; }
 
         public bool IsActing { get; set; }
         public bool CanUse { get; set; }

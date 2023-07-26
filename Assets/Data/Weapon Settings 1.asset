@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7de4faa63bfc345b72c554adb12921, type: 3}
   m_Name: Weapon Settings 1
   m_EditorClassIdentifier: 
-  <Distance>k__BackingField: 10
+  <Distance>k__BackingField: 20
   <TargetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 128

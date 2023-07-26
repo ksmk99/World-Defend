@@ -8,6 +8,8 @@ namespace Unit
     public interface IUnitModel
     {
         Transform Transform { get; }
+        Team Team { get; }
+
         IMovement Movement { get; }
         IHealthPresentor Health { get; }
         IWeaponPresentor Weapon { get; }

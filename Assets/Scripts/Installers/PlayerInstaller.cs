@@ -30,7 +30,7 @@ public class PlayerInstaller : MonoInstaller
         Container.Bind<IWeaponModel>()
             .To<WeaponModel>()
             .AsTransient()
-            .WithArguments(Team.Ally, weaponSettings);
+            .WithArguments(weaponSettings);
         Container.Bind<IWeaponPresentor>()
             .To(weaponSettings.WeaponType)
             .AsTransient()

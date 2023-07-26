@@ -10,7 +10,6 @@ public class EnemyView : UnitView, IPoolable<IMemoryPool>, IDisposable
     public NavMeshAgent Agent;
 
     private IMemoryPool pool;
-    private EnemyPresentor presentor;
 
     [Inject]
     public void Init(EnemyPresentor presentor)

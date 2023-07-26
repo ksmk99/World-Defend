@@ -15,7 +15,9 @@ public class EnemyModel : IUnitModel
     public Vector3 Position => Transform.position;
     public NavMeshAgent Agent { get; }
 
-    public EnemyModel(//[Inject(Id = "EW")] 
+    public Team Team => Team.Enemy;
+
+    public EnemyModel(
         IWeaponPresentor weapon,
         EnemyView view,
         IMovement movement,

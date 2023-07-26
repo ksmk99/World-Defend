@@ -5,10 +5,9 @@ namespace Unit
     public interface IWeaponPresentor
     {
         bool IsReloading();
-        Team GetTeam();
-        bool SetAction(Transform transform);
-        void Attack(Transform transform);
-        void Update(Transform transform, bool isDead);
+        bool SetAction(Transform transform, Team team);
+        void Attack(Transform transform, bool isDead, Team team);
+        void Update(Transform transform, bool isDead, Team team);
         void Reset();
     }
 }

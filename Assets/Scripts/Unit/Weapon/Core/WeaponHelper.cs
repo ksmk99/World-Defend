@@ -4,19 +4,21 @@ namespace Unit
 {
     public static class WeaponHelper
     {
-        public static EnemyView GetNearestEnemy(Vector3 position, IWeaponSettings settings)
+        public static UnitView GetNearestEnemy(Vector3 position, IWeaponSettings settings, Team team)
         {
-            float minDistance = float.MaxValue;
-            EnemyView result = default;
+            float minDistance = settings.Distance;
+            UnitView result = default;
             var enemies = Physics.OverlapSphere(position, settings.Distance, settings.TargetLayer);
             for (int i = 0; i < enemies.Length; i++)
             {
                 float distance = (position - enemies[i].transform.position).sqrMagnitude;
-                if (distance < minDistance &&
-                    enemies[i].TryGetComponent(out EnemyView view))
+                if (distance <= minDistance && enemies[i].TryGetComponent(out UnitView view))
                 {
-                    minDistance = distance;
-                    result = view;
+                    if (view.GetTeam() != team)
+                    {
+                        minDistance = distance;
+                        result = view;
+                    }
                 }
             }
 

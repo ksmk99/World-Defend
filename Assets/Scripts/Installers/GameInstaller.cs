@@ -44,7 +44,7 @@ public class GameInstaller : MonoInstaller
 
         subContainer.Bind<IWeaponModel>().To<WeaponModel>()
             .AsTransient()
-            .WithArguments(Team.Enemy, weaponSettings);
+            .WithArguments(weaponSettings);
         subContainer.Bind<IWeaponPresentor>()
             .To(weaponSettings.WeaponType)
             .AsTransient();
