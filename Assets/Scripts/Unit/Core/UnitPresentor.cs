@@ -12,6 +12,11 @@ public abstract class UnitPresentor : ITickable
 
     public virtual void Tick()
     {
+        if(!model.IsActive)
+        {
+            return;
+        }
+
         var isDead = model.Health.IsDeath();
         model.Health.AutoHeal();
         model.Weapon.Update(model.Transform, isDead, model.Team);

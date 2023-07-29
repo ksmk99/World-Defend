@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7de4faa63bfc345b72c554adb12921, type: 3}
   m_Name: Weapon Settings
   m_EditorClassIdentifier: 
-  <Distance>k__BackingField: 20
+  <Distance>k__BackingField: 40
   <TargetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 128
@@ -20,6 +20,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fbf1951f512e9a24c8e80c41f1d0ba1c, type: 2}
   BulletPrefab: {fileID: 5865941083765694682, guid: 8bba4bfc0d3211f4fa1c0ab571a28188,
     type: 3}
-  BulletCount: 4
-  ReloadTime: 0.3
+  BulletCount: 2
+  ReloadTime: 0.45
   BulletDelay: 0.1

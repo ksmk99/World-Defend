@@ -17,6 +17,8 @@ public class EnemyModel : IUnitModel
 
     public Team Team => Team.Enemy;
 
+    public bool IsActive { get; set; }
+
     public EnemyModel(
         IWeaponPresentor weapon,
         EnemyView view,
@@ -30,5 +32,6 @@ public class EnemyModel : IUnitModel
         Effects = new List<IEffectPresentor>();
         Agent = view.transform.GetComponent<NavMeshAgent>();
         Transform = view.transform;
+        IsActive = true;
     }
 }

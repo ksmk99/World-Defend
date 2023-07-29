@@ -57,23 +57,6 @@ public class PlayerInstaller : MonoInstaller
         Container.BindSignal<SignalOnUnitDied>().ToMethod<PlayerPresentor>(x => x.OnDeath).FromResolve();
     }
 
-    private void BindWeapon(DiContainer subContainer)
-    {
-        subContainer.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
-                .FromMonoPoolableMemoryPool(
-                     x => x.WithInitialSize(weaponSettings.BulletCount)
-                    .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
-                    .UnderTransformGroup("Bullet Pool"));
-        subContainer.Bind<IWeaponModel>()
-            .To<WeaponModel>()
-            .AsTransient()
-            .WithArguments(Team.Ally, weaponSettings);
-        subContainer.Bind<IWeaponPresentor>()
-            .To(weaponSettings.WeaponType)
-            .AsTransient()
-            .WhenInjectedInto<PlayerModel>();
-    }
-
     [Serializable]
     public class Settings
     {

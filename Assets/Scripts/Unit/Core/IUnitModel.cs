@@ -8,6 +8,7 @@ namespace Unit
     public interface IUnitModel
     {
         Transform Transform { get; }
+        bool IsActive { get; set; }
         Team Team { get; }
 
         IMovement Movement { get; }
