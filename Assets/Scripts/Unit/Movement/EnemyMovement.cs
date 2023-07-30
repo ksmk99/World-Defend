@@ -17,6 +17,7 @@ namespace Unit
             this.transform = view.transform;
             this.settings = settings;
             this.agent = transform.GetComponent<NavMeshAgent>();
+            agent.speed = settings.MoveSpeed;
 
             ClampPos();
         }

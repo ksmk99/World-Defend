@@ -1,53 +1,28 @@
 using System;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using Zenject;
+using static Zenject.CheatSheet;
 
 namespace Unit.Bullet
 {
     public class BulletView : MonoBehaviour,
         IBulletView,
-        IPoolable<BulletRuntimeSettings, IMemoryPool>,
+        IPoolable<IMemoryPool>,
         IDisposable
     {
-        public float Speed;
-
         private IMemoryPool pool;
 
-        private BulletRuntimeSettings settings;
-        private bool canCollide;
+        public event Action<Collider> OnCollide;
 
         public void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<UnitView>(out var view))
-            {
-                var isSuccess = view.TryAddEffects(settings.Effects, settings.Team);
-                canCollide = !isSuccess;
-            }
+            OnCollide?.Invoke(other);
         }
 
-        public bool CheckEnd()
+        public void OnSpawned(IMemoryPool pool)
         {
-            if(!canCollide)
-            {
-                return true;
-            }
-
-            var distance = Vector3.Distance(settings.Position, transform.position);
-            return distance > settings.Distance;
-        }
-
-        public void Move()
-        {
-            transform.position += transform.forward * Time.deltaTime * Speed;
-        }
-
-        public void OnSpawned(BulletRuntimeSettings p1, IMemoryPool pool)
-        {
-            this.settings = p1;
             this.pool = pool;
-
-            transform.position = p1.Position;
-            transform.rotation = p1.Rotation;
 
             gameObject.SetActive(true);
         }
@@ -55,7 +30,7 @@ namespace Unit.Bullet
         public void OnDespawned()
         {
             pool = null;
-            transform.position = Vector3.zero;
+
             gameObject.SetActive(false);
         }
 
@@ -64,8 +39,38 @@ namespace Unit.Bullet
             pool.Despawn(this);
         }
 
-        public class Factory : PlaceholderFactory<BulletRuntimeSettings, BulletView>
+        public class Factory : PlaceholderFactory<UnityEngine.Object, IBulletSettings, BulletRuntimeSettings, BulletView>
         {
+        }
+
+        public class Pool : MemoryPool<UnityEngine.Object, IBulletSettings, BulletRuntimeSettings, BulletView>
+        {
+
+        }
+    }
+
+    public class BulletFactory : IFactory<BulletView>
+    {
+        readonly DiContainer _container;
+
+        public BulletFactory(DiContainer container)
+        {
+            _container = container;
+        }
+
+        public BulletView Create(UnityEngine.Object prefab, IBulletSettings param2, BulletRuntimeSettings param3)
+        {
+            var result = _container.InstantiatePrefabForComponent<BulletView>(prefab);
+            var model = _container.Resolve<BulletModel>();
+            var presentor = _container.Resolve<BulletPresentor>();
+            model.Init(param2, param3);
+            presentor.Init(model, result);
+            return result;
+        }
+
+        public BulletView Create()
+        {
+            throw new NotImplementedException();
         }
     }
 }

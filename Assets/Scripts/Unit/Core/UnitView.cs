@@ -9,6 +9,11 @@ public abstract class UnitView : MonoBehaviour
     public abstract bool TryAddEffects(List<EffectSettings> effects, Team team);
 
     public abstract void Death();
+    public virtual UnitPresentor GetPresentor()
+    {
+        return presentor;
+    }
+
     public virtual Team GetTeam()
     {
         return presentor.Team;

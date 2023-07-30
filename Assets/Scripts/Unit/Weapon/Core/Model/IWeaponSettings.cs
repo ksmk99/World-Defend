@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unit.Bullet;
 using UnityEngine;
 
 namespace Unit
 {
     public interface IWeaponSettings
     {
-        public float Distance { get; }
-        public LayerMask TargetLayer { get; }
-        public Type WeaponType { get; }
-        public List<EffectSettings> Effects { get; }
+        float Distance { get; }
+        LayerMask TargetLayer { get; }
+        Type WeaponType { get; }
+        BulletSettings BulletSettings { get; }
+        List<EffectSettings> Effects { get; }
     }
 }

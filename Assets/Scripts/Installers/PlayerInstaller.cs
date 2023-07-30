@@ -22,11 +22,10 @@ public class PlayerInstaller : MonoInstaller
             AsSingle().WithArguments(settings.Joystick);
         Container.Bind<HealthModel>()
             .AsTransient().WithArguments(healthSettings);
-        Container.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
-        .FromMonoPoolableMemoryPool(
-             x => x.WithInitialSize(weaponSettings.BulletCount)
-            .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
-            .UnderTransformGroup("Bullet Pool"));
+
+        //Container.BindFactory<UnityEngine.Object, IBulletSettings, BulletRuntimeSettings, BulletView, BulletView.Factory>()
+        //    .FromFactory<PrefabFactory<IBulletSettings, BulletRuntimeSettings, BulletView>>();
+
         Container.Bind<IWeaponModel>()
             .To<WeaponModel>()
             .AsTransient()

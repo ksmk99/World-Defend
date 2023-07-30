@@ -1,11 +1,12 @@
-﻿namespace Unit.Bullet
+﻿using UnityEngine;
+
+namespace Unit.Bullet
 {
     public interface IBulletSettings
     {
         [field: SerializeField]
         public float Speed { get; set; }
         [field: SerializeField]
-        public int Damage { get; set; }
-
+        public BulletView Prefab { get; set; }
     }
 }

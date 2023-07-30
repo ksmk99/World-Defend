@@ -5,14 +5,13 @@ namespace Unit
 {
     public interface IWeaponModel
     {
-        public IWeaponSettings Settings { get; set; }
-        public BulletView.Factory BulletFactory { get; set; }
-
-        public bool IsActing { get; set; }
-        public bool CanUse { get; set; }
-        public float NextUseTime { get; set; }
-        public float ActionTimer { get; set; }
-        public float TTL { get; set; }
-        public Transform Target { get; set; }
+        IWeaponSettings Settings { get; set; }
+        BulletFactory BulletFactory { get; set; }
+        bool IsActing { get; set; }
+        bool CanUse { get; set; }
+        float NextUseTime { get; set; }
+        float ActionTimer { get; set; }
+        float TTL { get; set; }
+        Transform Target { get; set; }
     }
 }

@@ -1,19 +1,23 @@
-﻿using Unit.Bullet;
+﻿using System;
+using Unit.Bullet;
 using UnityEngine;
 
 namespace Unit
 {
     public class BulletModel
     {
-        public IBulletSettings Settings { get; }
-        public Transform Transform { get; }
-        public Team Team { get; }
+        public IBulletSettings Settings { get; private set; }
+        public BulletRuntimeSettings RuntimeSettings { get; private set; }
+        public Team Team => RuntimeSettings.Team;
 
-        public BulletModel(Transform transform, Team team, IBulletSettings settings)
+        public bool CanCollide { get; set; }
+
+        public void Init(IBulletSettings param2, BulletRuntimeSettings param3)
         {
-            Transform = transform;
-            Team = team;
-            Settings = settings;
+            Settings = param2;
+            RuntimeSettings = param3;
+
+            CanCollide = true;
         }
     }
 }

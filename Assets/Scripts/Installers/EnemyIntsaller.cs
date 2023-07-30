@@ -1,9 +1,10 @@
+using System;
 using Unit;
 using Unit.Bullet;
 using UnityEngine;
 using Zenject;
 
-public class GameInstaller : MonoInstaller
+public class EnemyIntsaller : MonoInstaller
 {
     [SerializeField] private GameObject enemy;
     [SerializeField] private HealthSettings healthSettings;
@@ -12,6 +13,11 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private Transform bulletParent;
 
     public override void InstallBindings()
+    {
+        InstallEnemyFacotry();
+    }
+
+    private void InstallEnemyFacotry()
     {
         Container.BindInstance(enemyMovement).WhenInjectedInto<EnemyMovement>();
         Container.BindFactory<EnemyView, EnemyView.Factory>()
@@ -36,11 +42,8 @@ public class GameInstaller : MonoInstaller
         subContainer.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
         subContainer.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
 
-        subContainer.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
-            .FromMonoPoolableMemoryPool(
-                x => x.WithInitialSize(weaponSettings.BulletCount)
-                .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
-                .UnderTransform(bulletParent));
+        //Container.BindFactory<UnityEngine.Object, IBulletSettings, BulletRuntimeSettings, BulletView, BulletView.Factory>()
+        //    .FromFactory<PrefabFactory<IBulletSettings, BulletRuntimeSettings, BulletView>>();
 
         subContainer.Bind<IWeaponModel>().To<WeaponModel>()
             .AsTransient()

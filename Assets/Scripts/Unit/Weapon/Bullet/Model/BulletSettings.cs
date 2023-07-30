@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Unit.Bullet
 {
-    [CreateAssetMenu()]
-    public class BulletSettings : ScriptableObject, IBulletSettings
+    [Serializable]
+    public class BulletSettings : IBulletSettings
     {
         [field: SerializeField]
         public float Speed { get; set; }
         [field: SerializeField]
-        public int Damage { get; set; }
+        public BulletView Prefab { get; set; }
     }
 }

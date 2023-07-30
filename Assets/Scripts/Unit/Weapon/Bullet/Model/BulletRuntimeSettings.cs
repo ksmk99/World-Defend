@@ -14,8 +14,7 @@ namespace Unit.Bullet
 
         public List<EffectSettings> Effects;
 
-        public BulletRuntimeSettings(float distance, Quaternion rotation, Vector3 position, Team team,
-            List<EffectSettings> effects)
+        public BulletRuntimeSettings(float distance, Quaternion rotation, Vector3 position, Team team, List<EffectSettings> effects)
         {
             Distance = distance;
             Rotation = rotation;

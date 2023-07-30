@@ -13,12 +13,17 @@ MonoBehaviour:
   m_Name: Game Settings Installer
   m_EditorClassIdentifier: 
   playerMS:
-    MoveSpeed: 5.54
+    MoveSpeed: 6
     RotateSpeed: 0.8
   enemyMS:
-    MoveSpeed: 3.28
+    MoveSpeed: 4
     RotateSpeed: 0.8
     MaxDistance: 999
+  mobMS:
+    MoveSpeed: 7
   spawnerSettings:
     SpawnRate: 1.82
+    Offset: {x: 6.37, y: 0, z: 7.13}
+  mobSpawnerSettings:
+    SpawnCount: 1
     Offset: {x: 6.37, y: 0, z: 7.13}

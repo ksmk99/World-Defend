@@ -18,8 +18,10 @@ MonoBehaviour:
     m_Bits: 128
   <Effects>k__BackingField:
   - {fileID: 11400000, guid: 7f2985867de2dc448b626795af5b96ee, type: 2}
-  BulletPrefab: {fileID: 5865941083765694682, guid: cdd19274c6e15a1499262198abac537e,
-    type: 3}
+  <BulletSettings>k__BackingField:
+    <Speed>k__BackingField: 10
+    <Prefab>k__BackingField: {fileID: 5865941083765694682, guid: cdd19274c6e15a1499262198abac537e,
+      type: 3}
   BulletCount: 2
   ReloadTime: 2
   BulletDelay: 0.1
