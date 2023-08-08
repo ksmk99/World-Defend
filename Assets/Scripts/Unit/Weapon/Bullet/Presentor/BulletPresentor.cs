@@ -9,15 +9,21 @@ namespace Unit.Bullet
         private  BulletModel model;
         private  BulletView view;
 
-        public void Init(BulletModel model, BulletView result)
+        public BulletPresentor(BulletModel model, BulletView result)
         {
             this.model = model;
             this.view = result;
 
+            view.OnCollide += Collide;
+            view.OnDataUpdate += DataUpdate;
+        }
+
+        private void DataUpdate(IBulletSettings settings1, BulletRuntimeSettings settings2)
+        {
+            model.Init(settings1, settings2);
+
             view.transform.position = model.RuntimeSettings.Position;
             view.transform.rotation = model.RuntimeSettings.Rotation;
-
-            view.OnCollide += Collide;
         }
 
         public void Collide(Collider other)

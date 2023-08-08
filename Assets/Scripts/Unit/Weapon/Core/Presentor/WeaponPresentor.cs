@@ -95,7 +95,7 @@ namespace Unit
                 settings.Distance, transform.rotation,
                 transform.position, team,
                 settings.Effects);
-            var bullet = model.BulletFactory.Create(model.Settings.BulletSettings.Prefab, model.Settings.BulletSettings, bulletSettings);
+            var bullet = model.BulletPool.Spawn(model.Settings.BulletSettings, bulletSettings);
             //model.Bullets.Add(bullet);
         }
 

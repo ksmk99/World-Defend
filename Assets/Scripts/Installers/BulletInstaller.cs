@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using Unit;
 using Unit.Bullet;
+using Unity.VisualScripting;
 using Zenject;
 
 namespace Installers
@@ -9,16 +10,9 @@ namespace Installers
     {
         public override void InstallBindings()
         {
-            Container.Bind<BulletModel>().AsSingle();
-            //Container.Bind<IBulletSettings>().To<BulletSettings>().WhenInjectedInto<BulletModel>();
-            Container.Bind<BulletFactory>().AsCached(); 
-            Container.BindInterfacesAndSelfTo<BulletPresentor>().AsSingle();
-            Container.BindMemoryPool<BulletView, BulletView.Pool>()
-                .FromFactory<BulletFactory>();
-
-            //Container.BindFactory<UnityEngine.Object, IBulletSettings, BulletRuntimeSettings, BulletView, BulletFactory>()
-            //    .FromPoolableMemoryPool<UnityEngine.Object, IBulletSettings, BulletRuntimeSettings, BulletView>()
-            //         .FromFactory<BulletFactory>();
+            //Container.Bind<BulletModel>().AsSingle();
+            ////Container.Bind<IBulletSettings>().To<BulletSettings>().WhenInjectedInto<BulletModel>();
+            //Container.BindInterfacesAndSelfTo<BulletPresentor>().AsSingle();
         }
     }
 }

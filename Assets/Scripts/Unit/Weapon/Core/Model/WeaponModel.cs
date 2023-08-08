@@ -7,7 +7,7 @@ namespace Unit
     public class WeaponModel : IWeaponModel
     {
         public IWeaponSettings Settings { get; set; }
-        public BulletFactory BulletFactory { get; set; }
+        public BulletView.Pool BulletPool { get; set; }
         public List<IBulletPresentor> Bullets { get; set; }
 
         public bool IsActing { get; set; }
@@ -18,11 +18,11 @@ namespace Unit
         public float TTL { get; set; }
         public Transform Target { get; set; }
 
-        public WeaponModel(IWeaponSettings settings, BulletFactory factory)
+        public WeaponModel(IWeaponSettings settings, BulletView.Pool factory)
         {
             Settings = settings;
             CanUse = true;
-            BulletFactory = factory;
+            BulletPool = factory;
             Bullets = new List<IBulletPresentor>();
         }
     }

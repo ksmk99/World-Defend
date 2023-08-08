@@ -26,6 +26,13 @@ public class PlayerInstaller : MonoInstaller
         //Container.BindFactory<UnityEngine.Object, IBulletSettings, BulletRuntimeSettings, BulletView, BulletView.Factory>()
         //    .FromFactory<PrefabFactory<IBulletSettings, BulletRuntimeSettings, BulletView>>();
 
+        Container.BindMemoryPool<BulletView, BulletView.Pool>()
+            .WithInitialSize(5)
+            .FromSubContainerResolve()
+            .ByNewPrefabMethod(weaponSettings.BulletSettings.Prefab, BulletBind)
+            .UnderTransformGroup("PlayerBullet")
+            .AsTransient();
+
         Container.Bind<IWeaponModel>()
             .To<WeaponModel>()
             .AsTransient()
@@ -54,6 +61,13 @@ public class PlayerInstaller : MonoInstaller
             .AsTransient();
 
         Container.BindSignal<SignalOnUnitDied>().ToMethod<PlayerPresentor>(x => x.OnDeath).FromResolve();
+    }
+
+    private void BulletBind(DiContainer container)
+    {
+        container.Bind<BulletModel>().AsSingle();
+        container.Bind<BulletView>().AsSingle();
+        container.Bind<BulletPresentor>().AsSingle();
     }
 
     [Serializable]
