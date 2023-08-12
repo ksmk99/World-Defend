@@ -16,9 +16,11 @@ namespace Unit
         public List<EffectSettings> Effects { get; set; }
 
         public Type WeaponType => typeof(WeaponPresentor);
+
         [field: SerializeField]
         public BulletSettings BulletSettings { get; set; }
 
+        public BulletView BulletPrefab;
         public int BulletCount;
         public float ReloadTime;
         public float BulletDelay;

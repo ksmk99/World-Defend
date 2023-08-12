@@ -6,7 +6,7 @@ namespace Unit
     public interface IWeaponModel
     {
         IWeaponSettings Settings { get; set; }
-        BulletFactory BulletFactory { get; set; }
+        BulletView.Factory BulletFactory { get; set; }
         bool IsActing { get; set; }
         bool CanUse { get; set; }
         float NextUseTime { get; set; }

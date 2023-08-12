@@ -20,21 +20,21 @@ namespace Unit
             Attack(transform, isDead, team);
         }
 
-        //private void BulletsUpdate()
-        //{
-        //    for (int i = 0; i < model.Bullets.Count; i++)
-        //    {
-        //        if (model.Bullets[i].CheckEnd())
-        //        {
-        //            model.Bullets[i].Dispose();
-        //            model.Bullets.Remove(model.Bullets[i]);
-        //        }
-        //        else
-        //        {
-        //            model.Bullets[i].Move();
-        //        }
-        //    }
-        //}
+        private void BulletsUpdate()
+        {
+            for (int i = 0; i < model.Bullets.Count; i++)
+            {
+                if (model.Bullets[i].CheckEnd())
+                {
+                    model.Bullets[i].Dispose();
+                    model.Bullets.Remove(model.Bullets[i]);
+                }
+                else
+                {
+                    model.Bullets[i].Move();
+                }
+            }
+        }
 
         public bool IsReloading()
         {
@@ -95,8 +95,8 @@ namespace Unit
                 settings.Distance, transform.rotation,
                 transform.position, team,
                 settings.Effects);
-            var bullet = model.BulletFactory.Create(model.Settings.BulletSettings.Prefab, model.Settings.BulletSettings, bulletSettings);
-            //model.Bullets.Add(bullet);
+            var bullet = model.BulletFactory.Create(bulletSettings);
+            model.Bullets.Add(bullet);
         }
 
         public void Reset()

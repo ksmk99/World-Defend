@@ -20,7 +20,6 @@ namespace Installers
             Container.BindInstance(mobMS).IfNotBound();
             Container.BindInstance(spawnerSettings).IfNotBound();
             Container.BindInstance(mobSpawnerSettings).IfNotBound();
-            BulletInstaller.Install(Container);
         }
     }
 }
