@@ -15,7 +15,7 @@ namespace Unit
         [field: SerializeField]
         public List<EffectSettings> Effects { get; set; }
 
-        public Type WeaponType => typeof(WeaponPresentor);
+        public Type WeaponType => typeof(WeaponPresenter);
         [field: SerializeField]
         public BulletSettings BulletSettings { get; set; }
 

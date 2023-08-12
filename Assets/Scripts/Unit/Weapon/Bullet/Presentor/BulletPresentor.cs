@@ -4,23 +4,23 @@ using Zenject;
 
 namespace Unit.Bullet
 {
-    public class BulletPresentor : IBulletPresentor, ITickable
+    public class BulletPresenter : IBulletPresentor, ITickable
     {
         private  BulletModel model;
         private  BulletView view;
 
-        public BulletPresentor(BulletModel model, BulletView result)
+        public BulletPresenter(BulletModel model, BulletView result)
         {
             this.model = model;
             this.view = result;
 
             view.OnCollide += Collide;
-            view.OnDataUpdate += DataUpdate;
+            view.OnReinitialize += Reinitialize;
         }
 
-        private void DataUpdate(IBulletSettings settings1, BulletRuntimeSettings settings2)
+        private void Reinitialize(BulletRuntimeSettings settings2)
         {
-            model.Init(settings1, settings2);
+            model.Init(settings2);
 
             view.transform.position = model.RuntimeSettings.Position;
             view.transform.rotation = model.RuntimeSettings.Rotation;
@@ -54,7 +54,7 @@ namespace Unit.Bullet
 
         private void Dispose()
         {
-            view.transform.GetComponent<BulletView>().Dispose();
+            view.Dispose();
         }
 
         public bool CheckEnd()

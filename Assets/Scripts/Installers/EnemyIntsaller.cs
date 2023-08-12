@@ -14,10 +14,10 @@ public class EnemyIntsaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        InstallEnemyFacotry();
+        InstallEnemyFactory();
     }
 
-    private void InstallEnemyFacotry()
+    private void InstallEnemyFactory()
     {
         Container.BindInstance(enemyMovement).WhenInjectedInto<EnemyMovement>();
         Container.BindFactory<EnemyView, EnemyView.Factory>()
@@ -42,16 +42,6 @@ public class EnemyIntsaller : MonoInstaller
         subContainer.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
         subContainer.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
 
-
-        Container.BindMemoryPool<BulletView, BulletView.Pool>()
-            .WithInitialSize(5)
-            .FromSubContainerResolve()
-            .ByNewPrefabMethod(weaponSettings.BulletSettings.Prefab, BulletBind)
-            .UnderTransformGroup("PlayerBullet").AsTransient(); ;
-
-        //Container.BindFactory<UnityEngine.Object, IBulletSettings, BulletRuntimeSettings, BulletView, BulletView.Factory>()
-        //    .FromFactory<PrefabFactory<IBulletSettings, BulletRuntimeSettings, BulletView>>();
-
         subContainer.Bind<IWeaponModel>().To<WeaponModel>()
             .AsTransient()
             .WithArguments(weaponSettings);
@@ -64,12 +54,23 @@ public class EnemyIntsaller : MonoInstaller
         subContainer.BindInterfacesAndSelfTo<EnemyPresentor>().AsSingle();
 
         subContainer.BindSignal<SignalOnUnitDied>().ToMethod<EnemyPresentor>(x => x.OnDeath).FromResolve();
+
+        subContainer.Bind<BulletModel>().AsTransient().WithArguments(weaponSettings.BulletSettings);
+        subContainer.Bind<BulletPresenter>().AsTransient();
+        subContainer.Bind<BulletView>().AsTransient().WhenInjectedInto<BulletPresenter>();
+        subContainer.Bind<ITickable>().To<BulletPresenter>().AsTransient();
+
+        subContainer.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
+            .FromMonoPoolableMemoryPool(x =>
+             x.WithInitialSize(5)
+            .FromComponentInNewPrefab(weaponSettings.BulletSettings.Prefab)
+            .UnderTransformGroup("PlayerBullet"));
     }
 
     private void BulletBind(DiContainer container)
     {
-        container.Bind<BulletModel>().AsSingle();
-        container.Bind<BulletView>().AsSingle();
-        container.Bind<BulletPresentor>().AsSingle();
+        container.Bind<BulletModel>().AsTransient().WithArguments(weaponSettings.BulletSettings);
+        //container.Bind<BulletView>().AsTransient();
+        container.Bind<BulletPresenter>().AsTransient();
     }
 }

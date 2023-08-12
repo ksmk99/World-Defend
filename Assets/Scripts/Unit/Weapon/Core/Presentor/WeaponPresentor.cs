@@ -1,14 +1,17 @@
-﻿using Unit.Bullet;
+﻿using System;
+using System.Collections.Generic;
+using Unit.Bullet;
 using UnityEngine;
 
 namespace Unit
 {
-    public class WeaponPresentor : IWeaponPresentor
+    public class WeaponPresenter : IWeaponPresentor
     {
         private readonly WeaponSettings settings;
         private readonly WeaponModel model;
+        private List<BulletView> bullets = new List<BulletView>();
 
-        public WeaponPresentor(IWeaponModel model)
+        public WeaponPresenter(IWeaponModel model)
         {
             this.model = (WeaponModel)model;
             settings = (WeaponSettings)model.Settings;
@@ -16,25 +19,8 @@ namespace Unit
 
         public void Update(Transform transform, bool isDead, Team team)
         {
-            //BulletsUpdate();
             Attack(transform, isDead, team);
         }
-
-        //private void BulletsUpdate()
-        //{
-        //    for (int i = 0; i < model.Bullets.Count; i++)
-        //    {
-        //        if (model.Bullets[i].CheckEnd())
-        //        {
-        //            model.Bullets[i].Dispose();
-        //            model.Bullets.Remove(model.Bullets[i]);
-        //        }
-        //        else
-        //        {
-        //            model.Bullets[i].Move();
-        //        }
-        //    }
-        //}
 
         public bool IsReloading()
         {
@@ -95,8 +81,16 @@ namespace Unit
                 settings.Distance, transform.rotation,
                 transform.position, team,
                 settings.Effects);
-            var bullet = model.BulletPool.Spawn(model.Settings.BulletSettings, bulletSettings);
-            //model.Bullets.Add(bullet);
+
+            var bullet = model.BulletPool.Create(bulletSettings);
+            bullet.OnDispose += DisposeBullet;
+
+            bullets.Add(bullet);
+        }
+
+        private void DisposeBullet(BulletView view)
+        {
+            bullets.Remove(view);
         }
 
         public void Reset()

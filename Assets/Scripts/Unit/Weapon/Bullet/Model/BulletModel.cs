@@ -12,9 +12,13 @@ namespace Unit
 
         public bool CanCollide { get; set; }
 
-        public void Init(IBulletSettings param2, BulletRuntimeSettings param3)
+        public BulletModel(IBulletSettings settings)
         {
-            Settings = param2;
+            Settings = settings;
+        }
+
+        public void Init(BulletRuntimeSettings param3)
+        {
             RuntimeSettings = param3;
 
             CanCollide = true;
