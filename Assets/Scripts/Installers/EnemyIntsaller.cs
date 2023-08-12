@@ -42,8 +42,11 @@ public class EnemyIntsaller : MonoInstaller
         subContainer.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
         subContainer.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
 
-        //Container.BindFactory<UnityEngine.Object, IBulletSettings, BulletRuntimeSettings, BulletView, BulletView.Factory>()
-        //    .FromFactory<PrefabFactory<IBulletSettings, BulletRuntimeSettings, BulletView>>();
+        Container.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
+        .FromMonoPoolableMemoryPool(
+             x => x.WithInitialSize(weaponSettings.BulletCount)
+            .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
+            .UnderTransformGroup("Bullet Pool"));
 
         subContainer.Bind<IWeaponModel>().To<WeaponModel>()
             .AsTransient()
