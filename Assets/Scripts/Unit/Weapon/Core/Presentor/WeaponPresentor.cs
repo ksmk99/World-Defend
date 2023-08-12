@@ -16,8 +16,8 @@ namespace Unit
 
         public void Update(Transform transform, bool isDead, Team team)
         {
-            //BulletsUpdate();
             Attack(transform, isDead, team);
+            BulletsUpdate();
         }
 
         private void BulletsUpdate()
@@ -71,6 +71,11 @@ namespace Unit
             if (isDead || IsReloading() || !SetAction(transform, team))
             {
                 return;
+            }
+
+            if(team == Team.Enemy)
+            {
+                Debug.Log("Enemy");
             }
 
             transform.LookAt(model.Target.position);

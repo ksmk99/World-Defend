@@ -45,8 +45,7 @@ public class MobInstaller : MonoInstaller
         subContainer.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
         .FromMonoPoolableMemoryPool(
              x => x.WithInitialSize(weaponSettings.BulletCount)
-            .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
-            .UnderTransformGroup("Bullet Pool"));
+            .FromComponentInNewPrefab(weaponSettings.BulletPrefab));
 
         subContainer.Bind<IWeaponModel>().To<WeaponModel>()
             .AsTransient()

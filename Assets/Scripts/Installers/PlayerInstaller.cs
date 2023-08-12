@@ -39,7 +39,7 @@ public class PlayerInstaller : MonoInstaller
             .WhenInjectedInto<PlayerModel>();
         Container.Bind<IHealthPresentor>().To<HealthPresentor>()
             .AsTransient()
-            .WhenInjectedInto<PlayerModel>(); ;
+            .WhenInjectedInto<PlayerModel>(); 
         Container.Bind<IMovement>().To<PlayerMovement>()
             .AsTransient()
             .WithArguments(settings.Transform)

@@ -46,8 +46,11 @@ namespace Unit.Bullet
             this.settings = p1;
             this.pool = pool;
 
+            transform.SetParent(null);
             transform.position = p1.Position;
             transform.rotation = p1.Rotation;
+
+            canCollide = true;
 
             gameObject.SetActive(true);
         }

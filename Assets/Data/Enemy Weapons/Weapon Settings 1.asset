@@ -22,6 +22,8 @@ MonoBehaviour:
     <Speed>k__BackingField: 10
     <Prefab>k__BackingField: {fileID: 5865941083765694682, guid: cdd19274c6e15a1499262198abac537e,
       type: 3}
+  BulletPrefab: {fileID: 5865941083765694682, guid: cdd19274c6e15a1499262198abac537e,
+    type: 3}
   BulletCount: 2
   ReloadTime: 2
   BulletDelay: 0.1

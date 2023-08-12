@@ -8,7 +8,7 @@ namespace Unit
     {
         public IWeaponSettings Settings { get; set; }
         public BulletView.Factory BulletFactory { get; set; }
-        public List<IBulletView> Bullets { get; set; }
+        public List<BulletView> Bullets { get; set; }
 
         public bool IsActing { get; set; }
         public bool CanUse { get; set; }
@@ -23,7 +23,7 @@ namespace Unit
             Settings = settings;
             CanUse = true;
             BulletFactory = factory;
-            Bullets = new List<IBulletView>();
+            Bullets = new List<BulletView>();
         }
     }
 }
