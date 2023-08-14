@@ -17,9 +17,6 @@ namespace Unit
 
         public Type WeaponType => typeof(WeaponPresentor);
 
-        [field: SerializeField]
-        public BulletSettings BulletSettings { get; set; }
-
         public BulletView BulletPrefab;
         public int BulletCount;
         public float ReloadTime;

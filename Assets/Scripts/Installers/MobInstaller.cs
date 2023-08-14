@@ -14,10 +14,10 @@ public class MobInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        InstallMobFacotry();
+        InstallMobFactory();
     }
 
-    private void InstallMobFacotry()
+    private void InstallMobFactory()
     {
         Container.BindInstance(movement).WhenInjectedInto<MobMovement>();
         Container.BindFactory<MobView, MobView.Factory>()
@@ -45,7 +45,8 @@ public class MobInstaller : MonoInstaller
         subContainer.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
         .FromMonoPoolableMemoryPool(
              x => x.WithInitialSize(weaponSettings.BulletCount)
-            .FromComponentInNewPrefab(weaponSettings.BulletPrefab));
+            .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
+            .UnderTransform(new GameObject("[Mob Bullets]").transform));
 
         subContainer.Bind<IWeaponModel>().To<WeaponModel>()
             .AsTransient()

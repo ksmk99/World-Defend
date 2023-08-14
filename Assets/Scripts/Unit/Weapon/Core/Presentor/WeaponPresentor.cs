@@ -73,11 +73,6 @@ namespace Unit
                 return;
             }
 
-            if(team == Team.Enemy)
-            {
-                Debug.Log("Enemy");
-            }
-
             transform.LookAt(model.Target.position);
             if (model.ActionTimer >= settings.BulletDelay)
             {

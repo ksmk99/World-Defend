@@ -10,7 +10,6 @@ namespace Unit
         float Distance { get; }
         LayerMask TargetLayer { get; }
         Type WeaponType { get; }
-        BulletSettings BulletSettings { get; }
         List<EffectSettings> Effects { get; }
     }
 }
