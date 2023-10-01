@@ -4,18 +4,15 @@ using Zenject;
 
 namespace Unit.Bullet
 {
-    public class BulletPresenter : IBulletPresentor, ITickable
+    public class BulletPresenter : ITickable, IInitializable, IBulletPresenter
     {
-        private  BulletModel model;
-        private  BulletView view;
+        private BulletModel model;
+        private BulletView view;
 
         public BulletPresenter(BulletModel model, BulletView result)
         {
             this.model = model;
             this.view = result;
-
-            view.OnCollide += Collide;
-            view.OnReinitialize += Reinitialize;
         }
 
         private void Reinitialize(BulletRuntimeSettings settings2)
@@ -66,6 +63,12 @@ namespace Unit.Bullet
 
             var distance = Vector3.Distance(model.RuntimeSettings.Position, view.transform.position);
             return distance > model.RuntimeSettings.Distance;
+        }
+
+        public void Initialize()
+        {
+            view.OnCollide += Collide;
+            view.OnReinitialize += Reinitialize;
         }
     }
 }

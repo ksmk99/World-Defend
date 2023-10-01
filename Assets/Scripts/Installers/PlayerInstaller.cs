@@ -55,18 +55,6 @@ public class PlayerInstaller : MonoInstaller
             .AsTransient();
 
         Container.BindSignal<SignalOnUnitDied>().ToMethod<PlayerPresentor>(x => x.OnDeath).FromResolve();
-
-       // Container.BindInterfacesAndSelfTo<BulletView>().AsSingle();
-
-        Container.Bind<BulletModel>().AsTransient().WithArguments(weaponSettings.BulletSettings);
-        Container.Bind<BulletPresenter>().AsTransient();
-        Container.Bind<BulletView>().AsTransient().WhenInjectedInto<BulletPresenter>();
-        Container.Bind<ITickable>().To<BulletPresenter>().AsTransient();
-        Container.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
-            .FromMonoPoolableMemoryPool(x => 
-             x.WithInitialSize(5)
-            .FromComponentInNewPrefab(weaponSettings.BulletSettings.Prefab)
-            .UnderTransformGroup("PlayerBullet"));
     }
 
     [Serializable]

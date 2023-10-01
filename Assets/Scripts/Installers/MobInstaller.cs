@@ -46,12 +46,5 @@ public class MobInstaller : MonoInstaller<MobInstaller>
 
         Container.BindSignal<SignalOnUnitDied>().ToMethod<MobPresenter>(x => x.OnDeath).FromResolve();
     }
-
-    private void BulletBind(DiContainer container)
-    {
-        container.Bind<BulletModel>().AsTransient().WithArguments(weaponSettings.BulletSettings);
-        //container.Bind<BulletView>().AsTransient();
-        container.Bind<BulletPresenter>().AsTransient();
-    }
 }
 

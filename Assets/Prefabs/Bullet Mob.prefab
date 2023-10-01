@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 351271368797992982}
-  - component: {fileID: 950369333699829498}
+  - component: {fileID: 7925052222882293108}
+  - component: {fileID: 4772305225413596586}
   - component: {fileID: 5865941083765694682}
   - component: {fileID: 381115580095677100}
   m_Layer: 8
@@ -35,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &950369333699829498
+--- !u!114 &7925052222882293108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,15 +45,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 5674363304323072882}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 5865941083765694682}
-  _identifier: 
-  _useSceneContext: 1
-  _context: {fileID: 0}
-  _bindType: 2
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 4772305225413596586}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &4772305225413596586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5674363304323072882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c180d524ae4eea4cbe83aee3bb99406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings:
+    <Speed>k__BackingField: 10
 --- !u!114 &5865941083765694682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,10 +77,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5674363304323072882}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca5a8379879b06f40ac263c3112ff5b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 53eedadb5eee4d74f916d1dd84b2b7dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 15
 --- !u!65 &381115580095677100
 BoxCollider:
   m_ObjectHideFlags: 0

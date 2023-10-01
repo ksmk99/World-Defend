@@ -17,9 +17,15 @@ public class EnemiesInstaller : MonoInstaller
 
     private void InstallEnemyFactory()
     {
-        Container.Bind<ISpawnManager>().To<EnemySpawnManager>().AsSingle().WithArguments(spawnerSettings);
-        Container.BindFactory<UnityEngine.Object, EnemyView, EnemyView.Factory>().FromFactory<PrefabFactory<EnemyView>>();
+        Container.Bind<ISpawnManager>().To<EnemySpawnManager>()
+            .AsSingle()
+            .WithArguments(spawnerSettings);
 
-        Container.BindInterfacesAndSelfTo<EnemySpawner>().AsSingle().WithArguments(poolParent);
+        Container.BindFactory<UnityEngine.Object, EnemyView, EnemyView.Factory>()
+            .FromFactory<PrefabFactory<EnemyView>>();
+
+        Container.BindInterfacesAndSelfTo<EnemySpawner>()
+            .AsSingle()
+            .WithArguments(poolParent);
     }
 }

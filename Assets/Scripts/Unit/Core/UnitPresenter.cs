@@ -50,6 +50,11 @@ public abstract class UnitPresenter : ITickable
             return false;
         }
 
+        if(effects == null)
+        {
+            return false;
+        }
+
         for (var i = 0; i < effects.Count; i++)
         {
             var effectModel = new EffectModel(effects[i]);

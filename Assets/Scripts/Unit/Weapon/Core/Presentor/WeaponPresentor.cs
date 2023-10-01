@@ -20,7 +20,6 @@ namespace Unit
         public void Update(Transform transform, bool isDead, Team team)
         {
             Attack(transform, isDead, team);
-            BulletsUpdate();
         }
 
         public bool IsReloading()
