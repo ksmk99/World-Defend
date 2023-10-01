@@ -11,20 +11,32 @@ public class EnemyView : UnitView, IPoolable<IMemoryPool>, IDisposable
 
     private IMemoryPool pool;
 
-    [Inject]
-    public void Init(EnemyPresentor presentor)
-    {
-        this.presentor = presentor;
-    }
+    public Action OnRespawn;
+    public Func<UnitPresenter> OnPresenterCall;
+    public Func<List<EffectSettings>, Team, bool> OnTryAddEffects;
 
     public void Respawn()
     {
-        presentor.Respawn();
+        //presentor.Respawn();
+        OnRespawn?.Invoke();
     }
 
     public override bool TryAddEffects(List<EffectSettings> effects, Team team)
     {
-        return presentor.AddEffects(effects, team);
+        //return presentor.AddEffects(effects, team);
+        return OnTryAddEffects.Invoke(effects, team);
+    }
+
+    public override UnitPresenter GetPresenter()
+    {
+        return OnPresenterCall.Invoke();
+    }
+
+    public override Team GetTeam()
+    {
+        return Team.Enemy;
+        var presenter = OnPresenterCall.Invoke();
+        return presenter.Team;
     }
 
     public override void Death()
@@ -54,7 +66,26 @@ public class EnemyView : UnitView, IPoolable<IMemoryPool>, IDisposable
         transform.localScale = Vector3.one;
     }
 
-    public class Factory : PlaceholderFactory<EnemyView>
+    public class Factory : PlaceholderFactory<UnityEngine.Object, EnemyView>
     {
+    }
+}
+
+public class CustomEnemyFactory : IFactory<EnemyView>
+{
+    private DiContainer container;
+    private ISpawnManager spawnManager;
+
+
+    public CustomEnemyFactory(DiContainer container, ISpawnManager spawnManager)
+    {
+        this.container = container;
+        this.spawnManager = spawnManager;
+    }
+
+    public EnemyView Create()
+    {
+        var enemy = container.InstantiatePrefab(spawnManager.GetPrefab());
+        return enemy.GetComponent<EnemyView>();
     }
 }

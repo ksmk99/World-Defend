@@ -6,7 +6,7 @@ using Zenject;
 
 public class MobModel : IUnitModel
 {
-    public UnitPresentor Target { get; set; }
+    public UnitPresenter Target { get; set; }
     public Transform Transform { get; }
     public IMovement Movement { get; }
     public IHealthPresentor Health { get; }
@@ -22,7 +22,7 @@ public class MobModel : IUnitModel
 
     public MobModel(
         IWeaponPresentor weapon,
-        MobView view,
+        Transform transform,
         IMovement movement,
         IHealthPresentor health)
     {
@@ -31,8 +31,8 @@ public class MobModel : IUnitModel
         Weapon = weapon;
 
         Effects = new List<IEffectPresentor>();
-        Agent = view.transform.GetComponent<NavMeshAgent>();
-        Transform = view.transform;
+        Agent = transform.GetComponent<NavMeshAgent>();
+        Transform = transform;
         IsActive = false;
     }
 }

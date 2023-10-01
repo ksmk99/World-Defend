@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 35575656}
   m_Layer: 0
-  m_Name: -----------------------------------------
+  m_Name: =========================================
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -560,17 +560,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1105396708260317832, guid: eaf9cd4a669739d47ad3b691157b5958, type: 3}
-  healthSettings:
-    MaxHealth: 100
-    IsAutoHeal: 1
-    HealDelay: 1
-    HealRate: 1
-    HealCount: 10
-  weaponSettings: {fileID: 11400000, guid: e2ecfd870eda3b54f8544dbe557e2afd, type: 2}
-  enemyMovement:
-    MoveSpeed: 0
-    RotateSpeed: 0
-  bulletParent: {fileID: 0}
+  spawnerSettings:
+    Types:
+    - Prefab: {fileID: 6836847249817977, guid: eaf9cd4a669739d47ad3b691157b5958, type: 3}
+      Count: 15
+    - Prefab: {fileID: 6836847249817977, guid: b23af1e288b8ccc40b1ba9cfd4f560c5, type: 3}
+      Count: 20
 --- !u!1 &504025541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1718,18 +1713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3bbb782660e1504d9655c5701f761fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mob: {fileID: 1105396708260317832, guid: 2ec30f69a8288054b85742c5fb633ec9, type: 3}
-  healthSettings:
-    MaxHealth: 100
-    IsAutoHeal: 1
-    HealDelay: 1
-    HealRate: 1
-    HealCount: 10
-  weaponSettings: {fileID: 11400000, guid: 17eb7cac167ff164981ac0d0bbabab66, type: 2}
-  movement:
-    MoveSpeed: 6
-    RotateSpeed: 0
-  bulletParent: {fileID: 0}
+  prefab: {fileID: 1105396708260317832, guid: 2ec30f69a8288054b85742c5fb633ec9, type: 3}
 --- !u!4 &1699314294
 Transform:
   m_ObjectHideFlags: 0

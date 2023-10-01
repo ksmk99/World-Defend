@@ -3,7 +3,7 @@ using Unit;
 using UnityEngine;
 using Zenject;
 
-public abstract class UnitPresentor : ITickable
+public abstract class UnitPresenter : ITickable
 {
     public Transform Transform => model.Transform;
     public Team Team => model.Team;
@@ -59,4 +59,5 @@ public abstract class UnitPresentor : ITickable
 
         return true;
     }
+
 }

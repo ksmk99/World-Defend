@@ -4,18 +4,18 @@ using UnityEngine;
 
 public abstract class UnitView : MonoBehaviour
 {
-    protected UnitPresentor presentor;
+    protected UnitPresenter presenter;
 
     public abstract bool TryAddEffects(List<EffectSettings> effects, Team team);
 
     public abstract void Death();
-    public virtual UnitPresentor GetPresentor()
+    public virtual UnitPresenter GetPresenter()
     {
-        return presentor;
+        return presenter;
     }
 
     public virtual Team GetTeam()
     {
-        return presentor.Team;
+        return presenter.Team;
     }
 }

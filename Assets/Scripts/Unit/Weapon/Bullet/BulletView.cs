@@ -20,7 +20,8 @@ namespace Unit.Bullet
         {
             if (other.TryGetComponent<UnitView>(out var view))
             {
-                var isSuccess = view.TryAddEffects(settings.Effects, settings.Team);
+                var presenter = view.GetPresenter();
+                var isSuccess = presenter.AddEffects(settings.Effects, settings.Team);
                 canCollide = !isSuccess;
             }
         }
@@ -46,7 +47,6 @@ namespace Unit.Bullet
             this.settings = p1;
             this.pool = pool;
 
-            //transform.SetParent(null);
             transform.position = p1.Position;
             transform.rotation = p1.Rotation;
 

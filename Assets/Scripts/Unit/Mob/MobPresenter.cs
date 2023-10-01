@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 using Unit;
 using UnityEngine;
 
-public class MobPresentor : UnitPresentor
+public class MobPresenter : UnitPresenter
 {
     private MobModel mobModel;
 
-    public MobPresentor(MobModel model)
+    public MobPresenter(MobModel model)
     {
         this.model = model; 
         mobModel = model;
     }
 
-    public void SetPlayer(UnitPresentor presentor)
+    public void SetPlayer(UnitPresenter presentor)
     {
         mobModel.Target = presentor;
         mobModel.IsActive = true;

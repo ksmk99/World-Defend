@@ -35,11 +35,9 @@ public class PlayerInstaller : MonoInstaller
             .WithArguments(weaponSettings);
         Container.Bind<IWeaponPresentor>()
             .To(weaponSettings.WeaponType)
-            .AsTransient()
+            .AsSingle()
             .WhenInjectedInto<PlayerModel>();
-        Container.Bind<IHealthPresentor>().To<HealthPresentor>()
-            .AsTransient()
-            .WhenInjectedInto<PlayerModel>(); 
+        Container.Bind<IHealthPresentor>().To<HealthPresentor>().AsSingle().WhenInjectedInto<PlayerModel>();
         Container.Bind<IMovement>().To<PlayerMovement>()
             .AsTransient()
             .WithArguments(settings.Transform)

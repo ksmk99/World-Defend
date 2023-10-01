@@ -1,64 +1,54 @@
-using System;
-using Unit;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Unit.Bullet;
+using Unit;
 using UnityEngine;
 using Zenject;
 
-public class EnemyInstaller : MonoInstaller
+
+public class EnemyInstaller : MonoInstaller<EnemyInstaller>
 {
-    [SerializeField] private GameObject enemy;
     [SerializeField] private HealthSettings healthSettings;
     [SerializeField] private WeaponSettings weaponSettings;
     [SerializeField] private MovementSettings enemyMovement;
-    [SerializeField] private Transform bulletParent;
 
     public override void InstallBindings()
     {
-        InstallEnemyFactory();
-    }
+        Container.Bind<EnemyView>().FromComponentOnRoot().AsSingle();
 
-    private void InstallEnemyFactory()
-    {
+        Container.Bind<Transform>().FromComponentOnRoot().AsSingle().WhenInjectedInto<EnemyModel>();
+        Container.Bind<IMovement>().To<EnemyMovement>().AsSingle();
+
         Container.BindInstance(enemyMovement).WhenInjectedInto<EnemyMovement>();
-        Container.BindFactory<EnemyView, EnemyView.Factory>()
-            .FromPoolableMemoryPool(poolBinder => poolBinder
-                .WithInitialSize(1)
-                .FromSubContainerResolve()
-                .ByNewPrefabMethod(enemy, InstallEnemy)
-                .UnderTransformGroup("Enemy"));
+        Container.Bind<HealthModel>().AsTransient().WithArguments(healthSettings);
+        Container.BindInterfacesAndSelfTo<HealthPresentor>().AsSingle();
+        Container.BindInterfacesAndSelfTo<HealthView>().FromComponentInHierarchy()
+            .AsSingle();
 
-        Container.BindInterfacesAndSelfTo<EnemySpawner>().AsSingle();
-    }
+        Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
+        Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
 
-    private void InstallEnemy(DiContainer subContainer)
-    {
-        subContainer.Bind<IMovement>().To<EnemyMovement>().AsSingle();
-
-        subContainer.Bind<HealthModel>().AsSingle().WithArguments(healthSettings);
-        subContainer.BindInterfacesAndSelfTo<HealthPresentor>().AsSingle();
-        subContainer.BindInterfacesAndSelfTo<HealthView>().FromComponentInHierarchy()
-            .AsTransient();
-
-        subContainer.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
-        subContainer.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
-
-        subContainer.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
+        Container.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
         .FromMonoPoolableMemoryPool(
-             x => x.WithInitialSize(weaponSettings.BulletCount)
+        x => x.WithInitialSize(weaponSettings.BulletCount)
             .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
             .UnderTransform(new GameObject("[Enemy Bullets]").transform));
 
-        subContainer.Bind<IWeaponModel>().To<WeaponModel>()
-            .AsTransient()
+        Container.Bind<IWeaponModel>().To<WeaponModel>()
+        .AsSingle()
             .WithArguments(weaponSettings);
-        subContainer.Bind<IWeaponPresentor>()
+        Container.Bind<IWeaponPresentor>()
             .To(weaponSettings.WeaponType)
-            .AsTransient();
+            .AsSingle()
+            .WhenInjectedInto<EnemyModel>();
 
+        Container.Bind<EnemyModel>().AsSingle();
+        Container.BindInterfacesAndSelfTo<EnemyPresenter>().AsSingle();
 
-        subContainer.Bind<EnemyModel>().AsSingle();
-        subContainer.BindInterfacesAndSelfTo<EnemyPresentor>().AsSingle();
-
-        subContainer.BindSignal<SignalOnUnitDied>().ToMethod<EnemyPresentor>(x => x.OnDeath).FromResolve();
+        Container.BindSignal<SignalOnUnitDied>().ToMethod<EnemyPresenter>(x => x.OnDeath).FromResolve();
     }
 }
+

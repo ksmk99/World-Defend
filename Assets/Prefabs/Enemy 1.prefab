@@ -97,65 +97,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &468685623060384442
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1079302363239297118}
-  - component: {fileID: 609806565924790197}
-  - component: {fileID: 6936469039913648769}
-  m_Layer: 7
-  m_Name: Activator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1079302363239297118
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 468685623060384442}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6856802899705905095}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &609806565924790197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 468685623060384442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 836bb44a13b88b94c84ab00da918bc17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mobView: {fileID: 6897901460311837676}
---- !u!135 &6936469039913648769
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 468685623060384442}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &1105396708260317832
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,14 +106,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6856802899705905095}
-  - component: {fileID: 6417774804966910204}
-  - component: {fileID: 2670642449243155981}
-  - component: {fileID: 6897901460311837676}
+  - component: {fileID: 5855645574599253659}
+  - component: {fileID: 5023545045572905536}
+  - component: {fileID: 6836847249817977}
   - component: {fileID: 5492454107114095048}
   - component: {fileID: 522790400928916869}
   - component: {fileID: 3041045619799994618}
   m_Layer: 7
-  m_Name: Mob
+  m_Name: Enemy 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,11 +133,10 @@ Transform:
   m_Children:
   - {fileID: 3239281642705618488}
   - {fileID: 4553569343905451317}
-  - {fileID: 1079302363239297118}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6417774804966910204
+--- !u!114 &5855645574599253659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,11 +150,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 2670642449243155981}
+  - {fileID: 5023545045572905536}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
---- !u!114 &2670642449243155981
+--- !u!114 &5023545045572905536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -223,20 +163,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1105396708260317832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70c4299b619715041a355349c24e47d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a33179200d064f4fbc9fb7ab99e526b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthSettings:
-    MaxHealth: 100
+    MaxHealth: 200
     IsAutoHeal: 0
     HealDelay: 0
     HealRate: 0
     HealCount: 0
-  weaponSettings: {fileID: 11400000, guid: 17eb7cac167ff164981ac0d0bbabab66, type: 2}
-  movement:
+  weaponSettings: {fileID: 11400000, guid: e2ecfd870eda3b54f8544dbe557e2afd, type: 2}
+  enemyMovement:
     MoveSpeed: 5
     RotateSpeed: 5
---- !u!114 &6897901460311837676
+--- !u!114 &6836847249817977
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -245,9 +185,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1105396708260317832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bfbee1cd580ce746abea9e334904f4e, type: 3}
+  m_Script: {fileID: 11500000, guid: d352db080c282524b925fd5ba91fcb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Agent: {fileID: 5492454107114095048}
 --- !u!195 &5492454107114095048
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -362,7 +303,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e8a0b046bc7fc9c46bfdf5af3aaac5f8, type: 2}
+  - {fileID: 2100000, guid: 96614917d86d2234496a910adaa9a3d5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
