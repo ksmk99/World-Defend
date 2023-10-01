@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a7de4faa63bfc345b72c554adb12921, type: 3}
+  m_Name: Enemy Weapon Settings
+  m_EditorClassIdentifier: 
+  <Distance>k__BackingField: 40
+  <TargetLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 128
+  <Effects>k__BackingField:
+  - {fileID: 11400000, guid: 7f2985867de2dc448b626795af5b96ee, type: 2}
+  <BulletSettings>k__BackingField:
+    <Speed>k__BackingField: 10
+    <Prefab>k__BackingField: {fileID: 5865941083765694682, guid: cdd19274c6e15a1499262198abac537e,
+      type: 3}
+  BulletPrefab: {fileID: 5865941083765694682, guid: cdd19274c6e15a1499262198abac537e,
+    type: 3}
+  BulletCount: 2
+  ReloadTime: 2
+  BulletDelay: 0.1

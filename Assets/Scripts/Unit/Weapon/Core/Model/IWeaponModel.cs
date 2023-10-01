@@ -1,4 +1,4 @@
-﻿using Unit.Bullet;
+using Unit.Bullet;
 using UnityEngine;
 
 namespace Unit

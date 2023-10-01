@@ -23,8 +23,11 @@ public class PlayerInstaller : MonoInstaller
         Container.Bind<HealthModel>()
             .AsTransient().WithArguments(healthSettings);
 
-        //Container.BindFactory<UnityEngine.Object, IBulletSettings, BulletRuntimeSettings, BulletView, BulletView.Factory>()
-        //    .FromFactory<PrefabFactory<IBulletSettings, BulletRuntimeSettings, BulletView>>();
+        Container.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
+        .FromMonoPoolableMemoryPool(
+             x => x.WithInitialSize(weaponSettings.BulletCount)
+            .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
+            .UnderTransformGroup("Bullet Pool"));
 
         Container.Bind<IWeaponModel>()
             .To<WeaponModel>()
@@ -32,11 +35,9 @@ public class PlayerInstaller : MonoInstaller
             .WithArguments(weaponSettings);
         Container.Bind<IWeaponPresentor>()
             .To(weaponSettings.WeaponType)
-            .AsTransient()
+            .AsSingle()
             .WhenInjectedInto<PlayerModel>();
-        Container.Bind<IHealthPresentor>().To<HealthPresentor>()
-            .AsTransient()
-            .WhenInjectedInto<PlayerModel>(); ;
+        Container.Bind<IHealthPresentor>().To<HealthPresenter>().AsSingle().WhenInjectedInto<PlayerModel>();
         Container.Bind<IMovement>().To<PlayerMovement>()
             .AsTransient()
             .WithArguments(settings.Transform)

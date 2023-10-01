@@ -12,11 +12,11 @@ public class PlayerView : UnitView
     [Inject]
     public void Init(PlayerPresentor presentor)
     {
-        this.presentor = presentor;
+        this.presenter = presentor;
     }
 
     public override bool TryAddEffects(List<EffectSettings> effects, Team team)
     {
-        return presentor.AddEffects(effects, team);
+        return presenter.AddEffects(effects, team);
     }
 }

@@ -5,21 +5,20 @@ namespace Unit
 {
     public class MobMovement : IMovement
     {
-        private readonly MobView mobView;
         private readonly PlayerPresentor player;
         private readonly MobMovementSettings settings;
 
         private readonly Transform transform;
         private readonly NavMeshAgent agent;
 
-        public MobMovement(MobMovementSettings settings, MobView mobView, PlayerPresentor player)
+        public MobMovement(MobMovementSettings settings, Transform transform, PlayerPresentor player)
         {
-            this.mobView = mobView;
             this.player = player;
             this.settings = settings;
-            this.agent = mobView.transform.GetComponent<NavMeshAgent>();
+            this.agent = transform.GetComponent<NavMeshAgent>();
+            this.transform = transform;
+
             agent.speed = settings.MoveSpeed;
-            transform = mobView.transform;
 
             ClampPos();
         }

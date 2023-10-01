@@ -165,7 +165,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6856802899705905095}
-  - component: {fileID: 6013683970808979509}
+  - component: {fileID: 6417774804966910204}
+  - component: {fileID: 2670642449243155981}
   - component: {fileID: 6897901460311837676}
   - component: {fileID: 5492454107114095048}
   - component: {fileID: 522790400928916869}
@@ -195,7 +196,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6013683970808979509
+--- !u!114 &6417774804966910204
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,15 +205,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 1105396708260317832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 6897901460311837676}
-  _identifier: 
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 2
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 2670642449243155981}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &2670642449243155981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105396708260317832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70c4299b619715041a355349c24e47d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSettings:
+    MaxHealth: 100
+    IsAutoHeal: 0
+    HealDelay: 0
+    HealRate: 0
+    HealCount: 0
+  weaponSettings: {fileID: 11400000, guid: 17eb7cac167ff164981ac0d0bbabab66, type: 2}
+  movement:
+    MoveSpeed: 5
+    RotateSpeed: 5
 --- !u!114 &6897901460311837676
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 using Unit;
 
-public class PlayerPresentor : UnitPresentor
+public class PlayerPresentor : UnitPresenter
 {
     public PlayerPresentor(IUnitModel model)
     {

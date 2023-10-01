@@ -21,7 +21,7 @@ public class EnemyModel : IUnitModel
 
     public EnemyModel(
         IWeaponPresentor weapon,
-        EnemyView view,
+        Transform transform,
         IMovement movement,
         IHealthPresentor health)
     {
@@ -30,8 +30,8 @@ public class EnemyModel : IUnitModel
         Weapon = weapon;
 
         Effects = new List<IEffectPresentor>();
-        Agent = view.transform.GetComponent<NavMeshAgent>();
-        Transform = view.transform;
+        Agent = transform.GetComponent<NavMeshAgent>();
+        Transform = transform;
         IsActive = true;
     }
 }

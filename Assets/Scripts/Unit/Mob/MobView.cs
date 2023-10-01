@@ -8,24 +8,24 @@ using Zenject;
 
 public class MobView : UnitView, IPoolable<IMemoryPool>, IDisposable
 {
-    private MobPresentor mobPresentor;
+    private MobPresenter mobPresenter;
     private IMemoryPool pool;
 
     [Inject]
-    public void Init(MobPresentor presentor)
+    public void Init(MobPresenter presenter)
     {
-        this.presentor = presentor;
-        mobPresentor = presentor;
+        this.presenter = presenter;
+        mobPresenter = presenter;
     }
 
     public void Respawn()
     {
-        presentor.Respawn();
+        presenter.Respawn();
     }
 
     public override bool TryAddEffects(List<EffectSettings> effects, Team team)
     {
-        return presentor.AddEffects(effects, team);
+        return presenter.AddEffects(effects, team);
     }
 
     public override void Death()
@@ -36,8 +36,8 @@ public class MobView : UnitView, IPoolable<IMemoryPool>, IDisposable
 
     public void Activate(PlayerView player)
     {
-        var playerPresentor = player.GetPresentor();
-        mobPresentor.SetPlayer(playerPresentor);
+        var playerPresenter = player.GetPresenter();
+        mobPresenter.SetPlayer(playerPresenter);
     }
 
     public void Dispose()

@@ -1,70 +1,50 @@
-﻿using System;
-using Unit;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Unit.Bullet;
+using Unit;
 using UnityEngine;
 using Zenject;
 
-public class MobInstaller : MonoInstaller
+public class MobInstaller : MonoInstaller<MobInstaller>
 {
-    [SerializeField] private GameObject mob;
     [SerializeField] private HealthSettings healthSettings;
     [SerializeField] private WeaponSettings weaponSettings;
     [SerializeField] private MovementSettings movement;
-    [SerializeField] private Transform bulletParent;
 
     public override void InstallBindings()
     {
-        InstallMobFacotry();
-    }
+        Container.Bind<Transform>().FromComponentOnRoot().AsSingle();
+        Container.Bind<IMovement>().To<MobMovement>().AsSingle();
 
-    private void InstallMobFacotry()
-    {
-        Container.BindInstance(movement).WhenInjectedInto<MobMovement>();
-        Container.BindFactory<MobView, MobView.Factory>()
-            .FromPoolableMemoryPool(poolBinder => poolBinder
-                .WithInitialSize(1)
-                .FromSubContainerResolve()
-                .ByNewPrefabMethod(mob, InstallMob)
-                .UnderTransformGroup("Mobs"));
-
-        Container.BindInterfacesAndSelfTo<MobSpawner>().AsSingle();
-    }
-
-    private void InstallMob(DiContainer subContainer)
-    {
-        subContainer.Bind<IMovement>().To<MobMovement>().AsSingle();
-
-        subContainer.Bind<HealthModel>().AsSingle().WithArguments(healthSettings);
-        subContainer.BindInterfacesAndSelfTo<HealthPresentor>().AsSingle();
-        subContainer.BindInterfacesAndSelfTo<HealthView>().FromComponentInHierarchy()
+        Container.Bind<HealthModel>().AsSingle().WithArguments(healthSettings);
+        Container.BindInterfacesAndSelfTo<HealthPresenter>().AsSingle();
+        Container.BindInterfacesAndSelfTo<HealthView>().FromComponentInHierarchy()
             .AsTransient();
 
-        subContainer.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
-        subContainer.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
+        Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
+        Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
 
-        subContainer.Bind<IWeaponModel>().To<WeaponModel>()
+        Container.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
+        .FromMonoPoolableMemoryPool(
+        x => x.WithInitialSize(weaponSettings.BulletCount)
+            .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
+            .UnderTransform(new GameObject("[Mob Bullets]").transform));
+
+        Container.Bind<IWeaponModel>().To<WeaponModel>()
             .AsTransient()
             .WithArguments(weaponSettings);
-        subContainer.Bind<IWeaponPresentor>()
+        Container.Bind<IWeaponPresentor>()
             .To(weaponSettings.WeaponType)
             .AsTransient();
 
+        Container.Bind<MobView>().FromComponentOnRoot().AsSingle().WhenInjectedInto<MobPresenter>();
+        Container.Bind<MobModel>().AsSingle();
+        Container.BindInterfacesAndSelfTo<MobPresenter>().AsSingle();
 
-        subContainer.Bind<MobModel>().AsSingle();
-        subContainer.BindInterfacesAndSelfTo<MobPresentor>().AsSingle();
-
-        subContainer.BindSignal<SignalOnUnitDied>().ToMethod<MobPresentor>(x => x.OnDeath).FromResolve();
-
-        subContainer.Bind<BulletModel>().AsTransient().WithArguments(weaponSettings.BulletSettings);
-        subContainer.Bind<BulletPresenter>().AsTransient();
-        subContainer.Bind<BulletView>().AsTransient().WhenInjectedInto<BulletPresenter>();
-        subContainer.Bind<ITickable>().To<BulletPresenter>().AsTransient();
-
-        subContainer.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
-            .FromMonoPoolableMemoryPool(x =>
-             x.WithInitialSize(5)
-            .FromComponentInNewPrefab(weaponSettings.BulletSettings.Prefab)
-            .UnderTransformGroup("PlayerBullet"));
+        Container.BindSignal<SignalOnUnitDied>().ToMethod<MobPresenter>(x => x.OnDeath).FromResolve();
     }
 
     private void BulletBind(DiContainer container)
@@ -74,3 +54,4 @@ public class MobInstaller : MonoInstaller
         container.Bind<BulletPresenter>().AsTransient();
     }
 }
+

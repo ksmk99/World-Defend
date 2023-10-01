@@ -106,7 +106,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6856802899705905095}
-  - component: {fileID: 6013683970808979509}
+  - component: {fileID: 5855645574599253659}
+  - component: {fileID: 5023545045572905536}
   - component: {fileID: 6836847249817977}
   - component: {fileID: 5492454107114095048}
   - component: {fileID: 522790400928916869}
@@ -135,7 +136,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6013683970808979509
+--- !u!114 &5855645574599253659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,15 +145,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 1105396708260317832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 6836847249817977}
-  _identifier: 
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 2
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 5023545045572905536}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &5023545045572905536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105396708260317832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a33179200d064f4fbc9fb7ab99e526b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSettings:
+    MaxHealth: 200
+    IsAutoHeal: 0
+    HealDelay: 0
+    HealRate: 0
+    HealCount: 0
+  weaponSettings: {fileID: 11400000, guid: e2ecfd870eda3b54f8544dbe557e2afd, type: 2}
+  enemyMovement:
+    MoveSpeed: 5
+    RotateSpeed: 5
 --- !u!114 &6836847249817977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Agent: {fileID: 5492454107114095048}
+  Type: 1
 --- !u!195 &5492454107114095048
 NavMeshAgent:
   m_ObjectHideFlags: 0

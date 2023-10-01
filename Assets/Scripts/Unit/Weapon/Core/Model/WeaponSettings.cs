@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Unit.Bullet;
 using UnityEngine;
@@ -19,6 +19,7 @@ namespace Unit
         [field: SerializeField]
         public BulletSettings BulletSettings { get; set; }
 
+        public BulletView BulletPrefab;
         public int BulletCount;
         public float ReloadTime;
         public float BulletDelay;

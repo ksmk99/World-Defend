@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 35575656}
   m_Layer: 0
-  m_Name: -----------------------------------------
+  m_Name: =========================================
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,7 +152,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &36137217
 GameObject:
@@ -560,48 +560,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1105396708260317832, guid: eaf9cd4a669739d47ad3b691157b5958, type: 3}
-  healthSettings:
-    MaxHealth: 100
-    IsAutoHeal: 1
-    HealDelay: 1
-    HealRate: 1
-    HealCount: 10
-  weaponSettings: {fileID: 11400000, guid: e2ecfd870eda3b54f8544dbe557e2afd, type: 2}
-  enemyMovement:
-    MoveSpeed: 0
-    RotateSpeed: 0
-  bulletParent: {fileID: 422069448}
---- !u!1 &422069447
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 422069448}
-  m_Layer: 0
-  m_Name: '[Bullet Pool]'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &422069448
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 422069447}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 30, z: -25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  spawnerSettings:
+    Types:
+    - Prefab: {fileID: 6836847249817977, guid: eaf9cd4a669739d47ad3b691157b5958, type: 3}
+      Count: 15
+    - Prefab: {fileID: 6836847249817977, guid: b23af1e288b8ccc40b1ba9cfd4f560c5, type: 3}
+      Count: 20
+  poolParent: {fileID: 0}
 --- !u!1 &504025541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,37 +1002,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720967536}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1053396963
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1053396964}
-  m_Layer: 0
-  m_Name: '[Bullet Pool] '
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1053396964
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053396963}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 30, z: -25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1057888951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,18 +1714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3bbb782660e1504d9655c5701f761fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mob: {fileID: 1105396708260317832, guid: 2ec30f69a8288054b85742c5fb633ec9, type: 3}
-  healthSettings:
-    MaxHealth: 100
-    IsAutoHeal: 1
-    HealDelay: 1
-    HealRate: 1
-    HealCount: 10
-  weaponSettings: {fileID: 11400000, guid: e2ecfd870eda3b54f8544dbe557e2afd, type: 2}
-  movement:
-    MoveSpeed: 6
-    RotateSpeed: 0
-  bulletParent: {fileID: 1053396964}
+  prefab: {fileID: 1105396708260317832, guid: 2ec30f69a8288054b85742c5fb633ec9, type: 3}
 --- !u!4 &1699314294
 Transform:
   m_ObjectHideFlags: 0
@@ -2001,6 +1924,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1810060710}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1860952240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1860952241}
+  m_Layer: 0
+  m_Name: '[Enemy Pool]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1860952241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860952240}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1873168344
 GameObject:
   m_ObjectHideFlags: 0
@@ -2445,7 +2399,7 @@ PrefabInstance:
     - target: {fileID: 632017414469642739, guid: c695e60766f24dc488a96917d7f334ee,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 632017414469642739, guid: c695e60766f24dc488a96917d7f334ee,
         type: 3}
