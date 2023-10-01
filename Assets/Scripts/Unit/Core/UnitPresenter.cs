@@ -39,6 +39,7 @@ public abstract class UnitPresenter : ITickable
     public void Respawn()
     {
         model.Health.Heal(int.MaxValue);
+        model.IsActive = true;
         model.Weapon.Reset();
     }
 

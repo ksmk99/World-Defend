@@ -36,12 +36,12 @@ namespace Unit
     }
     #endregion
 
-    public class HealthPresentor : IHealthPresentor
+    public class HealthPresenter : IHealthPresentor
     {
         private readonly SignalBus signalBus;
         private readonly HealthModel model;
 
-        public HealthPresentor(HealthModel model, SignalBus signalBus)
+        public HealthPresenter(HealthModel model, SignalBus signalBus)
         {
             this.model = model;
             this.signalBus = signalBus;

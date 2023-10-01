@@ -24,7 +24,7 @@ public class EnemyInstaller : MonoInstaller<EnemyInstaller>
 
         Container.BindInstance(enemyMovement).WhenInjectedInto<EnemyMovement>();
         Container.Bind<HealthModel>().AsTransient().WithArguments(healthSettings);
-        Container.BindInterfacesAndSelfTo<HealthPresentor>().AsSingle();
+        Container.BindInterfacesAndSelfTo<HealthPresenter>().AsSingle();
         Container.BindInterfacesAndSelfTo<HealthView>().FromComponentInHierarchy()
             .AsSingle();
 

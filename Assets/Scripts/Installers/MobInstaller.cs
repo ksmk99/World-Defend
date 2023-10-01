@@ -20,7 +20,7 @@ public class MobInstaller : MonoInstaller<MobInstaller>
         Container.Bind<IMovement>().To<MobMovement>().AsSingle();
 
         Container.Bind<HealthModel>().AsSingle().WithArguments(healthSettings);
-        Container.BindInterfacesAndSelfTo<HealthPresentor>().AsSingle();
+        Container.BindInterfacesAndSelfTo<HealthPresenter>().AsSingle();
         Container.BindInterfacesAndSelfTo<HealthView>().FromComponentInHierarchy()
             .AsTransient();
 
