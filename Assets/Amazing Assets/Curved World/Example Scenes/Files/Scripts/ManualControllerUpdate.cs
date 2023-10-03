@@ -5,14 +5,14 @@ using UnityEngine.Rendering;
 namespace AmazingAssets.CurvedWorld.Example
 {
     public class ManualControllerUpdate : MonoBehaviour
-    {        
+    {
         public CurvedWorldController curvedWorldController;
 
 
         void Start()
         {
             //Check if using Scriptable render pipeline
-            if(GraphicsSettings.renderPipelineAsset != null)
+            if (GraphicsSettings.renderPipelineAsset != null)
                 RenderPipelineManager.beginCameraRendering += BeginCameraRendering;
         }
 

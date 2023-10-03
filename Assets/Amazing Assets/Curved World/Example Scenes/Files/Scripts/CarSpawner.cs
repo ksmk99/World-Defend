@@ -19,8 +19,8 @@ namespace AmazingAssets.CurvedWorld.Example
         [Space(10)]
         public Vector3 moveDirection = new Vector3(1, 0, 0);
         public Vector2 movingSpeed = new Vector2(3, 5);
-        
-        
+
+
 
         float deltaTime;
 
@@ -35,11 +35,11 @@ namespace AmazingAssets.CurvedWorld.Example
         {
             deltaTime += Time.deltaTime;
 
-            if(deltaTime > spawnRate)
+            if (deltaTime > spawnRate)
             {
                 deltaTime = 0;
 
-                if(Random.value > spawnRandomizer)
+                if (Random.value > spawnRandomizer)
                 {
                     int index = Random.Range(0, cars.Length);
 
@@ -53,7 +53,7 @@ namespace AmazingAssets.CurvedWorld.Example
                     carScipt.moveDirection = moveDirection;
                     carScipt.movingSpeed = Random.Range(movingSpeed.x, movingSpeed.y);
 
-                   
+
                 }
             }
         }

@@ -41,7 +41,7 @@ namespace AmazingAssets.CurvedWorld.Example
 
             animationComp = GetComponent<Animation>();
         }
-        
+
         void Update()
         {
             if (ExampleInput.GetKeyDown(moveLeftKey))

@@ -6,7 +6,7 @@ namespace AmazingAssets.CurvedWorld.Example
     public class RunnerChunk : MonoBehaviour
     {
         public ChunkSpawner spawner;
-        
+
 
         void Update()
         {
@@ -37,7 +37,7 @@ namespace AmazingAssets.CurvedWorld.Example
                         spawner.DestroyChunk(this);
                     break;
             }
-            
+
         }
     }
 }
