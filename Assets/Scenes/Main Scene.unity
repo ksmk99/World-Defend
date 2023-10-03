@@ -566,7 +566,7 @@ MonoBehaviour:
       Count: 15
     - Prefab: {fileID: 6836847249817977, guid: b23af1e288b8ccc40b1ba9cfd4f560c5, type: 3}
       Count: 20
-  poolParent: {fileID: 0}
+  poolParent: {fileID: 1860952241}
 --- !u!1 &504025541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,6 +1002,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720967536}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &979491786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 979491787}
+  m_Layer: 0
+  m_Name: '[Mob Pool]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &979491787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979491786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1057888951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1715,6 +1746,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1105396708260317832, guid: 2ec30f69a8288054b85742c5fb633ec9, type: 3}
+  mobSpawnerSettings:
+    SpawnCount: 5
+    Offset: {x: 25, y: 0, z: 25}
+  spawnerSettings:
+    Types:
+    - Prefab: {fileID: 6897901460311837676, guid: 2ec30f69a8288054b85742c5fb633ec9,
+        type: 3}
+      Count: 5
+    - Prefab: {fileID: 6897901460311837676, guid: 2ec30f69a8288054b85742c5fb633ec9,
+        type: 3}
+      Count: 5
+  poolParent: {fileID: 979491787}
 --- !u!4 &1699314294
 Transform:
   m_ObjectHideFlags: 0

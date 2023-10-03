@@ -6,10 +6,21 @@ using Unit;
 using UnityEngine;
 using Zenject;
 
-public class MobView : UnitView, IPoolable<IMemoryPool>, IDisposable
+public enum MobType
 {
+    None,
+    Default,
+    Big
+}
+
+public class MobView : UnitView
+{
+    public MobType Type;
+
     private MobPresenter mobPresenter;
     private IMemoryPool pool;
+
+    public override Action<UnitView> OnDeath { get; set; }
 
     [Inject]
     public void Init(MobPresenter presenter)
@@ -30,8 +41,7 @@ public class MobView : UnitView, IPoolable<IMemoryPool>, IDisposable
 
     public override void Death()
     {
-        transform.localScale = Vector3.zero;
-        Dispose();
+        OnDeath?.Invoke(this);
     }
 
     public void Activate(PlayerView player)
@@ -40,28 +50,12 @@ public class MobView : UnitView, IPoolable<IMemoryPool>, IDisposable
         mobPresenter.SetPlayer(playerPresenter);
     }
 
-    public void Dispose()
+    public override int GetID()
     {
-        if (pool == null)
-        {
-            return;
-        }
-
-        pool.Despawn(this);
+        return (int)Type;
     }
 
-    public void OnDespawned()
-    {
-        pool = null;
-    }
-
-    public void OnSpawned(IMemoryPool pool)
-    {
-        this.pool = pool;
-        transform.localScale = Vector3.one;
-    }
-
-    public class Factory : PlaceholderFactory<MobView>
+    public class Factory : PlaceholderFactory<UnityEngine.Object, MobView>
     {
     }
 }

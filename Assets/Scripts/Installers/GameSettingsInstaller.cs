@@ -11,7 +11,6 @@ namespace Installers
         [SerializeField] private EnemyMovementSettings enemyMS;
         [SerializeField] private MobMovementSettings mobMS;
         [SerializeField] private EnemySpawnerSettings spawnerSettings;
-        [SerializeField] private MobSpawnerSettings mobSpawnerSettings;
 
         public override void InstallBindings()
         {
@@ -19,7 +18,6 @@ namespace Installers
             Container.BindInstance(enemyMS).IfNotBound();
             Container.BindInstance(mobMS).IfNotBound();
             Container.BindInstance(spawnerSettings).IfNotBound();
-            Container.BindInstance(mobSpawnerSettings).IfNotBound();
         }
     }
 }

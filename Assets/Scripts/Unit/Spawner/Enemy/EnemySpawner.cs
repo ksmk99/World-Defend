@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Helpers;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
+using static Zenject.SignalSubscription;
 using Random = UnityEngine.Random;
 
 namespace Unit
@@ -10,16 +12,19 @@ namespace Unit
     {
         private readonly EnemyView.Factory factory;
         private readonly EnemySpawnerSettings settings;
-        private readonly ISpawnManager spawnManager;
+        private readonly CustomPool<EnemyView> pool;
         private readonly Transform parent;
+
+        private readonly ISpawnManager spawnManager;
+
         private float nextSpawnTime;
 
-        private Dictionary<int, Queue<EnemyView>> memberPool = new Dictionary<int, Queue<EnemyView>>();
-        public EnemySpawner(EnemyView.Factory factory, EnemySpawnerSettings settings, ISpawnManager spawnManager, Transform parent)
+        public EnemySpawner(EnemyView.Factory factory, EnemySpawnerSettings settings, ISpawnManager spawnManager, CustomPool<EnemyView> pool, Transform parent)
         {
             this.factory = factory;
             this.settings = settings;
             this.spawnManager = spawnManager;
+            this.pool = pool;
             this.parent = parent;
         }
 
@@ -27,11 +32,19 @@ namespace Unit
         {
             if (nextSpawnTime <= Time.time)
             {
-                EnemyView enemy = CreateEnemy();
+                EnemyView enemy = Create();
                 SetStartSettings(enemy);
 
                 nextSpawnTime = Time.time + settings.SpawnRate;
             }
+        }
+
+        private EnemyView Create()
+        {
+            EnemyView prefab = (EnemyView)spawnManager.GetPrefab();
+            var id = (int)prefab.Type;
+            EnemyView enemy = pool.Create(id, prefab, factory.Create);
+            return enemy;
         }
 
         private void SetStartSettings(EnemyView enemy)
@@ -42,34 +55,18 @@ namespace Unit
 
             enemy.transform.position = randomPosition;
             enemy.transform.SetParent(parent);
-            enemy.gameObject.SetActive(true);   
+            enemy.gameObject.SetActive(true);
+            enemy.OnDeath += Release;
             enemy.Respawn();
         }
 
-        private EnemyView CreateEnemy()
+        public void Release(UnitView member)
         {
-            EnemyView prefab = (EnemyView)spawnManager.GetPrefab();
-            var id = (int)prefab.Type;
-            if (!memberPool.ContainsKey(id))
-            {
-                memberPool.Add(id, new Queue<EnemyView>());
-            }
-
-            if (memberPool[id].Count == 0)
-            {
-                EnemyView member = factory.Create(prefab);
-                member.OnDeath += Release;
-                return member;
-            }
-
-            return memberPool[id].Dequeue();
-        }
-
-        public void Release(EnemyView member)
-        {
-            Debug.Log("Death");
-            memberPool[(int)member.Type].Enqueue(member);
             member.gameObject.SetActive(false);
+            member.OnDeath -= Release;
+
+            var id = member.GetID();
+            pool.Release(id, (EnemyView)member);
         }
     }
 }

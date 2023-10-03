@@ -8,11 +8,11 @@ using Random = UnityEngine.Random;
 
 namespace Unit
 {
-    public class EnemySpawnManager : ISpawnManager
+    public class SpawnManager : ISpawnManager
     {
         private readonly SpawnerSettings settings;
 
-        public EnemySpawnManager(SpawnerSettings settings) 
+        public SpawnManager(SpawnerSettings settings) 
         {
             this.settings = settings;
         }

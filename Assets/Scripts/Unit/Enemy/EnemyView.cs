@@ -10,8 +10,9 @@ public class EnemyView : UnitView
     public NavMeshAgent Agent;
     public EnemyType Type;
 
+    public override Action<UnitView> OnDeath { get; set; }
+
     public Action OnRespawn;
-    public Action<EnemyView> OnDeath;
     public Func<UnitPresenter> OnPresenterCall;
     public Func<List<EffectSettings>, Team, bool> OnTryAddEffects;
 
@@ -39,6 +40,11 @@ public class EnemyView : UnitView
     public override void Death()
     {
         OnDeath?.Invoke(this);
+    }
+
+    public override int GetID()
+    {
+        return (int)Type;
     }
 
     public class Factory : PlaceholderFactory<UnityEngine.Object, EnemyView>

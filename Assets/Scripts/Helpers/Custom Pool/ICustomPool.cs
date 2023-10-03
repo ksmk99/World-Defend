@@ -9,8 +9,8 @@ namespace Helpers
 {
     public interface ICustomPool<T>
     {
-        void Init(int prespawnCount, Transform parent = null);
-        T Get();
-        void Release(T member);
+        public T Create(int id, T prefab, Func<T, T> funcCreate);
+
+        public void Release(int id, T member);
     }
 }

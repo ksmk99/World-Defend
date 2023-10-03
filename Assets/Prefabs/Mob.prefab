@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSettings:
-    MaxHealth: 100
+    MaxHealth: 1000
     IsAutoHeal: 0
     HealDelay: 0
     HealRate: 0
@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfbee1cd580ce746abea9e334904f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
 --- !u!195 &5492454107114095048
 NavMeshAgent:
   m_ObjectHideFlags: 0

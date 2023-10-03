@@ -1,3 +1,4 @@
+using Helpers;
 using System;
 using Unit;
 using Unit.Bullet;
@@ -17,9 +18,11 @@ public class EnemiesInstaller : MonoInstaller
 
     private void InstallEnemyFactory()
     {
-        Container.Bind<ISpawnManager>().To<EnemySpawnManager>()
-            .AsSingle()
-            .WithArguments(spawnerSettings);
+        Container.Bind<CustomPool<EnemyView>>().AsSingle();
+        Container.Bind<ISpawnManager>().To<SpawnManager>()
+            .AsCached()
+            .WithArguments(spawnerSettings)
+            .WhenInjectedInto<EnemySpawner>();
 
         Container.BindFactory<UnityEngine.Object, EnemyView, EnemyView.Factory>()
             .FromFactory<PrefabFactory<EnemyView>>();
