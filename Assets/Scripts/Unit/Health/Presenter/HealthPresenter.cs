@@ -34,6 +34,16 @@ namespace Unit
             Percent = percent;
         }
     }
+
+    public class SignalOnMove
+    {
+        public bool IsMoving { get; }
+
+        public SignalOnMove(bool isMoving)
+        {
+            IsMoving = isMoving;
+        }
+    }
     #endregion
 
     public class HealthPresenter : IHealthPresenter

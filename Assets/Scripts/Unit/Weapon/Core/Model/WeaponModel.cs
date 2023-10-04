@@ -2,6 +2,7 @@ using Helpers;
 using System.Collections.Generic;
 using Unit.Bullet;
 using UnityEngine;
+using Zenject;
 
 namespace Unit
 {
@@ -19,13 +20,15 @@ namespace Unit
         public float ActionTimer { get; set; }
         public float TTL { get; set; }
         public Transform Target { get; set; }
+        public SignalBus SignalBus { get; set; }
 
-        public WeaponModel(IWeaponSettings settings, BulletView.Factory factory, PoolParentFlag parent)
+        public WeaponModel(IWeaponSettings settings, BulletView.Factory factory, SignalBus signalBus, PoolParentFlag parent)
         {
             Settings = settings;
             CanUse = true;
             BulletPool = factory;
             Parent = parent;
+            SignalBus = signalBus;
             Bullets = new List<IBulletPresenter>();
         }
     }

@@ -20,7 +20,7 @@ public abstract class UnitPresenter : ITickable
         var isDead = model.Health.IsDeath();
         model.Health.AutoHeal();
         model.Weapon.Update(model.Transform, isDead, model.Team);
-        model.Movement.Move(isDead);
+        model.Movement.Move(isDead, model.Weapon.GetTarget());
 
         for (var i = 0; i < model.Effects.Count; i++)
         {

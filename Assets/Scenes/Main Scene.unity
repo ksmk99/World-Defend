@@ -904,6 +904,12 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1232500722}
+--- !u!95 &698395511 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 718323420605218998, guid: c695e60766f24dc488a96917d7f334ee,
+    type: 3}
+  m_PrefabInstance: {fileID: 632017413440126003}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &720967536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,6 +1230,7 @@ MonoBehaviour:
   settings:
     <Transform>k__BackingField: {fileID: 1118262720}
     <Joystick>k__BackingField: {fileID: 1213732808}
+    <Animator>k__BackingField: {fileID: 698395511}
   healthSettings:
     MaxHealth: 1000
     IsAutoHeal: 1
@@ -1792,7 +1799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1105396708260317832, guid: 2ec30f69a8288054b85742c5fb633ec9, type: 3}
   mobSpawnerSettings:
-    SpawnCount: 5
+    SpawnCount: 0
     Offset: {x: 25, y: 0, z: 25}
   spawnerSettings:
     Types:
@@ -2573,6 +2580,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913340854839890859, guid: c695e60766f24dc488a96917d7f334ee,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.88
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c695e60766f24dc488a96917d7f334ee, type: 3}

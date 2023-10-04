@@ -19,11 +19,12 @@ namespace Unit
             this.transform = transform;
 
             agent.speed = settings.MoveSpeed;
+            agent.updateRotation = false;
 
             ClampPos();
         }
 
-        public void Move(bool isDead)
+        public void Move(bool isDead, Transform target = null)
         {
             if (isDead)
             {
@@ -32,7 +33,20 @@ namespace Unit
             }
 
             agent.SetDestination(player.Transform.position);
+            var direction = (agent.nextPosition - transform.position).normalized;
+            Rotate(direction, target);
         }
+
+
+        private void Rotate(Vector3 direction, Transform target)
+        {
+            direction = target == null ? direction : (target.position - transform.position).normalized;
+
+            var angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            var value = Mathf.Lerp(transform.rotation.y, angle, settings.RotateSpeed);
+            transform.rotation = Quaternion.Euler(0, value, 0);
+        }
+
 
         private void ClampPos()
         {

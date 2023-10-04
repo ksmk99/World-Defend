@@ -22,7 +22,7 @@ namespace Unit
             ClampPos();
         }
 
-        public void Move(bool isDead)
+        public void Move(bool isDead, Transform target = null)
         {
             if (isDead)
             {

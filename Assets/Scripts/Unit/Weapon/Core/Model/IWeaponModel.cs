@@ -1,5 +1,6 @@
 using Unit.Bullet;
 using UnityEngine;
+using Zenject;
 
 namespace Unit
 {
@@ -13,5 +14,6 @@ namespace Unit
         float ActionTimer { get; set; }
         float TTL { get; set; }
         Transform Target { get; set; }
+        SignalBus SignalBus { get; set; }
     }
 }

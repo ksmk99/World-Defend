@@ -21,6 +21,8 @@ public class PlayerInstaller : MonoInstaller
         Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
         Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
         Container.DeclareSignal<SignalOnUnitDied>();
+        Container.DeclareSignal<SignalOnMove>();
+        Container.DeclareSignal<SignalOnAttack>();
 
         Container.Bind<InputService>().
             AsSingle().WithArguments(settings.Joystick);
@@ -57,6 +59,16 @@ public class PlayerInstaller : MonoInstaller
             .FromComponentInHierarchy()
             .AsTransient();
 
+        Container.BindInterfacesAndSelfTo<AnimationData>()
+            .AsSingle(); 
+        Container.Bind<IAnimationsController>()
+            .To<AnimationsController>()
+            .AsSingle()
+            .WithArguments(settings.Animator);
+        Container.BindSignal<SignalOnMove>().ToMethod<IAnimationsController>(x => x.SetMovement).FromResolve();
+        Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
+
+
         Container.BindSignal<SignalOnUnitDied>().ToMethod<PlayerPresenter>(x => x.OnDeath).FromResolve();
     }
 
@@ -67,5 +79,7 @@ public class PlayerInstaller : MonoInstaller
         public Transform Transform { get; private set; }
         [field: SerializeField]
         public Joystick Joystick { get; private set; }
+        [field: SerializeField]
+        public Animator Animator { get; private set; }
     }
 }

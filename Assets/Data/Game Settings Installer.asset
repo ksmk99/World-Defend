@@ -14,16 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMS:
     MoveSpeed: 6
-    RotateSpeed: 0.8
+    RotateSpeed: 1
   enemyMS:
     MoveSpeed: 4
     RotateSpeed: 0.8
     MaxDistance: 999
   mobMS:
     MoveSpeed: 7
+    RotateSpeed: 1
   spawnerSettings:
-    SpawnRate: 1.82
-    Offset: {x: 6.37, y: 0, z: 7.13}
-  mobSpawnerSettings:
-    SpawnCount: 1
+    SpawnRate: 5
     Offset: {x: 6.37, y: 0, z: 7.13}

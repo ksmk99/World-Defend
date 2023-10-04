@@ -6,5 +6,6 @@ namespace Unit
     public class MobMovementSettings
     {
         public float MoveSpeed;
+        public float RotateSpeed;
     }
 }

@@ -2,9 +2,15 @@ using System;
 using System.Collections.Generic;
 using Unit.Bullet;
 using UnityEngine;
+using Zenject;
 
 namespace Unit
 {
+    public class SignalOnAttack
+    {
+
+    }
+
     public class WeaponPresenter : IWeaponPresenter
     {
         private readonly WeaponSettings settings;
@@ -15,6 +21,11 @@ namespace Unit
         {
             this.model = (WeaponModel)model;
             settings = (WeaponSettings)model.Settings;
+        }
+
+        public Transform GetTarget()
+        {
+            return model.Target;
         }
 
         public void Update(Transform transform, bool isDead, Team team)
@@ -39,6 +50,7 @@ namespace Unit
             UnitView enemy = WeaponHelper.GetNearestEnemy(transform.position, model.Settings, team);
             if (enemy == default)
             {
+                model.Target = null;
                 return false;
             }
 
@@ -59,11 +71,14 @@ namespace Unit
                 return;
             }
 
-            transform.LookAt(model.Target.position);
+            //transform.LookAt(model.Target.position);
             if (model.ActionTimer >= settings.BulletDelay)
             {
                 CreateBullet(transform, team);
                 model.ActionTimer = 0;
+
+                var signal = new SignalOnAttack();
+                model.SignalBus.TryFire(signal);
             }
 
             if (model.TTL >= settings.BulletCount * settings.BulletDelay)

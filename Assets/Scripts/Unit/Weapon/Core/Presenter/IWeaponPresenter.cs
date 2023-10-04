@@ -9,5 +9,6 @@ namespace Unit
         void Attack(Transform transform, bool isDead, Team team);
         void Update(Transform transform, bool isDead, Team team);
         void Reset();
+        Transform GetTarget();
     }
 }
