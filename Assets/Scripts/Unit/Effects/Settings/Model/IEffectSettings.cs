@@ -3,6 +3,6 @@
     public interface IEffectSettings
     {
         float Value { get; }
-        IEffectPresentor GetPresentor(IUnitModel player, EffectModel model);
+        IEffectPresenter GetPresenter(IUnitModel player, EffectModel model);
     }
 }

@@ -10,16 +10,16 @@ public class PlayerModel : IUnitModel
     public Transform Transform { get; }
     public bool IsActive { get; set; }
     public IMovement Movement { get; }
-    public IHealthPresentor Health { get; }
-    public IWeaponPresentor Weapon { get; }
+    public IHealthPresenter Health { get; }
+    public IWeaponPresenter Weapon { get; }
 
-    public List<IEffectPresentor> Effects { get; }
+    public List<IEffectPresenter> Effects { get; }
 
     public Vector3 Position => Transform.position;
     public NavMeshAgent Agent { get; }
     public Team Team => Team.Ally;
 
-    public PlayerModel(IMovement movement, IHealthPresentor health, IWeaponPresentor weapon, Transform transform, bool isActive = true)
+    public PlayerModel(IMovement movement, IHealthPresenter health, IWeaponPresenter weapon, Transform transform, bool isActive = true)
     {
         Transform = transform;
         Movement = movement;
@@ -27,7 +27,7 @@ public class PlayerModel : IUnitModel
         Weapon = weapon;
         IsActive = isActive;
 
-        Effects = new List<IEffectPresentor>();
+        Effects = new List<IEffectPresenter>();
         Agent = transform.GetComponent<NavMeshAgent>();
     }
 }

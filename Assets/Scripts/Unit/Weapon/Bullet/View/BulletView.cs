@@ -16,6 +16,7 @@ namespace Unit.Bullet
         public void Dispose()
         {
             _pool.Despawn(this);
+            OnDispose?.Invoke(this);
         }
 
         public void OnDespawned()

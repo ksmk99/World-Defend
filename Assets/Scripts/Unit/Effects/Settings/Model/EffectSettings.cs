@@ -6,6 +6,6 @@ namespace Unit
     {
         public abstract float Value { get; set; }
 
-        public abstract IEffectPresentor GetPresentor(IUnitModel player, EffectModel model);
+        public abstract IEffectPresenter GetPresenter(IUnitModel player, EffectModel model);
     }
 }

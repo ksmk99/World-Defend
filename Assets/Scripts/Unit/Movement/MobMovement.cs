@@ -5,13 +5,13 @@ namespace Unit
 {
     public class MobMovement : IMovement
     {
-        private readonly PlayerPresentor player;
+        private readonly PlayerPresenter player;
         private readonly MobMovementSettings settings;
 
         private readonly Transform transform;
         private readonly NavMeshAgent agent;
 
-        public MobMovement(MobMovementSettings settings, Transform transform, PlayerPresentor player)
+        public MobMovement(MobMovementSettings settings, Transform transform, PlayerPresenter player)
         {
             this.player = player;
             this.settings = settings;

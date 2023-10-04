@@ -1,3 +1,4 @@
+using Helpers;
 using System;
 using Unit;
 using Unit.Bullet;
@@ -10,9 +11,12 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField] private Settings settings;
     [SerializeField] private HealthSettings healthSettings;
     [SerializeField] private WeaponSettings weaponSettings;
+    [SerializeField] private PoolParentFlag poolParentFlag;
 
     public override void InstallBindings()
     {
+        Container.BindInstance(poolParentFlag);
+
         SignalBusInstaller.Install(Container);
         Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
         Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
@@ -26,18 +30,17 @@ public class PlayerInstaller : MonoInstaller
         Container.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
         .FromMonoPoolableMemoryPool(
              x => x.WithInitialSize(weaponSettings.BulletCount)
-            .FromComponentInNewPrefab(weaponSettings.BulletPrefab)
-            .UnderTransformGroup("Bullet Pool"));
+            .FromComponentInNewPrefab(weaponSettings.BulletPrefab));
 
         Container.Bind<IWeaponModel>()
             .To<WeaponModel>()
             .AsTransient()
             .WithArguments(weaponSettings);
-        Container.Bind<IWeaponPresentor>()
+        Container.Bind<IWeaponPresenter>()
             .To(weaponSettings.WeaponType)
             .AsSingle()
             .WhenInjectedInto<PlayerModel>();
-        Container.Bind<IHealthPresentor>().To<HealthPresenter>().AsSingle().WhenInjectedInto<PlayerModel>();
+        Container.Bind<IHealthPresenter>().To<HealthPresenter>().AsSingle().WhenInjectedInto<PlayerModel>();
         Container.Bind<IMovement>().To<PlayerMovement>()
             .AsTransient()
             .WithArguments(settings.Transform)
@@ -45,8 +48,8 @@ public class PlayerInstaller : MonoInstaller
         Container.BindInstance(settings.Transform).WhenInjectedInto<PlayerModel>();
         Container.Bind<IUnitModel>().To<PlayerModel>()
             .AsSingle()
-            .WhenInjectedInto<PlayerPresentor>();
-        Container.BindInterfacesAndSelfTo<PlayerPresentor>().AsSingle();
+            .WhenInjectedInto<PlayerPresenter>();
+        Container.BindInterfacesAndSelfTo<PlayerPresenter>().AsSingle();
         Container.BindInterfacesAndSelfTo<PlayerView>()
             .FromComponentInHierarchy()
             .AsSingle();
@@ -54,7 +57,7 @@ public class PlayerInstaller : MonoInstaller
             .FromComponentInHierarchy()
             .AsTransient();
 
-        Container.BindSignal<SignalOnUnitDied>().ToMethod<PlayerPresentor>(x => x.OnDeath).FromResolve();
+        Container.BindSignal<SignalOnUnitDied>().ToMethod<PlayerPresenter>(x => x.OnDeath).FromResolve();
     }
 
     [Serializable]

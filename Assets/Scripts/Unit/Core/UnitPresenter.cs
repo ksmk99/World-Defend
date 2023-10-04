@@ -58,9 +58,9 @@ public abstract class UnitPresenter : ITickable
         for (var i = 0; i < effects.Count; i++)
         {
             var effectModel = new EffectModel(effects[i]);
-            var presentor = effectModel.Settings.GetPresentor(model, effectModel);
-            model.Effects.Add(presentor);
-            presentor.OnEffectEnd += (x) => model.Effects.Remove(x);
+            var presenter = effectModel.Settings.GetPresenter(model, effectModel);
+            model.Effects.Add(presenter);
+            presenter.OnEffectEnd += (x) => model.Effects.Remove(x);
         }
 
         return true;

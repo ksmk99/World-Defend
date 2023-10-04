@@ -1,6 +1,6 @@
 ﻿namespace Unit
 {
-    public class DamageEP : EffectPresentor
+    public class DamageEP : EffectPresenter
     {
         public DamageEP(IUnitModel unit, EffectModel model) : base(unit, model) { }
 

@@ -18,9 +18,9 @@ public class PlayerView : UnitView
     }
 
     [Inject]
-    public void Init(PlayerPresentor presentor)
+    public void Init(PlayerPresenter presenter)
     {
-        this.presenter = presentor;
+        this.presenter = presenter;
     }
 
     public override bool TryAddEffects(List<EffectSettings> effects, Team team)

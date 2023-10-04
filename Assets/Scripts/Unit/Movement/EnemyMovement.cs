@@ -5,13 +5,13 @@ namespace Unit
 {
     public class EnemyMovement : IMovement
     {
-        private readonly PlayerPresentor player;
+        private readonly PlayerPresenter player;
         private readonly EnemyMovementSettings settings;
 
         private readonly Transform transform;
         private readonly NavMeshAgent agent;
 
-        public EnemyMovement(EnemyView view, EnemyMovementSettings settings, PlayerPresentor player)
+        public EnemyMovement(EnemyView view, EnemyMovementSettings settings, PlayerPresenter player)
         {
             this.player = player;
             this.transform = view.transform;

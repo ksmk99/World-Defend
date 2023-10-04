@@ -9,7 +9,7 @@ public class MobActivator : MonoBehaviour
 {
     [SerializeField] private MobView mobView;
 
-    private bool isFirstTime;
+    private bool isFirstTime = true;
 
     private void Awake()
     {

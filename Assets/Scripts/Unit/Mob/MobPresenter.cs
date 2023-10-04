@@ -16,9 +16,9 @@ public class MobPresenter : UnitPresenter
         mobModel = model;
     }
 
-    public void SetPlayer(UnitPresenter presentor)
+    public void SetPlayer(UnitPresenter presenter)
     {
-        mobModel.Target = presentor;
+        mobModel.Target = presenter;
         mobModel.IsActive = true;
     }
 

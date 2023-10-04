@@ -1,3 +1,4 @@
+using Helpers;
 using System.Collections.Generic;
 using Unit.Bullet;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace Unit
     {
         public IWeaponSettings Settings { get; set; }
         public BulletView.Factory BulletPool { get; set; }
+        public PoolParentFlag Parent { get; }
         public List<IBulletPresenter> Bullets { get; set; }
 
         public bool IsActing { get; set; }
@@ -18,11 +20,12 @@ namespace Unit
         public float TTL { get; set; }
         public Transform Target { get; set; }
 
-        public WeaponModel(IWeaponSettings settings, BulletView.Factory factory)
+        public WeaponModel(IWeaponSettings settings, BulletView.Factory factory, PoolParentFlag parent)
         {
             Settings = settings;
             CanUse = true;
             BulletPool = factory;
+            Parent = parent;
             Bullets = new List<IBulletPresenter>();
         }
     }

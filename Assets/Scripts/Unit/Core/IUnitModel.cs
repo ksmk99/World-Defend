@@ -12,10 +12,10 @@ namespace Unit
         Team Team { get; }
 
         IMovement Movement { get; }
-        IHealthPresentor Health { get; }
-        IWeaponPresentor Weapon { get; }
+        IHealthPresenter Health { get; }
+        IWeaponPresenter Weapon { get; }
 
-        List<IEffectPresentor> Effects { get; }
+        List<IEffectPresenter> Effects { get; }
 
         Vector3 Position { get; }
         NavMeshAgent Agent { get; }

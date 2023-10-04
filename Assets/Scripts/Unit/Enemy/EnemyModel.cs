@@ -8,9 +8,9 @@ public class EnemyModel : IUnitModel
 {
     public Transform Transform { get; }
     public IMovement Movement { get; }
-    public IHealthPresentor Health { get; }
-    public IWeaponPresentor Weapon { get; }
-    public List<IEffectPresentor> Effects { get; }
+    public IHealthPresenter Health { get; }
+    public IWeaponPresenter Weapon { get; }
+    public List<IEffectPresenter> Effects { get; }
 
     public Vector3 Position => Transform.position;
     public NavMeshAgent Agent { get; }
@@ -20,16 +20,16 @@ public class EnemyModel : IUnitModel
     public bool IsActive { get; set; }
 
     public EnemyModel(
-        IWeaponPresentor weapon,
+        IWeaponPresenter weapon,
         Transform transform,
         IMovement movement,
-        IHealthPresentor health)
+        IHealthPresenter health)
     {
         Movement = movement;
         Health = health;
         Weapon = weapon;
 
-        Effects = new List<IEffectPresentor>();
+        Effects = new List<IEffectPresenter>();
         Agent = transform.GetComponent<NavMeshAgent>();
         Transform = transform;
         IsActive = true;
