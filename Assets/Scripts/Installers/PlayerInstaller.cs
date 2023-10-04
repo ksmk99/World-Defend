@@ -64,7 +64,7 @@ public class PlayerInstaller : MonoInstaller
         Container.Bind<IAnimationsController>()
             .To<AnimationsController>()
             .AsSingle()
-            .WithArguments(settings.Animator);
+            .WithArguments(settings.Animator, settings.Transform);
         Container.BindSignal<SignalOnMove>().ToMethod<IAnimationsController>(x => x.SetMovement).FromResolve();
         Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
 

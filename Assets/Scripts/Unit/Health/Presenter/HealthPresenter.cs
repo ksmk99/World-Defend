@@ -38,10 +38,12 @@ namespace Unit
     public class SignalOnMove
     {
         public bool IsMoving { get; }
+        public Transform Sender { get; }
 
-        public SignalOnMove(bool isMoving)
+        public SignalOnMove(bool isMoving, Transform sender)
         {
             IsMoving = isMoving;
+            Sender = sender;
         }
     }
     #endregion

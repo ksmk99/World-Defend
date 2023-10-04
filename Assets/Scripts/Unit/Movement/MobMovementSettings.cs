@@ -3,9 +3,7 @@
 namespace Unit
 {
     [Serializable]
-    public class MobMovementSettings
+    public class MobMovementSettings : MovementSettings
     {
-        public float MoveSpeed;
-        public float RotateSpeed;
     }
 }

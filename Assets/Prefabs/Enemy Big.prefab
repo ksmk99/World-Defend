@@ -175,7 +175,8 @@ MonoBehaviour:
   weaponSettings: {fileID: 11400000, guid: e2ecfd870eda3b54f8544dbe557e2afd, type: 2}
   enemyMovement:
     MoveSpeed: 5
-    RotateSpeed: 5
+    RotateSpeed: 1
+    MaxDistance: 10
 --- !u!114 &6836847249817977
 MonoBehaviour:
   m_ObjectHideFlags: 0

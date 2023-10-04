@@ -30,6 +30,10 @@ namespace Unit.Bullet
                 var isSuccess = view.TryAddEffects(model.RuntimeSettings.Effects, model.RuntimeSettings.Team);
                 model.CanCollide = !isSuccess;
             }
+            else
+            {
+                model.CanCollide = false;
+            }
         }
 
         public void Tick()

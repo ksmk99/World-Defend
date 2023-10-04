@@ -1799,7 +1799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1105396708260317832, guid: 2ec30f69a8288054b85742c5fb633ec9, type: 3}
   mobSpawnerSettings:
-    SpawnCount: 0
+    SpawnCount: 5
     Offset: {x: 25, y: 0, z: 25}
   spawnerSettings:
     Types:

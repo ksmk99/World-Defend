@@ -13,7 +13,7 @@ public class EnemyInstaller : MonoInstaller< EnemyInstaller>
 {
     [SerializeField] private HealthSettings healthSettings;
     [SerializeField] private WeaponSettings weaponSettings;
-    [SerializeField] private MovementSettings enemyMovement;
+    [SerializeField] private EnemyMovementSettings enemyMovement;
 
     public override void InstallBindings()
     {

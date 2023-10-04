@@ -8,17 +8,22 @@ namespace Unit
     {
         private readonly Animator animator;
         private readonly AnimationData data;
+        private readonly Transform transform;
 
-        public AnimationsController(Animator animator, AnimationData data)
+        public AnimationsController(Animator animator, AnimationData data, Transform transform)
         {
             this.animator = animator;
             this.data = data;
+            this.transform = transform;
         }
 
         public void SetMovement(SignalOnMove signal)
         {
-            var id = data.GetAnimationID(data.IsMoving);
-            animator.SetBool(id, signal.IsMoving);
+            if (transform.Equals(signal.Sender))
+            {
+                var id = data.GetAnimationID(data.IsMoving);
+                animator.SetBool(id, signal.IsMoving);
+            }
         }
 
         public void TriggerAttack(SignalOnAttack signal)
