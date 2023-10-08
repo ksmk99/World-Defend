@@ -4,7 +4,7 @@
     {
         void Heal(int count);
         void Damage(int count);
-        void AutoHeal();
-        bool IsDeath();
+        bool IsDead();
+        void Reset();
     }
 }

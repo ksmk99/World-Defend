@@ -14,19 +14,27 @@ public class EnemyInstaller : MonoInstaller< EnemyInstaller>
     [SerializeField] private HealthSettings healthSettings;
     [SerializeField] private WeaponSettings weaponSettings;
     [SerializeField] private EnemyMovementSettings enemyMovement;
+    [SerializeField] private HealthView healthPrefab;
+    [SerializeField] private Sprite healthBarIcon;
 
     public override void InstallBindings()
     {
         Container.Bind<EnemyView>().FromComponentOnRoot().AsSingle();
 
-        Container.Bind<Transform>().FromComponentOnRoot().AsSingle().WhenInjectedInto<EnemyModel>();
+        Container.Bind<Transform>().FromComponentOnRoot().AsSingle();
         Container.Bind<IMovement>().To<EnemyMovement>().AsSingle();
 
         Container.BindInstance(enemyMovement).WhenInjectedInto<EnemyMovement>();
+
+
         Container.Bind<HealthModel>().AsTransient().WithArguments(healthSettings);
+        Container.Bind<HealthFollower>().AsSingle();
         Container.BindInterfacesAndSelfTo<HealthPresenter>().AsSingle();
-        Container.BindInterfacesAndSelfTo<HealthView>().FromComponentInHierarchy()
-            .AsSingle();
+        Container.BindInterfacesAndSelfTo<HealthView>()
+            .FromComponentInNewPrefab(healthPrefab)
+            .AsSingle()
+            .WithArguments(healthBarIcon); 
+
 
         Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
         Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();

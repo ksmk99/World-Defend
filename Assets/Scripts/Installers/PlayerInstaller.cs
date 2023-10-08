@@ -12,6 +12,9 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField] private HealthSettings healthSettings;
     [SerializeField] private WeaponSettings weaponSettings;
     [SerializeField] private PoolParentFlag poolParentFlag;
+    [SerializeField] private HealthView healthPrefab;
+    [SerializeField] private RectTransform healthParent;
+    [SerializeField] private Sprite healthBarIcon;
 
     public override void InstallBindings()
     {
@@ -42,7 +45,14 @@ public class PlayerInstaller : MonoInstaller
             .To(weaponSettings.WeaponType)
             .AsSingle()
             .WhenInjectedInto<PlayerModel>();
-        Container.Bind<IHealthPresenter>().To<HealthPresenter>().AsSingle().WhenInjectedInto<PlayerModel>();
+
+        Container.Bind<HealthFollower>().AsSingle().WithArguments(settings.Transform);
+        Container.BindInterfacesAndSelfTo<HealthPresenter>().AsSingle();
+        Container.BindInterfacesAndSelfTo<HealthView>()
+            .FromComponentInNewPrefab(healthPrefab)
+            .AsSingle()
+            .WithArguments(healthBarIcon);
+
         Container.Bind<IMovement>().To<PlayerMovement>()
             .AsTransient()
             .WithArguments(settings.Transform)
@@ -55,12 +65,9 @@ public class PlayerInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<PlayerView>()
             .FromComponentInHierarchy()
             .AsSingle();
-        Container.BindInterfacesAndSelfTo<HealthView>()
-            .FromComponentInHierarchy()
-            .AsTransient();
 
         Container.BindInterfacesAndSelfTo<AnimationData>()
-            .AsSingle(); 
+            .AsSingle();
         Container.Bind<IAnimationsController>()
             .To<AnimationsController>()
             .AsSingle()

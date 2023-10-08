@@ -10,6 +10,7 @@ public class EnemiesInstaller : MonoInstaller
     [SerializeField] private GameObject enemy;
     [SerializeField] private SpawnerSettings spawnerSettings;
     [SerializeField] private Transform poolParent;
+    [SerializeField] private HealthParentFlag healthParentFlag;
 
     public override void InstallBindings()
     {
@@ -18,6 +19,7 @@ public class EnemiesInstaller : MonoInstaller
 
     private void InstallEnemyFactory()
     {
+        Container.BindInstance(healthParentFlag);
         Container.Bind<CustomPool<EnemyView>>().AsSingle();
         Container.Bind<ISpawnManager>().To<SpawnManager>()
             .AsCached()

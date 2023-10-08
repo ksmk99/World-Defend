@@ -53,9 +53,7 @@ namespace Unit
             direction = direction.normalized;
             var angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             var value = Mathf.Lerp(transform.rotation.y, angle, settings.RotateSpeed);
-            transform.rotation = Quaternion.Euler(0, value, 0);
-
-            Debug.Log(angle);
+            transform.rotation = Quaternion.Euler(0, value, 0); 
         }
 
         private void SendMoveSignal(bool isMoving)

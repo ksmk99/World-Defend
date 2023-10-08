@@ -1,41 +1,50 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Unit
 {
-    public class HealthView : MonoBehaviour, IInitializable
+    public class HealthView : MonoBehaviour
     {
         [SerializeField] private Image healthBar;
+        [SerializeField] private RectTransform rect;
+        [SerializeField] private TMP_Text healthText;
+        [SerializeField] private Vector3 offset;
+
+        public RectTransform Rect => rect;
+        public Vector3 Offset => offset;
 
         private SignalBus signalBus;
 
         [Inject]
-        public void Init(SignalBus signalBus)
+        public void Init(SignalBus signalBus, Sprite barIcon)
         {
             this.signalBus = signalBus;
+            healthBar.sprite = barIcon;
         }
 
-        public void Initialize()
+        private void OnEnable()
         {
-            signalBus.Subscribe<SignalOnUnitHeal>(Heal);
-            signalBus.Subscribe<SignalOnUnitDamage>(Damage);
+            signalBus.Subscribe<SignalOnUnitHeal>(UpdateValues);
+            signalBus.Subscribe<SignalOnUnitDamage>(UpdateValues);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
-            signalBus.Unsubscribe<SignalOnUnitHeal>(Heal);
-            signalBus.Unsubscribe<SignalOnUnitDamage>(Damage);
+            signalBus.Unsubscribe<SignalOnUnitHeal>(UpdateValues);
+            signalBus.Unsubscribe<SignalOnUnitDamage>(UpdateValues);
         }
 
-        private void Heal(SignalOnUnitHeal data)
-        {
-            healthBar.fillAmount = data.Percent;
-        }
-
-        private void Damage(SignalOnUnitDamage data)
+        public void UpdateValues(ISignalOnHealthChange data)
         {
             healthBar.fillAmount = data.Percent;
+            healthText.text = data.Health.ToString();
+        }
+
+        public class Factory : PlaceholderFactory<HealthView>
+        {
+
         }
     }
 }

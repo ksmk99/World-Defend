@@ -13,7 +13,9 @@ public class MobInstaller : MonoInstaller<MobInstaller>
     [SerializeField] private HealthSettings healthSettings;
     [SerializeField] private WeaponSettings weaponSettings;
     [SerializeField] private MobMovementSettings movement;
-    [SerializeField]private Animator animator;
+    [SerializeField] private Animator animator;
+    [SerializeField] private HealthView healthViewPrefab;
+    [SerializeField] private Sprite healthBarIcon;
 
     public override void InstallBindings()
     {
@@ -21,10 +23,13 @@ public class MobInstaller : MonoInstaller<MobInstaller>
         Container.Bind<Transform>().FromComponentOnRoot().AsSingle();
         Container.Bind<IMovement>().To<MobMovement>().AsSingle();
 
-        Container.Bind<HealthModel>().AsSingle().WithArguments(healthSettings);
+        Container.Bind<HealthFollower>().AsSingle();
+        Container.Bind<HealthModel>().AsTransient().WithArguments(healthSettings);
         Container.BindInterfacesAndSelfTo<HealthPresenter>().AsSingle();
-        Container.BindInterfacesAndSelfTo<HealthView>().FromComponentInHierarchy()
-            .AsTransient();
+        Container.BindInterfacesAndSelfTo<HealthView>()
+            .FromComponentInNewPrefab(healthViewPrefab)
+            .AsSingle()
+            .WithArguments(healthBarIcon); 
 
         Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
         Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
@@ -41,7 +46,7 @@ public class MobInstaller : MonoInstaller<MobInstaller>
             .To(weaponSettings.WeaponType)
             .AsTransient();
 
-        Container.Bind<MobView>().FromComponentOnRoot().AsSingle().WhenInjectedInto<MobPresenter>();
+        Container.Bind<MobView>().FromComponentOnRoot().AsSingle();
         Container.Bind<MobModel>().AsSingle();
         Container.BindInterfacesAndSelfTo<MobPresenter>().AsSingle();
 

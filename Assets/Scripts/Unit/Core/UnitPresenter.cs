@@ -12,13 +12,12 @@ public abstract class UnitPresenter : ITickable
 
     public virtual void Tick()
     {
-        if(!model.IsActive)
+        if (!model.IsActive)
         {
             return;
         }
 
-        var isDead = model.Health.IsDeath();
-        model.Health.AutoHeal();
+        var isDead = model.Health.IsDead();
         model.Weapon.Update(model.Transform, isDead, model.Team);
         model.Movement.Move(isDead, model.Weapon.GetTarget());
 
@@ -30,7 +29,7 @@ public abstract class UnitPresenter : ITickable
 
     public void OnDeath()
     {
-        if (model.Health.IsDeath())
+        if (model.Health.IsDead())
         {
             Transform.GetComponent<UnitView>().Death();
         }
@@ -38,7 +37,7 @@ public abstract class UnitPresenter : ITickable
 
     public void Respawn()
     {
-        model.Health.Heal(int.MaxValue);
+        model.Health.Reset();
         model.IsActive = true;
         model.Weapon.Reset();
     }
