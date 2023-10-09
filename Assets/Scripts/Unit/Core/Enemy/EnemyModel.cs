@@ -12,9 +12,9 @@ public class EnemyModel : IUnitModel
     public IWeaponPresenter Weapon { get; }
     public List<IEffectPresenter> Effects { get; }
 
-    public Vector3 Position => Transform.position;
-    public NavMeshAgent Agent { get; }
+    public SignalBus SignalBus { get; }
 
+    public Vector3 Position => Transform.position;
     public Team Team => Team.Enemy;
 
     public bool IsActive { get; set; }
@@ -23,15 +23,16 @@ public class EnemyModel : IUnitModel
         IWeaponPresenter weapon,
         Transform transform,
         IMovement movement,
-        IHealthPresenter health)
+        IHealthPresenter health,
+        SignalBus signalBus)
     {
         Movement = movement;
         Health = health;
         Weapon = weapon;
 
         Effects = new List<IEffectPresenter>();
-        Agent = transform.GetComponent<NavMeshAgent>();
         Transform = transform;
         IsActive = true;
+        SignalBus = signalBus;
     }
 }

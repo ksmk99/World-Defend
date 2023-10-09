@@ -7,6 +7,7 @@ using Unit.Bullet;
 using Unit;
 using UnityEngine;
 using Zenject;
+using Helpers;
 
 public class MobInstaller : MonoInstaller<MobInstaller>
 {
@@ -59,7 +60,7 @@ public class MobInstaller : MonoInstaller<MobInstaller>
         Container.BindSignal<SignalOnMove>().ToMethod<IAnimationsController>(x => x.SetMovement).FromResolve();
         Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
 
-        Container.BindSignal<SignalOnUnitDied>().ToMethod<MobPresenter>(x => x.OnDeath).FromResolve();
+        Container.BindSignal<SignalOnUnitDeath>().ToMethod<MobPresenter>(x => x.OnDeath).FromResolve();
     }
 }
 

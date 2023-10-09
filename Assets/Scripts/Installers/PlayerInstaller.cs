@@ -20,13 +20,6 @@ public class PlayerInstaller : MonoInstaller
     {
         Container.BindInstance(poolParentFlag);
 
-        SignalBusInstaller.Install(Container);
-        Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
-        Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
-        Container.DeclareSignal<SignalOnUnitDied>();
-        Container.DeclareSignal<SignalOnMove>();
-        Container.DeclareSignal<SignalOnAttack>();
-
         Container.Bind<InputService>().
             AsSingle().WithArguments(settings.Joystick);
         Container.Bind<HealthModel>()
@@ -76,7 +69,7 @@ public class PlayerInstaller : MonoInstaller
         Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
 
 
-        Container.BindSignal<SignalOnUnitDied>().ToMethod<PlayerPresenter>(x => x.OnDeath).FromResolve();
+        Container.BindSignal<SignalOnUnitDeath>().ToMethod<PlayerPresenter>(x => x.OnDeath).FromResolve();
     }
 
     [Serializable]

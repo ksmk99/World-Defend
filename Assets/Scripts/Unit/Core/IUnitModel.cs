@@ -7,9 +7,10 @@ namespace Unit
 {
     public interface IUnitModel
     {
+        Team Team { get; }
         Transform Transform { get; }
         bool IsActive { get; set; }
-        Team Team { get; }
+        Vector3 Position { get; }
 
         IMovement Movement { get; }
         IHealthPresenter Health { get; }
@@ -17,7 +18,6 @@ namespace Unit
 
         List<IEffectPresenter> Effects { get; }
 
-        Vector3 Position { get; }
-        NavMeshAgent Agent { get; }
+        SignalBus SignalBus { get; }
     }
 }

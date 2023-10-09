@@ -27,7 +27,7 @@ public abstract class UnitPresenter : ITickable
         }
     }
 
-    public void OnDeath()
+    public virtual void OnDeath()
     {
         if (model.Health.IsDead())
         {

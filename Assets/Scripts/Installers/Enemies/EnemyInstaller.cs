@@ -7,7 +7,7 @@ using Unit.Bullet;
 using Unit;
 using UnityEngine;
 using Zenject;
-
+using Helpers;
 
 public class EnemyInstaller : MonoInstaller< EnemyInstaller>
 {
@@ -55,7 +55,7 @@ public class EnemyInstaller : MonoInstaller< EnemyInstaller>
         Container.Bind<EnemyModel>().AsSingle();
         Container.BindInterfacesAndSelfTo<EnemyPresenter>().AsSingle();
 
-        Container.BindSignal<SignalOnUnitDied>().ToMethod<EnemyPresenter>(x => x.OnDeath).FromResolve();
+        Container.BindSignal<SignalOnUnitDeath>().ToMethod<EnemyPresenter>(x => x.OnDeath).FromResolve();
     }
 }
 

@@ -1,60 +1,11 @@
-﻿using System;
+﻿using Helpers;
+using System;
 using UnityEngine;
 using Zenject;
 using static UnityEditor.Profiling.HierarchyFrameDataView;
 
 namespace Unit
 {
-
-    #region Signals
-    public class SignalOnUnitDied
-    {
-    }
-
-    public interface ISignalOnHealthChange
-    {
-        public float Percent { get; }
-        public float Health { get; }
-    }
-
-    public class SignalOnUnitDamage : ISignalOnHealthChange
-    {
-        public float Percent { get; }
-
-        public float Health { get; }
-
-        public SignalOnUnitDamage(float percent, float health)
-        {
-            Percent = percent;
-            Health = health;
-        }
-    }
-
-    public class SignalOnUnitHeal : ISignalOnHealthChange
-    {
-        public float Percent { get; }
-        public float Health { get; }
-
-        public SignalOnUnitHeal(float percent, float health)
-        {
-            Percent = percent;
-            Health = health;
-        }
-    }
-
-    public class SignalOnMove
-    {
-        public bool IsMoving { get; }
-        public Transform Sender { get; }
-
-        public SignalOnMove(bool isMoving, Transform sender)
-        {
-            IsMoving = isMoving;
-            Sender = sender;
-        }
-    }
-    #endregion
-
     public class HealthPresenter : IHealthPresenter, IInitializable, ITickable
     {
         private readonly SignalBus signalBus;
@@ -109,7 +60,7 @@ namespace Unit
             {
                 model.IsDead = true;
                 model.Follower.Disable(view);
-                signalBus.TryFire<SignalOnUnitDied>();
+                signalBus.TryFire<SignalOnUnitDeath>();
             }
         }
 

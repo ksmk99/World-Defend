@@ -16,19 +16,26 @@ public class PlayerModel : IUnitModel
     public List<IEffectPresenter> Effects { get; }
 
     public Vector3 Position => Transform.position;
-    public NavMeshAgent Agent { get; }
     public Team Team => Team.Ally;
 
-    public PlayerModel(IMovement movement, IHealthPresenter health, IWeaponPresenter weapon, Transform transform, bool isActive = true)
+    public SignalBus SignalBus { get; }
+
+    public PlayerModel(
+        IMovement movement, 
+        IHealthPresenter health, 
+        IWeaponPresenter weapon, 
+        SignalBus signalBus,
+        Transform transform, 
+        bool isActive = true)
     {
         Transform = transform;
         Movement = movement;
         Health = health;
         Weapon = weapon;
+        SignalBus = signalBus;
         IsActive = isActive;
 
         Effects = new List<IEffectPresenter>();
-        Agent = transform.GetComponent<NavMeshAgent>();
     }
 }
 
