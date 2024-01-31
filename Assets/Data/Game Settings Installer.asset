@@ -19,4 +19,4 @@ MonoBehaviour:
     Count: 25
     SpawnRateMin: 2
     SpawnRateMax: 2
-    Offset: {x: 6.37, y: 0, z: 7.13}
+    <Offset>k__BackingField: {x: 15, y: 0, z: 15}

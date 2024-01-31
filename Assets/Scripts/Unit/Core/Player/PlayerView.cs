@@ -27,4 +27,8 @@ public class PlayerView : UnitView
     {
         return presenter.AddEffects(effects, team);
     }
+
+    public class Factory : PlaceholderFactory<UnityEngine.Object, PlayerView>
+    {
+    }
 }

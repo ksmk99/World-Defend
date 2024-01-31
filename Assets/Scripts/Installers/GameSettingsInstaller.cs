@@ -10,16 +10,12 @@ namespace Installers
     public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInstaller>
     {
         [SerializeField] private MovementSettings playerMS;
-        [SerializeField] private EnemySpawnerSettings spawnerSettings;
 
         public override void InstallBindings()
         {
             BindSignals();
             Container
                 .BindInstance(playerMS)
-                .IfNotBound();
-            Container
-                .BindInstance(spawnerSettings)
                 .IfNotBound();
 
             BindLevelProgression();

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Unit;
 using UnityEngine;
 using Zenject;
@@ -65,4 +66,8 @@ public abstract class UnitPresenter : ITickable
         return true;
     }
 
+    public virtual void SetPlayer(UnitPresenter playerPresenter)
+    {
+
+    }
 }

@@ -7,7 +7,7 @@ using Zenject;
 
 public class EnemiesInstaller : MonoInstaller
 {
-    [SerializeField] private GameObject enemy;
+    [SerializeField] private EnemySpawnerSettings enemiesSpawnerSettings;
     [SerializeField] private SpawnerSettings spawnerSettings;
     [SerializeField] private Transform poolParent;
     [SerializeField] private HealthParentFlag healthParentFlag;
@@ -31,6 +31,6 @@ public class EnemiesInstaller : MonoInstaller
 
         Container.BindInterfacesAndSelfTo<EnemySpawner>()
             .AsSingle()
-            .WithArguments(poolParent);
+            .WithArguments(enemiesSpawnerSettings, poolParent);
     }
 }

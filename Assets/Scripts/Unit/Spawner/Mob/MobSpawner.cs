@@ -56,7 +56,7 @@ namespace Unit
                 UnityEngine.Random.Range(-settings.Offset.x, settings.Offset.x), 0,
                 UnityEngine.Random.Range(-settings.Offset.z, settings.Offset.z));
 
-            view.transform.position = randomPosition;
+            view.transform.position = randomPosition + settings.StartPoint.position;
             view.transform.SetParent(parent);
             view.gameObject.SetActive(true);
             view.OnDeath += Release;

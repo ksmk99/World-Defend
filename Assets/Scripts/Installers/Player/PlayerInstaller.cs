@@ -1,27 +1,21 @@
-using Helpers;
-using System;
-using Unit;
 using Unit.Bullet;
+using Unit;
 using UnityEngine;
 using Zenject;
+using Helpers;
+using System;
 
-public class PlayerInstaller : MonoInstaller
+public class PlayerInstaller : MonoInstaller<PlayerInstaller>
 {
     [Header("Settings")]
     [SerializeField] private Settings settings;
     [SerializeField] private HealthSettings healthSettings;
     [SerializeField] private WeaponSettings weaponSettings;
-    [SerializeField] private PoolParentFlag poolParentFlag;
     [SerializeField] private HealthView healthPrefab;
-    [SerializeField] private RectTransform healthParent;
     [SerializeField] private Sprite healthBarIcon;
 
     public override void InstallBindings()
     {
-        Container.BindInstance(poolParentFlag);
-
-        Container.Bind<InputService>().
-            AsSingle().WithArguments(settings.Joystick);
         Container.Bind<HealthModel>()
             .AsTransient().WithArguments(healthSettings);
 
@@ -83,3 +77,4 @@ public class PlayerInstaller : MonoInstaller
         public Animator Animator { get; private set; }
     }
 }
+

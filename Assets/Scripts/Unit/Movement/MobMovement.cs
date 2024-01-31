@@ -7,16 +7,15 @@ namespace Unit
 {
     public class MobMovement : IMovement
     {
-        private readonly PlayerPresenter player;
+        private PlayerPresenter player;
         private readonly SignalBus signalBus;
         private readonly MobMovementSettings settings;
 
         private readonly Transform transform;
         private readonly NavMeshAgent agent;
 
-        public MobMovement(MobMovementSettings settings, Transform transform, PlayerPresenter player, SignalBus signalBus)
+        public MobMovement(MobMovementSettings settings, Transform transform, SignalBus signalBus)
         {
-            this.player = player;
             this.signalBus = signalBus;
             this.settings = settings;
             this.agent = transform.GetComponent<NavMeshAgent>();
@@ -30,7 +29,7 @@ namespace Unit
 
         public void Move(bool isDead, Transform target = null)
         {
-            if (isDead)
+            if (isDead || player == null)
             {
                 agent.velocity = Vector3.zero;
                 return;
@@ -45,6 +44,7 @@ namespace Unit
 
         private void Rotate(Vector3 direction, Transform target)
         {
+
             direction = target == null ? direction : target.position - transform.position;
             if (direction == Vector3.zero)
             {
@@ -70,6 +70,11 @@ namespace Unit
             {
                 transform.position = hit.position;
             }
+        }
+
+        public void SetTarget(UnitPresenter presenter)
+        {
+            player = (PlayerPresenter)presenter;
         }
     }
 }

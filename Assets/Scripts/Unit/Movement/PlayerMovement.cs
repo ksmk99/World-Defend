@@ -47,5 +47,10 @@ namespace Unit
             var signal = new SignalOnMove(direction.sqrMagnitude > 0, transform);
             signalBus.TryFire(signal);
         }
+
+        public void SetTarget(UnitPresenter presenter)
+        {
+
+        }
     }
 }

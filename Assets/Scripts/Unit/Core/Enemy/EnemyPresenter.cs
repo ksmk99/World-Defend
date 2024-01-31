@@ -21,4 +21,10 @@ public class EnemyPresenter : UnitPresenter
             model.SignalBus.TryFire<SignalOnEnemyDeath>();
         }
     }
+
+    public override void SetPlayer(UnitPresenter presenter)
+    {
+        model.Movement.SetTarget(presenter);
+        model.IsActive = true;
+    }
 }

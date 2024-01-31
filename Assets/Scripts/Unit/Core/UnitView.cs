@@ -22,4 +22,11 @@ public abstract class UnitView : MonoBehaviour
     {
         return presenter.Team;
     }
+
+    public virtual void Activate(UnitView player)
+    {
+        var playerPresenter = player.GetPresenter();
+        var presenter = GetPresenter();
+        presenter.SetPlayer(playerPresenter);
+    }
 }

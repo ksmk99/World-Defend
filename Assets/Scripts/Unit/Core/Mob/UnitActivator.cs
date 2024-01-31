@@ -5,28 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class MobActivator : MonoBehaviour
+public class UnitActivator : MonoBehaviour
 {
-    [SerializeField] private MobView mobView;
-
-    private bool isFirstTime = true;
-
-    private void Awake()
-    {
-        isFirstTime = true;
-    }
+    [SerializeField] private UnitView mobView;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isFirstTime)
-        {
-            return;
-        }
-
         if (other.TryGetComponent<PlayerView>(out var player))
         {
-            isFirstTime = false;
             mobView.Activate(player);
+            Destroy(gameObject);
         }
     }
 }

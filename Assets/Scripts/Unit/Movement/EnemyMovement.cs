@@ -5,15 +5,16 @@ namespace Unit
 {
     public class EnemyMovement : IMovement
     {
-        private readonly PlayerPresenter player;
+        private readonly Transform target;
         private readonly EnemyMovementSettings settings;
 
         private readonly Transform transform;
         private readonly NavMeshAgent agent;
 
-        public EnemyMovement(EnemyView view, EnemyMovementSettings settings, PlayerPresenter player)
+        private UnitPresenter player = default;  
+
+        public EnemyMovement(EnemyView view, EnemyMovementSettings settings)
         {
-            this.player = player;
             this.transform = view.transform;
             this.settings = settings;
             this.agent = transform.GetComponent<NavMeshAgent>();
@@ -24,7 +25,7 @@ namespace Unit
 
         public void Move(bool isDead, Transform target = null)
         {
-            if (isDead)
+            if (isDead || player == default)
             {
                 agent.velocity = Vector3.zero;
                 return;
@@ -43,6 +44,16 @@ namespace Unit
             }
         }
 
+        private bool CheckTarget()
+        {
+            if(target == default)
+            {
+
+            }
+
+            return false;
+        }
+
         private void Rotate(Vector3 direction)
         {
             var angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
@@ -57,6 +68,11 @@ namespace Unit
             {
                 transform.position = hit.position;
             }
+        }
+
+        public void SetTarget(UnitPresenter presenter)
+        {
+            this.player = presenter;
         }
     }
 }

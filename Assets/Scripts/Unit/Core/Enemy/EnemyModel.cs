@@ -32,7 +32,8 @@ public class EnemyModel : IUnitModel
 
         Effects = new List<IEffectPresenter>();
         Transform = transform;
-        IsActive = true;
         SignalBus = signalBus;
+
+        IsActive = false;
     }
 }

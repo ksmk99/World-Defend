@@ -9,11 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 632017414469642739}
+  - component: {fileID: 3810316252454219760}
+  - component: {fileID: 3810316252454219759}
   - component: {fileID: 1903814587}
   - component: {fileID: 632017414469642738}
   - component: {fileID: 1903814589}
   - component: {fileID: 154692354110889400}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,6 +38,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3810316252454219760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632017414469642637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 3810316252454219759}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &3810316252454219759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632017414469642637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 852d3f98336f08744952857b5b0c5dc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings:
+    <Transform>k__BackingField: {fileID: 632017414469642739}
+    <Joystick>k__BackingField: {fileID: 0}
+    <Animator>k__BackingField: {fileID: 718323420605218998}
+  healthSettings:
+    MaxHealth: 1000
+    IsAutoHeal: 1
+    HealDelay: 3
+    HealRate: 0.5
+    HealCount: 50
+  weaponSettings: {fileID: 11400000, guid: 4851361856ca003448c211b2d6bf2df0, type: 2}
+  poolParentFlag: {fileID: 0}
+  healthPrefab: {fileID: 2671775819908182200, guid: 504d91682790efc41abe87f2ec3a28e0,
+    type: 3}
+  healthBarIcon: {fileID: 21300000, guid: a833faab059b93b449aa75d2adf4203c, type: 3}
 --- !u!114 &1903814587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +163,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4439641322390354, guid: 7808f0aeae535744d839b436592d7285, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439641322390354, guid: 7808f0aeae535744d839b436592d7285, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439641322390354, guid: 7808f0aeae535744d839b436592d7285, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439641322390354, guid: 7808f0aeae535744d839b436592d7285, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -160,11 +219,22 @@ PrefabInstance:
       propertyPath: m_Avatar
       value: 
       objectReference: {fileID: 9000000, guid: 6264b2d6b3e783548bc875468039d679, type: 3}
+    - target: {fileID: 95060476663339902, guid: 7808f0aeae535744d839b436592d7285,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 47345836b65a71b48a37656b1c66b303, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7808f0aeae535744d839b436592d7285, type: 3}
 --- !u!4 &624173454392137882 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4439641322390354, guid: 7808f0aeae535744d839b436592d7285,
+    type: 3}
+  m_PrefabInstance: {fileID: 623264383853009864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &718323420605218998 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95060476663339902, guid: 7808f0aeae535744d839b436592d7285,
     type: 3}
   m_PrefabInstance: {fileID: 623264383853009864}
   m_PrefabAsset: {fileID: 0}

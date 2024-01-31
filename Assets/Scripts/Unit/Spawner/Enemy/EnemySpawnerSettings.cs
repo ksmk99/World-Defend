@@ -9,6 +9,10 @@ namespace Unit
         public int Count = 10;
         public float SpawnRateMin = 2f;
         public float SpawnRateMax = 2f;
-        public Vector3 Offset;
+
+        [field: SerializeField]
+        public Vector3 Offset { get; set; }
+        [field: SerializeField]
+        public Transform StartPoint { get; set; }
     }
 }

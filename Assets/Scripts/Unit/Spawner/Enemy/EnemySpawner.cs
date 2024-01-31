@@ -27,6 +27,8 @@ namespace Unit
             this.spawnManager = spawnManager;
             this.pool = pool;
             this.parent = parent;
+
+            nextSpawnTime = Time.time + settings.SpawnRateMax;
         }
 
         public void Tick()
@@ -42,7 +44,7 @@ namespace Unit
                 SetStartSettings(enemy);
 
                 spawnCount++;
-                var delay = Random.Range(settings.SpawnRateMin, settings.SpawnRateMin);
+                var delay = Random.Range(settings.SpawnRateMin, settings.SpawnRateMax);
                 nextSpawnTime = Time.time + delay;
             }
         }
@@ -61,7 +63,7 @@ namespace Unit
                 Random.Range(-settings.Offset.x, settings.Offset.x), 0,
                 Random.Range(-settings.Offset.z, settings.Offset.z));
 
-            enemy.transform.position = randomPosition;
+            enemy.transform.position = randomPosition + settings.StartPoint.position;
             enemy.transform.SetParent(parent);
             enemy.gameObject.SetActive(true);
             enemy.OnDeath += Release;

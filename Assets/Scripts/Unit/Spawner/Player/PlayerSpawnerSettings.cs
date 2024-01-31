@@ -4,12 +4,11 @@ using UnityEngine;
 namespace Unit
 {
     [Serializable]
-    public class MobSpawnerSettings
+    public class PlayerSpawnerSettings
     {
-        public int SpawnCount;
         [field: SerializeField]
         public Vector3 Offset { get; set; }
         [field: SerializeField]
-        public Transform StartPoint { get; set; }
+        public Transform StartPoint { get; set; }   
     }
 }
