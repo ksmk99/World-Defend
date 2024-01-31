@@ -9,7 +9,7 @@ using UnityEngine;
 using Zenject;
 using Helpers;
 
-public class EnemyInstaller : MonoInstaller< EnemyInstaller>
+public class EnemyInstaller : MonoInstaller<EnemyInstaller>
 {
     [SerializeField] private HealthSettings healthSettings;
     [SerializeField] private WeaponSettings weaponSettings;

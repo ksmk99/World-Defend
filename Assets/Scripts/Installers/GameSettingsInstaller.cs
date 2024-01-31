@@ -1,3 +1,4 @@
+using Gameplay;
 using Helpers;
 using Unit;
 using UnityEngine;
@@ -27,21 +28,22 @@ namespace Installers
         private void BindLevelProgression()
         {
             Container
-                .Bind<LevelProgressionService>()
+                .Bind<RoomProgressionService>()
                 .AsSingle();
             Container
                 .BindSignal<SignalOnPlayerDeath>()
-                .ToMethod<LevelProgressionService>(x => x.PlayerDeath)
+                .ToMethod<RoomProgressionService>(x => x.PlayerDeath)
                 .FromResolve();
             Container
                 .BindSignal<SignalOnEnemyDeath>()
-                .ToMethod<LevelProgressionService>(x => x.EnemyDeath)
+                .ToMethod<RoomProgressionService>(x => x.EnemyDeath)
                 .FromResolve();
         }
 
         private void BindSignals()
         {
             SignalBusInstaller.Install(Container);
+
             Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
             Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
 
@@ -51,6 +53,8 @@ namespace Installers
 
             Container.DeclareSignal<SignalOnMove>();
             Container.DeclareSignal<SignalOnAttack>();
+
+            Container.DeclareSignal<SignalOnProgressionChange>();
         }
     }
 }

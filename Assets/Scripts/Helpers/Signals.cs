@@ -7,6 +7,18 @@ using UnityEngine;
 
 namespace Helpers
 {
+    public class SignalOnProgressionChange
+    {
+        public int KillCount { get; }
+        public int Percent { get; }
+
+        public SignalOnProgressionChange(int killCount, int percent)
+        {
+            KillCount = killCount;
+            Percent = percent;
+        }
+    }
+
     #region Death
     public interface ISignalOnDeath { }
     public class SignalOnPlayerDeath : ISignalOnDeath { }
@@ -60,5 +72,15 @@ namespace Helpers
             IsMoving = isMoving;
             Sender = sender;
         }
+    }
+
+    public class SignalOnRoomLoose
+    {
+
+    }
+
+    public class SignalOnRoomWin
+    {
+
     }
 }

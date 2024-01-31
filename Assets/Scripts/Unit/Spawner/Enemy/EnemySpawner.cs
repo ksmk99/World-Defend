@@ -18,6 +18,7 @@ namespace Unit
         private readonly ISpawnManager spawnManager;
 
         private float nextSpawnTime;
+        private int spawnCount;
 
         public EnemySpawner(EnemyView.Factory factory, EnemySpawnerSettings settings, ISpawnManager spawnManager, CustomPool<EnemyView> pool, Transform parent)
         {
@@ -30,12 +31,19 @@ namespace Unit
 
         public void Tick()
         {
+            if(spawnCount >= settings.Count)
+            {
+                return;
+            }
+
             if (nextSpawnTime <= Time.time)
             {
                 EnemyView enemy = Create();
                 SetStartSettings(enemy);
 
-                nextSpawnTime = Time.time + settings.SpawnRate;
+                spawnCount++;
+                var delay = Random.Range(settings.SpawnRateMin, settings.SpawnRateMin);
+                nextSpawnTime = Time.time + delay;
             }
         }
 

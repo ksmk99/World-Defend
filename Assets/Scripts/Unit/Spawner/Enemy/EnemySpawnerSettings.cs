@@ -7,7 +7,8 @@ namespace Unit
     public class EnemySpawnerSettings
     {
         public int Count = 10;
-        public float SpawnRate = 2f;
+        public float SpawnRateMin = 2f;
+        public float SpawnRateMax = 2f;
         public Vector3 Offset;
     }
 }
