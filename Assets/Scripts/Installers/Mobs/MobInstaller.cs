@@ -11,6 +11,7 @@ using Helpers;
 
 public class MobInstaller : MonoInstaller<MobInstaller>
 {
+    [SerializeField] private int RoomIndex = 1;
     [SerializeField] private HealthSettings healthSettings;
     [SerializeField] private WeaponSettings weaponSettings;
     [SerializeField] private MobMovementSettings movement;

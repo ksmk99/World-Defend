@@ -25,22 +25,12 @@ public class MobView : UnitView
         this.presenter = presenter;
     }
 
-    public void Respawn()
-    {
-        presenter.Respawn();
-    }
-
-    public override bool TryAddEffects(List<EffectSettings> effects, Team team)
-    {
-        return presenter.AddEffects(effects, team);
-    }
-
     public override void Death()
     {
         OnDeath?.Invoke(this);
     }
 
-    public override int GetID()
+    public override int GetPoolID()
     {
         return (int)Type;
     }

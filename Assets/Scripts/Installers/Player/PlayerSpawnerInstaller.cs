@@ -5,7 +5,7 @@ using Unit;
 using UnityEngine;
 using Zenject;
 
-public class PlayerSpawnerInstaller : MonoInstaller
+public class PlayerSpawnerInstaller : AUnitInstaller
 {
     [SerializeField] private PlayerSpawnerSettings playerSpawnerSettings;
     [SerializeField] private SpawnerSettings spawnerSettings;
@@ -29,6 +29,6 @@ public class PlayerSpawnerInstaller : MonoInstaller
 
         Container.BindInterfacesAndSelfTo<PlayerSpawner>()
             .AsSingle()
-            .WithArguments(playerSpawnerSettings, poolParent);
+            .WithArguments(playerSpawnerSettings, poolParent, RoomIndex);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using GameplayState;
 using Helpers;
+using System;
 using Unit;
 using UnityEngine;
 using Zenject;
@@ -8,18 +9,21 @@ namespace Gameplay
 {
     public class RoomProgressionService
     {
-        private readonly EnemySpawnerSettings spawnerSettings;
         private readonly GameplayStateMachine stateMachine;
         private readonly SignalBus signalBus;
+
+        private readonly int spawnCount;
+        private readonly int roomIndex;
 
         private int killCount;
         private bool isFinish;
 
-        public RoomProgressionService(GameplayStateMachine stateMachine, SignalBus signalBus, EnemySpawnerSettings spawnerSettings)
+        public RoomProgressionService(GameplayStateMachine stateMachine, SignalBus signalBus, int spawnCount, int roomIndex)
         {
             this.stateMachine = stateMachine;
             this.signalBus = signalBus;
-            this.spawnerSettings = spawnerSettings;
+            this.spawnCount = spawnCount;
+            this.roomIndex = roomIndex;
         }
 
         public void EnemyDeath(SignalOnEnemyDeath signal)
@@ -31,23 +35,33 @@ namespace Gameplay
 
             killCount++;
 
+            Debug.Log("KILL " + killCount + " " + roomIndex);
+
             SendProgressionSignal();
             CheckWinCondition();
         }
 
         private void CheckWinCondition()
         {
-            if (killCount >= spawnerSettings.Count)
+            if (killCount >= spawnCount)
             {
                 isFinish = true;
-
+                RefreshRoom();
                 //stateMachine.TransitionTo(new WinState());
             }
         }
 
+        private void RefreshRoom()
+        {
+            Debug.Log("Room Reset");
+            signalBus.TryFire(new SignalOnRoomReset(roomIndex));
+            killCount = 0;
+            isFinish = false;
+        }
+
         private void SendProgressionSignal()
         {
-            var completePercent = killCount / spawnerSettings.Count;
+            var completePercent = killCount / spawnCount;
             var progressionChangeSignal = new SignalOnProgressionChange(killCount, completePercent);
             signalBus.TryFire(progressionChangeSignal);
         }
@@ -61,6 +75,8 @@ namespace Gameplay
 
             isFinish = true;
             //stateMachine.TransitionTo(new LooseState());
+
+            RefreshRoom();
         }
     }
 }

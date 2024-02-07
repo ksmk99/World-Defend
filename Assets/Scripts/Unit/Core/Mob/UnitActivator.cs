@@ -11,6 +11,8 @@ public class UnitActivator : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        return;
+
         if (other.TryGetComponent<PlayerView>(out var player))
         {
             mobView.Activate(player);

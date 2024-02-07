@@ -13,36 +13,30 @@ public class EnemyView : UnitView
     public override Action<UnitView> OnDeath { get; set; }
 
     public Action OnRespawn;
-    public Func<UnitPresenter> OnPresenterCall;
-    public Func<List<EffectSettings>, Team, bool> OnTryAddEffects;
+
+    [Inject]
+    public void Init(EnemyPresenter presenter)
+    {
+        this.presenter = presenter;
+    }
 
     public void Respawn()
     {
         OnRespawn?.Invoke();
     }
 
-    public override bool TryAddEffects(List<EffectSettings> effects, Team team)
-    {
-        return OnTryAddEffects.Invoke(effects, team);
+    public override void Death()
+    {  
+        OnDeath?.Invoke(this);
+        gameObject.SetActive(false);
     }
 
     public override UnitPresenter GetPresenter()
     {
-        return OnPresenterCall.Invoke();
+        return presenter;
     }
 
-    public override Team GetTeam()
-    {
-        var presenter = OnPresenterCall.Invoke();
-        return presenter.Team;
-    }
-
-    public override void Death()
-    {
-        OnDeath?.Invoke(this);
-    }
-
-    public override int GetID()
+    public override int GetPoolID()
     {
         return (int)Type;
     }

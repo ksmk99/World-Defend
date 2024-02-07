@@ -7,8 +7,10 @@ namespace Unit
 {
     public interface IUnitModel
     {
+        int RoomIndex { get; set; }
         Team Team { get; }
         Transform Transform { get; }
+        UnitView UnitView { get; }
         bool IsActive { get; set; }
         Vector3 Position { get; }
 
@@ -19,5 +21,6 @@ namespace Unit
         List<IEffectPresenter> Effects { get; }
 
         SignalBus SignalBus { get; }
+        bool IsDeathFired { get; set; }
     }
 }

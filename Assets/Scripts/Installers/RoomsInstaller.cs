@@ -21,4 +21,19 @@ public class RoomsInstaller : MonoInstaller
             .AsSingle()
             .WithArguments(context);
     }
+
+    private void OnValidate()
+    {
+        var index = 1;
+        foreach (var context in context)
+        {
+            var installers = context.GetComponentsInChildren<AUnitInstaller>();
+            foreach (var installer in installers) 
+            {
+                installer.RoomIndex = index;
+            }
+
+            index++;
+        }
+    }
 }

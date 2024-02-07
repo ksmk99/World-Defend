@@ -7,25 +7,20 @@ public class PlayerView : UnitView
 {
     public override Action<UnitView> OnDeath { get; set; }
 
-    public override void Death()
-    {
-        return;
-    }
-
-    public override int GetID()
-    {
-        return 0;
-    }
-
     [Inject]
     public void Init(PlayerPresenter presenter)
     {
         this.presenter = presenter;
     }
 
-    public override bool TryAddEffects(List<EffectSettings> effects, Team team)
+    public override void Death()
     {
-        return presenter.AddEffects(effects, team);
+        return;
+    }
+
+    public override int GetPoolID()
+    {
+        return 0;
     }
 
     public class Factory : PlaceholderFactory<UnityEngine.Object, PlayerView>

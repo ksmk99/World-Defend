@@ -1,3 +1,4 @@
+using Gameplay;
 using Helpers;
 using System;
 using Unit;
@@ -5,7 +6,7 @@ using Unit.Bullet;
 using UnityEngine;
 using Zenject;
 
-public class EnemiesInstaller : MonoInstaller
+public class EnemiesInstaller : AUnitInstaller
 {
     [SerializeField] private EnemySpawnerSettings enemiesSpawnerSettings;
     [SerializeField] private SpawnerSettings spawnerSettings;
@@ -31,6 +32,30 @@ public class EnemiesInstaller : MonoInstaller
 
         Container.BindInterfacesAndSelfTo<EnemySpawner>()
             .AsSingle()
-            .WithArguments(enemiesSpawnerSettings, poolParent);
+            .WithArguments(enemiesSpawnerSettings, poolParent, RoomIndex);
+
+        Container
+            .BindSignal<SignalOnRoomReset>()
+            .ToMethod<EnemySpawner>(x => x.Reset)
+            .FromResolve();
+
+
+        BindLevelProgression();
+    }
+
+    private void BindLevelProgression()
+    {
+        Container
+            .Bind<RoomProgressionService>()
+            .AsTransient()
+            .WithArguments(enemiesSpawnerSettings.Count, RoomIndex);
+        Container
+            .BindSignal<SignalOnPlayerDeath>()
+            .ToMethod<RoomProgressionService>(x => x.PlayerDeath)
+            .FromResolve();
+        Container
+            .BindSignal<SignalOnEnemyDeath>()
+            .ToMethod<RoomProgressionService>(x => x.EnemyDeath)
+            .FromResolve();
     }
 }

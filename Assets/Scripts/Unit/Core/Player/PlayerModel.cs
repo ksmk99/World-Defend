@@ -7,6 +7,8 @@ using Zenject;
 
 public class PlayerModel : IUnitModel
 {
+    public int RoomIndex { get; set; }
+
     public Transform Transform { get; }
     public bool IsActive { get; set; }
     public IMovement Movement { get; }
@@ -19,23 +21,26 @@ public class PlayerModel : IUnitModel
     public Team Team => Team.Ally;
 
     public SignalBus SignalBus { get; }
+    public bool IsDeathFired { get; set; }
+
+    public UnitView UnitView { get; }
 
     public PlayerModel(
         IMovement movement, 
         IHealthPresenter health, 
         IWeaponPresenter weapon, 
         SignalBus signalBus,
-        Transform transform, 
-        bool isActive = true)
+        Transform transform)
     {
         Transform = transform;
         Movement = movement;
         Health = health;
         Weapon = weapon;
         SignalBus = signalBus;
-        IsActive = isActive;
+        IsActive = true;
 
         Effects = new List<IEffectPresenter>();
+        UnitView = Transform.GetComponent<UnitView>();
     }
 }
 

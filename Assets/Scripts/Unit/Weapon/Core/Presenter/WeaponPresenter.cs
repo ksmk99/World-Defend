@@ -100,6 +100,7 @@ namespace Unit
             BulletView bullet = model.BulletPool.Create(bulletSettings);
             bullet.OnDispose += DisposeBullet;
             bullet.transform.SetParent(model.Parent.transform);
+            bullet.transform.position += Vector3.up;
 
             bullets.Add(bullet);
         }

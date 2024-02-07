@@ -6,7 +6,7 @@ using UnityEngine;
 using Zenject;
 using static Zenject.CheatSheet;
 
-public class MobsInstaller : MonoInstaller
+public class MobsInstaller : AUnitInstaller
 {
     [SerializeField] private GameObject prefab;
     [SerializeField] private MobSpawnerSettings mobSpawnerSettings;
@@ -31,6 +31,6 @@ public class MobsInstaller : MonoInstaller
 
         Container.BindInterfacesAndSelfTo<MobSpawner>()
             .AsSingle()
-            .WithArguments(mobSpawnerSettings, poolParent);
+            .WithArguments(mobSpawnerSettings, poolParent, RoomIndex);
     }
 }

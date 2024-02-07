@@ -6,6 +6,7 @@ using Zenject;
 
 public class MobModel : IUnitModel
 {
+    public int RoomIndex { get; set; }
     public UnitPresenter Target { get; set; }
     public Transform Transform { get; }
     public IMovement Movement { get; }
@@ -19,6 +20,12 @@ public class MobModel : IUnitModel
     public Team Team => Team.Ally;
 
     public bool IsActive { get; set; }
+    public bool IsDeathFired  { get; set; }
+
+    public UnitView UnitView
+    {
+        get;
+    }
 
     public MobModel(
         IWeaponPresenter weapon,
@@ -31,10 +38,11 @@ public class MobModel : IUnitModel
         Health = health;
         Weapon = weapon;
 
-        Effects = new List<IEffectPresenter>();
         Transform = transform;
-        IsActive = false;
         SignalBus = signalBus;
+
+        Effects = new List<IEffectPresenter>();
+        UnitView = Transform.GetComponent<UnitView>();
     }
 }
 

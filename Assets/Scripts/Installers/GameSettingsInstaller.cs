@@ -17,23 +17,6 @@ namespace Installers
             Container
                 .BindInstance(playerMS)
                 .IfNotBound();
-
-            BindLevelProgression();
-        }
-
-        private void BindLevelProgression()
-        {
-            Container
-                .Bind<RoomProgressionService>()
-                .AsSingle();
-            Container
-                .BindSignal<SignalOnPlayerDeath>()
-                .ToMethod<RoomProgressionService>(x => x.PlayerDeath)
-                .FromResolve();
-            Container
-                .BindSignal<SignalOnEnemyDeath>()
-                .ToMethod<RoomProgressionService>(x => x.EnemyDeath)
-                .FromResolve();
         }
 
         private void BindSignals()
@@ -51,6 +34,7 @@ namespace Installers
             Container.DeclareSignal<SignalOnAttack>();
 
             Container.DeclareSignal<SignalOnProgressionChange>();
+            Container.DeclareSignal<SignalOnRoomReset>();
         }
     }
 }

@@ -10,21 +10,23 @@ using Zenject;
 
 namespace Unit
 {
-    public class MobSpawner : IInitializable
+    public class MobSpawner : IInitializable, IRoomResettable
     {
         private readonly MobView.Factory factory;
         private readonly MobSpawnerSettings settings;
         private readonly ISpawnManager spawnManager;
         private readonly CustomPool<MobView> pool;
         private readonly Transform parent;
+        private readonly int roomIndex;
 
-        public MobSpawner(MobView.Factory factory, MobSpawnerSettings settings, ISpawnManager spawnManager, CustomPool<MobView> pool, Transform parent)
+        public MobSpawner(MobView.Factory factory, MobSpawnerSettings settings, ISpawnManager spawnManager, CustomPool<MobView> pool, Transform parent, int roomIndex)
         {
             this.factory = factory;
             this.settings = settings;
             this.spawnManager = spawnManager;
             this.pool = pool;
             this.parent = parent;
+            this.roomIndex = roomIndex;
         }
 
         public void Initialize()
@@ -32,12 +34,22 @@ namespace Unit
             Spawn();
         }
 
-        public void Spawn()
+        public async void Spawn()
         {
+            await Task.Delay(1000);
+
             for (int i = 0; i < settings.SpawnCount; i++)
             {
                 MobView view = Create();
                 SetStartSettings(view);
+            }
+        }
+
+        public void Reset(SignalOnRoomReset signal)
+        {
+            if (this.roomIndex == signal.RoomIndex)
+            {
+                Spawn();
             }
         }
 
@@ -59,6 +71,7 @@ namespace Unit
             view.transform.position = randomPosition + settings.StartPoint.position;
             view.transform.SetParent(parent);
             view.gameObject.SetActive(true);
+
             view.OnDeath += Release;
         }
 
@@ -67,7 +80,7 @@ namespace Unit
             member.gameObject.SetActive(false);
             member.OnDeath -= Release;
 
-            var id = member.GetID();
+            var id = member.GetPoolID();
             pool.Release(id, (MobView)member);
         }
     }

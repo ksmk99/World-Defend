@@ -7,6 +7,7 @@ using System;
 
 public class PlayerInstaller : MonoInstaller<PlayerInstaller>
 {
+    [SerializeField] private int RoomIndex = 1;
     [Header("Settings")]
     [SerializeField] private Settings settings;
     [SerializeField] private HealthSettings healthSettings;

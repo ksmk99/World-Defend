@@ -14,7 +14,7 @@ namespace Unit
                 float distance = (position - enemies[i].transform.position).sqrMagnitude;
                 if (distance <= minDistance && enemies[i].TryGetComponent(out UnitView view))
                 {
-                    if (view.GetTeam() != team)
+                    if (view.GetPresenter().Team != team)
                     {
                         minDistance = distance;
                         result = view;

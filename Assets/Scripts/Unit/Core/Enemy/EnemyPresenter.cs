@@ -6,20 +6,16 @@ public class EnemyPresenter : UnitPresenter
     public EnemyPresenter(EnemyModel model, EnemyView view)
     {
         this.model = model;
-        //this.view = view;
 
         view.OnRespawn += Respawn;
-        view.OnTryAddEffects += AddEffects;
-        view.OnPresenterCall += () => this;
+
+        model.Health.OnDeath += OnDeath; 
     }
 
     public override void OnDeath()
     {
-        if (model.Health.IsDead())
-        {
-            Transform.GetComponent<UnitView>().Death();
-            model.SignalBus.TryFire<SignalOnEnemyDeath>();
-        }
+        model.SignalBus.TryFire(new SignalOnEnemyDeath(model.RoomIndex));
+        Transform.GetComponent<UnitView>().Death();
     }
 
     public override void SetPlayer(UnitPresenter presenter)

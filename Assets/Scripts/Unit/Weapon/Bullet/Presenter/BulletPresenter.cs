@@ -27,7 +27,8 @@ namespace Unit.Bullet
         {
             if (other.TryGetComponent<UnitView>(out var view))
             {
-                var isSuccess = view.TryAddEffects(model.RuntimeSettings.Effects, model.RuntimeSettings.Team);
+                UnitPresenter presenter = view.GetPresenter();
+                var isSuccess = presenter.AddEffects(model.RuntimeSettings.Effects, model.RuntimeSettings.Team);
                 model.CanCollide = !isSuccess;
             }
             else

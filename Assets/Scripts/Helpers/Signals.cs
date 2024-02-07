@@ -21,11 +21,34 @@ namespace Helpers
 
     #region Death
     public interface ISignalOnDeath { }
-    public class SignalOnPlayerDeath : ISignalOnDeath { }
-    public class SignalOnEnemyDeath : ISignalOnDeath { }
+    public class SignalOnPlayerDeath : ISignalOnDeath
+    {
+        public int RoomIndex { get; }
+
+        public SignalOnPlayerDeath(int roomIndex)
+        {
+            RoomIndex = roomIndex;
+        }
+    }
+
+    public class SignalOnEnemyDeath : ISignalOnDeath
+    {
+        public int RoomIndex { get; }
+
+        public SignalOnEnemyDeath(int roomIndex)
+        {
+            RoomIndex = roomIndex;
+        }
+    }
 
     public class SignalOnUnitDeath
     {
+        public int RoomIndex { get; }
+
+        public SignalOnUnitDeath(int roomIndex)
+        {
+            RoomIndex = roomIndex;
+        }
     }
     #endregion
 
@@ -61,6 +84,16 @@ namespace Helpers
         }
     }
     #endregion
+
+    public class SignalOnRoomReset
+    {
+        public int RoomIndex { get; }
+
+        public SignalOnRoomReset(int roomIndex)
+        {
+            RoomIndex = roomIndex;
+        }
+    }
 
     public class SignalOnMove
     {

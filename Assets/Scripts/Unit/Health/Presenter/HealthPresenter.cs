@@ -12,6 +12,8 @@ namespace Unit
         private readonly HealthView view;
         private readonly HealthModel model;
 
+        public event Action OnDeath;
+
         public HealthPresenter(HealthView view, HealthModel model, SignalBus signalBus)
         {
             this.view = view;
@@ -27,6 +29,11 @@ namespace Unit
 
         public void Tick()
         {
+            if(model.IsDead)
+            {
+                return;
+            }
+
             model.Follower.Update(view, model.IsDead);
             AutoHeal();
         }
@@ -60,7 +67,7 @@ namespace Unit
             {
                 model.IsDead = true;
                 model.Follower.Disable(view);
-                signalBus.TryFire<SignalOnUnitDeath>();
+                OnDeath?.Invoke();
             }
         }
 

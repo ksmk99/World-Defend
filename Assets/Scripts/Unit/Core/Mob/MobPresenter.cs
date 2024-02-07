@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,16 @@ public class MobPresenter : UnitPresenter
     {
         this.model = model; 
         mobModel = model;
+
+        model.Health.OnDeath += OnDeath;
+    }
+
+    public override void OnDeath()
+    {
+        model.Health.OnDeath -= OnDeath;
+
+        Transform.GetComponent<UnitView>().Death();
+        model.SignalBus.TryFire(new SignalOnUnitDeath(model.RoomIndex));
     }
 
     public override void SetPlayer(UnitPresenter presenter)

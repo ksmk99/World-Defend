@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Helpers;
+using System;
 using System.Collections.Generic;
 using Unit;
 using UnityEngine;
@@ -8,38 +9,38 @@ public abstract class UnitPresenter : ITickable
 {
     public Transform Transform => model.Transform;
     public Team Team => model.Team;
+    public int RoomIndex => model.RoomIndex;    
 
     protected IUnitModel model;
 
     public virtual void Tick()
     {
-        if (!model.IsActive)
+        var isDead = model.Health.IsDead();
+        if (isDead)
         {
+            model.UnitView.Death();
             return;
         }
-
-        var isDead = model.Health.IsDead();
-        model.Weapon.Update(model.Transform, isDead, model.Team);
-        model.Movement.Move(isDead, model.Weapon.GetTarget());
 
         for (var i = 0; i < model.Effects.Count; i++)
         {
             model.Effects[i].Update();
         }
+
+        if (!model.IsActive)
+        {
+            return;
+        }
+
+        model.Weapon.Update(model.Transform, isDead, model.Team);
+        model.Movement.Move(isDead, model.Weapon.GetTarget());
     }
 
-    public virtual void OnDeath()
-    {
-        if (model.Health.IsDead())
-        {
-            Transform.GetComponent<UnitView>().Death();
-        }
-    }
+    public abstract void OnDeath();
 
     public void Respawn()
     {
         model.Health.Reset();
-        model.IsActive = true;
         model.Weapon.Reset();
     }
 
@@ -69,5 +70,10 @@ public abstract class UnitPresenter : ITickable
     public virtual void SetPlayer(UnitPresenter playerPresenter)
     {
 
+    }
+
+    public void SetRoom(int roomIndex)
+    {
+        model.RoomIndex = roomIndex;
     }
 }
