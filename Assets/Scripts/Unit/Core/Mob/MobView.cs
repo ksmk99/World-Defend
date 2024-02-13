@@ -17,8 +17,6 @@ public class MobView : UnitView
 {
     public MobType Type;
 
-    public override Action<UnitView> OnDeath { get; set; }
-
     [Inject]
     public void Init(MobPresenter presenter)
     {
@@ -27,7 +25,7 @@ public class MobView : UnitView
 
     public override void Death()
     {
-        OnDeath?.Invoke(this);
+        gameObject.SetActive(false);
     }
 
     public override int GetPoolID()

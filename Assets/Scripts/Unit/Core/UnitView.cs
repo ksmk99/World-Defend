@@ -8,8 +8,6 @@ public abstract class UnitView : MonoBehaviour, IRoomResettable
 {
     protected UnitPresenter presenter;
 
-    public abstract Action<UnitView> OnDeath { get; set; }
-
     public abstract int GetPoolID();
     public abstract void Death();
 
@@ -28,7 +26,7 @@ public abstract class UnitView : MonoBehaviour, IRoomResettable
     {
         if (presenter.RoomIndex == signal.RoomIndex)
         {
-            OnDeath?.Invoke(this);
+
         }
     }
 }

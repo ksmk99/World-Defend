@@ -39,6 +39,15 @@ public class EnemiesInstaller : AUnitInstaller
             .ToMethod<EnemySpawner>(x => x.Reset)
             .FromResolve();
 
+        Container
+          .BindSignal<SignalOnEnemyDeath>()
+          .ToMethod<EnemySpawner>(x => x.Release)
+          .FromResolve();
+        Container
+            .BindSignal<SignalOnEnemyReset>()
+            .ToMethod<EnemySpawner>(x => x.Release)
+            .FromResolve();
+
 
         BindLevelProgression();
     }

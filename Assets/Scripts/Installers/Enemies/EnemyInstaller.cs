@@ -55,7 +55,13 @@ public class EnemyInstaller : MonoInstaller<EnemyInstaller>
         Container.Bind<EnemyModel>().AsSingle();
         Container.BindInterfacesAndSelfTo<EnemyPresenter>().AsSingle();
 
-        Container.BindSignal<SignalOnUnitDeath>().ToMethod<EnemyPresenter>(x => x.OnDeath).FromResolve();
+        Container.BindSignal<SignalOnMobDeath>()
+            .ToMethod<EnemyPresenter>(x => x.Death)
+            .FromResolve();
+
+        Container.BindSignal<SignalOnRoomReset>()
+            .ToMethod<EnemyPresenter>(x => x.Reset)
+            .FromResolve();
     }
 }
 

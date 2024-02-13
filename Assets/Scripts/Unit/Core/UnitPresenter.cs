@@ -36,7 +36,7 @@ public abstract class UnitPresenter : ITickable
         model.Movement.Move(isDead, model.Weapon.GetTarget());
     }
 
-    public abstract void OnDeath();
+    public abstract void Death();
 
     public void Respawn()
     {
@@ -76,4 +76,6 @@ public abstract class UnitPresenter : ITickable
     {
         model.RoomIndex = roomIndex;
     }
+
+    public abstract void Reset(SignalOnRoomReset signal);
 }

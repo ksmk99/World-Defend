@@ -60,11 +60,19 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
             .To<AnimationsController>()
             .AsSingle()
             .WithArguments(settings.Animator, settings.Transform);
+
         Container.BindSignal<SignalOnMove>().ToMethod<IAnimationsController>(x => x.SetMovement).FromResolve();
         Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
 
 
-        Container.BindSignal<SignalOnUnitDeath>().ToMethod<PlayerPresenter>(x => x.OnDeath).FromResolve();
+        Container
+            .BindSignal<SignalOnPlayerDeath>()
+            .ToMethod<PlayerPresenter>(x => x.Death)
+            .FromResolve();
+        Container
+            .BindSignal<SignalOnRoomReset>()
+            .ToMethod<PlayerPresenter>(x => x.Reset)
+            .FromResolve();
     }
 
     [Serializable]

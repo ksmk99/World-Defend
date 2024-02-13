@@ -53,7 +53,7 @@ namespace Unit
             if (this.roomIndex == signal.RoomIndex)
             {
                 spawnCount = 0;
-                nextSpawnTime = Time.time;
+                nextSpawnTime = Time.time + 3f;
             }
         }
 
@@ -77,18 +77,23 @@ namespace Unit
 
             var presenter = enemy.GetPresenter();
             presenter.SetRoom(roomIndex);
-
-            enemy.OnDeath += Release;
             enemy.Respawn();
         }
 
-        public void Release(UnitView member)
+        public void Release(SignalOnEnemyReset signal)
         {
-            member.gameObject.SetActive(false);
+            Release(new SignalOnEnemyDeath(signal.RoomIndex, signal.View));
+        }
 
-            var id = member.GetPoolID();
-            pool.Release(id, (EnemyView)member);
-            member.OnDeath -= Release;
+        public void Release(SignalOnEnemyDeath signal)
+        {
+            if (signal.RoomIndex == roomIndex)
+            {
+                signal.View.gameObject.SetActive(false);
+
+                var id = signal.View.GetPoolID();
+                pool.Release(id, (EnemyView)signal.View);
+            }
         }
     }
 }

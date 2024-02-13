@@ -54,16 +54,22 @@ namespace Unit
             view.transform.SetParent(parent);
             view.gameObject.SetActive(true);
             view.GetPresenter().SetRoom(roomIndex); 
-            view.OnDeath += Release;
         }
 
-        public void Release(UnitView member)
+        public void Release(SignalOnPlayerDeath signal)
         {
-            member.gameObject.SetActive(false);
-            member.OnDeath -= Release;
+            if (signal.RoomIndex == roomIndex)
+            {
+                signal.View.gameObject.SetActive(false);
 
-            var id = member.GetPoolID();
-            pool.Release(id, (PlayerView)member);
+                var id = signal.View.GetPoolID();
+                pool.Release(id, (PlayerView)signal.View);
+            }
+        }
+
+        public void Release(SignalOnPlayerReset signal)
+        {
+            Release(new SignalOnPlayerDeath(signal.RoomIndex, signal.View));
         }
 
         public void Reset(SignalOnRoomReset signal)

@@ -30,5 +30,21 @@ public class PlayerSpawnerInstaller : AUnitInstaller
         Container.BindInterfacesAndSelfTo<PlayerSpawner>()
             .AsSingle()
             .WithArguments(playerSpawnerSettings, poolParent, RoomIndex);
+
+
+        Container
+            .BindSignal<SignalOnRoomReset>()
+            .ToMethod<PlayerSpawner>(x => x.Reset)
+            .FromResolve();
+        Container
+            .BindSignal<SignalOnPlayerReset>()
+            .ToMethod<PlayerSpawner>(x => x.Release)
+            .FromResolve();
+
+
+        Container
+          .BindSignal<SignalOnPlayerDeath>()
+          .ToMethod<PlayerSpawner>(x => x.Release)
+          .FromResolve();
     }
 }

@@ -36,7 +36,7 @@ namespace Unit
 
         public async void Spawn()
         {
-            await Task.Delay(1000);
+            await Task.Delay(3000);
 
             for (int i = 0; i < settings.SpawnCount; i++)
             {
@@ -71,17 +71,23 @@ namespace Unit
             view.transform.position = randomPosition + settings.StartPoint.position;
             view.transform.SetParent(parent);
             view.gameObject.SetActive(true);
-
-            view.OnDeath += Release;
         }
 
-        public void Release(UnitView member)
+        public void Release(SignalOnMobDeath signal)
         {
-            member.gameObject.SetActive(false);
-            member.OnDeath -= Release;
+            if (signal.RoomIndex == roomIndex)
+            {
+                signal.View.gameObject.SetActive(false);
 
-            var id = member.GetPoolID();
-            pool.Release(id, (MobView)member);
+                var id = signal.View.GetPoolID();
+                pool.Release(id, (MobView)signal.View);
+                Debug.Log("Release");
+            }
+        }
+
+        public void Release(SignalOnMobReset signal)
+        {
+            Release(new SignalOnMobDeath(signal.RoomIndex, signal.View));
         }
     }
 }

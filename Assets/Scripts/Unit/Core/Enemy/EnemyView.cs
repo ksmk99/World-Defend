@@ -10,8 +10,6 @@ public class EnemyView : UnitView
     public NavMeshAgent Agent;
     public EnemyType Type;
 
-    public override Action<UnitView> OnDeath { get; set; }
-
     public Action OnRespawn;
 
     [Inject]
@@ -27,7 +25,6 @@ public class EnemyView : UnitView
 
     public override void Death()
     {  
-        OnDeath?.Invoke(this);
         gameObject.SetActive(false);
     }
 

@@ -16,15 +16,20 @@ public class MobPresenter : UnitPresenter
         this.model = model; 
         mobModel = model;
 
-        model.Health.OnDeath += OnDeath;
+        model.Health.OnDeath += Death;
     }
 
-    public override void OnDeath()
+    public override void Death()
     {
-        model.Health.OnDeath -= OnDeath;
+        model.Health.OnDeath -= Death;
 
         Transform.GetComponent<UnitView>().Death();
-        model.SignalBus.TryFire(new SignalOnUnitDeath(model.RoomIndex));
+        model.SignalBus.TryFire(new SignalOnMobDeath(model.RoomIndex, model.UnitView));
+    }
+
+    public override void Reset(SignalOnRoomReset signal)
+    {
+        model.SignalBus.TryFire(new SignalOnMobReset(model.RoomIndex, model.UnitView));
     }
 
     public override void SetPlayer(UnitPresenter presenter)

@@ -21,33 +21,69 @@ namespace Helpers
 
     #region Death
     public interface ISignalOnDeath { }
-    public class SignalOnPlayerDeath : ISignalOnDeath
+
+    public class SignalOnDeath : ISignalOnDeath
     {
         public int RoomIndex { get; }
+        public UnitView View { get; }
 
-        public SignalOnPlayerDeath(int roomIndex)
+        public SignalOnDeath(int roomIndex, UnitView view)
         {
             RoomIndex = roomIndex;
+            View = view;
+        }
+    }
+    public class SignalOnPlayerDeath : SignalOnDeath
+    {
+        public SignalOnPlayerDeath(int roomIndex, UnitView view) : base(roomIndex, view)
+        {
         }
     }
 
-    public class SignalOnEnemyDeath : ISignalOnDeath
+    public class SignalOnEnemyDeath : SignalOnDeath
     {
-        public int RoomIndex { get; }
-
-        public SignalOnEnemyDeath(int roomIndex)
+        public SignalOnEnemyDeath(int roomIndex, UnitView view) : base(roomIndex, view)
         {
-            RoomIndex = roomIndex;
         }
     }
 
-    public class SignalOnUnitDeath
+    public class SignalOnMobDeath : SignalOnDeath
+    {
+        public SignalOnMobDeath(int roomIndex, UnitView view) : base(roomIndex, view)
+        {
+        }
+    }
+    #endregion
+
+    #region RoomReset
+    public class SignalOnUnitReset : ISignalOnDeath
     {
         public int RoomIndex { get; }
+        public UnitView View { get; }
 
-        public SignalOnUnitDeath(int roomIndex)
+        public SignalOnUnitReset(int roomIndex, UnitView view)
         {
             RoomIndex = roomIndex;
+            View = view;
+        }
+    }
+
+    public class SignalOnPlayerReset : SignalOnUnitReset
+    {
+        public SignalOnPlayerReset(int roomIndex, UnitView view) : base(roomIndex, view)
+        {
+        }
+    }
+    public class SignalOnEnemyReset : SignalOnUnitReset
+    {
+        public SignalOnEnemyReset(int roomIndex, UnitView view) : base(roomIndex, view)
+        {
+        }
+    }
+    public class SignalOnMobReset : SignalOnUnitReset
+    {
+        public SignalOnMobReset(int roomIndex, UnitView view) : base(roomIndex, view)
+        {
         }
     }
     #endregion

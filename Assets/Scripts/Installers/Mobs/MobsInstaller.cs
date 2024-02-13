@@ -32,5 +32,19 @@ public class MobsInstaller : AUnitInstaller
         Container.BindInterfacesAndSelfTo<MobSpawner>()
             .AsSingle()
             .WithArguments(mobSpawnerSettings, poolParent, RoomIndex);
+
+        Container
+            .BindSignal<SignalOnRoomReset>()
+            .ToMethod<MobSpawner>(x => x.Reset)
+            .FromResolve();
+
+        Container
+          .BindSignal<SignalOnMobDeath>()
+          .ToMethod<MobSpawner>(x => x.Release)
+          .FromResolve();
+        Container
+            .BindSignal<SignalOnMobReset>()
+            .ToMethod<MobSpawner>(x => x.Release)
+            .FromResolve();
     }
 }

@@ -4,8 +4,7 @@ using Unit;
 using Zenject;
 
 public class PlayerView : UnitView
-{
-    public override Action<UnitView> OnDeath { get; set; }
+{ 
 
     [Inject]
     public void Init(PlayerPresenter presenter)

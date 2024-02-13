@@ -58,10 +58,18 @@ public class MobInstaller : MonoInstaller<MobInstaller>
             .To<AnimationsController>()
             .AsSingle()
             .WithArguments(animator);
+
         Container.BindSignal<SignalOnMove>().ToMethod<IAnimationsController>(x => x.SetMovement).FromResolve();
         Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
 
-        Container.BindSignal<SignalOnUnitDeath>().ToMethod<MobPresenter>(x => x.OnDeath).FromResolve();
+        Container
+            .BindSignal<SignalOnMobDeath>()
+            .ToMethod<MobPresenter>(x => x.Death)
+            .FromResolve();
+        Container
+            .BindSignal<SignalOnRoomReset>()
+            .ToMethod<MobPresenter>(x => x.Reset)
+            .FromResolve();
     }
 }
 

@@ -9,14 +9,17 @@ public class PlayerPresenter : UnitPresenter
     {
         this.model = model;
 
-        model.Health.OnDeath += OnDeath;
+        model.Health.OnDeath += Death;
     }
 
-    public override void OnDeath()
+    public override void Death()
     {
-        model.Health.OnDeath -= OnDeath;
-
+        model.SignalBus.TryFire(new SignalOnPlayerDeath(model.RoomIndex, model.UnitView));
         model.UnitView.Death();
-        model.SignalBus.TryFire<SignalOnPlayerDeath>();
+    }
+
+    public override void Reset(SignalOnRoomReset signal)
+    {
+        model.SignalBus.TryFire(new SignalOnPlayerReset(model.RoomIndex, model.UnitView));
     }
 }
