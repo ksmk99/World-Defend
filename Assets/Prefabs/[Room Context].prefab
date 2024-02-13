@@ -1581,10 +1581,8 @@ MonoBehaviour:
     Types:
     - Prefab: {fileID: 6897901460311837676, guid: 2ec30f69a8288054b85742c5fb633ec9,
         type: 3}
-      Count: 5
     - Prefab: {fileID: 6897901460311837676, guid: 2ec30f69a8288054b85742c5fb633ec9,
         type: 3}
-      Count: 5
   poolParent: {fileID: 3810316252884218915}
 --- !u!1 &5446291519374796769
 GameObject:
@@ -1632,17 +1630,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RoomIndex: 1
   enemiesSpawnerSettings:
-    Count: 1
-    SpawnRateMin: 2
-    SpawnRateMax: 2
+    Count: 3
+    SpawnRateMin: 1
+    SpawnRateMax: 5
     <Offset>k__BackingField: {x: 15, y: 15, z: 15}
     <StartPoint>k__BackingField: {fileID: 7895053760647252996}
   spawnerSettings:
     Types:
     - Prefab: {fileID: 6836847249817977, guid: eaf9cd4a669739d47ad3b691157b5958, type: 3}
-      Count: 15
     - Prefab: {fileID: 6836847249817977, guid: b23af1e288b8ccc40b1ba9cfd4f560c5, type: 3}
-      Count: 20
   poolParent: {fileID: 3810316254167011161}
   healthParentFlag: {fileID: 3810316252490150995}
 --- !u!1 &6423928186642950673
@@ -1756,5 +1752,4 @@ MonoBehaviour:
   spawnerSettings:
     Types:
     - Prefab: {fileID: 1903814587, guid: c695e60766f24dc488a96917d7f334ee, type: 3}
-      Count: 0
   poolParent: {fileID: 3810316252487923840}

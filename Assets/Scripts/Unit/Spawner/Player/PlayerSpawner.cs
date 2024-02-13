@@ -1,4 +1,5 @@
 ﻿using Helpers;
+using System.Threading.Tasks;
 using Unit;
 using UnityEngine;
 using Zenject;
@@ -72,10 +73,12 @@ namespace Unit
             Release(new SignalOnPlayerDeath(signal.RoomIndex, signal.View));
         }
 
-        public void Reset(SignalOnRoomReset signal)
+        public async void Reset(SignalOnRoomReset signal)
         {
             if (this.roomIndex == signal.RoomIndex)
             {
+                await Task.Delay(3000);
+
                 Spawn();
             }
         }

@@ -9,14 +9,17 @@ public class UnitActivator : MonoBehaviour
 {
     [SerializeField] private UnitView mobView;
 
+    public void Enable()
+    {
+        GetComponent<Collider>().enabled = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        return;
-
         if (other.TryGetComponent<PlayerView>(out var player))
         {
             mobView.Activate(player);
-            Destroy(gameObject);
+            GetComponent<Collider>().enabled = false;   
         }
     }
 }

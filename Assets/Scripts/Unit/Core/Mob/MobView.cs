@@ -25,6 +25,7 @@ public class MobView : UnitView
 
     public override void Death()
     {
+        GetComponentInChildren<UnitActivator>().Enable();
         gameObject.SetActive(false);
     }
 

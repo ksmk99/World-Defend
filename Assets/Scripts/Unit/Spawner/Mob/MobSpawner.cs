@@ -36,7 +36,7 @@ namespace Unit
 
         public async void Spawn()
         {
-            await Task.Delay(3000);
+            //await Task.Delay(3000);
 
             for (int i = 0; i < settings.SpawnCount; i++)
             {
@@ -45,10 +45,12 @@ namespace Unit
             }
         }
 
-        public void Reset(SignalOnRoomReset signal)
+        public async void Reset(SignalOnRoomReset signal)
         {
             if (this.roomIndex == signal.RoomIndex)
             {
+                await Task.Delay(3000);
+
                 Spawn();
             }
         }
@@ -58,8 +60,8 @@ namespace Unit
         {
             MobView prefab = (MobView)spawnManager.GetPrefab();
             var id = (int)prefab.Type;
-            MobView enemy = pool.Create(id, prefab, factory.Create);
-            return enemy;
+            MobView mob = pool.Create(id, prefab, factory.Create);
+            return mob;
         }
 
         private void SetStartSettings(MobView view)
@@ -71,6 +73,8 @@ namespace Unit
             view.transform.position = randomPosition + settings.StartPoint.position;
             view.transform.SetParent(parent);
             view.gameObject.SetActive(true);
+
+            view.GetPresenter().SetRoom(roomIndex);
         }
 
         public void Release(SignalOnMobDeath signal)
@@ -81,7 +85,6 @@ namespace Unit
 
                 var id = signal.View.GetPoolID();
                 pool.Release(id, (MobView)signal.View);
-                Debug.Log("Release");
             }
         }
 

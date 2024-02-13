@@ -53,10 +53,11 @@ namespace Gameplay
 
         private void RefreshRoom()
         {
-            Debug.Log("Room Reset");
             signalBus.TryFire(new SignalOnRoomReset(roomIndex));
             killCount = 0;
             isFinish = false;
+
+            Debug.Log("Room Reset");
         }
 
         private void SendProgressionSignal()

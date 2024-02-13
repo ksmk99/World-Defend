@@ -20,6 +20,11 @@ public class PlayerPresenter : UnitPresenter
 
     public override void Reset(SignalOnRoomReset signal)
     {
+        if (model.Health.IsDead())
+        {
+            return;
+        }
+     
         model.SignalBus.TryFire(new SignalOnPlayerReset(model.RoomIndex, model.UnitView));
     }
 }

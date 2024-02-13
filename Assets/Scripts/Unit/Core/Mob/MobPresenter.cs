@@ -13,7 +13,7 @@ public class MobPresenter : UnitPresenter
 
     public MobPresenter(MobModel model)
     {
-        this.model = model; 
+        this.model = model;
         mobModel = model;
 
         model.Health.OnDeath += Death;
@@ -21,14 +21,20 @@ public class MobPresenter : UnitPresenter
 
     public override void Death()
     {
-        model.Health.OnDeath -= Death;
-
-        Transform.GetComponent<UnitView>().Death();
+        model.IsActive = false;
+        model.UnitView.Death();
         model.SignalBus.TryFire(new SignalOnMobDeath(model.RoomIndex, model.UnitView));
     }
 
     public override void Reset(SignalOnRoomReset signal)
     {
+        if (model.Health.IsDead())
+        {
+            return;
+        }
+
+        model.IsActive = false;
+        model.UnitView.Death();
         model.SignalBus.TryFire(new SignalOnMobReset(model.RoomIndex, model.UnitView));
     }
 
@@ -41,7 +47,7 @@ public class MobPresenter : UnitPresenter
 
     public Transform GetTarget()
     {
-        if(mobModel.Target == null)
+        if (mobModel.Target == null)
         {
             throw new Exception("Target is not set");
         }

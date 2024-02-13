@@ -1,5 +1,6 @@
 ﻿using Helpers;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
@@ -42,18 +43,21 @@ namespace Unit
                 EnemyView enemy = Create();
                 SetStartSettings(enemy);
 
-                spawnCount++;
                 var delay = Random.Range(settings.SpawnRateMin, settings.SpawnRateMax);
-                nextSpawnTime = Time.time + delay;
+                nextSpawnTime = Time.time + 0.1f;
+                spawnCount++;// + delay;
+                Debug.Log("Spawn");
             }
         }
 
-        public void Reset(SignalOnRoomReset signal)
+        public async void Reset(SignalOnRoomReset signal)
         {
             if (this.roomIndex == signal.RoomIndex)
             {
+                await Task.Delay(3000);
+
                 spawnCount = 0;
-                nextSpawnTime = Time.time + 3f;
+                nextSpawnTime = Time.time;
             }
         }
 

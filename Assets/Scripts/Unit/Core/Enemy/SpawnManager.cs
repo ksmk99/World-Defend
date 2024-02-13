@@ -34,6 +34,5 @@ namespace Unit
     public struct SpawnType
     {
         public UnitView Prefab;
-        public int Count;
     }
 }
