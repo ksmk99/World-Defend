@@ -29,12 +29,14 @@ namespace Unit.Bullet
             {
                 UnitPresenter presenter = view.GetPresenter();
                 var isSuccess = presenter.AddEffects(model.RuntimeSettings.Effects, model.RuntimeSettings.Team);
-                model.CanCollide = !isSuccess;
+                if (!isSuccess)
+                {
+                    return;
+                }
             }
-            else
-            {
-                model.CanCollide = false;
-            }
+
+            model.CanCollide = false;
+            Dispose();
         }
 
         public void Tick()

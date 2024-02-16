@@ -21,24 +21,50 @@ public class EnemyInstaller : MonoInstaller<EnemyInstaller>
     {
         Container.Bind<EnemyView>().FromComponentOnRoot().AsSingle();
 
+        BindMovement();
+        BindHealth();
+        BindWeapon();
+
+        Container.Bind<EnemyModel>().AsSingle();
+        Container.BindInterfacesAndSelfTo<EnemyPresenter>().AsSingle();
+
+        BindSignals();
+    }
+
+    private void BindMovement()
+    {
         Container.Bind<Transform>().FromComponentOnRoot().AsSingle();
         Container.Bind<IMovement>().To<EnemyMovement>().AsSingle();
 
         Container.BindInstance(enemyMovement).WhenInjectedInto<EnemyMovement>();
+    }
 
+    private void BindSignals()
+    {
+        Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
+        Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
+        Container.BindSignal<SignalOnMobDeath>()
+            .ToMethod<EnemyPresenter>(x => x.Death)
+            .FromResolve();
 
+        Container.BindSignal<SignalOnRoomReset>()
+            .ToMethod<EnemyPresenter>(x => x.Reset)
+            .FromResolve();
+    }
+
+    private void BindHealth()
+    {
         Container.Bind<HealthModel>().AsTransient().WithArguments(healthSettings);
         Container.Bind<HealthFollower>().AsSingle();
         Container.BindInterfacesAndSelfTo<HealthPresenter>().AsSingle();
         Container.BindInterfacesAndSelfTo<HealthView>()
             .FromComponentInNewPrefab(healthPrefab)
             .AsSingle()
-            .WithArguments(healthBarIcon); 
+            .WithArguments(healthBarIcon);
+    }
 
-
-        Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
-        Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
-
+    private void BindWeapon()
+    {
         Container.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
         .FromMonoPoolableMemoryPool(
         x => x.WithInitialSize(weaponSettings.BulletCount)
@@ -51,17 +77,6 @@ public class EnemyInstaller : MonoInstaller<EnemyInstaller>
             .To(weaponSettings.WeaponType)
             .AsSingle()
             .WhenInjectedInto<EnemyModel>();
-
-        Container.Bind<EnemyModel>().AsSingle();
-        Container.BindInterfacesAndSelfTo<EnemyPresenter>().AsSingle();
-
-        Container.BindSignal<SignalOnMobDeath>()
-            .ToMethod<EnemyPresenter>(x => x.Death)
-            .FromResolve();
-
-        Container.BindSignal<SignalOnRoomReset>()
-            .ToMethod<EnemyPresenter>(x => x.Reset)
-            .FromResolve();
     }
 }
 

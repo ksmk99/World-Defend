@@ -14,20 +14,17 @@ public class EnemyPresenter : UnitPresenter
 
     public override void Death()
     {
+        base.Death();
+
         model.IsActive = false;
-        model.UnitView.Death();
         model.SignalBus.TryFire(new SignalOnEnemyDeath(model.RoomIndex, model.UnitView));
     }
 
     public override void Reset(SignalOnRoomReset signal)
     {
-        if (model.Health.IsDead())
-        {
-            return;
-        }
+        base.Reset(signal);
 
         model.IsActive = false;
-        model.UnitView.Death();
         model.SignalBus.TryFire(new SignalOnEnemyReset(model.RoomIndex, model.UnitView));
 
     }

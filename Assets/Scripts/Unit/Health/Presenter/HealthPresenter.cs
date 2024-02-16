@@ -109,5 +109,10 @@ namespace Unit
                 model.NextHealTime = Time.time + model.Settings.HealRate;
             }
         }
+
+        public void Disable()
+        {
+            model.Follower.Disable(view);
+        }
     }
 }

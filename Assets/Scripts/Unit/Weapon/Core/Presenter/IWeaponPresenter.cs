@@ -10,5 +10,6 @@ namespace Unit
         void Update(Transform transform, bool isDead, Team team);
         void Reset();
         Transform GetTarget();
+        void Disable();
     }
 }

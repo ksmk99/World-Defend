@@ -46,13 +46,13 @@ GameObject:
   - component: {fileID: 3810316252095254101}
   - component: {fileID: 3810316252095254100}
   - component: {fileID: 3810316252095254099}
-  - component: {fileID: 3810316252095254102}
-  m_Layer: 0
+  - component: {fileID: 983109276}
+  m_Layer: 6
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3810316252095254098
 Transform:
@@ -63,7 +63,7 @@ Transform:
   m_GameObject: {fileID: 3810316252095254097}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 25.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 52}
+  m_LocalScale: {x: 1, y: 10, z: 52}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3810316252288583844}
@@ -132,7 +132,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &3810316252095254102
+--- !u!54 &983109276
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -760,13 +760,13 @@ GameObject:
   - component: {fileID: 3810316253267492646}
   - component: {fileID: 3810316253267492645}
   - component: {fileID: 3810316253267492644}
-  - component: {fileID: 3810316253267492647}
-  m_Layer: 0
+  - component: {fileID: 68636164}
+  m_Layer: 6
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3810316253267492643
 Transform:
@@ -777,7 +777,7 @@ Transform:
   m_GameObject: {fileID: 3810316253267492642}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 25.5}
-  m_LocalScale: {x: 52, y: 2, z: 1}
+  m_LocalScale: {x: 52, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3810316252288583844}
@@ -846,7 +846,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &3810316253267492647
+--- !u!54 &68636164
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1183,13 +1183,13 @@ GameObject:
   - component: {fileID: 3810316254154598452}
   - component: {fileID: 3810316254154598451}
   - component: {fileID: 3810316254154598450}
-  - component: {fileID: 3810316254154598453}
-  m_Layer: 0
+  - component: {fileID: 1434937110}
+  m_Layer: 6
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3810316254154598449
 Transform:
@@ -1200,7 +1200,7 @@ Transform:
   m_GameObject: {fileID: 3810316254154598448}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -25.5}
-  m_LocalScale: {x: 52, y: 2, z: 1}
+  m_LocalScale: {x: 52, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3810316252288583844}
@@ -1269,7 +1269,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &3810316254154598453
+--- !u!54 &1434937110
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1425,13 +1425,13 @@ GameObject:
   - component: {fileID: 3810316254217845314}
   - component: {fileID: 3810316254217845313}
   - component: {fileID: 3810316254217845312}
-  - component: {fileID: 3810316254217845315}
-  m_Layer: 0
+  - component: {fileID: 805410276}
+  m_Layer: 6
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3810316254217845327
 Transform:
@@ -1442,7 +1442,7 @@ Transform:
   m_GameObject: {fileID: 3810316254217845326}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -25.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 52}
+  m_LocalScale: {x: 1, y: 10, z: 52}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3810316252288583844}
@@ -1511,7 +1511,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &3810316254217845315
+--- !u!54 &805410276
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

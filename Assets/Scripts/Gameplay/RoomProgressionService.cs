@@ -35,8 +35,6 @@ namespace Gameplay
 
             killCount++;
 
-            Debug.Log("KILL " + killCount + " " + roomIndex);
-
             SendProgressionSignal();
             CheckWinCondition();
         }
@@ -56,8 +54,6 @@ namespace Gameplay
             signalBus.TryFire(new SignalOnRoomReset(roomIndex));
             killCount = 0;
             isFinish = false;
-
-            Debug.Log("Room Reset");
         }
 
         private void SendProgressionSignal()

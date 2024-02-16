@@ -10,5 +10,6 @@ namespace Unit
         void Damage(int count);
         bool IsDead();
         void Reset();
+        void Disable();
     }
 }

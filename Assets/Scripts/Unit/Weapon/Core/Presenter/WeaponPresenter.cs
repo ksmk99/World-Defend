@@ -1,3 +1,4 @@
+using Helpers;
 using System;
 using System.Collections.Generic;
 using Unit.Bullet;
@@ -11,7 +12,7 @@ namespace Unit
 
     }
 
-    public class WeaponPresenter : IWeaponPresenter
+    public class WeaponPresenter : IWeaponPresenter, IRoomResettable
     {
         private readonly WeaponSettings settings;
         private readonly WeaponModel model;
@@ -107,8 +108,10 @@ namespace Unit
 
         private void DisposeBullet(BulletView view)
         {
-            bullets.Remove(view);
+            view.OnDispose -= DisposeBullet;
             view.transform.SetParent(model.Parent.transform);
+
+            bullets.Remove(view);
         }
 
         public void Reset()
@@ -116,6 +119,26 @@ namespace Unit
             model.ActionTimer = 0;
             model.TTL = 0;
             model.IsActing = false;
+        }
+
+        public void Disable()
+        {
+            model.ActionTimer = 0;
+            model.TTL = 0;
+            model.IsActing = false;
+
+            foreach (var bullet in bullets) 
+            {
+                bullet.OnDispose -= DisposeBullet;
+                bullet.Dispose();
+            }
+
+            bullets.Clear();
+        }
+
+        public void Reset(SignalOnRoomReset signal)
+        {
+            Disable();
         }
     }
 }
