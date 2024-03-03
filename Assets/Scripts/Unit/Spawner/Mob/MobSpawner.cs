@@ -12,6 +12,8 @@ namespace Unit
 {
     public class MobSpawner : IInitializable, IRoomResettable
     {
+        public List<UnitView> ActiveUnits = new List<UnitView>(); 
+
         private readonly MobView.Factory factory;
         private readonly MobSpawnerSettings settings;
         private readonly ISpawnManager spawnManager;
@@ -49,7 +51,7 @@ namespace Unit
         {
             if (this.roomIndex == signal.RoomIndex)
             {
-                await Task.Delay(3000);
+                await Task.Delay(1);
 
                 Spawn();
             }
@@ -75,6 +77,8 @@ namespace Unit
             view.gameObject.SetActive(true);
 
             view.GetPresenter().SetRoom(roomIndex);
+            view.GetPresenter().Respawn();
+            ActiveUnits.Add(view);  
         }
 
         public void Release(SignalOnMobDeath signal)
@@ -85,6 +89,7 @@ namespace Unit
 
                 var id = signal.View.GetPoolID();
                 pool.Release(id, (MobView)signal.View);
+                ActiveUnits.Remove((MobView)signal.View);
             }
         }
 

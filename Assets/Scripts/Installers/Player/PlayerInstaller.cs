@@ -4,6 +4,7 @@ using UnityEngine;
 using Zenject;
 using Helpers;
 using System;
+using Services;
 
 public class PlayerInstaller : MonoInstaller<PlayerInstaller>
 {
@@ -41,6 +42,9 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
             .AsSingle()
             .WithArguments(healthBarIcon);
 
+        Container.Bind<IInputService>()
+            .To<MLInputService>()
+            .AsSingle();
         Container.Bind<IMovement>().To<PlayerMovement>()
             .AsTransient()
             .WithArguments(settings.Transform)
@@ -53,6 +57,8 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
         Container.BindInterfacesAndSelfTo<PlayerView>()
             .FromComponentInHierarchy()
             .AsSingle();
+
+        BindAgent();
 
         Container.BindInterfacesAndSelfTo<AnimationData>()
             .AsSingle();
@@ -72,6 +78,37 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
         Container
             .BindSignal<SignalOnRoomReset>()
             .ToMethod<PlayerPresenter>(x => x.Reset)
+            .FromResolve();
+    }
+
+    private void BindAgent()
+    {
+        Container.BindInterfacesAndSelfTo<PlayerAgent>()
+            .FromComponentInHierarchy()
+            .AsSingle();
+        Container
+            .BindSignal<SignalOnRoomReset>()
+            .ToMethod<PlayerAgent>(x => x.RoomReset)
+            .FromResolve();
+
+        Container
+            .BindSignal<SignalOnEnemyDeath>()
+            .ToMethod<PlayerAgent>(x => x.EnemyDeath)
+            .FromResolve();
+
+        Container
+            .BindSignal<SignalOnDamage>()
+            .ToMethod<PlayerAgent>(x => x.UnitDamage)
+            .FromResolve();
+
+        Container
+            .BindSignal<SignalOnMobActivate>()
+            .ToMethod<PlayerAgent>(x => x.MobActivate)
+            .FromResolve();
+
+        Container
+            .BindSignal<SignalOnObstacleTouch>()
+            .ToMethod<PlayerAgent>(x => x.TouchBorder)
             .FromResolve();
     }
 

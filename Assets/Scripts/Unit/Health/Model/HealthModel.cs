@@ -3,7 +3,7 @@
     public class HealthModel
     {
         public HealthSettings Settings { get; private set; }
-        public HealthFollower Follower { get; private set; }    
+        public HealthFollower Follower { get; private set; }
 
         public float Health;
         public float NextHealTime;
@@ -15,6 +15,7 @@
             Settings = settings;
             Health = settings.MaxHealth;
             Follower = follower;
+
             IsDead = false;
         }
     }

@@ -10,17 +10,10 @@ public class EnemyView : UnitView
     public NavMeshAgent Agent;
     public EnemyType Type;
 
-    public Action OnRespawn;
-
     [Inject]
     public void Init(EnemyPresenter presenter)
     {
         this.presenter = presenter;
-    }
-
-    public void Respawn()
-    {
-        OnRespawn?.Invoke();
     }
 
     public override void Death()

@@ -6,12 +6,12 @@ namespace Unit
 {
     public class PlayerMovement : IMovement
     {
-        private readonly InputService inputService;
+        private readonly IInputService inputService;
         private readonly Transform transform;
         private readonly SignalBus signalBus;
         private readonly MovementSettings movementModel;
 
-        public PlayerMovement(InputService inputService, MovementSettings movementModel, Transform transform, SignalBus signalBus)
+        public PlayerMovement(IInputService inputService, MovementSettings movementModel, Transform transform, SignalBus signalBus)
         {
             this.inputService = inputService;
             this.transform = transform;

@@ -17,6 +17,7 @@ public class MobPresenter : UnitPresenter
         mobModel = model;
 
         model.Health.OnDeath += Death;
+        model.Health.OnDamage += () => model.SignalBus.TryFire(new SignalOnDamage(this, model.Team));
     }
 
     public override void Death()
@@ -40,6 +41,8 @@ public class MobPresenter : UnitPresenter
         mobModel.Target = presenter;
         mobModel.Movement.SetTarget(presenter);
         mobModel.IsActive = true;
+
+        model.SignalBus.TryFire(new SignalOnMobActivate(presenter, this));
     }
 
     public Transform GetTarget()

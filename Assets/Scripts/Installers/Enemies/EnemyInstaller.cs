@@ -43,9 +43,6 @@ public class EnemyInstaller : MonoInstaller<EnemyInstaller>
     {
         Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
         Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
-        Container.BindSignal<SignalOnMobDeath>()
-            .ToMethod<EnemyPresenter>(x => x.Death)
-            .FromResolve();
 
         Container.BindSignal<SignalOnRoomReset>()
             .ToMethod<EnemyPresenter>(x => x.Reset)

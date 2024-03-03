@@ -14,7 +14,7 @@ public class RoomsInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.BindInstance(poolParentFlag);
-        Container.Bind<InputService>()
+        Container.Bind<JoystickInputService>()
             .AsSingle()
             .WithArguments(joystick);
         Container.BindInterfacesAndSelfTo<GameObjectContext>()

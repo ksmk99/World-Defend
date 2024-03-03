@@ -5,6 +5,7 @@ namespace Unit
     public interface IHealthPresenter
     {
         event Action OnDeath;
+        event Action OnDamage;
 
         void Heal(int count);
         void Damage(int count);

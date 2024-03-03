@@ -26,6 +26,10 @@ namespace Installers
             Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
             Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
 
+            Container.DeclareSignal<SignalOnDamage>();
+            Container.DeclareSignal<SignalOnMobActivate>();
+            Container.DeclareSignal<SignalOnObstacleTouch>();
+
             Container.DeclareSignal<SignalOnMobDeath>();
             Container.DeclareSignal<SignalOnEnemyDeath>();
             Container.DeclareSignal<SignalOnPlayerDeath>();

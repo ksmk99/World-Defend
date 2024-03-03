@@ -13,6 +13,7 @@ namespace Unit
         private readonly HealthModel model;
 
         public event Action OnDeath;
+        public event Action OnDamage;
 
         public HealthPresenter(HealthView view, HealthModel model, SignalBus signalBus)
         {
@@ -55,6 +56,7 @@ namespace Unit
 
             var signal = new SignalOnUnitDamage(model.Health / model.Settings.MaxHealth, model.Health);
             signalBus.TryFire(signal);
+            OnDamage?.Invoke();
 
             model.NextHealTime = Time.time + model.Settings.HealDelay;
 

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class InputService
+public class JoystickInputService : IInputService
 {
     private Joystick joystick;
 
-    public InputService(Joystick joystick)
+    public JoystickInputService(Joystick joystick)
     {
         this.joystick = joystick;
     }
@@ -18,5 +18,10 @@ public class InputService
         Vector3 direction = new Vector3(horizontal, 0, vertical);
 
         return direction;
+    }
+
+    public void SetMoveDirection(Vector3 direction)
+    {
+        return;
     }
 }

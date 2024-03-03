@@ -108,6 +108,18 @@ namespace Helpers
         }
     }
 
+    public class SignalOnDamage
+    {
+        public Team Team { get; }
+        public UnitPresenter Target { get; }
+
+        public SignalOnDamage(UnitPresenter presenter, Team team)
+        {
+            Target = presenter;
+            Team = team;
+        }
+    }
+
     public class SignalOnUnitHeal : ISignalOnHealthChange
     {
         public float Percent { get; }
@@ -140,6 +152,28 @@ namespace Helpers
         {
             IsMoving = isMoving;
             Sender = sender;
+        }
+    }
+
+    public class SignalOnObstacleTouch
+    {
+        public UnitPresenter Presenter { get; }
+
+        public SignalOnObstacleTouch(UnitPresenter presenter)
+        {
+            Presenter = presenter;
+        }
+    }
+
+    public class SignalOnMobActivate
+    {
+        public UnitPresenter Player { get; }
+        public UnitPresenter Mob { get; }
+
+        public SignalOnMobActivate(UnitPresenter player, UnitPresenter mob)
+        {
+            Player = player;
+            Mob = mob;
         }
     }
 

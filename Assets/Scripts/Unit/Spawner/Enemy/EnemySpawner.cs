@@ -11,6 +11,8 @@ namespace Unit
 {
     public class EnemySpawner : ITickable, IRoomResettable
     {
+        public List<UnitView> ActiveUnits = new List<UnitView>();
+
         private readonly EnemyView.Factory factory;
         private readonly EnemySpawnerSettings settings;
         private readonly CustomPool<EnemyView> pool;
@@ -40,21 +42,26 @@ namespace Unit
 
             if (nextSpawnTime <= Time.time)
             {
-                EnemyView enemy = Create();
-                SetStartSettings(enemy);
-
-                var delay = Random.Range(settings.SpawnRateMin, settings.SpawnRateMax);
-                nextSpawnTime = Time.time + 0.1f;
-                spawnCount++;// + delay;
-                Debug.Log("Spawn");
+                CreateEnemy();
             }
+        }
+
+        private void CreateEnemy()
+        {
+            EnemyView enemy = Create();
+            SetStartSettings(enemy);
+
+            var delay = Random.Range(settings.SpawnRateMin, settings.SpawnRateMax);
+            nextSpawnTime = Time.time + 0.1f;
+            spawnCount++;
+            Debug.Log("Check Enemy " + spawnCount);
         }
 
         public async void Reset(SignalOnRoomReset signal)
         {
             if (this.roomIndex == signal.RoomIndex)
             {
-                await Task.Delay(3000);
+                await Task.Delay(1);
 
                 spawnCount = 0;
                 nextSpawnTime = Time.time;
@@ -81,7 +88,9 @@ namespace Unit
 
             var presenter = enemy.GetPresenter();
             presenter.SetRoom(roomIndex);
-            enemy.Respawn();
+            presenter.Respawn();
+
+            ActiveUnits.Add(enemy); 
         }
 
         public void Release(SignalOnEnemyReset signal)
@@ -97,6 +106,7 @@ namespace Unit
 
                 var id = signal.View.GetPoolID();
                 pool.Release(id, (EnemyView)signal.View);
+                ActiveUnits.Remove((EnemyView)signal.View);
             }
         }
     }

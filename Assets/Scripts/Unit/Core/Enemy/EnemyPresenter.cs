@@ -1,6 +1,5 @@
 using Helpers;
-using Unity.Barracuda;
-using Unity.VisualScripting;
+using UnityEngine;
 
 public class EnemyPresenter : UnitPresenter
 {
@@ -8,25 +7,33 @@ public class EnemyPresenter : UnitPresenter
     {
         this.model = model;
 
-        view.OnRespawn += Respawn;
         model.Health.OnDeath += Death;
+        model.Health.OnDamage += () => model.SignalBus.TryFire(new SignalOnDamage(this, model.Team));
     }
 
     public override void Death()
     {
         base.Death();
 
-        model.IsActive = false;
-        model.SignalBus.TryFire(new SignalOnEnemyDeath(model.RoomIndex, model.UnitView));
+        Debug.Log("Death");
+        if (model.IsActive)
+        {
+            model.IsActive = false;
+            model.SignalBus.TryFire(new SignalOnEnemyDeath(model.RoomIndex, model.UnitView));
+        }
     }
 
     public override void Reset(SignalOnRoomReset signal)
     {
         base.Reset(signal);
 
+        if (model.Health.IsDead())
+        {
+            return;
+        }
+
         model.IsActive = false;
         model.SignalBus.TryFire(new SignalOnEnemyReset(model.RoomIndex, model.UnitView));
-
     }
 
     public override void SetPlayer(UnitPresenter presenter)

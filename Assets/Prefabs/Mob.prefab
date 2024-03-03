@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 3041045619799994618}
   m_Layer: 7
   m_Name: Mob
-  m_TagString: Untagged
+  m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,8 +128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c4299b619715041a355349c24e47d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RoomIndex: 1
   healthSettings:
-    MaxHealth: 1000
+    MaxHealth: 10
     IsAutoHeal: 0
     HealDelay: 0
     HealRate: 0

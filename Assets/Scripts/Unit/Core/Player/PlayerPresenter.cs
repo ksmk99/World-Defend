@@ -11,6 +11,7 @@ public class PlayerPresenter : UnitPresenter
         this.model = model;
 
         model.Health.OnDeath += Death;
+        model.Health.OnDamage += () => model.SignalBus.TryFire(new SignalOnDamage(this, model.Team));
     }
 
     public override void Death()
@@ -22,6 +23,11 @@ public class PlayerPresenter : UnitPresenter
     public override void Reset(SignalOnRoomReset signal)
     {
         base.Reset(signal);
+
+        if (model.Health.IsDead())
+        {
+            return;
+        }
         model.SignalBus.TryFire(new SignalOnPlayerReset(model.RoomIndex, model.UnitView));
     }
 }

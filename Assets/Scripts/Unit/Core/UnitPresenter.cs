@@ -86,11 +86,17 @@ public abstract class UnitPresenter : ITickable
         model.Weapon.Disable();
         model.Health.Disable();
 
+        Debug.Log("Reset");
         if (model.Health.IsDead())
         {
             return;
         }
 
         model.UnitView.Death();
+    }
+
+    public void TouchBorder()
+    {
+        model.SignalBus.TryFire(new SignalOnObstacleTouch(this));
     }
 }

@@ -77,7 +77,7 @@ namespace Unit
         {
             if (this.roomIndex == signal.RoomIndex)
             {
-                await Task.Delay(3000);
+                await Task.Delay(1);
 
                 Spawn();
             }

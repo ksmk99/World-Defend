@@ -44,6 +44,7 @@ namespace Gameplay
             if (killCount >= spawnCount)
             {
                 isFinish = true;
+                Debug.Log("CHECK CheckWinCondition");
                 RefreshRoom();
                 //stateMachine.TransitionTo(new WinState());
             }
@@ -51,6 +52,7 @@ namespace Gameplay
 
         private void RefreshRoom()
         {
+            Debug.Log("CHECK Room Reset");
             signalBus.TryFire(new SignalOnRoomReset(roomIndex));
             killCount = 0;
             isFinish = false;
@@ -58,6 +60,7 @@ namespace Gameplay
 
         private void SendProgressionSignal()
         {
+            Debug.Log("CHECK " + killCount + "/" + spawnCount);
             var completePercent = killCount / spawnCount;
             var progressionChangeSignal = new SignalOnProgressionChange(killCount, completePercent);
             signalBus.TryFire(progressionChangeSignal);
@@ -72,7 +75,7 @@ namespace Gameplay
 
             isFinish = true;
             //stateMachine.TransitionTo(new LooseState());
-
+            Debug.Log("CHECK PlayerDeath");
             RefreshRoom();
         }
     }

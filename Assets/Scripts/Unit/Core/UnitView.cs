@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unit;
 using UnityEngine;
 
-public abstract class UnitView : MonoBehaviour, IRoomResettable
+public abstract class UnitView : MonoBehaviour
 {
     protected UnitPresenter presenter;
 
@@ -20,13 +20,6 @@ public abstract class UnitView : MonoBehaviour, IRoomResettable
     {
         var playerPresenter = player.GetPresenter();
         presenter.SetPlayer(playerPresenter);
-    }
 
-    public void Reset(SignalOnRoomReset signal)
-    {
-        if (presenter.RoomIndex == signal.RoomIndex)
-        {
-
-        }
     }
 }

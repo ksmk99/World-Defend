@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: 632017414469642738}
   - component: {fileID: 1903814589}
   - component: {fileID: 154692354110889400}
+  - component: {fileID: 3581098999271098276}
+  - component: {fileID: 9047893332035696370}
+  - component: {fileID: 5556347734132526376}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -68,6 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 852d3f98336f08744952857b5b0c5dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RoomIndex: 1
   settings:
     <Transform>k__BackingField: {fileID: 632017414469642739}
     <Joystick>k__BackingField: {fileID: 0}
@@ -79,7 +83,6 @@ MonoBehaviour:
     HealRate: 0.5
     HealCount: 50
   weaponSettings: {fileID: 11400000, guid: 4851361856ca003448c211b2d6bf2df0, type: 2}
-  poolParentFlag: {fileID: 0}
   healthPrefab: {fileID: 2671775819908182200, guid: 504d91682790efc41abe87f2ec3a28e0,
     type: 3}
   healthBarIcon: {fileID: 21300000, guid: a833faab059b93b449aa75d2adf4203c, type: 3}
@@ -147,6 +150,68 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3581098999271098276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632017414469642637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 14
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 2
+      BranchSizes: 01000000
+    VectorActionSize: 
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 0
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 1
+  m_BehaviorName: PlayerAgent
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_DeterministicInference: 0
+  m_ObservableAttributeHandling: 0
+--- !u!114 &9047893332035696370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632017414469642637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65b7eca4078ee24f9c6948d02e5f35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 500000
+  episodeDuration: 20
+--- !u!114 &5556347734132526376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632017414469642637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 10
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &623264383853009864
 PrefabInstance:
   m_ObjectHideFlags: 0

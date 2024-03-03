@@ -12,7 +12,7 @@ namespace Unit
 
     }
 
-    public class WeaponPresenter : IWeaponPresenter, IRoomResettable
+    public class WeaponPresenter : IWeaponPresenter
     {
         private readonly WeaponSettings settings;
         private readonly WeaponModel model;
@@ -134,11 +134,6 @@ namespace Unit
             }
 
             bullets.Clear();
-        }
-
-        public void Reset(SignalOnRoomReset signal)
-        {
-            Disable();
         }
     }
 }
