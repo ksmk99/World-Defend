@@ -137,8 +137,6 @@ public class PlayerAgent : Agent
 
     private async void StartEndEpisodeTimer(CancellationTokenSource cts)
     {
-        return;
-
         await Task.Delay((int)(episodeDuration * 1000));
 
         if (cts.IsCancellationRequested)
