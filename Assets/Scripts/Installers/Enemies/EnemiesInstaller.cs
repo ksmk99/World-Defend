@@ -66,5 +66,9 @@ public class EnemiesInstaller : AUnitInstaller
             .BindSignal<SignalOnEnemyDeath>()
             .ToMethod<RoomProgressionService>(x => x.EnemyDeath)
             .FromResolve();
+        Container
+            .BindSignal<SignalOnTimeRoomReset>()
+            .ToMethod<RoomProgressionService>(x => x.TimeReset)
+            .FromResolve();
     }
 }

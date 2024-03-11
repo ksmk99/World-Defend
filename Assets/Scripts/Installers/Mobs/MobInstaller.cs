@@ -63,7 +63,7 @@ public class MobInstaller : MonoInstaller<MobInstaller>
         Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
 
         Container
-            .BindSignal<SignalOnRoomReset>()
+            .BindSignal<SignalOnRoomResetUnits>()
             .ToMethod<MobPresenter>(x => x.Reset)
             .FromResolve();
     }

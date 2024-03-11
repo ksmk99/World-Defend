@@ -174,7 +174,7 @@ MonoBehaviour:
     HealCount: 0
   weaponSettings: {fileID: 11400000, guid: e2ecfd870eda3b54f8544dbe557e2afd, type: 2}
   enemyMovement:
-    MoveSpeed: 5
+    MoveSpeed: 0
     RotateSpeed: 1
     MaxDistance: 10
   healthPrefab: {fileID: 2671775819908182200, guid: 504d91682790efc41abe87f2ec3a28e0,
@@ -204,7 +204,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.45
-  m_Speed: 3.5
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -303,7 +303,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 8
+  m_Radius: 15
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &6983927651485204736
 GameObject:

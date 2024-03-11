@@ -12,18 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7de4faa63bfc345b72c554adb12921, type: 3}
   m_Name: Enemy Weapon Settings
   m_EditorClassIdentifier: 
-  <Distance>k__BackingField: 40
+  <Distance>k__BackingField: 10
+  <MinDistance>k__BackingField: 0
   <TargetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 128
   <Effects>k__BackingField:
   - {fileID: 11400000, guid: 7f2985867de2dc448b626795af5b96ee, type: 2}
-  <BulletSettings>k__BackingField:
-    <Speed>k__BackingField: 10
-    <Prefab>k__BackingField: {fileID: 5865941083765694682, guid: cdd19274c6e15a1499262198abac537e,
-      type: 3}
   BulletPrefab: {fileID: 5865941083765694682, guid: cdd19274c6e15a1499262198abac537e,
     type: 3}
-  BulletCount: 2
-  ReloadTime: 2
+  BulletCount: 1
+  ReloadTime: 0.5
   BulletDelay: 0.1

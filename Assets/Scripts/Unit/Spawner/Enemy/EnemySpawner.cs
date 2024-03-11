@@ -12,6 +12,7 @@ namespace Unit
     public class EnemySpawner : ITickable, IRoomResettable
     {
         public List<UnitView> ActiveUnits = new List<UnitView>();
+        public Vector3 SpawnOffset => settings.StartPoint.position;
 
         private readonly EnemyView.Factory factory;
         private readonly EnemySpawnerSettings settings;
@@ -54,15 +55,12 @@ namespace Unit
             var delay = Random.Range(settings.SpawnRateMin, settings.SpawnRateMax);
             nextSpawnTime = Time.time + 0.1f;
             spawnCount++;
-            Debug.Log("Check Enemy " + spawnCount);
         }
 
-        public async void Reset(SignalOnRoomReset signal)
+        public void Reset(SignalOnRoomReset signal)
         {
             if (this.roomIndex == signal.RoomIndex)
             {
-                await Task.Delay(1);
-
                 spawnCount = 0;
                 nextSpawnTime = Time.time;
             }

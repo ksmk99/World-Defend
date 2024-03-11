@@ -12,4 +12,13 @@ public class Obstacle : MonoBehaviour
             presenter.TouchBorder();
         }
     }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.transform.TryGetComponent<PlayerView>(out var player))
+        {
+            var presenter = player.GetPresenter();
+            presenter.TouchBorder();
+        }
+    }
 }

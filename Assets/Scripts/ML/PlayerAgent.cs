@@ -15,23 +15,33 @@ using System.Threading;
 public class PlayerAgent : Agent
 {
     [SerializeField] private float episodeDuration = 60f;
+    [Space]
+    [SerializeField] private float timeReward = 2f;
+    [SerializeField] private AnimationCurve timeRewardCurve;
+    [SerializeField] private float damageReward = 25f;
+    [SerializeField] private AnimationCurve damageRewardCurve;
+    [SerializeField] private float killReward = 100f;
+    [SerializeField] private AnimationCurve killRewardCurve;
 
     private IInputService inputService;
 
     private MobSpawner mobSpawner;
     private EnemySpawner enemySpawner;
     private PlayerPresenter presenter;
+    private SignalBus signalBus;
 
     private bool isEpisodeEnd;
+    private float startTime;
     private CancellationTokenSource cts = new CancellationTokenSource();
 
     [Inject]
-    public void Init(IInputService inputService, MobSpawner mobSpawner, EnemySpawner enemySpawner, PlayerPresenter presenter)
+    public void Init(IInputService inputService, EnemySpawner enemySpawner, PlayerPresenter presenter, SignalBus signalBus)
     {
         this.inputService = inputService;
-        this.mobSpawner = mobSpawner;
+        //this.mobSpawner = mobSpawner;
         this.enemySpawner = enemySpawner;
         this.presenter = presenter;
+        this.signalBus = signalBus;
     }
 
     /// <summary>
@@ -42,51 +52,59 @@ public class PlayerAgent : Agent
         Vector3 direction = GetMoveDirection(actionBuffers.ContinuousActions);
         inputService.SetMoveDirection(direction);
 
-        AddReward(-1f / MaxStep);
+        var reward = GetReward(timeRewardCurve, timeReward) * Time.deltaTime;
+        AddReward(-reward);
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(transform.position.x);
-        sensor.AddObservation(transform.position.z);
+        sensor.AddObservation(transform.position.x - enemySpawner.SpawnOffset.x);
+        sensor.AddObservation(transform.position.z - enemySpawner.SpawnOffset.z);
 
-        AddUnitsObservation(sensor, mobSpawner.ActiveUnits, transform.position);
-        AddUnitsObservation(sensor, enemySpawner.ActiveUnits, transform.position);
+        //AddUnitsObservation(sensor, mobSpawner.ActiveUnits, transform.position);
+        AddUnitsObservation(sensor, enemySpawner.ActiveUnits, transform.position, enemySpawner.SpawnOffset);
     }
 
     public void EnemyDeath(SignalOnEnemyDeath signal)
     {
-        AddReward(20f);
+        float reward = GetReward(killRewardCurve, killReward);
+        AddReward(reward);
     }
 
     public void TouchBorder(SignalOnObstacleTouch signal)
     {
         if (signal.Presenter.Equals(presenter))
         {
-            AddReward(-20f);
+            AddReward(-1);
         }
     }
 
     public void UnitDamage(SignalOnDamage signal)
     {
+        float reward = GetReward(damageRewardCurve, damageReward);
         if (signal.Team == Team.Enemy)
         {
-            AddReward(5f);
+            AddReward(reward);
         }
-        else
-        {
-            AddReward(-5);
-        }
+        //else
+        //{
+        //    AddReward(-reward);
+        //}
+    }
+
+    private float GetReward(AnimationCurve rewardCurve, float rewardIndex)
+    {
+        var time = (Time.time - startTime) / episodeDuration;
+        var reward = rewardCurve.Evaluate(time) * rewardIndex;
+        return reward;
     }
 
     public void MobActivate(SignalOnMobActivate signal)
     {
-        AddReward(15f);
+        AddReward(100f);
     }
 
-
-
-    private void AddUnitsObservation(VectorSensor sensor, List<UnitView> views, Vector3 position)
+    private void AddUnitsObservation(VectorSensor sensor, List<UnitView> views, Vector3 position, Vector3 offset)
     {
         var enemyUnits = GetNearestUnits(views, position);
         for (int i = 0; i < 3; i++)
@@ -95,6 +113,7 @@ public class PlayerAgent : Agent
             if (enemyUnits.Length > i)
             {
                 observation = enemyUnits[i];
+                observation -= offset;
             }
 
             sensor.AddObservation(observation.x);
@@ -116,23 +135,23 @@ public class PlayerAgent : Agent
         return new Vector3(continuousActions[0], 0, continuousActions[1]);
     }
 
-    public override void OnEpisodeBegin()
+    public void Begin(SignalOnRoomReset signal)
     {
         cts = new CancellationTokenSource();
         StartEndEpisodeTimer(cts);
         isEpisodeEnd = false;
+        startTime = Time.time;
     }
 
     public void RoomReset(SignalOnRoomReset signal)
     {
-        if (signal.RoomIndex.Equals(presenter.RoomIndex) && !isEpisodeEnd)
+        if (signal.RoomIndex.Equals(presenter.RoomIndex))
         {
             cts.Cancel();
             isEpisodeEnd = true;
             EndEpisode();
         }
     }
-
 
 
     private async void StartEndEpisodeTimer(CancellationTokenSource cts)
@@ -147,8 +166,7 @@ public class PlayerAgent : Agent
         if (!isEpisodeEnd)
         {
             isEpisodeEnd = true;
-            presenter.Death();
-            EndEpisode();
+            signalBus.TryFire(new SignalOnTimeRoomReset(presenter.RoomIndex));
         }
     }
 

@@ -13,10 +13,5 @@ MonoBehaviour:
   m_Name: Game Settings Installer
   m_EditorClassIdentifier: 
   playerMS:
-    MoveSpeed: 6
+    MoveSpeed: 8
     RotateSpeed: 1
-  spawnerSettings:
-    Count: 25
-    SpawnRateMin: 2
-    SpawnRateMax: 2
-    <Offset>k__BackingField: {x: 15, y: 0, z: 15}

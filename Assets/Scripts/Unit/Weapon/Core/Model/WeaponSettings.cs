@@ -11,6 +11,8 @@ namespace Unit
         [field: SerializeField]
         public float Distance { get; set; }
         [field: SerializeField]
+        public float MinDistance { get; set; }
+        [field: SerializeField]
         public LayerMask TargetLayer { get; set; }
         [field: SerializeField]
         public List<EffectSettings> Effects { get; set; }

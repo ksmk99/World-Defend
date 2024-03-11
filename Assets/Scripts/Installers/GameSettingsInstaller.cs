@@ -42,7 +42,9 @@ namespace Installers
             Container.DeclareSignal<SignalOnAttack>();
 
             Container.DeclareSignal<SignalOnProgressionChange>();
+            Container.DeclareSignal<SignalOnRoomResetUnits>();
             Container.DeclareSignal<SignalOnRoomReset>();
+            Container.DeclareSignal<SignalOnTimeRoomReset>();
         }
     }
 }

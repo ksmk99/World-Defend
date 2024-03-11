@@ -2,7 +2,6 @@
 using System;
 using UnityEngine;
 using Zenject;
-using static UnityEditor.Profiling.HierarchyFrameDataView;
 
 namespace Unit
 {

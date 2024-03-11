@@ -1,0 +1,65 @@
+{
+    "PlayerAgent": {
+        "checkpoints": [
+            {
+                "steps": 7499967,
+                "file_path": "results\\Normilize Reward Test\\PlayerAgent\\PlayerAgent-7499967.onnx",
+                "reward": -59.39299514038222,
+                "creation_time": 1710130389.2384245,
+                "auxillary_file_paths": [
+                    "results\\Normilize Reward Test\\PlayerAgent\\PlayerAgent-7499967.pt"
+                ]
+            },
+            {
+                "steps": 7999907,
+                "file_path": "results\\Normilize Reward Test\\PlayerAgent\\PlayerAgent-7999907.onnx",
+                "reward": -16.78380611403422,
+                "creation_time": 1710132931.6948836,
+                "auxillary_file_paths": [
+                    "results\\Normilize Reward Test\\PlayerAgent\\PlayerAgent-7999907.pt"
+                ]
+            },
+            {
+                "steps": 8499954,
+                "file_path": "results\\Normilize Reward Test\\PlayerAgent\\PlayerAgent-8499954.onnx",
+                "reward": -11.688141882419586,
+                "creation_time": 1710135940.8856382,
+                "auxillary_file_paths": [
+                    "results\\Normilize Reward Test\\PlayerAgent\\PlayerAgent-8499954.pt"
+                ]
+            },
+            {
+                "steps": 8999952,
+                "file_path": "results\\Normilize Reward Test\\PlayerAgent\\PlayerAgent-8999952.onnx",
+                "reward": -6.199247920235922,
+                "creation_time": 1710139310.4639318,
+                "auxillary_file_paths": [
+                    "results\\Normilize Reward Test\\PlayerAgent\\PlayerAgent-8999952.pt"
+                ]
+            },
+            {
+                "steps": 9322963,
+                "file_path": "results\\Normilize Reward Test\\PlayerAgent\\PlayerAgent-9322963.onnx",
+                "reward": -10.30582266383701,
+                "creation_time": 1710141628.398328,
+                "auxillary_file_paths": [
+                    "results\\Normilize Reward Test\\PlayerAgent\\PlayerAgent-9322963.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 9322963,
+            "file_path": "results\\Normilize Reward Test\\PlayerAgent.onnx",
+            "reward": -10.30582266383701,
+            "creation_time": 1710141628.398328,
+            "auxillary_file_paths": [
+                "results\\Normilize Reward Test\\PlayerAgent\\PlayerAgent-9322963.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.1+cu121"
+    }
+}

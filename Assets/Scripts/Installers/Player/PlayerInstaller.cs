@@ -60,15 +60,15 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
 
         BindAgent();
 
-        Container.BindInterfacesAndSelfTo<AnimationData>()
-            .AsSingle();
-        Container.Bind<IAnimationsController>()
-            .To<AnimationsController>()
-            .AsSingle()
-            .WithArguments(settings.Animator, settings.Transform);
+        //Container.BindInterfacesAndSelfTo<AnimationData>()
+        //    .AsSingle();
+        //Container.Bind<IAnimationsController>()
+        //    .To<AnimationsController>()
+        //    .AsSingle()
+        //    .WithArguments(settings.Animator, settings.Transform);
 
-        Container.BindSignal<SignalOnMove>().ToMethod<IAnimationsController>(x => x.SetMovement).FromResolve();
-        Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
+        //Container.BindSignal<SignalOnMove>().ToMethod<IAnimationsController>(x => x.SetMovement).FromResolve();
+        //Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
 
 
         Container
@@ -76,7 +76,7 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
             .ToMethod<PlayerPresenter>(x => x.Death)
             .FromResolve();
         Container
-            .BindSignal<SignalOnRoomReset>()
+            .BindSignal<SignalOnRoomResetUnits>()
             .ToMethod<PlayerPresenter>(x => x.Reset)
             .FromResolve();
     }
@@ -89,6 +89,11 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
         Container
             .BindSignal<SignalOnRoomReset>()
             .ToMethod<PlayerAgent>(x => x.RoomReset)
+            .FromResolve();
+
+        Container
+            .BindSignal<SignalOnRoomReset>()
+            .ToMethod<PlayerAgent>(x => x.Begin)
             .FromResolve();
 
         Container

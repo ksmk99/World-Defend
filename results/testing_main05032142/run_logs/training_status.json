@@ -1,0 +1,56 @@
+{
+    "PlayerAgent": {
+        "checkpoints": [
+            {
+                "steps": 499989,
+                "file_path": "results\\testing_main05032142\\PlayerAgent\\PlayerAgent-499989.onnx",
+                "reward": -1.3453612310069574,
+                "creation_time": 1709665211.7534118,
+                "auxillary_file_paths": [
+                    "results\\testing_main05032142\\PlayerAgent\\PlayerAgent-499989.pt"
+                ]
+            },
+            {
+                "steps": 999986,
+                "file_path": "results\\testing_main05032142\\PlayerAgent\\PlayerAgent-999986.onnx",
+                "reward": 2.9229114511160463,
+                "creation_time": 1709666294.4923909,
+                "auxillary_file_paths": [
+                    "results\\testing_main05032142\\PlayerAgent\\PlayerAgent-999986.pt"
+                ]
+            },
+            {
+                "steps": 1499986,
+                "file_path": "results\\testing_main05032142\\PlayerAgent\\PlayerAgent-1499986.onnx",
+                "reward": -90.00241088867188,
+                "creation_time": 1709667432.4154952,
+                "auxillary_file_paths": [
+                    "results\\testing_main05032142\\PlayerAgent\\PlayerAgent-1499986.pt"
+                ]
+            },
+            {
+                "steps": 1867667,
+                "file_path": "results\\testing_main05032142\\PlayerAgent\\PlayerAgent-1867667.onnx",
+                "reward": 11.710188303982466,
+                "creation_time": 1709668346.258105,
+                "auxillary_file_paths": [
+                    "results\\testing_main05032142\\PlayerAgent\\PlayerAgent-1867667.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1867667,
+            "file_path": "results\\testing_main05032142\\PlayerAgent.onnx",
+            "reward": 11.710188303982466,
+            "creation_time": 1709668346.258105,
+            "auxillary_file_paths": [
+                "results\\testing_main05032142\\PlayerAgent\\PlayerAgent-1867667.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.1+cu121"
+    }
+}

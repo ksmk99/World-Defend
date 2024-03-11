@@ -1,6 +1,7 @@
 ﻿using GameplayState;
 using Helpers;
 using System;
+using System.Threading.Tasks;
 using Unit;
 using UnityEngine;
 using Zenject;
@@ -44,23 +45,25 @@ namespace Gameplay
             if (killCount >= spawnCount)
             {
                 isFinish = true;
-                Debug.Log("CHECK CheckWinCondition");
                 RefreshRoom();
                 //stateMachine.TransitionTo(new WinState());
             }
         }
 
-        private void RefreshRoom()
+        private async void RefreshRoom()
         {
-            Debug.Log("CHECK Room Reset");
+
+            signalBus.TryFire(new SignalOnRoomResetUnits(roomIndex));
+            await Task.Delay(5);
             signalBus.TryFire(new SignalOnRoomReset(roomIndex));
+
+
             killCount = 0;
             isFinish = false;
         }
 
         private void SendProgressionSignal()
         {
-            Debug.Log("CHECK " + killCount + "/" + spawnCount);
             var completePercent = killCount / spawnCount;
             var progressionChangeSignal = new SignalOnProgressionChange(killCount, completePercent);
             signalBus.TryFire(progressionChangeSignal);
@@ -75,7 +78,17 @@ namespace Gameplay
 
             isFinish = true;
             //stateMachine.TransitionTo(new LooseState());
-            Debug.Log("CHECK PlayerDeath");
+            RefreshRoom();
+        }
+
+        public void TimeReset(SignalOnTimeRoomReset signal)
+        {
+            if (isFinish)
+            {
+                return;
+            }
+
+            isFinish = true;
             RefreshRoom();
         }
     }

@@ -15,6 +15,8 @@ namespace Unit
         private readonly Transform parent;
         private readonly int roomIndex;
 
+        private PlayerView playerView;
+
         public PlayerSpawner(PlayerView.Factory factory, PlayerSpawnerSettings settings, ISpawnManager spawnManager, 
             CustomPool<PlayerView> pool, Transform parent, int roomIndex)
         {
@@ -33,15 +35,19 @@ namespace Unit
 
         public void Spawn()
         {
-            PlayerView view = Create();
-            SetStartSettings(view);
-        }
+            if (playerView == default)
+            {
+                playerView = Create();
+            }
 
+            SetStartSettings(playerView);
+        }
 
         private PlayerView Create()
         {
             PlayerView prefab = (PlayerView)spawnManager.GetPrefab();
             PlayerView player = pool.Create(0, prefab, factory.Create);
+
             return player;
         }
 
@@ -54,17 +60,21 @@ namespace Unit
             view.transform.position = randomPosition + settings.StartPoint.position;
             view.transform.SetParent(parent);
             view.gameObject.SetActive(true);
-            view.GetPresenter().SetRoom(roomIndex); 
+            view.GetPresenter().SetRoom(roomIndex);
+            view.GetPresenter().Respawn();
+
+            view.GetComponent<PlayerAgent>().OnEpisodeBegin();
         }
 
         public void Release(SignalOnPlayerDeath signal)
         {
             if (signal.RoomIndex == roomIndex)
             {
-                signal.View.gameObject.SetActive(false);
+                //signal.View.gameObject.SetActive(false);
 
-                var id = signal.View.GetPoolID();
-                pool.Release(id, (PlayerView)signal.View);
+
+                //var id = signal.View.GetPoolID();
+           //     pool.Release(id, (PlayerView)signal.View);
             }
         }
 
@@ -73,12 +83,10 @@ namespace Unit
             Release(new SignalOnPlayerDeath(signal.RoomIndex, signal.View));
         }
 
-        public async void Reset(SignalOnRoomReset signal)
+        public void Reset(SignalOnRoomReset signal)
         {
             if (this.roomIndex == signal.RoomIndex)
             {
-                await Task.Delay(1);
-
                 Spawn();
             }
         }

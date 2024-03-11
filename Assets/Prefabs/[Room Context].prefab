@@ -53,7 +53,7 @@ GameObject:
   m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3810316252095254098
 Transform:
@@ -63,8 +63,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3810316252095254097}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 10, z: 52}
+  m_LocalPosition: {x: 12, y: -0.79, z: 0}
+  m_LocalScale: {x: 1, y: 5, z: 26}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3810316252288583844}
@@ -131,7 +131,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 3, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &983109276
 Rigidbody:
@@ -147,7 +147,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &3810316252454219759
 MonoBehaviour:
@@ -691,8 +691,8 @@ Transform:
   m_GameObject: {fileID: 3810316253161552024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 1, z: 5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3810316254066094234}
   m_RootOrder: 0
@@ -780,7 +780,7 @@ GameObject:
   m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3810316253267492643
 Transform:
@@ -790,8 +790,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3810316253267492642}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 25.5}
-  m_LocalScale: {x: 52, y: 10, z: 1}
+  m_LocalPosition: {x: 0, y: -0.79, z: 12}
+  m_LocalScale: {x: 26, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3810316252288583844}
@@ -858,7 +858,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &68636164
 Rigidbody:
@@ -874,7 +874,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &3810316252454219758
 MonoBehaviour:
@@ -1216,7 +1216,7 @@ GameObject:
   m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3810316254154598449
 Transform:
@@ -1226,8 +1226,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3810316254154598448}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -25.5}
-  m_LocalScale: {x: 52, y: 10, z: 1}
+  m_LocalPosition: {x: 0, y: -0.79, z: -12}
+  m_LocalScale: {x: 26, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3810316252288583844}
@@ -1294,7 +1294,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1434937110
 Rigidbody:
@@ -1310,7 +1310,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &3810316252454219757
 MonoBehaviour:
@@ -1471,7 +1471,7 @@ GameObject:
   m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3810316254217845327
 Transform:
@@ -1481,8 +1481,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3810316254217845326}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -25.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 10, z: 52}
+  m_LocalPosition: {x: -12, y: -0.79, z: 0}
+  m_LocalScale: {x: 1, y: 5, z: 26}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3810316252288583844}
@@ -1549,7 +1549,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 3, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &805410276
 Rigidbody:
@@ -1565,7 +1565,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &1901809178
 MonoBehaviour:
@@ -1618,7 +1618,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4848583073920436508}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3bbb782660e1504d9655c5701f761fe, type: 3}
   m_Name: 
@@ -1626,8 +1626,8 @@ MonoBehaviour:
   RoomIndex: 1
   prefab: {fileID: 1105396708260317832, guid: 2ec30f69a8288054b85742c5fb633ec9, type: 3}
   mobSpawnerSettings:
-    SpawnCount: 5
-    <Offset>k__BackingField: {x: 15, y: 0, z: 15}
+    SpawnCount: 3
+    <Offset>k__BackingField: {x: 10, y: 0, z: 10}
     <StartPoint>k__BackingField: {fileID: 4810413522223770963}
   spawnerSettings:
     Types:
@@ -1682,15 +1682,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RoomIndex: 1
   enemiesSpawnerSettings:
-    Count: 15
-    SpawnRateMin: 1
+    Count: 3
+    SpawnRateMin: 0.5
     SpawnRateMax: 5
-    <Offset>k__BackingField: {x: 15, y: 15, z: 15}
+    <Offset>k__BackingField: {x: 10, y: 10, z: 10}
     <StartPoint>k__BackingField: {fileID: 7895053760647252996}
   spawnerSettings:
     Types:
     - Prefab: {fileID: 6836847249817977, guid: eaf9cd4a669739d47ad3b691157b5958, type: 3}
-    - Prefab: {fileID: 6836847249817977, guid: b23af1e288b8ccc40b1ba9cfd4f560c5, type: 3}
   poolParent: {fileID: 3810316254167011161}
   healthParentFlag: {fileID: 3810316252490150995}
 --- !u!1 &6423928186642950673
@@ -1749,7 +1748,6 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 3810316252454219755}
   - {fileID: 2801677506545878091}
-  - {fileID: 1162275436680488811}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
@@ -1799,7 +1797,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RoomIndex: 1
   playerSpawnerSettings:
-    <Offset>k__BackingField: {x: 15, y: 0, z: 15}
+    <Offset>k__BackingField: {x: 10, y: 0, z: 10}
     <StartPoint>k__BackingField: {fileID: 7771865846714558556}
   spawnerSettings:
     Types:

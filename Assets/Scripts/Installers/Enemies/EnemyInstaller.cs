@@ -44,7 +44,7 @@ public class EnemyInstaller : MonoInstaller<EnemyInstaller>
         Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
         Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
 
-        Container.BindSignal<SignalOnRoomReset>()
+        Container.BindSignal<SignalOnRoomResetUnits>()
             .ToMethod<EnemyPresenter>(x => x.Reset)
             .FromResolve();
     }

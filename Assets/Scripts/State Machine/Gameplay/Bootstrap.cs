@@ -13,7 +13,6 @@ public class Bootstrap : IInitializable
 
     public void Initialize()
     {
-        Debug.Log("Start");
         stateMachine.TransitionTo(new MainMenuState());
     }
 }

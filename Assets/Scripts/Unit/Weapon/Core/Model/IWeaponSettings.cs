@@ -8,6 +8,7 @@ namespace Unit
     public interface IWeaponSettings
     {
         float Distance { get; }
+        float MinDistance { get; }  
         LayerMask TargetLayer { get; }
         Type WeaponType { get; }
         List<EffectSettings> Effects { get; }

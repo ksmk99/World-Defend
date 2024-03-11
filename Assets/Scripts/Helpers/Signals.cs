@@ -133,6 +133,26 @@ namespace Helpers
     }
     #endregion
 
+    public class SignalOnRoomResetUnits
+    {
+        public int RoomIndex { get; }
+
+        public SignalOnRoomResetUnits(int roomIndex)
+        {
+            RoomIndex = roomIndex;
+        }
+    }
+
+    public class SignalOnTimeRoomReset
+    {
+        public int RoomIndex { get; }
+
+        public SignalOnTimeRoomReset(int roomIndex)
+        {
+            RoomIndex = roomIndex;
+        }
+    }
+
     public class SignalOnRoomReset
     {
         public int RoomIndex { get; }

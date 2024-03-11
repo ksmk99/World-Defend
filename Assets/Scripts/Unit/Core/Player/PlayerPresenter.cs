@@ -17,17 +17,34 @@ public class PlayerPresenter : UnitPresenter
     public override void Death()
     {
         base.Death();
-        model.SignalBus.TryFire(new SignalOnPlayerDeath(model.RoomIndex, model.UnitView));
-    }
 
-    public override void Reset(SignalOnRoomReset signal)
-    {
-        base.Reset(signal);
-
-        if (model.Health.IsDead())
+        if (!model.IsActive)
         {
             return;
         }
+
+        model.IsActive = false;
+        model.SignalBus.TryFire(new SignalOnPlayerDeath(model.RoomIndex, model.UnitView));
+    }
+
+    public override void Reset(SignalOnRoomResetUnits signal)
+    {
+        base.Reset(signal);
+
+        if (!model.IsActive)
+        {
+            return;
+        }
+
+
+        model.IsActive = false;
         model.SignalBus.TryFire(new SignalOnPlayerReset(model.RoomIndex, model.UnitView));
+    }
+
+    public override void Respawn()
+    {
+        base.Respawn();
+
+        model.IsActive = true;
     }
 }

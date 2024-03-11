@@ -38,21 +38,19 @@ namespace Unit
 
         public async void Spawn()
         {
-            //await Task.Delay(3000);
-
             for (int i = 0; i < settings.SpawnCount; i++)
             {
                 MobView view = Create();
                 SetStartSettings(view);
+
+                await Task.Delay(5);
             }
         }
 
-        public async void Reset(SignalOnRoomReset signal)
+        public void Reset(SignalOnRoomReset signal)
         {
             if (this.roomIndex == signal.RoomIndex)
             {
-                await Task.Delay(1);
-
                 Spawn();
             }
         }

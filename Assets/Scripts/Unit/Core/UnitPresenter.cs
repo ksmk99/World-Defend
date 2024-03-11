@@ -42,7 +42,7 @@ public abstract class UnitPresenter : ITickable
         model.Health.Disable();
     }
 
-    public void Respawn()
+    public virtual void Respawn()
     {
         model.Health.Reset();
         model.Weapon.Reset();
@@ -81,12 +81,11 @@ public abstract class UnitPresenter : ITickable
         model.RoomIndex = roomIndex;
     }
 
-    public virtual void Reset(SignalOnRoomReset signal)
+    public virtual void Reset(SignalOnRoomResetUnits signal)
     {
         model.Weapon.Disable();
         model.Health.Disable();
 
-        Debug.Log("Reset");
         if (model.Health.IsDead())
         {
             return;

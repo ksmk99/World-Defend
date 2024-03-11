@@ -15,7 +15,6 @@ public class EnemyPresenter : UnitPresenter
     {
         base.Death();
 
-        Debug.Log("Death");
         if (model.IsActive)
         {
             model.IsActive = false;
@@ -23,7 +22,7 @@ public class EnemyPresenter : UnitPresenter
         }
     }
 
-    public override void Reset(SignalOnRoomReset signal)
+    public override void Reset(SignalOnRoomResetUnits signal)
     {
         base.Reset(signal);
 

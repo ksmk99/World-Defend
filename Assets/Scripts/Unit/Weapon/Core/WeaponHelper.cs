@@ -11,8 +11,8 @@ namespace Unit
             var enemies = Physics.OverlapSphere(position, settings.Distance, settings.TargetLayer);
             for (int i = 0; i < enemies.Length; i++)
             {
-                float distance = (position - enemies[i].transform.position).sqrMagnitude;
-                if (distance <= minDistance && enemies[i].TryGetComponent(out UnitView view))
+                float distance = (position - enemies[i].transform.position).magnitude;
+                if (distance >= settings.MinDistance && distance <= minDistance && enemies[i].TryGetComponent(out UnitView view))
                 {
                     if (view.GetPresenter().Team != team)
                     {

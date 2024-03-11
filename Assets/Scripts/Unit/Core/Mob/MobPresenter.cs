@@ -28,7 +28,7 @@ public class MobPresenter : UnitPresenter
         model.SignalBus.TryFire(new SignalOnMobDeath(model.RoomIndex, model.UnitView));
     }
 
-    public override void Reset(SignalOnRoomReset signal)
+    public override void Reset(SignalOnRoomResetUnits signal)
     {
         base.Reset(signal);
 
