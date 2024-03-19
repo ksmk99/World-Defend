@@ -1,0 +1,29 @@
+{
+    "PlayerAgent": {
+        "checkpoints": [
+            {
+                "steps": 396249,
+                "file_path": "results\\EnemyMovement0v2 --resume\\PlayerAgent\\PlayerAgent-396249.onnx",
+                "reward": -58.18540097354503,
+                "creation_time": 1710181160.9986217,
+                "auxillary_file_paths": [
+                    "results\\EnemyMovement0v2 --resume\\PlayerAgent\\PlayerAgent-396249.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 396249,
+            "file_path": "results\\EnemyMovement0v2 --resume\\PlayerAgent.onnx",
+            "reward": -58.18540097354503,
+            "creation_time": 1710181160.9986217,
+            "auxillary_file_paths": [
+                "results\\EnemyMovement0v2 --resume\\PlayerAgent\\PlayerAgent-396249.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.1+cu121"
+    }
+}

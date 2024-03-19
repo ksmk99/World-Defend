@@ -4,6 +4,8 @@ namespace Unit
 {
     public interface IWeaponPresenter
     {
+        IWeaponSettings Settings { get; }   
+
         bool IsReloading();
         bool SetAction(Transform transform, Team team);
         void Attack(Transform transform, bool isDead, Team team);

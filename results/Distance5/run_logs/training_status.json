@@ -1,0 +1,65 @@
+{
+    "PlayerAgent": {
+        "checkpoints": [
+            {
+                "steps": 30999920,
+                "file_path": "results\\Distance5\\PlayerAgent\\PlayerAgent-30999920.onnx",
+                "reward": 189.16083629926047,
+                "creation_time": 1710416058.7337294,
+                "auxillary_file_paths": [
+                    "results\\Distance5\\PlayerAgent\\PlayerAgent-30999920.pt"
+                ]
+            },
+            {
+                "steps": 31499994,
+                "file_path": "results\\Distance5\\PlayerAgent\\PlayerAgent-31499994.onnx",
+                "reward": null,
+                "creation_time": 1710420094.2292538,
+                "auxillary_file_paths": [
+                    "results\\Distance5\\PlayerAgent\\PlayerAgent-31499994.pt"
+                ]
+            },
+            {
+                "steps": 31533044,
+                "file_path": "results\\Distance5\\PlayerAgent\\PlayerAgent-31533044.onnx",
+                "reward": 82.82627761905843,
+                "creation_time": 1710421198.9054801,
+                "auxillary_file_paths": [
+                    "results\\Distance5\\PlayerAgent\\PlayerAgent-31533044.pt"
+                ]
+            },
+            {
+                "steps": 31968493,
+                "file_path": "results\\Distance5\\PlayerAgent\\PlayerAgent-31968493.onnx",
+                "reward": 80.76299200124211,
+                "creation_time": 1710423116.2880769,
+                "auxillary_file_paths": [
+                    "results\\Distance5\\PlayerAgent\\PlayerAgent-31968493.pt"
+                ]
+            },
+            {
+                "steps": 31968583,
+                "file_path": "results\\Distance5\\PlayerAgent\\PlayerAgent-31968583.onnx",
+                "reward": 26.709998726844788,
+                "creation_time": 1710448822.2270823,
+                "auxillary_file_paths": [
+                    "results\\Distance5\\PlayerAgent\\PlayerAgent-31968583.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 31968583,
+            "file_path": "results\\Distance5\\PlayerAgent.onnx",
+            "reward": 26.709998726844788,
+            "creation_time": 1710448822.2270823,
+            "auxillary_file_paths": [
+                "results\\Distance5\\PlayerAgent\\PlayerAgent-31968583.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.1+cu121"
+    }
+}

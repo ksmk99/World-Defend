@@ -23,4 +23,4 @@ MonoBehaviour:
     type: 3}
   BulletCount: 1
   ReloadTime: 0.5
-  BulletDelay: 0.1
+  BulletDelay: 1

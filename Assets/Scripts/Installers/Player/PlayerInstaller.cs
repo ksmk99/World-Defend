@@ -32,8 +32,7 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
             .WithArguments(weaponSettings);
         Container.Bind<IWeaponPresenter>()
             .To(weaponSettings.WeaponType)
-            .AsSingle()
-            .WhenInjectedInto<PlayerModel>();
+            .AsSingle();
 
         Container.Bind<HealthFollower>().AsSingle().WithArguments(settings.Transform);
         Container.BindInterfacesAndSelfTo<HealthPresenter>().AsSingle();
@@ -86,6 +85,7 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
         Container.BindInterfacesAndSelfTo<PlayerAgent>()
             .FromComponentInHierarchy()
             .AsSingle();
+
         Container
             .BindSignal<SignalOnRoomReset>()
             .ToMethod<PlayerAgent>(x => x.RoomReset)

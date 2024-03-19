@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mob Weapon Settings
   m_EditorClassIdentifier: 
   <Distance>k__BackingField: 10
-  <MinDistance>k__BackingField: 0
+  <MinDistance>k__BackingField: 4
   <TargetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 128
@@ -21,6 +21,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7318ce8e48adf8040ae22771b667d9b7, type: 2}
   BulletPrefab: {fileID: 5865941083765694682, guid: 6c29f3f5bebe19e44b5389b122348b4c,
     type: 3}
-  BulletCount: 3
+  BulletCount: 1
   ReloadTime: 1
   BulletDelay: 0.2

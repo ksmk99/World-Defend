@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Weapon Settings
   m_EditorClassIdentifier: 
   <Distance>k__BackingField: 8
-  <MinDistance>k__BackingField: 4
+  <MinDistance>k__BackingField: 5
   <TargetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 128
@@ -23,4 +23,4 @@ MonoBehaviour:
     type: 3}
   BulletCount: 4
   ReloadTime: 0.6
-  BulletDelay: 0.2
+  BulletDelay: 0.1

@@ -1,0 +1,65 @@
+{
+    "PlayerAgent": {
+        "checkpoints": [
+            {
+                "steps": 8999979,
+                "file_path": "results\\Mobs\\PlayerAgent\\PlayerAgent-8999979.onnx",
+                "reward": 344.16696376800536,
+                "creation_time": 1710551810.964028,
+                "auxillary_file_paths": [
+                    "results\\Mobs\\PlayerAgent\\PlayerAgent-8999979.pt"
+                ]
+            },
+            {
+                "steps": 9499954,
+                "file_path": "results\\Mobs\\PlayerAgent\\PlayerAgent-9499954.onnx",
+                "reward": 354.92662404378257,
+                "creation_time": 1710555527.237605,
+                "auxillary_file_paths": [
+                    "results\\Mobs\\PlayerAgent\\PlayerAgent-9499954.pt"
+                ]
+            },
+            {
+                "steps": 9999975,
+                "file_path": "results\\Mobs\\PlayerAgent\\PlayerAgent-9999975.onnx",
+                "reward": 363.7735308408737,
+                "creation_time": 1710559237.7021923,
+                "auxillary_file_paths": [
+                    "results\\Mobs\\PlayerAgent\\PlayerAgent-9999975.pt"
+                ]
+            },
+            {
+                "steps": 10499954,
+                "file_path": "results\\Mobs\\PlayerAgent\\PlayerAgent-10499954.onnx",
+                "reward": 302.65774578518335,
+                "creation_time": 1710562913.7171776,
+                "auxillary_file_paths": [
+                    "results\\Mobs\\PlayerAgent\\PlayerAgent-10499954.pt"
+                ]
+            },
+            {
+                "steps": 10780321,
+                "file_path": "results\\Mobs\\PlayerAgent\\PlayerAgent-10780321.onnx",
+                "reward": 241.06443495220608,
+                "creation_time": 1710565111.8075771,
+                "auxillary_file_paths": [
+                    "results\\Mobs\\PlayerAgent\\PlayerAgent-10780321.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 10780321,
+            "file_path": "results\\Mobs\\PlayerAgent.onnx",
+            "reward": 241.06443495220608,
+            "creation_time": 1710565111.8075771,
+            "auxillary_file_paths": [
+                "results\\Mobs\\PlayerAgent\\PlayerAgent-10780321.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.1+cu121"
+    }
+}

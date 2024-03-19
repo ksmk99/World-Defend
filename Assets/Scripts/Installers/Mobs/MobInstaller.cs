@@ -52,15 +52,15 @@ public class MobInstaller : MonoInstaller<MobInstaller>
         Container.Bind<MobModel>().AsSingle();
         Container.BindInterfacesAndSelfTo<MobPresenter>().AsSingle();
 
-        Container.BindInterfacesAndSelfTo<AnimationData>()
-            .AsSingle();
-        Container.Bind<IAnimationsController>()
-            .To<AnimationsController>()
-            .AsSingle()
-            .WithArguments(animator);
+        //Container.BindInterfacesAndSelfTo<AnimationData>()
+        //    .AsSingle();
+        //Container.Bind<IAnimationsController>()
+        //    .To<AnimationsController>()
+        //    .AsSingle()
+        //    .WithArguments(animator);
 
-        Container.BindSignal<SignalOnMove>().ToMethod<IAnimationsController>(x => x.SetMovement).FromResolve();
-        Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
+        //Container.BindSignal<SignalOnMove>().ToMethod<IAnimationsController>(x => x.SetMovement).FromResolve();
+        //Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
 
         Container
             .BindSignal<SignalOnRoomResetUnits>()

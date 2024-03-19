@@ -1,10 +1,7 @@
 ﻿using Helpers;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
-using static Zenject.SignalSubscription;
 using Random = UnityEngine.Random;
 
 namespace Unit
@@ -13,6 +10,7 @@ namespace Unit
     {
         public List<UnitView> ActiveUnits = new List<UnitView>();
         public Vector3 SpawnOffset => settings.StartPoint.position;
+        public Vector3 RoomSize => settings.Offset;
 
         private readonly EnemyView.Factory factory;
         private readonly EnemySpawnerSettings settings;

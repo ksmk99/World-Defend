@@ -10,6 +10,7 @@ public abstract class UnitPresenter : ITickable
     public Transform Transform => model.Transform;
     public Team Team => model.Team;
     public int RoomIndex => model.RoomIndex;    
+    public bool IsActive => model.IsActive; 
 
     protected IUnitModel model;
 

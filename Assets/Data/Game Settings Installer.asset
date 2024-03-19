@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Game Settings Installer
   m_EditorClassIdentifier: 
   playerMS:
-    MoveSpeed: 8
+    MoveSpeed: 7
     RotateSpeed: 1

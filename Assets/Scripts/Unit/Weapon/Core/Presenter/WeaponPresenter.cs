@@ -18,6 +18,8 @@ namespace Unit
         private readonly WeaponModel model;
         private List<BulletView> bullets = new List<BulletView>();
 
+        public IWeaponSettings Settings => settings;
+
         public WeaponPresenter(IWeaponModel model)
         {
             this.model = (WeaponModel)model;
