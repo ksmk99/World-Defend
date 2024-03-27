@@ -16,7 +16,6 @@ namespace Unit
     {
         private readonly WeaponSettings settings;
         private readonly WeaponModel model;
-        private List<BulletView> bullets = new List<BulletView>();
 
         public IWeaponSettings Settings => settings;
 
@@ -57,8 +56,16 @@ namespace Unit
                 return false;
             }
 
+            var direction = (enemy.transform.position - transform.position).normalized;
+            var distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if (Physics.Raycast(transform.position, direction, distance, model.Settings.BlockLayer))
+            {
+                return false;
+            }
+
             model.Target = enemy.transform;
             model.IsActing = true;
+            model.Team = team;
 
             model.NextUseTime = Time.time + settings.ReloadTime;
             model.ActionTimer = settings.BulletDelay;
@@ -101,19 +108,53 @@ namespace Unit
                 settings.Effects);
 
             BulletView bullet = model.BulletPool.Create(bulletSettings);
-            bullet.OnDispose += DisposeBullet;
             bullet.transform.SetParent(model.Parent.transform);
             bullet.transform.position += Vector3.up;
 
-            bullets.Add(bullet);
+            var presenter = bullet.GetPresenter();
+            bullet.OnDispose += DisposeView;
+            presenter.OnCollide += BulletCollide;
+
+            model.Disposables.Add(bullet);
         }
 
-        private void DisposeBullet(BulletView view)
+        private bool BulletCollide(Collider collider, Vector3 position)
         {
-            view.OnDispose -= DisposeBullet;
+            if (collider.TryGetComponent<UnitView>(out var view))
+            {
+                UnitPresenter presenter = view.GetPresenter();
+                var isSuccess = presenter.TryApplyEffects(settings.Effects, model.Team);
+                if (isSuccess)
+                {
+                    CreateHit(position);
+                }
+
+                return isSuccess;
+            }
+
+            CreateHit(position);
+
+            return true;
+        }
+
+        private void CreateHit(Vector3 position)
+        {
+            var hitSettings = new HitRuntimeSettings(position, Quaternion.identity);
+            var hit = model.HitPool.Create(hitSettings);
+            hit.transform.SetParent(model.Parent.transform);
+            hit.transform.position += Vector3.up;
+
+            hit.OnDispose += DisposeView;
+
+            model.Disposables.Add(hit);
+        }
+
+        private void DisposeView(ADisposeView view)
+        {
+            view.OnDispose -= DisposeView;
             view.transform.SetParent(model.Parent.transform);
 
-            bullets.Remove(view);
+            model.Disposables.Remove(view);
         }
 
         public void Reset()
@@ -129,13 +170,13 @@ namespace Unit
             model.TTL = 0;
             model.IsActing = false;
 
-            foreach (var bullet in bullets) 
+            foreach (var bullet in model.Disposables)
             {
-                bullet.OnDispose -= DisposeBullet;
+                bullet.OnDispose -= DisposeView;
                 bullet.Dispose();
             }
 
-            bullets.Clear();
+            model.Disposables.Clear();
         }
     }
 }

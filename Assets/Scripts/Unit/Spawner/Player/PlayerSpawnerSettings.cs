@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Cinemachine;
 
 namespace Unit
 {
@@ -9,6 +10,9 @@ namespace Unit
         [field: SerializeField]
         public Vector3 Offset { get; set; }
         [field: SerializeField]
-        public Transform StartPoint { get; set; }   
+        public Transform StartPoint { get; set; }
+
+        [field: SerializeField]
+        public CinemachineVirtualCamera CMCamera { get; set; }
     }
 }

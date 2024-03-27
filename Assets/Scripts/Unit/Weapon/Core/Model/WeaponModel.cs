@@ -1,4 +1,5 @@
 using Helpers;
+using System;
 using System.Collections.Generic;
 using Unit.Bullet;
 using UnityEngine;
@@ -10,8 +11,9 @@ namespace Unit
     {
         public IWeaponSettings Settings { get; set; }
         public BulletView.Factory BulletPool { get; set; }
+        public HitView.Factory HitPool { get; set; }
         public PoolParentFlag Parent { get; }
-        public List<IBulletPresenter> Bullets { get; set; }
+        public List<ADisposeView> Disposables { get; set; }
 
         public bool IsActing { get; set; }
         public bool CanUse { get; set; }
@@ -21,15 +23,20 @@ namespace Unit
         public float TTL { get; set; }
         public Transform Target { get; set; }
         public SignalBus SignalBus { get; set; }
+        public Team Team { get; internal set; }
+        public LayerMask BlockLayer { get; }
 
-        public WeaponModel(IWeaponSettings settings, BulletView.Factory factory, SignalBus signalBus, PoolParentFlag parent)
+        public WeaponModel(IWeaponSettings settings, BulletView.Factory bulletPool, HitView.Factory hitPool, SignalBus signalBus, PoolParentFlag parent)
         {
             Settings = settings;
-            CanUse = true;
-            BulletPool = factory;
+            BulletPool = bulletPool;
+            HitPool = hitPool;
+
             Parent = parent;
             SignalBus = signalBus;
-            Bullets = new List<IBulletPresenter>();
+
+            CanUse = true;
+            Disposables = new List<ADisposeView>();
         }
     }
 }

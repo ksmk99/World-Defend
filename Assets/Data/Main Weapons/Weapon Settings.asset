@@ -17,9 +17,14 @@ MonoBehaviour:
   <TargetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 128
+  <BlockLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 64
   <Effects>k__BackingField:
   - {fileID: 11400000, guid: 7f2985867de2dc448b626795af5b96ee, type: 2}
   BulletPrefab: {fileID: 5865941083765694682, guid: 8bba4bfc0d3211f4fa1c0ab571a28188,
+    type: 3}
+  HitPrefab: {fileID: -9082463660586353062, guid: 570c93b66c983284495e6cc387cee2d1,
     type: 3}
   BulletCount: 4
   ReloadTime: 0.6

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.Barracuda;
+using UnityEngine;
 
 namespace Unit
 {
@@ -14,10 +15,15 @@ namespace Unit
                 float distance = (position - enemies[i].transform.position).magnitude;
                 if (distance >= settings.MinDistance && distance <= minDistance && enemies[i].TryGetComponent(out UnitView view))
                 {
-                    if (view.GetPresenter().Team != team)
+                    var presenter = view.GetPresenter();
+                    if (presenter.Team != team && presenter.IsActive)
                     {
-                        minDistance = distance;
-                        result = view;
+                        var direction = (enemies[i].transform.position - position).normalized;
+                        if (!Physics.Raycast(position, direction, distance, settings.BlockLayer))
+                        {
+                            minDistance = distance;
+                            result = view;
+                        }
                     }
                 }
             }

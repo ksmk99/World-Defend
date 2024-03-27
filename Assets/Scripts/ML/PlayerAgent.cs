@@ -79,9 +79,9 @@ public class PlayerAgent : Agent
         UpdateRewardValue(-reward);
 
         var enemyUnits = GetNearestUnits(enemySpawner.ActiveUnits, transform.position);
-        foreach (var unit in enemyUnits)
-        {
-            var distance = Vector3.Distance(unit, transform.position);
+        if(enemyUnits.Length > 0)
+        { 
+            var distance = Vector3.Distance(enemyUnits[0], transform.position);
             var index = distance > weapon.Settings.MinDistance && distance < weapon.Settings.Distance ? 1 : -1;
 
             reward = GetReward(distanceRewardCurve, distanceReward);
@@ -91,9 +91,9 @@ public class PlayerAgent : Agent
         var colliders = new Collider[5];
         var bulletsCount = Physics.OverlapSphereNonAlloc(transform.position, bulletVisionRadius, colliders, bulletVisionLayer);
         bullets = colliders.Where(x => x != null).Select(x => x.transform.position).ToArray();
-        foreach (var bullet in bullets)
+        if(bullets.Length > 0)
         {
-            var distance = Vector3.Distance(bullet, transform.position);
+            var distance = Vector3.Distance(bullets[0], transform.position);
             var index = distance > minBulletDistance ? 1 : -1;
 
             reward = GetReward(bulletDistanceRewardCurve, bulletDistanceReward);
@@ -113,19 +113,30 @@ public class PlayerAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation((transform.position.x - enemySpawner.SpawnOffset.x) / roomSize.x);
-        sensor.AddObservation((transform.position.z - enemySpawner.SpawnOffset.z) / roomSize.z);
+        var value = GetNormalizedValue(transform.position.x, enemySpawner.RoomSize.x, enemySpawner.SpawnOffset.x);
+        sensor.AddObservation(value);
+        value = GetNormalizedValue(transform.position.z, enemySpawner.RoomSize.z, enemySpawner.SpawnOffset.z);
+        sensor.AddObservation(value);
 
         AddUnitsObservation(sensor, enemySpawner.ActiveUnits, transform.position, enemySpawner.SpawnOffset);
         AddUnitsObservation(sensor, mobSpawner.ActiveUnits, transform.position, enemySpawner.SpawnOffset);
         AddBulletsObservation(sensor, transform.position, bulletVisionRadius, bulletVisionLayer);
     }
 
+    private float GetNormalizedValue(float value, float roomSize, float offset)
+    {
+        value = value - offset;
+        var minValue = -roomSize / 2f;
+        var maxValue = roomSize / 2f;
+        var normalizeValue = (value - minValue) / (maxValue - minValue);
+        return normalizeValue; 
+    }
+
     private void AddBulletsObservation(VectorSensor sensor, Vector3 position, float radius, LayerMask layer)
     {
-        var colliders = new Collider[5];
+        var colliders = new Collider[1];
         var bulletsCount = Physics.OverlapSphereNonAlloc(position, radius, colliders, layer);
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 1; i++)
         {
             var bulletPos = Vector3.zero;
             if(bulletsCount > i)
@@ -133,8 +144,10 @@ public class PlayerAgent : Agent
                 bulletPos = colliders[i].transform.position;
             }
 
-            sensor.AddObservation(bulletPos.x / roomSize.x);
-            sensor.AddObservation(bulletPos.z / roomSize.z);
+            var value = GetNormalizedValue(bulletPos.x, roomSize.x, enemySpawner.SpawnOffset.x);
+            sensor.AddObservation(value);
+            value = GetNormalizedValue(bulletPos.z, roomSize.z, enemySpawner.SpawnOffset.z);
+            sensor.AddObservation(value);
         }
 
         
@@ -199,7 +212,7 @@ public class PlayerAgent : Agent
     private void AddUnitsObservation(VectorSensor sensor, List<UnitView> views, Vector3 position, Vector3 offset)
     {
         var enemyUnits = GetNearestUnits(views, position);
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 1; i++)
         {
             var observation = Vector3.zero;
             if (enemyUnits.Length > i)
@@ -208,8 +221,10 @@ public class PlayerAgent : Agent
                 observation -= offset;
             }
 
-            sensor.AddObservation(observation.x / roomSize.x);
-            sensor.AddObservation(observation.z / roomSize.z);
+            var value = GetNormalizedValue(observation.x, roomSize.x, enemySpawner.SpawnOffset.x);
+            sensor.AddObservation(value);
+            value = GetNormalizedValue(observation.z, roomSize.z, enemySpawner.SpawnOffset.z);
+            sensor.AddObservation(value);
         }
     }
 
@@ -219,7 +234,7 @@ public class PlayerAgent : Agent
             .OrderBy(x => Vector3.Distance(position, x.transform.position))
             .Select(x => x.transform.position);
 
-        return units.Take(3).ToArray();
+        return units.Take(1).ToArray();
     }
 
     private UnitView[] GetActiveMobs(List<UnitView> views, Vector3 position)

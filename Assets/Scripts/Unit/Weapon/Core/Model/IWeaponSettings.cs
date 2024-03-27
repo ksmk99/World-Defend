@@ -10,6 +10,7 @@ namespace Unit
         float Distance { get; }
         float MinDistance { get; }  
         LayerMask TargetLayer { get; }
+        LayerMask BlockLayer { get; }
         Type WeaponType { get; }
         List<EffectSettings> Effects { get; }
     }

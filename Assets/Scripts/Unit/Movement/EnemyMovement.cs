@@ -1,22 +1,25 @@
-﻿using UnityEngine;
+﻿using Helpers;
+using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
 namespace Unit
 {
     public class EnemyMovement : IMovement
     {
-        private readonly Transform target;
         private readonly EnemyMovementSettings settings;
+        private readonly SignalBus signalBus;
 
         private readonly Transform transform;
         private readonly NavMeshAgent agent;
 
-        private UnitPresenter player = default;  
+        private UnitPresenter player = default;
 
-        public EnemyMovement(EnemyView view, EnemyMovementSettings settings)
+        public EnemyMovement(EnemyView view, EnemyMovementSettings settings, SignalBus signalBus)
         {
             this.transform = view.transform;
             this.settings = settings;
+            this.signalBus = signalBus;
             this.agent = transform.GetComponent<NavMeshAgent>();
             agent.speed = settings.MoveSpeed;
 
@@ -42,16 +45,14 @@ namespace Unit
                     agent.SetDestination(hit.position);
                 }
             }
+
+            SendMoveSignal(agent.velocity.magnitude > 0.1f);
         }
 
-        private bool CheckTarget()
+        private void SendMoveSignal(bool isMoving)
         {
-            if(target == default)
-            {
-
-            }
-
-            return false;
+            var signal = new SignalOnMove(isMoving, transform);
+            signalBus.TryFire(signal);
         }
 
         private void Rotate(Vector3 direction)

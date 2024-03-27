@@ -31,7 +31,7 @@ public class MobInstaller : MonoInstaller<MobInstaller>
         Container.BindInterfacesAndSelfTo<HealthView>()
             .FromComponentInNewPrefab(healthViewPrefab)
             .AsSingle()
-            .WithArguments(healthBarIcon); 
+            .WithArguments(healthBarIcon);
 
         Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
         Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();
@@ -40,6 +40,11 @@ public class MobInstaller : MonoInstaller<MobInstaller>
         .FromMonoPoolableMemoryPool(
         x => x.WithInitialSize(weaponSettings.BulletCount)
             .FromComponentInNewPrefab(weaponSettings.BulletPrefab));
+
+        Container.BindFactory<HitRuntimeSettings, HitView, HitView.Factory>()
+    .FromMonoPoolableMemoryPool(
+    x => x.WithInitialSize(weaponSettings.BulletCount)
+    .FromComponentInNewPrefab(weaponSettings.HitPrefab));
 
         Container.Bind<IWeaponModel>().To<WeaponModel>()
             .AsTransient()
@@ -52,20 +57,25 @@ public class MobInstaller : MonoInstaller<MobInstaller>
         Container.Bind<MobModel>().AsSingle();
         Container.BindInterfacesAndSelfTo<MobPresenter>().AsSingle();
 
-        //Container.BindInterfacesAndSelfTo<AnimationData>()
-        //    .AsSingle();
-        //Container.Bind<IAnimationsController>()
-        //    .To<AnimationsController>()
-        //    .AsSingle()
-        //    .WithArguments(animator);
-
-        //Container.BindSignal<SignalOnMove>().ToMethod<IAnimationsController>(x => x.SetMovement).FromResolve();
-        //Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
+        BindAnimator();
 
         Container
             .BindSignal<SignalOnRoomResetUnits>()
             .ToMethod<MobPresenter>(x => x.Reset)
             .FromResolve();
+    }
+
+    private void BindAnimator()
+    {
+        Container.BindInterfacesAndSelfTo<AnimationData>()
+            .AsSingle();
+        Container.Bind<IAnimationsController>()
+            .To<AnimationsController>()
+            .AsSingle()
+            .WithArguments(animator, transform);
+
+        Container.BindSignal<SignalOnMove>().ToMethod<IAnimationsController>(x => x.SetMovement).FromResolve();
+        Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
     }
 }
 

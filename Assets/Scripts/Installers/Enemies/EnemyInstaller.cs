@@ -12,10 +12,14 @@ using Helpers;
 public class EnemyInstaller : MonoInstaller<EnemyInstaller>
 {
     [SerializeField] private HealthSettings healthSettings;
-    [SerializeField] private WeaponSettings weaponSettings;
     [SerializeField] private EnemyMovementSettings enemyMovement;
+    [SerializeField] private WeaponSettings weaponSettings;
+    [Space]
     [SerializeField] private HealthView healthPrefab;
     [SerializeField] private Sprite healthBarIcon;
+    [Space]
+    [SerializeField] private Animator animator;
+    [SerializeField] private Transform unit;
 
     public override void InstallBindings()
     {
@@ -24,6 +28,7 @@ public class EnemyInstaller : MonoInstaller<EnemyInstaller>
         BindMovement();
         BindHealth();
         BindWeapon();
+        BindAnimator();
 
         Container.Bind<EnemyModel>().AsSingle();
         Container.BindInterfacesAndSelfTo<EnemyPresenter>().AsSingle();
@@ -37,6 +42,19 @@ public class EnemyInstaller : MonoInstaller<EnemyInstaller>
         Container.Bind<IMovement>().To<EnemyMovement>().AsSingle();
 
         Container.BindInstance(enemyMovement).WhenInjectedInto<EnemyMovement>();
+    }
+
+    private void BindAnimator()
+    {
+        Container.BindInterfacesAndSelfTo<AnimationData>()
+            .AsSingle();
+        Container.Bind<IAnimationsController>()
+            .To<AnimationsController>()
+            .AsSingle()
+            .WithArguments(animator, unit);
+
+        Container.BindSignal<SignalOnMove>().ToMethod<IAnimationsController>(x => x.SetMovement).FromResolve();
+        Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
     }
 
     private void BindSignals()
@@ -66,6 +84,11 @@ public class EnemyInstaller : MonoInstaller<EnemyInstaller>
         .FromMonoPoolableMemoryPool(
         x => x.WithInitialSize(weaponSettings.BulletCount)
             .FromComponentInNewPrefab(weaponSettings.BulletPrefab));
+
+        Container.BindFactory<HitRuntimeSettings, HitView, HitView.Factory>()
+        .FromMonoPoolableMemoryPool(
+                 x => x.WithInitialSize(weaponSettings.BulletCount)
+                 .FromComponentInNewPrefab(weaponSettings.HitPrefab));
 
         Container.Bind<IWeaponModel>().To<WeaponModel>()
         .AsSingle()

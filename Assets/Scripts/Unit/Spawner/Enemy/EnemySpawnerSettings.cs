@@ -14,5 +14,7 @@ namespace Unit
         public Vector3 Offset { get; set; }
         [field: SerializeField]
         public Transform StartPoint { get; set; }
+        [field: SerializeField]
+        public Vector3 MapSize { get; set; }
     }
 }

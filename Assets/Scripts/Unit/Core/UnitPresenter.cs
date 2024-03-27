@@ -49,7 +49,7 @@ public abstract class UnitPresenter : ITickable
         model.Weapon.Reset();
     }
 
-    public virtual bool AddEffects(List<EffectSettings> effects, Team team)
+    public virtual bool TryApplyEffects(List<EffectSettings> effects, Team team)
     {
         if (model.Team == team)
         {

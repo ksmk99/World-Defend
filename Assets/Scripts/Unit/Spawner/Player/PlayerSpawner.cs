@@ -1,6 +1,7 @@
 ﻿using Helpers;
 using System.Threading.Tasks;
 using Unit;
+using Unity.Barracuda;
 using UnityEngine;
 using Zenject;
 
@@ -38,6 +39,9 @@ namespace Unit
             if (playerView == default)
             {
                 playerView = Create();
+                
+                settings.CMCamera.Follow = playerView.transform;
+                settings.CMCamera.LookAt = playerView.transform;    
             }
 
             SetStartSettings(playerView);

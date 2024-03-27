@@ -26,6 +26,11 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
              x => x.WithInitialSize(weaponSettings.BulletCount)
             .FromComponentInNewPrefab(weaponSettings.BulletPrefab));
 
+        Container.BindFactory<HitRuntimeSettings, HitView, HitView.Factory>()
+            .FromMonoPoolableMemoryPool(
+            x => x.WithInitialSize(weaponSettings.BulletCount)
+            .FromComponentInNewPrefab(weaponSettings.HitPrefab));
+
         Container.Bind<IWeaponModel>()
             .To<WeaponModel>()
             .AsTransient()
@@ -59,15 +64,15 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
 
         BindAgent();
 
-        //Container.BindInterfacesAndSelfTo<AnimationData>()
-        //    .AsSingle();
-        //Container.Bind<IAnimationsController>()
-        //    .To<AnimationsController>()
-        //    .AsSingle()
-        //    .WithArguments(settings.Animator, settings.Transform);
+        Container.BindInterfacesAndSelfTo<AnimationData>()
+            .AsSingle();
+        Container.Bind<IAnimationsController>()
+            .To<AnimationsController>()
+            .AsSingle()
+            .WithArguments(settings.Animator, settings.Transform);
 
-        //Container.BindSignal<SignalOnMove>().ToMethod<IAnimationsController>(x => x.SetMovement).FromResolve();
-        //Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
+        Container.BindSignal<SignalOnMove>().ToMethod<IAnimationsController>(x => x.SetMovement).FromResolve();
+        Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
 
 
         Container

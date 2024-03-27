@@ -15,11 +15,15 @@ namespace Unit
         [field: SerializeField]
         public LayerMask TargetLayer { get; set; }
         [field: SerializeField]
+        public LayerMask BlockLayer { get; set; }
+        [field: SerializeField]
         public List<EffectSettings> Effects { get; set; }
 
         public Type WeaponType => typeof(WeaponPresenter);
 
         public BulletView BulletPrefab;
+        public HitView HitPrefab;
+
         public int BulletCount;
         public float ReloadTime;
         public float BulletDelay;

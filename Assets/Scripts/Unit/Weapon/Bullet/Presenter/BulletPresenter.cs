@@ -9,15 +9,17 @@ namespace Unit.Bullet
         private BulletModel model;
         private BulletView view;
 
-        public BulletPresenter(BulletModel model, BulletView result)
+        public event Func<Collider, Vector3, bool> OnCollide;
+
+        public BulletPresenter(BulletModel model, BulletView view)
         {
             this.model = model;
-            this.view = result;
+            this.view = view;
         }
 
-        private void Reinitialize(BulletRuntimeSettings settings2)
+        private void Reinitialize(BulletRuntimeSettings settings)
         {
-            model.Init(settings2);
+            model.Init(settings);
 
             view.transform.position = model.RuntimeSettings.Position;
             view.transform.rotation = model.RuntimeSettings.Rotation;
@@ -25,18 +27,13 @@ namespace Unit.Bullet
 
         public void Collide(Collider other)
         {
-            if (other.TryGetComponent<UnitView>(out var view))
+            var isSuccess = OnCollide.Invoke(other, view.transform.position);
+            if(isSuccess)
             {
-                UnitPresenter presenter = view.GetPresenter();
-                var isSuccess = presenter.AddEffects(model.RuntimeSettings.Effects, model.RuntimeSettings.Team);
-                if (!isSuccess)
-                {
-                    return;
-                }
-            }
 
-            model.CanCollide = false;
-            Dispose();
+                model.CanCollide = false;
+                Dispose();
+            }
         }
 
         public void Tick()

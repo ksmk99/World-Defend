@@ -37,9 +37,8 @@ namespace Unit
                 return;
             }
 
-            var angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            var value = Mathf.Lerp(transform.rotation.y, angle, movementModel.RotateSpeed);// * Time.deltaTime;
-            transform.rotation = Quaternion.Euler(0, value, 0);
+            var targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, movementModel.RotateSpeed * Time.deltaTime);
         }
 
         private void SendMoveSignal(Vector3 direction)

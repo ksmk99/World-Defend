@@ -10,7 +10,7 @@ namespace Unit
     {
         public List<UnitView> ActiveUnits = new List<UnitView>();
         public Vector3 SpawnOffset => settings.StartPoint.position;
-        public Vector3 RoomSize => settings.Offset;
+        public Vector3 RoomSize => settings.MapSize;
 
         private readonly EnemyView.Factory factory;
         private readonly EnemySpawnerSettings settings;
