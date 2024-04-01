@@ -70,7 +70,7 @@ public class EnemyInstaller : MonoInstaller<EnemyInstaller>
         Container.BindInterfacesAndSelfTo<HealthView>()
             .FromComponentInNewPrefab(healthPrefab)
             .AsSingle()
-            .WithArguments(healthBarIcon);
+            .WithArguments(healthBarIcon, "");
     }
 
     private void BindWeapon()

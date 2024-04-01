@@ -69,7 +69,7 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
         Container.BindInterfacesAndSelfTo<HealthView>()
             .FromComponentInNewPrefab(healthPrefab)
             .AsSingle()
-            .WithArguments(healthBarIcon);
+            .WithArguments(healthBarIcon, "Player");
     }
 
     private void BindPlayer()
@@ -164,8 +164,6 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
     {
         [field: SerializeField]
         public Transform Transform { get; private set; }
-        [field: SerializeField]
-        public Joystick Joystick { get; private set; }
         [field: SerializeField]
         public Animator Animator { get; private set; }
     }

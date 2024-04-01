@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Unit.Bullet
 {
-    public class BulletPresenter : ITickable, IInitializable, IBulletPresenter
+    public class BulletPresenter : ITickable, IBulletPresenter
     {
         private BulletModel model;
         private BulletView view;
@@ -17,7 +17,7 @@ namespace Unit.Bullet
             this.view = view;
         }
 
-        private void Reinitialize(BulletRuntimeSettings settings)
+        public void Reinitialize(BulletRuntimeSettings settings)
         {
             model.Init(settings);
 
@@ -27,12 +27,16 @@ namespace Unit.Bullet
 
         public void Collide(Collider other)
         {
-            var isSuccess = OnCollide.Invoke(other, view.transform.position);
-            if (isSuccess)
+            if (!model.CanCollide)
             {
+                return;
+            }
 
-                model.CanCollide = false;
-                Dispose();
+            var isSuccess = model.Weapon.BulletCollide(other, view.transform.position);
+            model.CanCollide = !isSuccess;
+            if(isSuccess)
+            {
+                Debug.Log("Succes " + other);
             }
         }
 
@@ -69,10 +73,9 @@ namespace Unit.Bullet
             return distance > model.RuntimeSettings.Distance;
         }
 
-        public void Initialize()
+        public void SetWeapon(WeaponPresenter weaponPresenter)
         {
-            view.OnCollide += Collide;
-            view.OnReinitialize += Reinitialize;
+            model.Weapon = weaponPresenter;
         }
     }
 }

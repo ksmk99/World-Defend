@@ -1,4 +1,5 @@
 using Unit.Bullet;
+using Unity.Barracuda;
 using UnityEngine;
 
 namespace Unit
@@ -63,10 +64,18 @@ namespace Unit
             return true;
         }
 
+        private int count = 1;
+
         public void Attack(Transform transform, bool isDead, Team team)
         {
             if (isDead || IsReloading() || !SetAction(transform, team))
             {
+                return;
+            }
+
+            if (model.TTL >= settings.BulletCount * settings.BulletDelay)
+            {
+                model.IsActing = false;
                 return;
             }
 
@@ -78,11 +87,7 @@ namespace Unit
 
                 var signal = new SignalOnAttack();
                 model.SignalBus.TryFire(signal);
-            }
-
-            if (model.TTL >= settings.BulletCount * settings.BulletDelay)
-            {
-                model.IsActing = false;
+                count++;
             }
 
             model.ActionTimer += Time.deltaTime;
@@ -99,15 +104,16 @@ namespace Unit
             BulletView bullet = model.BulletPool.Create(bulletSettings);
             bullet.transform.SetParent(model.Parent.transform);
             bullet.transform.position += Vector3.up;
+            bullet.name = "Bullet " + count;
 
-            var presenter = bullet.GetPresenter();
+            BulletPresenter presenter = bullet.GetPresenter();
+            presenter.SetWeapon(this);
             bullet.OnDispose += DisposeView;
-            presenter.OnCollide += BulletCollide;
 
             model.Disposables.Add(bullet);
         }
 
-        private bool BulletCollide(Collider collider, Vector3 position)
+        public bool BulletCollide(Collider collider, Vector3 position)
         {
             if (collider.TryGetComponent<UnitView>(out var view))
             {

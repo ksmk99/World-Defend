@@ -16,7 +16,7 @@ MonoBehaviour:
   <MinDistance>k__BackingField: 1
   <TargetLayer>k__BackingField:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1024
   <BlockLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
@@ -27,5 +27,5 @@ MonoBehaviour:
   HitPrefab: {fileID: -9082463660586353062, guid: 570c93b66c983284495e6cc387cee2d1,
     type: 3}
   BulletCount: 1
-  ReloadTime: 0.2
-  BulletDelay: 0.1
+  ReloadTime: 1
+  BulletDelay: 1

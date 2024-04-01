@@ -9,6 +9,8 @@ namespace Unit
         public Team Team => RuntimeSettings.Team;
 
         public bool CanCollide { get; set; }
+        public bool IsSubscribed { get; set; }
+        public WeaponPresenter Weapon { get; internal set; }
 
         public BulletModel(IBulletSettings settings)
         {

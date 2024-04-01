@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Unit.Bullet
 {
-    public class BulletView : ADisposeView, IBulletView, IPoolable<BulletRuntimeSettings, IMemoryPool>
+    public class BulletView : ADisposeView, IPoolable<BulletRuntimeSettings, IMemoryPool>
     {
         private ParticleSystem[] particles;
 
@@ -13,9 +13,7 @@ namespace Unit.Bullet
 
         private BulletPresenter presenter;
 
-        public event Action<Collider> OnCollide;
         public override event Action<ADisposeView> OnDispose;
-        public event Action<BulletRuntimeSettings> OnReinitialize;
 
         [Inject]
         public void Init(BulletPresenter presenter)
@@ -52,29 +50,13 @@ namespace Unit.Bullet
         public void OnSpawned(BulletRuntimeSettings p1, IMemoryPool p2)
         {
             _pool = p2;
-            OnReinitialize?.Invoke(p1);
-
-            PlayParticles();
+            presenter.Reinitialize(p1);
         }
 
-        private async void PlayParticles()
+        private void OnTriggerEnter(Collider other)
         {
-            if (particles == null)
-            {
-                particles = GetComponentsInChildren<ParticleSystem>();
-            }
-
-            await Task.Delay(10);
-
-            foreach (ParticleSystem particle in particles)
-            {
-                particle?.Play();
-            }
-        }
-
-        public void OnTriggerEnter(Collider other)
-        {
-            OnCollide?.Invoke(other);
+            Debug.Log("Invoke " + other);
+            presenter.Collide(other);
         }
 
         public class Factory : PlaceholderFactory<BulletRuntimeSettings, BulletView>

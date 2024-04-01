@@ -86,6 +86,8 @@ namespace Unit
             presenter.SetRoom(roomIndex);
             presenter.Respawn();
 
+            enemy.gameObject.name = "Enemy " + spawnCount;
+
             ActiveUnits.Add(enemy);
         }
 

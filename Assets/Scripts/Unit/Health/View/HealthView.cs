@@ -19,6 +19,9 @@ namespace Unit
         [SerializeField] private RectTransform rect;
         [SerializeField] private TMP_Text healthText;
         [SerializeField] private Vector3 offset;
+        [Space]
+        [SerializeField] private Animation animation;
+        [SerializeField] private TMP_Text nicknameText;
 
         public RectTransform Rect => rect;
         public Vector3 Offset => offset;
@@ -27,10 +30,12 @@ namespace Unit
         private CancellationTokenSource cts;
 
         [Inject]
-        public void Init(SignalBus signalBus, Sprite sprite)
+        public void Init(SignalBus signalBus, Sprite sprite, string name)
         {
             this.signalBus = signalBus;
             healthBar.sprite = sprite;
+            nicknameText.text = name;   
+
             cts = new CancellationTokenSource();
         }
 
@@ -56,6 +61,7 @@ namespace Unit
         {
             healthBar.fillAmount = data.Health / data.MaxHealth;
             healthText.text = data.Health.ToString();
+            animation.Play();
 
             cts.Cancel();
             cts = new CancellationTokenSource();

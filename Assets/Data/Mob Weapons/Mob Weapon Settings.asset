@@ -16,7 +16,7 @@ MonoBehaviour:
   <MinDistance>k__BackingField: 4
   <TargetLayer>k__BackingField:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1024
   <BlockLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
