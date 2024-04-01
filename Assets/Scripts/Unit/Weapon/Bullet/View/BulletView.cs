@@ -11,17 +11,17 @@ namespace Unit.Bullet
 
         private IMemoryPool _pool;
 
-        private BulletPresenter presenter;
+        private ABulletPresenter presenter;
 
         public override event Action<ADisposeView> OnDispose;
 
         [Inject]
-        public void Init(BulletPresenter presenter)
+        public void Init(ABulletPresenter presenter)
         {
             this.presenter = presenter;
         }
 
-        public BulletPresenter GetPresenter()
+        public ABulletPresenter GetPresenter()
         {
             return presenter;
         }
@@ -55,7 +55,6 @@ namespace Unit.Bullet
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Invoke " + other);
             presenter.Collide(other);
         }
 

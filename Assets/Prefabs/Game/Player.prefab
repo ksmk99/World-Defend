@@ -3347,7 +3347,6 @@ MonoBehaviour:
   RoomIndex: 1
   settings:
     <Transform>k__BackingField: {fileID: 632017414469642739}
-    <Joystick>k__BackingField: {fileID: 0}
     <Animator>k__BackingField: {fileID: 718323420605218998}
   movementSettings:
     MoveSpeed: 5
@@ -3360,7 +3359,7 @@ MonoBehaviour:
     HealCount: 50
   enemyDetectorData:
     <RotationSpeed>k__BackingField: 5
-  weaponSettings: {fileID: 11400000, guid: 4851361856ca003448c211b2d6bf2df0, type: 2}
+  weaponSettings: {fileID: 11400000, guid: 16fb455fc19a9d544a522c99422f4865, type: 2}
   healthPrefab: {fileID: 2671775819908182200, guid: 504d91682790efc41abe87f2ec3a28e0,
     type: 3}
   healthBarIcon: {fileID: 21300000, guid: a833faab059b93b449aa75d2adf4203c, type: 3}

@@ -1510,6 +1510,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3134426075482667356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4719549060993523202}
+  m_Layer: 0
+  m_Name: '[Player Pool]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4719549060993523202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3134426075482667356}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7982695976357910412}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3256551265207421221
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,50 +2187,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 617be1c2b9df70047b1962a9edf05817, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &3810316254003435658
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3810316254003435660}
-  - component: {fileID: 3810316254003435659}
-  m_Layer: 0
-  m_Name: '[Bullet Pool]'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3810316254003435660
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3810316254003435658}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7982695976357910412}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3810316254003435659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3810316254003435658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7f7abd04ced9734cb59516cd50bd4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3810316254066094233
@@ -3050,7 +3037,7 @@ MonoBehaviour:
   RoomIndex: 1
   prefab: {fileID: 1105396708260317832, guid: 2ec30f69a8288054b85742c5fb633ec9, type: 3}
   mobSpawnerSettings:
-    SpawnCount: 1
+    SpawnCount: 3
     <Offset>k__BackingField: {x: 22.5, y: 0, z: 22.5}
     <StartPoint>k__BackingField: {fileID: 4810413522223770963}
   spawnerSettings:
@@ -3188,10 +3175,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RoomIndex: 1
   enemiesSpawnerSettings:
-    Count: 11
+    Count: 15
     SpawnRateMin: 0.5
     SpawnRateMax: 5
-    <Offset>k__BackingField: {x: 22.5, y: 0, z: 22.5}
+    <Offset>k__BackingField: {x: 22, y: 0, z: 22}
     <StartPoint>k__BackingField: {fileID: 7895053760647252996}
     <MapSize>k__BackingField: {x: 40, y: 0, z: 40}
   spawnerSettings:
@@ -3631,9 +3618,9 @@ Transform:
   m_GameObject: {fileID: 6423928186642950673}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.0321846, y: -11.856838, z: 1.1165829}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2206606007660640634}
   - {fileID: 4406577737772929925}
@@ -3641,7 +3628,7 @@ Transform:
   - {fileID: 3810316252487923840}
   - {fileID: 3810316254167011161}
   - {fileID: 3810316252884218915}
-  - {fileID: 3810316254003435660}
+  - {fileID: 4719549060993523202}
   - {fileID: 3810316252490150994}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4272,7 +4259,7 @@ MonoBehaviour:
   spawnerSettings:
     Types:
     - Prefab: {fileID: 1903814587, guid: c695e60766f24dc488a96917d7f334ee, type: 3}
-  poolParent: {fileID: 3810316252487923840}
+  poolParent: {fileID: 4719549060993523202}
 --- !u!1 &7448544149040909178
 GameObject:
   m_ObjectHideFlags: 0

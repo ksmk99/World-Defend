@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c435d1fe9500146991342f23adefc1, type: 3}
+  m_Name: ShotGun Settings
+  m_EditorClassIdentifier: 
+  <Distance>k__BackingField: 10
+  <MinDistance>k__BackingField: 1
+  <TargetLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 1024
+  <BlockLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 64
+  <Effects>k__BackingField:
+  - {fileID: 11400000, guid: 7f2985867de2dc448b626795af5b96ee, type: 2}
+  <BulletPrefab>k__BackingField: {fileID: 5865941083765694682, guid: 8bba4bfc0d3211f4fa1c0ab571a28188,
+    type: 3}
+  <HitPrefab>k__BackingField: {fileID: -9082463660586353062, guid: 570c93b66c983284495e6cc387cee2d1,
+    type: 3}
+  <BulletPrespawnCount>k__BackingField: 6
+  ReloadTime: 2
+  BulletInWave: 6
+  WaveCount: 3
+  WaveDelay: 0.5
+  Angle: 45

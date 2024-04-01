@@ -75,8 +75,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -225,7 +225,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   rect: {fileID: 267357839736057757}
   healthText: {fileID: 2227309191569818265}
-  offset: {x: 0, y: 300, z: 0}
+  offset: {x: 0, y: 200, z: 0}
   animation: {fileID: 3667045448810874188}
   nicknameText: {fileID: 3786208418348479639}
 --- !u!111 &3667045448810874188

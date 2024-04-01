@@ -526,7 +526,7 @@ MonoBehaviour:
     HealDelay: 0
     HealRate: 0
     HealCount: 0
-  weaponSettings: {fileID: 11400000, guid: 17eb7cac167ff164981ac0d0bbabab66, type: 2}
+  weaponSettings: {fileID: 11400000, guid: b79b0bdafb5ea3f4e96023ce388751dd, type: 2}
   movement:
     MoveSpeed: 4
     RotateSpeed: 21

@@ -8,7 +8,7 @@ public class EnemyInstaller : MonoInstaller<EnemyInstaller>
 {
     [SerializeField] private HealthSettings healthSettings;
     [SerializeField] private EnemyMovementSettings enemyMovement;
-    [SerializeField] private WeaponSettings weaponSettings;
+    [SerializeField] private AWeaponSettings weaponSettings;
     [Space]
     [SerializeField] private HealthView healthPrefab;
     [SerializeField] private Sprite healthBarIcon;
@@ -77,12 +77,12 @@ public class EnemyInstaller : MonoInstaller<EnemyInstaller>
     {
         Container.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
         .FromMonoPoolableMemoryPool(
-        x => x.WithInitialSize(weaponSettings.BulletCount)
+        x => x.WithInitialSize(weaponSettings.BulletPrespawnCount)
             .FromComponentInNewPrefab(weaponSettings.BulletPrefab));
 
         Container.BindFactory<HitRuntimeSettings, HitView, HitView.Factory>()
         .FromMonoPoolableMemoryPool(
-                 x => x.WithInitialSize(weaponSettings.BulletCount)
+                 x => x.WithInitialSize(weaponSettings.BulletPrespawnCount)
                  .FromComponentInNewPrefab(weaponSettings.HitPrefab));
 
         Container.Bind<IWeaponModel>().To<WeaponModel>()

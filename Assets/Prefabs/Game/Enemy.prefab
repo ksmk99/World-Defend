@@ -79,7 +79,7 @@ MonoBehaviour:
     MoveSpeed: 2.5
     RotateSpeed: 21
     MaxDistance: 999
-  weaponSettings: {fileID: 11400000, guid: e2ecfd870eda3b54f8544dbe557e2afd, type: 2}
+  weaponSettings: {fileID: 11400000, guid: d8c9a23ff387d4b4ba29c0933bbd7c99, type: 2}
   healthPrefab: {fileID: 2671775819908182200, guid: 504d91682790efc41abe87f2ec3a28e0,
     type: 3}
   healthBarIcon: {fileID: 21300000, guid: edddd0f1c7f85604f84506c69b695da1, type: 3}

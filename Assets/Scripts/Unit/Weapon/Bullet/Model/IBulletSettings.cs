@@ -1,8 +1,10 @@
-﻿namespace Unit.Bullet
+﻿using System;
+
+namespace Unit
 {
     public interface IBulletSettings
     {
-        [field: SerializeField]
-        public float Speed { get; set; }
+        float Speed { get; set; }
+        Type BulletType { get; }
     }
 }

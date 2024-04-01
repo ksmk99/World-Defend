@@ -67,8 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b2e38f3a3da444197bd7a999aaa882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings:
-    <Speed>k__BackingField: 7
+  settings: {fileID: 11400000, guid: 07359741b7929dd418ef95c34a86ce12, type: 2}
 --- !u!114 &5865941083765694682
 MonoBehaviour:
   m_ObjectHideFlags: 0

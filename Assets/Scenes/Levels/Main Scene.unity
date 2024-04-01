@@ -843,21 +843,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2801677506545878091, guid: 81363d8491f840d48a62743064fc5d98,
-        type: 3}
-      propertyPath: enemiesSpawnerSettings.Count
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2801677506545878091, guid: 81363d8491f840d48a62743064fc5d98,
-        type: 3}
-      propertyPath: enemiesSpawnerSettings.<Offset>k__BackingField.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2801677506545878091, guid: 81363d8491f840d48a62743064fc5d98,
-        type: 3}
-      propertyPath: enemiesSpawnerSettings.<Offset>k__BackingField.z
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 2884497093136317120, guid: 81363d8491f840d48a62743064fc5d98,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -939,7 +924,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3810316252487923855, guid: 81363d8491f840d48a62743064fc5d98, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81363d8491f840d48a62743064fc5d98, type: 3}

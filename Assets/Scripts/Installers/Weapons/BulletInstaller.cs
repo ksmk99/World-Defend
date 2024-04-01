@@ -6,12 +6,18 @@ using Zenject;
 
 public class BulletInstaller : MonoInstaller<BulletInstaller>
 {
-    [SerializeField] private BulletSettings settings;
+    [SerializeField] private ABulletSettings settings;
 
     public override void InstallBindings()
     {
         Container.Bind<BulletView>().FromComponentOnRoot().AsSingle();
         Container.Bind<BulletModel>().AsSingle().WithArguments(settings);
-        Container.BindInterfacesAndSelfTo<BulletPresenter>().AsSingle();
+        Container.Bind<ABulletPresenter>()
+            .To(settings.BulletType)
+            .AsTransient();
+
+        Container.Bind<ITickable>()
+            .To(settings.BulletType)
+            .AsTransient();
     }
 }

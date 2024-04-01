@@ -8,7 +8,7 @@ public class MobInstaller : MonoInstaller<MobInstaller>
 {
     [SerializeField] private int RoomIndex = 1;
     [SerializeField] private HealthSettings healthSettings;
-    [SerializeField] private WeaponSettings weaponSettings;
+    [SerializeField] private AWeaponSettings weaponSettings;
     [SerializeField] private MobMovementSettings movement;
     [SerializeField] private Animator animator;
     [SerializeField] private HealthView healthViewPrefab;
@@ -33,12 +33,12 @@ public class MobInstaller : MonoInstaller<MobInstaller>
 
         Container.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
         .FromMonoPoolableMemoryPool(
-        x => x.WithInitialSize(weaponSettings.BulletCount)
+        x => x.WithInitialSize(weaponSettings.BulletPrespawnCount)
             .FromComponentInNewPrefab(weaponSettings.BulletPrefab));
 
         Container.BindFactory<HitRuntimeSettings, HitView, HitView.Factory>()
     .FromMonoPoolableMemoryPool(
-    x => x.WithInitialSize(weaponSettings.BulletCount)
+    x => x.WithInitialSize(weaponSettings.BulletPrespawnCount)
     .FromComponentInNewPrefab(weaponSettings.HitPrefab));
 
         Container.Bind<IWeaponModel>().To<WeaponModel>()

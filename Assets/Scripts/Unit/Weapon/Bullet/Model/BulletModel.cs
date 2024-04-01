@@ -10,7 +10,7 @@ namespace Unit
 
         public bool CanCollide { get; set; }
         public bool IsSubscribed { get; set; }
-        public WeaponPresenter Weapon { get; internal set; }
+        public AWeaponPresenter Weapon { get; internal set; }
 
         public BulletModel(IBulletSettings settings)
         {
@@ -20,7 +20,6 @@ namespace Unit
         public void Init(BulletRuntimeSettings param3)
         {
             RuntimeSettings = param3;
-
             CanCollide = true;
         }
     }
