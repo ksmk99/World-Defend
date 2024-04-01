@@ -27,5 +27,5 @@ MonoBehaviour:
   HitPrefab: {fileID: -9082463660586353062, guid: 570c93b66c983284495e6cc387cee2d1,
     type: 3}
   BulletCount: 1
-  ReloadTime: 3
+  ReloadTime: 0.2
   BulletDelay: 0.1

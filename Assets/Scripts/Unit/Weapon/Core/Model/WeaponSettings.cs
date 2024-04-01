@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Unit
 {
-    [CreateAssetMenu()]
+    [CreateAssetMenu(fileName = "Weapon Settings", menuName = "Game/WeaponSettings")]
     public class WeaponSettings : ScriptableObject, IWeaponSettings
     {
         [field: SerializeField]

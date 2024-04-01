@@ -1,3 +1,4 @@
+using Gameplay;
 using Helpers;
 using Unit;
 using UnityEngine;
@@ -8,13 +9,13 @@ namespace Installers
     [CreateAssetMenu(fileName = "Game Settings Installer", menuName = "Installers/Game Settings Installer")]
     public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInstaller>
     {
-        [SerializeField] private MovementSettings playerMS;
+        [SerializeField] private LevelSettingsData levelSettings;
 
         public override void InstallBindings()
         {
             BindSignals();
             Container
-                .BindInstance(playerMS)
+                .BindInstance(levelSettings)
                 .IfNotBound();
         }
 

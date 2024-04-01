@@ -18,6 +18,10 @@ public class EnemiesInstaller : AUnitInstaller
 
     private void InstallEnemyFactory()
     {
+        Container
+            .BindInstance(enemiesSpawnerSettings)
+            .IfNotBound();
+
         Container.BindInstance(healthParentFlag);
         Container.Bind<CustomPool<EnemyView>>().AsSingle();
         Container.Bind<ISpawnManager>().To<SpawnManager>()
@@ -30,7 +34,7 @@ public class EnemiesInstaller : AUnitInstaller
 
         Container.BindInterfacesAndSelfTo<EnemySpawner>()
             .AsSingle()
-            .WithArguments(enemiesSpawnerSettings, poolParent, RoomIndex);
+            .WithArguments(poolParent, RoomIndex);
 
         Container
             .BindSignal<SignalOnRoomReset>()

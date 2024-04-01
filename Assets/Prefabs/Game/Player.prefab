@@ -3349,6 +3349,9 @@ MonoBehaviour:
     <Transform>k__BackingField: {fileID: 632017414469642739}
     <Joystick>k__BackingField: {fileID: 0}
     <Animator>k__BackingField: {fileID: 718323420605218998}
+  movementSettings:
+    MoveSpeed: 5
+    RotateSpeed: 10
   healthSettings:
     MaxHealth: 5000
     IsAutoHeal: 1

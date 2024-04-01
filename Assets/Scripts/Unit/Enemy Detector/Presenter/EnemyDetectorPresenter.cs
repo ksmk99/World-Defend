@@ -18,6 +18,7 @@ namespace Unit
         public void Tick()
         {
             var target = model.EnemySpawner.ActiveUnits
+                    .Where(x => x.GetPresenter().IsActive && x.GetPresenter().IsActive)
                     .OrderBy(x => Vector3.Distance(model.Transform.position, x.transform.position))
                     .FirstOrDefault();
 

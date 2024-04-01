@@ -1,3 +1,4 @@
+using Gameplay;
 using Helpers;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,6 @@ public class PlayerAgent : Agent
 {
     [SerializeField] private bool isDebug;
     [Space]
-    [SerializeField] private float episodeDuration = 60f;
     [SerializeField] private float minCumulativeReward = -1000;
     [SerializeField] private float bulletVisionRadius = 5f;
     [SerializeField] private LayerMask bulletVisionLayer;
@@ -38,6 +38,7 @@ public class PlayerAgent : Agent
 
     private IInputService inputService;
 
+    private LevelSettingsData levelSettings;
     private MobSpawner mobSpawner;
     private EnemySpawner enemySpawner;
     private PlayerPresenter presenter;
@@ -53,7 +54,9 @@ public class PlayerAgent : Agent
     private Vector3 roomSize => enemySpawner.RoomSize * 1.2f;
 
     [Inject]
-    public void Init(IInputService inputService, EnemySpawner enemySpawner, MobSpawner mobSpawner, PlayerPresenter presenter, SignalBus signalBus, IWeaponPresenter weapon)
+    public void Init(IInputService inputService, LevelSettingsData levelSettings, 
+        EnemySpawner enemySpawner, MobSpawner mobSpawner, 
+        PlayerPresenter presenter, SignalBus signalBus, IWeaponPresenter weapon)
     {
         this.inputService = inputService;
         this.mobSpawner = mobSpawner;
@@ -61,6 +64,7 @@ public class PlayerAgent : Agent
         this.presenter = presenter;
         this.signalBus = signalBus;
         this.weapon = weapon;
+        this.levelSettings = levelSettings;
     }
 
     /// <summary>
@@ -194,7 +198,7 @@ public class PlayerAgent : Agent
 
     private float GetReward(AnimationCurve rewardCurve, float rewardIndex)
     {
-        var time = (Time.time - startTime) / episodeDuration;
+        var time = (Time.time - startTime) / levelSettings.Duration;
         var reward = rewardCurve.Evaluate(time) * rewardIndex;
         return reward;
     }
@@ -273,7 +277,7 @@ public class PlayerAgent : Agent
 
     private async void StartEndEpisodeTimer(CancellationTokenSource cts)
     {
-        await Task.Delay((int)(episodeDuration * 1000));
+        await Task.Delay((int)(levelSettings.Duration * 1000));
 
         if (cts.IsCancellationRequested)
         {

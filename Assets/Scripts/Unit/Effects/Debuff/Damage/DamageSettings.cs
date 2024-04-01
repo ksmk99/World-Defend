@@ -2,7 +2,7 @@
 
 namespace Unit
 {
-    [CreateAssetMenu()]
+    [CreateAssetMenu(fileName = "Damage Settings", menuName = "Game/Effects/Damage Settings")]
     public class DamageSettings : EffectSettings
     {
         [field: SerializeField]

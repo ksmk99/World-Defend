@@ -11,6 +11,7 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
     [SerializeField] private int RoomIndex = 1;
     [Header("Settings")]
     [SerializeField] private Settings settings;
+    [SerializeField] private MovementSettings movementSettings;
     [SerializeField] private HealthSettings healthSettings;
     [SerializeField] private EnemyDetectorData enemyDetectorData;
     [SerializeField] private WeaponSettings weaponSettings;
@@ -24,6 +25,7 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
 
         BindWeapon();
         BindHealth();
+        BindMovement();
         BindPlayer();
         BindAgent();
         BindAnimations();
@@ -72,13 +74,6 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
 
     private void BindPlayer()
     {
-        Container.Bind<IInputService>()
-            .To<MLInputService>()
-            .AsSingle();
-        Container.Bind<IMovement>().To<PlayerMovement>()
-            .AsTransient()
-            .WithArguments(settings.Transform)
-            .WhenInjectedInto<PlayerModel>();
         Container.BindInstance(settings.Transform).WhenInjectedInto<PlayerModel>();
         Container.Bind<IUnitModel>().To<PlayerModel>()
             .AsSingle()
@@ -87,6 +82,17 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
         Container.BindInterfacesAndSelfTo<PlayerView>()
             .FromComponentInHierarchy()
             .AsSingle();
+    }
+
+    private void BindMovement()
+    {
+        Container.Bind<IInputService>()
+            .To<MLInputService>()
+            .AsSingle();
+        Container.Bind<IMovement>().To<PlayerMovement>()
+            .AsTransient()
+            .WithArguments(settings.Transform, movementSettings)
+            .WhenInjectedInto<PlayerModel>();
     }
 
     private void BindAnimations()
