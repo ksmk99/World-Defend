@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace GameplayState
+﻿namespace GameplayState
 {
-    public abstract class StateMachine<T> 
+    public abstract class StateMachine<T>
         where T : State
     {
         private T state = null;

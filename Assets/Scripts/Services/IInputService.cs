@@ -2,6 +2,6 @@
 
 public interface IInputService
 {
-    void SetMoveDirection(Vector3 direction);   
+    void SetMoveDirection(Vector3 direction);
     Vector3 GetMoveDirection();
 }

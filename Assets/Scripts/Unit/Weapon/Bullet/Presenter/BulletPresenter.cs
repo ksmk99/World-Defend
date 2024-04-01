@@ -28,7 +28,7 @@ namespace Unit.Bullet
         public void Collide(Collider other)
         {
             var isSuccess = OnCollide.Invoke(other, view.transform.position);
-            if(isSuccess)
+            if (isSuccess)
             {
 
                 model.CanCollide = false;

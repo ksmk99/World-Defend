@@ -1,10 +1,10 @@
-using Unit.Bullet;
+using Helpers;
+using Services;
+using System;
 using Unit;
+using Unit.Bullet;
 using UnityEngine;
 using Zenject;
-using Helpers;
-using System;
-using Services;
 
 public class PlayerInstaller : MonoInstaller<PlayerInstaller>
 {
@@ -12,6 +12,7 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
     [Header("Settings")]
     [SerializeField] private Settings settings;
     [SerializeField] private HealthSettings healthSettings;
+    [SerializeField] private EnemyDetectorData enemyDetectorData;
     [SerializeField] private WeaponSettings weaponSettings;
     [SerializeField] private HealthView healthPrefab;
     [SerializeField] private Sprite healthBarIcon;
@@ -21,6 +22,25 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
         Container.Bind<HealthModel>()
             .AsTransient().WithArguments(healthSettings);
 
+        BindWeapon();
+        BindHealth();
+        BindPlayer();
+        BindAgent();
+        BindAnimations();
+        BindEnemyDetector();
+
+        Container
+            .BindSignal<SignalOnPlayerDeath>()
+            .ToMethod<PlayerPresenter>(x => x.Death)
+            .FromResolve();
+        Container
+            .BindSignal<SignalOnRoomResetUnits>()
+            .ToMethod<PlayerPresenter>(x => x.Reset)
+            .FromResolve();
+    }
+
+    private void BindWeapon()
+    {
         Container.BindFactory<BulletRuntimeSettings, BulletView, BulletView.Factory>()
         .FromMonoPoolableMemoryPool(
              x => x.WithInitialSize(weaponSettings.BulletCount)
@@ -38,14 +58,20 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
         Container.Bind<IWeaponPresenter>()
             .To(weaponSettings.WeaponType)
             .AsSingle();
+    }
 
+    private void BindHealth()
+    {
         Container.Bind<HealthFollower>().AsSingle().WithArguments(settings.Transform);
         Container.BindInterfacesAndSelfTo<HealthPresenter>().AsSingle();
         Container.BindInterfacesAndSelfTo<HealthView>()
             .FromComponentInNewPrefab(healthPrefab)
             .AsSingle()
             .WithArguments(healthBarIcon);
+    }
 
+    private void BindPlayer()
+    {
         Container.Bind<IInputService>()
             .To<MLInputService>()
             .AsSingle();
@@ -61,9 +87,10 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
         Container.BindInterfacesAndSelfTo<PlayerView>()
             .FromComponentInHierarchy()
             .AsSingle();
+    }
 
-        BindAgent();
-
+    private void BindAnimations()
+    {
         Container.BindInterfacesAndSelfTo<AnimationData>()
             .AsSingle();
         Container.Bind<IAnimationsController>()
@@ -71,18 +98,22 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
             .AsSingle()
             .WithArguments(settings.Animator, settings.Transform);
 
+
         Container.BindSignal<SignalOnMove>().ToMethod<IAnimationsController>(x => x.SetMovement).FromResolve();
         Container.BindSignal<SignalOnAttack>().ToMethod<IAnimationsController>(x => x.TriggerAttack).FromResolve();
+    }
 
-
-        Container
-            .BindSignal<SignalOnPlayerDeath>()
-            .ToMethod<PlayerPresenter>(x => x.Death)
-            .FromResolve();
-        Container
-            .BindSignal<SignalOnRoomResetUnits>()
-            .ToMethod<PlayerPresenter>(x => x.Reset)
-            .FromResolve();
+    private void BindEnemyDetector()
+    {
+        Container.Bind<IEnemyDetectorModel>()
+            .To<EnemyDetectorModel>()
+            .AsSingle()
+            .WithArguments(enemyDetectorData, transform);
+        Container.Bind<EnemyDetectorView>()
+            .FromComponentInHierarchy()
+            .AsSingle();
+        Container.BindInterfacesAndSelfTo<EnemyDetectorPresenter>()
+            .AsSingle();
     }
 
     private void BindAgent()

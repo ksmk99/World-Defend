@@ -1,5 +1,4 @@
 ﻿using Helpers;
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -25,7 +24,7 @@ namespace Unit
 
         public void Update(HealthView view, bool isDead)
         {
-            if(isDead || !CheckInBounds())
+            if (isDead || !CheckInBounds())
             {
                 view.gameObject.SetActive(false);
                 return;

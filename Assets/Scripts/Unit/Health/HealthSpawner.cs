@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Unit
 {
-    public class HealthSpawner 
+    public class HealthSpawner
     {
         private readonly HealthView.Factory factory;
         private readonly Transform parent;

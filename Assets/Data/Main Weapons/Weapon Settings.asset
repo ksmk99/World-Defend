@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Weapon Settings
   m_EditorClassIdentifier: 
   <Distance>k__BackingField: 8
-  <MinDistance>k__BackingField: 5
+  <MinDistance>k__BackingField: 1
   <TargetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 128
@@ -26,6 +26,6 @@ MonoBehaviour:
     type: 3}
   HitPrefab: {fileID: -9082463660586353062, guid: 570c93b66c983284495e6cc387cee2d1,
     type: 3}
-  BulletCount: 4
-  ReloadTime: 0.6
+  BulletCount: 1
+  ReloadTime: 3
   BulletDelay: 0.1

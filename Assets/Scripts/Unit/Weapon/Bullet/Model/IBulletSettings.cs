@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Unit.Bullet
+﻿namespace Unit.Bullet
 {
     public interface IBulletSettings
     {

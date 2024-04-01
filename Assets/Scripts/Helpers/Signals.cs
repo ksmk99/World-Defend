@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Helpers
 {
@@ -91,20 +86,23 @@ namespace Helpers
     #region Health
     public interface ISignalOnHealthChange
     {
-        public float Percent { get; }
         public float Health { get; }
+        public float MaxHealth { get; }
+        public float ChangeValue { get; }
+
     }
 
     public class SignalOnUnitDamage : ISignalOnHealthChange
     {
-        public float Percent { get; }
-
         public float Health { get; }
+        public float MaxHealth { get; }
+        public float ChangeValue { get; }
 
-        public SignalOnUnitDamage(float percent, float health)
+        public SignalOnUnitDamage(float health, float maxHealth, float changeValue)
         {
-            Percent = percent;
             Health = health;
+            MaxHealth = maxHealth;
+            ChangeValue = changeValue;
         }
     }
 
@@ -122,13 +120,15 @@ namespace Helpers
 
     public class SignalOnUnitHeal : ISignalOnHealthChange
     {
-        public float Percent { get; }
         public float Health { get; }
+        public float MaxHealth { get; }
+        public float ChangeValue { get; }
 
-        public SignalOnUnitHeal(float percent, float health)
+        public SignalOnUnitHeal(float health, float maxHealth, float changeValue)
         {
-            Percent = percent;
             Health = health;
+            MaxHealth = maxHealth;
+            ChangeValue = changeValue;
         }
     }
     #endregion

@@ -1,7 +1,4 @@
 ﻿using Helpers;
-using System.Threading.Tasks;
-using Unit;
-using Unity.Barracuda;
 using UnityEngine;
 using Zenject;
 
@@ -18,7 +15,7 @@ namespace Unit
 
         private PlayerView playerView;
 
-        public PlayerSpawner(PlayerView.Factory factory, PlayerSpawnerSettings settings, ISpawnManager spawnManager, 
+        public PlayerSpawner(PlayerView.Factory factory, PlayerSpawnerSettings settings, ISpawnManager spawnManager,
             CustomPool<PlayerView> pool, Transform parent, int roomIndex)
         {
             this.factory = factory;
@@ -39,9 +36,9 @@ namespace Unit
             if (playerView == default)
             {
                 playerView = Create();
-                
+
                 settings.CMCamera.Follow = playerView.transform;
-                settings.CMCamera.LookAt = playerView.transform;    
+                settings.CMCamera.LookAt = playerView.transform;
             }
 
             SetStartSettings(playerView);
@@ -78,7 +75,7 @@ namespace Unit
 
 
                 //var id = signal.View.GetPoolID();
-           //     pool.Release(id, (PlayerView)signal.View);
+                //     pool.Release(id, (PlayerView)signal.View);
             }
         }
 

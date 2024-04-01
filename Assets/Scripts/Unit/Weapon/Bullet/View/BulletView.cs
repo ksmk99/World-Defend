@@ -25,17 +25,17 @@ namespace Unit.Bullet
 
         public BulletPresenter GetPresenter()
         {
-            return presenter;   
+            return presenter;
         }
 
         public override void Dispose()
         {
-            if(particles == null)
+            if (particles == null)
             {
                 particles = GetComponentsInChildren<ParticleSystem>();
             }
 
-            foreach(ParticleSystem particle in particles)
+            foreach (ParticleSystem particle in particles)
             {
                 particle.Stop();
             }
@@ -50,7 +50,7 @@ namespace Unit.Bullet
         }
 
         public void OnSpawned(BulletRuntimeSettings p1, IMemoryPool p2)
-        { 
+        {
             _pool = p2;
             OnReinitialize?.Invoke(p1);
 

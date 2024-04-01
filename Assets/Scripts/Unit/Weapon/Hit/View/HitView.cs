@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unit.Bullet;
 using UnityEngine;
 using Zenject;
 
@@ -11,7 +6,7 @@ namespace Unit
 {
     public class HitView : ADisposeView, IPoolable<HitRuntimeSettings, IMemoryPool>, IHitView
     {
-        [SerializeField] 
+        [SerializeField]
 
         private IMemoryPool _pool;
         private ParticleSystem[] particles;

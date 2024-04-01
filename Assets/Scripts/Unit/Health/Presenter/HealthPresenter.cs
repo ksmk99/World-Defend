@@ -29,7 +29,7 @@ namespace Unit
 
         public void Tick()
         {
-            if(model.IsDead)
+            if (model.IsDead)
             {
                 return;
             }
@@ -53,7 +53,7 @@ namespace Unit
             model.Health -= count;
             model.Health = Math.Clamp(model.Health, 0, model.Settings.MaxHealth);
 
-            var signal = new SignalOnUnitDamage(model.Health / model.Settings.MaxHealth, model.Health);
+            var signal = new SignalOnUnitDamage(model.Health, model.Settings.MaxHealth, count);
             signalBus.TryFire(signal);
             OnDamage?.Invoke();
 
@@ -88,12 +88,12 @@ namespace Unit
         public void Reset()
         {
             Heal(int.MaxValue);
-            view.UpdateValues(new SignalOnUnitHeal(1, model.Health));
+            view.HealReact(new SignalOnUnitHeal(model.Settings.MaxHealth, model.Settings.MaxHealth, model.Settings.MaxHealth));
         }
 
         private void HealthSignal()
         {
-            var signal = new SignalOnUnitHeal(model.Health / model.Settings.MaxHealth, model.Health);
+            var signal = new SignalOnUnitHeal(model.Health, model.Settings.MaxHealth, model.Health);
             signalBus.TryFire(signal);
         }
 

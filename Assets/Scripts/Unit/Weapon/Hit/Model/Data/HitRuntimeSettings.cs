@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Unit
 {
     public struct HitRuntimeSettings
-    { 
+    {
 
         [field: SerializeField]
         public Vector3 Position { get; set; }

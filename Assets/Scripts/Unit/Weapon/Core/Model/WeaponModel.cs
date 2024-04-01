@@ -1,5 +1,4 @@
 using Helpers;
-using System;
 using System.Collections.Generic;
 using Unit.Bullet;
 using UnityEngine;
@@ -24,7 +23,6 @@ namespace Unit
         public Transform Target { get; set; }
         public SignalBus SignalBus { get; set; }
         public Team Team { get; internal set; }
-        public LayerMask BlockLayer { get; }
 
         public WeaponModel(IWeaponSettings settings, BulletView.Factory bulletPool, HitView.Factory hitPool, SignalBus signalBus, PoolParentFlag parent)
         {

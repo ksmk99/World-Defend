@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
 
 namespace Installers
@@ -9,7 +6,7 @@ namespace Installers
     {
         public override void InstallBindings()
         {
-            
+
         }
     }
 }

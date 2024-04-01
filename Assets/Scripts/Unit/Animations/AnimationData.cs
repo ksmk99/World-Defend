@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Unit
 {
-    public class AnimationData 
+    public class AnimationData
     {
         public string Death => "Death";
         public string Respawn => "Respawn";
@@ -19,12 +15,12 @@ namespace Unit
 
         public int GetAnimationID(string name)
         {
-            if(idDictionary == null)
+            if (idDictionary == null)
             {
                 Init();
             }
 
-            if(!idDictionary.ContainsKey(name))
+            if (!idDictionary.ContainsKey(name))
             {
                 throw new ArgumentException();
             }

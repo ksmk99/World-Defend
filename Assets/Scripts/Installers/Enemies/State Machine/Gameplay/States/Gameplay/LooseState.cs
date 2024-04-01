@@ -1,12 +1,11 @@
-﻿using System;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine;
 
 namespace GameplayState
 {
     public class LooseState : GameState
     {
-        public override void Enter()    
+        public override void Enter()
         {
             Time.timeScale = 0;
             SceneManager.LoadSceneAsync("Loose Scene", LoadSceneMode.Additive);

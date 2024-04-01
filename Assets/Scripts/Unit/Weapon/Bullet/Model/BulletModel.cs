@@ -1,6 +1,4 @@
-﻿using System;
-using Unit.Bullet;
-using UnityEngine;
+﻿using Unit.Bullet;
 
 namespace Unit
 {

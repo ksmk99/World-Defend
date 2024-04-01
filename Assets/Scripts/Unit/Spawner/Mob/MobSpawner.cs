@@ -1,10 +1,6 @@
 ﻿using Helpers;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Unit;
 using UnityEngine;
 using Zenject;
 
@@ -12,7 +8,7 @@ namespace Unit
 {
     public class MobSpawner : IInitializable, IRoomResettable
     {
-        public List<UnitView> ActiveUnits = new List<UnitView>(); 
+        public List<UnitView> ActiveUnits = new List<UnitView>();
 
         private readonly MobView.Factory factory;
         private readonly MobSpawnerSettings settings;
@@ -76,7 +72,7 @@ namespace Unit
 
             view.GetPresenter().SetRoom(roomIndex);
             view.GetPresenter().Respawn();
-            ActiveUnits.Add(view);  
+            ActiveUnits.Add(view);
         }
 
         public void Release(SignalOnMobDeath signal)

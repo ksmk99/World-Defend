@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unit.Bullet;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace Unit
@@ -34,7 +28,7 @@ namespace Unit
             view.transform.position = model.RuntimeSettings.Position;
             view.transform.rotation = model.RuntimeSettings.Rotation;
         }
-        
+
         public void Tick()
         {
             if (model.EndOfLifeTime < Time.time)

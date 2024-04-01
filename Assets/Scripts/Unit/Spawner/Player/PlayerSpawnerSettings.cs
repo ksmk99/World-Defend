@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Cinemachine;
+using System;
 using UnityEngine;
-using Cinemachine;
 
 namespace Unit
 {

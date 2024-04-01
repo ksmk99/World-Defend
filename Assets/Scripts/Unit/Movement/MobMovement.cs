@@ -36,7 +36,7 @@ namespace Unit
             }
 
             agent.SetDestination(player.Transform.position);
-            var direction = (player.Transform.position  - transform.position);
+            var direction = (player.Transform.position - transform.position);
             Rotate(direction, target);
             SendMoveSignal(agent.velocity.sqrMagnitude > 0.05f);
         }
@@ -54,7 +54,7 @@ namespace Unit
             direction = direction.normalized;
             var angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             var value = Mathf.Lerp(transform.rotation.y, angle, settings.RotateSpeed);
-            transform.rotation = Quaternion.Euler(0, value, 0); 
+            transform.rotation = Quaternion.Euler(0, value, 0);
         }
 
         private void SendMoveSignal(bool isMoving)

@@ -1,4 +1,6 @@
-﻿using Helpers;
+﻿using Cysharp.Threading.Tasks;
+using Helpers;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +11,11 @@ namespace Unit
     public class HealthView : MonoBehaviour
     {
         [SerializeField] private Image healthBar;
+        [Space]
+        [SerializeField] private Image damageBar;
+        [SerializeField] private float damageChangeSpeed;
+        [SerializeField] private AnimationCurve damageCurve;
+        [Space]
         [SerializeField] private RectTransform rect;
         [SerializeField] private TMP_Text healthText;
         [SerializeField] private Vector3 offset;
@@ -17,30 +24,60 @@ namespace Unit
         public Vector3 Offset => offset;
 
         private SignalBus signalBus;
+        private CancellationTokenSource cts;
 
         [Inject]
-        public void Init(SignalBus signalBus, Sprite barIcon)
+        public void Init(SignalBus signalBus, Sprite sprite)
         {
             this.signalBus = signalBus;
-            healthBar.sprite = barIcon;
+            healthBar.sprite = sprite;
+            cts = new CancellationTokenSource();
         }
 
         private void OnEnable()
         {
-            signalBus.Subscribe<SignalOnUnitHeal>(UpdateValues);
-            signalBus.Subscribe<SignalOnUnitDamage>(UpdateValues);
+            signalBus.Subscribe<SignalOnUnitHeal>(HealReact);
+            signalBus.Subscribe<SignalOnUnitDamage>(DamageReact);
         }
 
         private void OnDisable()
         {
-            signalBus.Unsubscribe<SignalOnUnitHeal>(UpdateValues);
-            signalBus.Unsubscribe<SignalOnUnitDamage>(UpdateValues);
+            signalBus.Unsubscribe<SignalOnUnitHeal>(HealReact);
+            signalBus.Unsubscribe<SignalOnUnitDamage>(DamageReact);
         }
 
-        public void UpdateValues(ISignalOnHealthChange data)
+        public void HealReact(ISignalOnHealthChange data)
         {
-            healthBar.fillAmount = data.Percent;
+            healthBar.fillAmount = data.Health / data.MaxHealth;
             healthText.text = data.Health.ToString();
+        }
+
+        public void DamageReact(ISignalOnHealthChange data)
+        {
+            healthBar.fillAmount = data.Health / data.MaxHealth;
+            healthText.text = data.Health.ToString();
+
+            cts.Cancel();
+            cts = new CancellationTokenSource();
+            MoveDamageZone(data.Health / data.MaxHealth, cts);
+        }
+
+        private async void MoveDamageZone(float value, CancellationTokenSource cts)
+        {
+            float startValue = damageBar.fillAmount;
+            var t = 0f;
+            while (damageBar.fillAmount > value)
+            {
+                if (cts.IsCancellationRequested || damageBar == null)
+                {
+                    break;
+                }
+
+                t += Mathf.Abs(startValue - value) * damageChangeSpeed * Time.deltaTime;
+                damageBar.fillAmount = Mathf.Lerp(startValue, value, damageCurve.Evaluate(t));
+
+                await UniTask.DelayFrame(1);
+            }
         }
 
         public class Factory : PlaceholderFactory<HealthView>

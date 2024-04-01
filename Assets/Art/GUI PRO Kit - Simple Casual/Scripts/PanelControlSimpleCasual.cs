@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,16 +13,16 @@ namespace LayerLab
         [SerializeField] private List<GameObject> panelLight = new List<GameObject>();
         [SerializeField] private List<GameObject> panelDark = new List<GameObject>();
         private TextMeshProUGUI textTitle;
-        
+
         [SerializeField] private Transform panelTransformLight;
         [SerializeField] private Transform panelTransformDark;
-        
-        
+
+
         [SerializeField] private Button buttonPrev;
         [SerializeField] private Button buttonNext;
 
-        
-        
+
+
         private void Start()
         {
             textTitle = transform.GetComponentInChildren<TextMeshProUGUI>();
@@ -36,7 +34,7 @@ namespace LayerLab
                 panelLight.Add(t.gameObject);
                 t.gameObject.SetActive(false);
             }
-            
+
             foreach (Transform t in panelTransformDark)
             {
                 panelDark.Add(t.gameObject);
@@ -45,7 +43,7 @@ namespace LayerLab
 
             panelLight[page].SetActive(true);
             panelDark[page].SetActive(true);
-            
+
             isReady = true;
 
             CheckControl();
@@ -72,7 +70,7 @@ namespace LayerLab
             panelLight[page].SetActive(false);
             panelDark[page].SetActive(false);
             page -= 1;
-            
+
             panelLight[page].SetActive(true);
             panelDark[page].SetActive(true);
 
@@ -84,7 +82,7 @@ namespace LayerLab
             {
                 textTitle.text = panelDark[page].name;
             }
-            
+
             CheckControl();
         }
 
@@ -93,11 +91,11 @@ namespace LayerLab
         {
             if (page >= panelLight.Count - 1) return;
 
-            
+
             panelLight[page].SetActive(false);
             panelDark[page].SetActive(false);
             page += 1;
-            
+
             panelLight[page].SetActive(true);
             panelDark[page].SetActive(true);
             CheckControl();
@@ -114,13 +112,13 @@ namespace LayerLab
         {
             if (!isDarakMode)
             {
-                textTitle.text = panelLight[page].name.Replace("_", " ");    
+                textTitle.text = panelLight[page].name.Replace("_", " ");
             }
             else
             {
                 textTitle.text = panelDark[page].name.Replace("_", " ");
             }
-            
+
             SetArrowActive();
         }
 
@@ -128,11 +126,11 @@ namespace LayerLab
         {
             isDarakMode = !isDarakMode;
             SetMode();
-		CheckControl();
+            CheckControl();
 
         }
 
-        
+
         void SetMode()
         {
             if (!isDarakMode)
@@ -146,6 +144,6 @@ namespace LayerLab
                 panelTransformDark.gameObject.SetActive(true);
             }
         }
-        
+
     }
 }

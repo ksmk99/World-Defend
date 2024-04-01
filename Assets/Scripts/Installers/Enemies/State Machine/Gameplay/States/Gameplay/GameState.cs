@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameplayState
+﻿namespace GameplayState
 {
     public abstract class GameState : State
     {
@@ -12,7 +6,7 @@ namespace GameplayState
 
         public void SetStateMachine(GameplayStateMachine stateMachine)
         {
-            this.stateMachine = stateMachine;   
+            this.stateMachine = stateMachine;
         }
     }
 }

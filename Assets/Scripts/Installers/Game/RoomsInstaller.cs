@@ -1,7 +1,4 @@
-using Gameplay;
 using Helpers;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -28,7 +25,7 @@ public class RoomsInstaller : MonoInstaller
         foreach (var context in context)
         {
             var installers = context.GetComponentsInChildren<AUnitInstaller>();
-            foreach (var installer in installers) 
+            foreach (var installer in installers)
             {
                 installer.RoomIndex = index;
             }

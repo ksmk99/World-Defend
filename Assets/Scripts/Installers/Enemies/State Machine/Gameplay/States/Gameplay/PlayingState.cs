@@ -1,8 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
-namespace GameplayState
+﻿namespace GameplayState
 {
     public class PlayingState : GameState
     {

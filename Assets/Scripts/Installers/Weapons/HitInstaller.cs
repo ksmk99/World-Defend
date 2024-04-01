@@ -1,7 +1,6 @@
-﻿using Unit.Bullet;
-using Unit;
-using Zenject;
+﻿using Unit;
 using UnityEngine;
+using Zenject;
 
 
 public class HitInstaller : MonoInstaller<HitInstaller>

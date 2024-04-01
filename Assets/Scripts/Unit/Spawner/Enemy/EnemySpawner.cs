@@ -86,7 +86,7 @@ namespace Unit
             presenter.SetRoom(roomIndex);
             presenter.Respawn();
 
-            ActiveUnits.Add(enemy); 
+            ActiveUnits.Add(enemy);
         }
 
         public void Release(SignalOnEnemyReset signal)

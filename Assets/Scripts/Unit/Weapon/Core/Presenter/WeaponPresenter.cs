@@ -1,9 +1,5 @@
-using Helpers;
-using System;
-using System.Collections.Generic;
 using Unit.Bullet;
 using UnityEngine;
-using Zenject;
 
 namespace Unit
 {
@@ -53,13 +49,6 @@ namespace Unit
             if (enemy == default)
             {
                 model.Target = null;
-                return false;
-            }
-
-            var direction = (enemy.transform.position - transform.position).normalized;
-            var distance = Vector3.Distance(transform.position, enemy.transform.position);
-            if (Physics.Raycast(transform.position, direction, distance, model.Settings.BlockLayer))
-            {
                 return false;
             }
 

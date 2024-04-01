@@ -1,18 +1,14 @@
-using Unity.MLAgents;
-using Unity.MLAgents.Actuators;
-using UnityEngine;
-using Zenject;
-using Unity.MLAgents.Sensors;
+using Helpers;
 using System.Collections.Generic;
 using System.Linq;
-using Unit;
-using Unity.Barracuda;
-using System;
-using System.Threading.Tasks;
-using Helpers;
 using System.Threading;
-using UnityEngine.UIElements;
-using static UnityEditor.Experimental.GraphView.GraphView;
+using System.Threading.Tasks;
+using Unit;
+using Unity.MLAgents;
+using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Sensors;
+using UnityEngine;
+using Zenject;
 
 public class PlayerAgent : Agent
 {
@@ -28,7 +24,7 @@ public class PlayerAgent : Agent
     [SerializeField] private float damageReward = 25f;
     [SerializeField] private AnimationCurve damageRewardCurve;
     [SerializeField] private float killReward = 100f;
-    [SerializeField] private AnimationCurve killRewardCurve;    
+    [SerializeField] private AnimationCurve killRewardCurve;
 
     [SerializeField] private float distanceReward = 100f;
     [SerializeField] private AnimationCurve distanceRewardCurve;
@@ -52,7 +48,7 @@ public class PlayerAgent : Agent
     private float startTime;
     private CancellationTokenSource cts = new CancellationTokenSource();
 
-    private float cumulative_reward; 
+    private float cumulative_reward;
     private Vector3[] bullets;
     private Vector3 roomSize => enemySpawner.RoomSize * 1.2f;
 
@@ -79,8 +75,8 @@ public class PlayerAgent : Agent
         UpdateRewardValue(-reward);
 
         var enemyUnits = GetNearestUnits(enemySpawner.ActiveUnits, transform.position);
-        if(enemyUnits.Length > 0)
-        { 
+        if (enemyUnits.Length > 0)
+        {
             var distance = Vector3.Distance(enemyUnits[0], transform.position);
             var index = distance > weapon.Settings.MinDistance && distance < weapon.Settings.Distance ? 1 : -1;
 
@@ -91,7 +87,7 @@ public class PlayerAgent : Agent
         var colliders = new Collider[5];
         var bulletsCount = Physics.OverlapSphereNonAlloc(transform.position, bulletVisionRadius, colliders, bulletVisionLayer);
         bullets = colliders.Where(x => x != null).Select(x => x.transform.position).ToArray();
-        if(bullets.Length > 0)
+        if (bullets.Length > 0)
         {
             var distance = Vector3.Distance(bullets[0], transform.position);
             var index = distance > minBulletDistance ? 1 : -1;
@@ -105,7 +101,7 @@ public class PlayerAgent : Agent
     {
         AddReward(reward);
         cumulative_reward += reward;
-        if(cumulative_reward <= minCumulativeReward)
+        if (cumulative_reward <= minCumulativeReward)
         {
             EndCurrentEpisode();
         }
@@ -129,7 +125,7 @@ public class PlayerAgent : Agent
         var minValue = -roomSize / 2f;
         var maxValue = roomSize / 2f;
         var normalizeValue = (value - minValue) / (maxValue - minValue);
-        return normalizeValue; 
+        return normalizeValue;
     }
 
     private void AddBulletsObservation(VectorSensor sensor, Vector3 position, float radius, LayerMask layer)
@@ -139,7 +135,7 @@ public class PlayerAgent : Agent
         for (int i = 0; i < 1; i++)
         {
             var bulletPos = Vector3.zero;
-            if(bulletsCount > i)
+            if (bulletsCount > i)
             {
                 bulletPos = colliders[i].transform.position;
             }
@@ -150,13 +146,13 @@ public class PlayerAgent : Agent
             sensor.AddObservation(value);
         }
 
-        
-        bullets = colliders.Where(x => x != null).Select(x => x.transform.position).ToArray();  
+
+        bullets = colliders.Where(x => x != null).Select(x => x.transform.position).ToArray();
     }
 
     private void OnDrawGizmos()
     {
-        if(!isDebug || bullets == null)
+        if (!isDebug || bullets == null)
         {
             return;
         }

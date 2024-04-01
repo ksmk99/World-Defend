@@ -32,7 +32,7 @@ namespace Unit
         {
             direction = target == null ? direction : (target.position - transform.position).normalized;
 
-            if(direction == Vector3.zero)
+            if (direction == Vector3.zero)
             {
                 return;
             }

@@ -1,7 +1,7 @@
-﻿using Unit.Bullet;
-using Unit;
-using Zenject;
+﻿using Unit;
+using Unit.Bullet;
 using UnityEngine;
+using Zenject;
 
 
 public class BulletInstaller : MonoInstaller<BulletInstaller>

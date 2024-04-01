@@ -1,9 +1,6 @@
 ﻿using GameplayState;
 using Helpers;
-using System;
 using System.Threading.Tasks;
-using Unit;
-using UnityEngine;
 using Zenject;
 
 namespace Gameplay
