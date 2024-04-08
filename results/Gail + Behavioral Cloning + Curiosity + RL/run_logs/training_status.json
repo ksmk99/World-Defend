@@ -1,0 +1,65 @@
+{
+    "PlayerAgent": {
+        "checkpoints": [
+            {
+                "steps": 29999884,
+                "file_path": "results\\Gail + Behavioral Cloning + Curiosity + RL\\PlayerAgent\\PlayerAgent-29999884.onnx",
+                "reward": -0.1889695329659217,
+                "creation_time": 1712554967.7681088,
+                "auxillary_file_paths": [
+                    "results\\Gail + Behavioral Cloning + Curiosity + RL\\PlayerAgent\\PlayerAgent-29999884.pt"
+                ]
+            },
+            {
+                "steps": 30499874,
+                "file_path": "results\\Gail + Behavioral Cloning + Curiosity + RL\\PlayerAgent\\PlayerAgent-30499874.onnx",
+                "reward": -0.12727273254511504,
+                "creation_time": 1712558066.5920734,
+                "auxillary_file_paths": [
+                    "results\\Gail + Behavioral Cloning + Curiosity + RL\\PlayerAgent\\PlayerAgent-30499874.pt"
+                ]
+            },
+            {
+                "steps": 30999968,
+                "file_path": "results\\Gail + Behavioral Cloning + Curiosity + RL\\PlayerAgent\\PlayerAgent-30999968.onnx",
+                "reward": -0.10000000149011612,
+                "creation_time": 1712561293.9675019,
+                "auxillary_file_paths": [
+                    "results\\Gail + Behavioral Cloning + Curiosity + RL\\PlayerAgent\\PlayerAgent-30999968.pt"
+                ]
+            },
+            {
+                "steps": 31499999,
+                "file_path": "results\\Gail + Behavioral Cloning + Curiosity + RL\\PlayerAgent\\PlayerAgent-31499999.onnx",
+                "reward": -0.002570906099169812,
+                "creation_time": 1712565360.190953,
+                "auxillary_file_paths": [
+                    "results\\Gail + Behavioral Cloning + Curiosity + RL\\PlayerAgent\\PlayerAgent-31499999.pt"
+                ]
+            },
+            {
+                "steps": 31796884,
+                "file_path": "results\\Gail + Behavioral Cloning + Curiosity + RL\\PlayerAgent\\PlayerAgent-31796884.onnx",
+                "reward": 0.0726351821795106,
+                "creation_time": 1712568339.7070227,
+                "auxillary_file_paths": [
+                    "results\\Gail + Behavioral Cloning + Curiosity + RL\\PlayerAgent\\PlayerAgent-31796884.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 31796884,
+            "file_path": "results\\Gail + Behavioral Cloning + Curiosity + RL\\PlayerAgent.onnx",
+            "reward": 0.0726351821795106,
+            "creation_time": 1712568339.7070227,
+            "auxillary_file_paths": [
+                "results\\Gail + Behavioral Cloning + Curiosity + RL\\PlayerAgent\\PlayerAgent-31796884.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.1+cu121"
+    }
+}

@@ -23,7 +23,7 @@ public class EnemyInstaller : MonoInstaller<EnemyInstaller>
         BindMovement();
         BindHealth();
         BindWeapon();
-        BindAnimator();
+        //BindAnimator();
 
         Container.Bind<EnemyModel>().AsSingle();
         Container.BindInterfacesAndSelfTo<EnemyPresenter>().AsSingle();

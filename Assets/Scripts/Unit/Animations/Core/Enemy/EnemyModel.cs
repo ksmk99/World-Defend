@@ -14,13 +14,15 @@ public class EnemyModel : IUnitModel
 
     public SignalBus SignalBus { get; }
 
-    public Vector3 Position => Transform.position;
     public Team Team => Team.Enemy;
 
     public bool IsActive { get; set; }
-    public bool IsDeathFired { get; set; }
 
     public UnitView UnitView { get; }
+
+    public Vector3 Position => Transform.position;
+
+    public bool IsDeathFired { get; set; }
 
     public EnemyModel(
         IWeaponPresenter weapon,

@@ -174,7 +174,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 125, y: 30}
+  m_SizeDelta: {x: 25, y: 6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9185527764448092842
 CanvasRenderer:
@@ -225,7 +225,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   rect: {fileID: 267357839736057757}
   healthText: {fileID: 2227309191569818265}
-  offset: {x: 0, y: 200, z: 0}
+  offset: {x: 0, y: 100, z: 0}
   animation: {fileID: 3667045448810874188}
   nicknameText: {fileID: 3786208418348479639}
 --- !u!111 &3667045448810874188

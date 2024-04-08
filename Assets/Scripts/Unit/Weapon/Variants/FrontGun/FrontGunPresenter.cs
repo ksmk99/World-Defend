@@ -62,7 +62,7 @@ namespace Unit
                 model.ActionTimer = 0;
 
                 var signal = new SignalOnAttack();
-                model.SignalBus.TryFire(signal);
+                //model.SignalBus.TryFire(signal);
             }
 
             model.ActionTimer += Time.deltaTime;

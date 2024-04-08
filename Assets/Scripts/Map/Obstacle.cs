@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.transform.TryGetComponent<PlayerView>(out var player))
         {
@@ -11,9 +12,9 @@ public class Obstacle : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        if (collision.transform.TryGetComponent<PlayerView>(out var player))
+        if (other.transform.TryGetComponent<PlayerView>(out var player))
         {
             var presenter = player.GetPresenter();
             presenter.TouchBorder();

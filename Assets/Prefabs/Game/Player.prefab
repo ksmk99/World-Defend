@@ -3290,6 +3290,7 @@ GameObject:
   - component: {fileID: 5556347734132526376}
   - component: {fileID: 2526765562675044442}
   - component: {fileID: 8736597720332113030}
+  - component: {fileID: -6500952952196061230}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -3349,7 +3350,7 @@ MonoBehaviour:
     <Transform>k__BackingField: {fileID: 632017414469642739}
     <Animator>k__BackingField: {fileID: 718323420605218998}
   movementSettings:
-    MoveSpeed: 5
+    MoveSpeed: 8
     RotateSpeed: 10
   healthSettings:
     MaxHealth: 5000
@@ -3493,9 +3494,9 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 500000
+  MaxStep: 5000
   isDebug: 0
-  minCumulativeReward: -10000
+  minCumulativeReward: -99999
   bulletVisionRadius: 10
   bulletVisionLayer:
     serializedVersion: 2
@@ -3550,7 +3551,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  killReward: 0
+  killReward: 1
   killRewardCurve:
     serializedVersion: 2
     m_Curve:
@@ -3575,7 +3576,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  distanceReward: 0.05
+  distanceReward: 0.1
   distanceRewardCurve:
     serializedVersion: 2
     m_Curve:
@@ -3625,8 +3626,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  minBulletDistance: 3.5
-  bulletDistanceReward: 0.05
+  minBulletDistance: 1.5
+  bulletDistanceReward: 0.1
   bulletDistanceRewardCurve:
     serializedVersion: 2
     m_Curve:
@@ -3663,7 +3664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 13
+  DecisionPeriod: 10
   TakeActionsBetweenDecisions: 0
 --- !u!114 &2526765562675044442
 MonoBehaviour:
@@ -3681,12 +3682,12 @@ MonoBehaviour:
   m_DetectableTags:
   - Environment
   m_RaysPerDirection: 3
-  m_MaxRayDegrees: 90
+  m_MaxRayDegrees: 180
   m_SphereCastRadius: 0.5
   m_RayLength: 20
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1088
   m_ObservationStacks: 1
   m_AlternatingRayOrder: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
@@ -3707,8 +3708,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Record: 0
   NumStepsToRecord: 0
-  DemonstrationName: Demo2
+  DemonstrationName: Demo4
   DemonstrationDirectory: Demos
+--- !u!114 &-6500952952196061230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632017414469642637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - Enemy
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 180
+  m_SphereCastRadius: 0.5
+  m_RayLength: 20
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0.5
+  m_EndVerticalOffset: 0.5
 --- !u!1 &868678734940693625
 GameObject:
   m_ObjectHideFlags: 0

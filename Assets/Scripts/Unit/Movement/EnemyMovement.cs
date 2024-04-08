@@ -34,19 +34,19 @@ namespace Unit
                 return;
             }
 
-            var distance = Vector3.Distance(transform.position, player.Transform.position);
-            if (distance < settings.MaxDistance && distance > agent.stoppingDistance)
-            {
+            //var distance = Vector3.Distance(transform.position, player.Transform.position);
+            //if (distance < settings.MaxDistance && distance > agent.stoppingDistance)
+            //{
                 Vector3 direction = (player.Transform.position - transform.position).normalized;
                 Rotate(direction);
-                NavMeshHit hit;
-                if (NavMesh.SamplePosition(player.Transform.position, out hit, float.MaxValue, NavMesh.AllAreas))
-                {
-                    agent.SetDestination(hit.position);
-                }
-            }
+                //NavMeshHit hit;
+                //if (NavMesh.SamplePosition(player.Transform.position, out hit, float.MaxValue, NavMesh.AllAreas))
+                //{
+                    agent.SetDestination(player.Transform.position);
+                //}
+            //}
 
-            SendMoveSignal(agent.velocity.magnitude > 0.1f);
+            //SendMoveSignal(agent.velocity.magnitude > 0.1f);
         }
 
         private void SendMoveSignal(bool isMoving)

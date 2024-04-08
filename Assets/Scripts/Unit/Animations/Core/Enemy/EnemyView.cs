@@ -14,7 +14,7 @@ public class EnemyView : UnitView
 
     public override void Death()
     {
-        GetComponentInChildren<UnitActivator>().Enable();
+        GetComponentInChildren<UnitActivator>()?.Enable();
         gameObject.SetActive(false);
     }
 

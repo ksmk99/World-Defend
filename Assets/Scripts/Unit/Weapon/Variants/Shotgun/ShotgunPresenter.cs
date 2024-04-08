@@ -62,7 +62,7 @@ namespace Unit
                     angle += step;
 
                     var signal = new SignalOnAttack();
-                    model.SignalBus.TryFire(signal);
+                    //model.SignalBus.TryFire(signal);
                 }
             }
 

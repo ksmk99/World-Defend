@@ -1,7 +1,5 @@
 ﻿using Unit.Bullet;
-using Unity.Barracuda;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Unit
 {
@@ -29,6 +27,10 @@ namespace Unit
                     return;
                 }
             }
+            else
+            {
+                return;
+            }
 
             var colliders = Physics.OverlapSphere(view.transform.position, setting.Radius, model.Weapon.Settings.TargetLayer);
             foreach (var collider in colliders)
@@ -37,7 +39,9 @@ namespace Unit
                 presenter.TryApplyEffects(model.Weapon.Settings.Effects, model.Team);
             }
 
-            model.Weapon.CreateHit(unitView.transform.position);
+            var position = view.transform.position;
+            position.y = 0;
+            model.Weapon.CreateHit(position);
             model.CanCollide = false;
         }
     }

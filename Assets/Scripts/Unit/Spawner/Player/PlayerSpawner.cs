@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Unit
 {
-    internal class PlayerSpawner : IInitializable, IRoomResettable
+    public class PlayerSpawner : IInitializable, IRoomResettable
     {
         private readonly PlayerView.Factory factory;
         private readonly PlayerSpawnerSettings settings;
@@ -13,7 +13,7 @@ namespace Unit
         private readonly Transform parent;
         private readonly int roomIndex;
 
-        private PlayerView playerView;
+        public PlayerView Player { get; private set; }
 
         public PlayerSpawner(PlayerView.Factory factory, PlayerSpawnerSettings settings, ISpawnManager spawnManager,
             CustomPool<PlayerView> pool, Transform parent, int roomIndex)
@@ -33,15 +33,15 @@ namespace Unit
 
         public void Spawn()
         {
-            if (playerView == default)
+            if (Player == default)
             {
-                playerView = Create();
+                Player = Create();
 
-                settings.CMCamera.Follow = playerView.transform;
-                settings.CMCamera.LookAt = playerView.transform;
+                settings.CMCamera.Follow = Player.transform;
+                settings.CMCamera.LookAt = Player.transform;
             }
 
-            SetStartSettings(playerView);
+            SetStartSettings(Player);
         }
 
         private PlayerView Create()

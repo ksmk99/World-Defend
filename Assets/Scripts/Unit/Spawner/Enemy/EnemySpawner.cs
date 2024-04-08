@@ -17,12 +17,13 @@ namespace Unit
         private readonly CustomPool<EnemyView> pool;
         private readonly Transform parent;
         private readonly int roomIndex;
+        private readonly PlayerSpawner playerSpawner;
         private readonly ISpawnManager spawnManager;
 
         private float nextSpawnTime;
         private int spawnCount;
 
-        public EnemySpawner(EnemyView.Factory factory, EnemySpawnerSettings settings, ISpawnManager spawnManager, CustomPool<EnemyView> pool, Transform parent, int roomIndex)
+        public EnemySpawner(EnemyView.Factory factory, EnemySpawnerSettings settings, ISpawnManager spawnManager, CustomPool<EnemyView> pool, Transform parent, int roomIndex, PlayerSpawner playerSpawner)
         {
             this.factory = factory;
             this.settings = settings;
@@ -30,6 +31,7 @@ namespace Unit
             this.pool = pool;
             this.parent = parent;
             this.roomIndex = roomIndex;
+            this.playerSpawner = playerSpawner;
         }
 
         public void Tick()
@@ -85,7 +87,7 @@ namespace Unit
             var presenter = enemy.GetPresenter();
             presenter.SetRoom(roomIndex);
             presenter.Respawn();
-
+            presenter.SetPlayer(playerSpawner.Player.GetPresenter());
             enemy.gameObject.name = "Enemy " + spawnCount;
 
             ActiveUnits.Add(enemy);

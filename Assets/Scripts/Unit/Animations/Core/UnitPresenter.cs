@@ -10,6 +10,7 @@ public abstract class UnitPresenter : ITickable
     public Team Team => model.Team;
     public int RoomIndex => model.RoomIndex;
     public bool IsActive => model.IsActive;
+    public bool IsDead => model.Health.IsDead();
 
     protected IUnitModel model;
 

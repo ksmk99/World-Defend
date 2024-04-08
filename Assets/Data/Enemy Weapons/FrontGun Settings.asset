@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977a023fd14550f46a3f02b3aaec1c4a, type: 3}
   m_Name: FrontGun Settings
   m_EditorClassIdentifier: 
-  <Distance>k__BackingField: 10
-  <MinDistance>k__BackingField: 1
+  <Distance>k__BackingField: 999
+  <MinDistance>k__BackingField: 0
   <TargetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 128
@@ -26,7 +26,7 @@ MonoBehaviour:
     type: 3}
   <HitPrefab>k__BackingField: {fileID: -9082463660586353062, guid: 570c93b66c983284495e6cc387cee2d1,
     type: 3}
-  <BulletPrespawnCount>k__BackingField: 3
+  <BulletPrespawnCount>k__BackingField: 1
   BulletCount: 1
-  ReloadTime: 1
-  BulletDelay: 1
+  ReloadTime: 0.5
+  BulletDelay: 0.5

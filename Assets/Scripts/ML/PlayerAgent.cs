@@ -84,31 +84,31 @@ public class PlayerAgent : Agent
             var distance = Vector3.Distance(enemyUnits[0], transform.position);
             var index = distance > weapon.Settings.MinDistance && distance < weapon.Settings.Distance ? 1 : -1;
 
-            reward = GetReward(distanceRewardCurve, distanceReward);
-            UpdateRewardValue(reward * index);
+            if (index > 0)
+            {
+                reward = GetReward(distanceRewardCurve, distanceReward);
+                UpdateRewardValue(reward * index);
+            }
         }
 
-        var colliders = new Collider[5];
-        var bulletsCount = Physics.OverlapSphereNonAlloc(transform.position, bulletVisionRadius, colliders, bulletVisionLayer);
-        bullets = colliders.Where(x => x != null).Select(x => x.transform.position).ToArray();
-        if (bullets.Length > 0)
-        {
-            var distance = Vector3.Distance(bullets[0], transform.position);
-            var index = distance > minBulletDistance ? 1 : -1;
+        //var colliders = new Collider[5];
+        //var bulletsCount = Physics.OverlapSphereNonAlloc(transform.position, bulletVisionRadius, colliders, bulletVisionLayer);
+        //bullets = colliders.Where(x => x != null).Select(x => x.transform.position).ToArray();
+        //if (bullets.Length > 0)
+        //{
+        //    var distance = Vector3.Distance(bullets[0], transform.position);
+        //    var index = distance > minBulletDistance ? 1 : -1;
 
-            reward = GetReward(bulletDistanceRewardCurve, bulletDistanceReward);
-            UpdateRewardValue(reward * index);
-        }
+        //    reward = GetReward(bulletDistanceRewardCurve, bulletDistanceReward);
+        //    UpdateRewardValue(reward * index);
+        //}
     }
 
     private void UpdateRewardValue(float reward)
     {
         AddReward(reward);
         cumulative_reward += reward;
-        if (cumulative_reward <= minCumulativeReward)
-        {
-            EndCurrentEpisode();
-        }
+        //Debug.Log(cumulative_reward);
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -171,15 +171,15 @@ public class PlayerAgent : Agent
 
     public void EnemyDeath(SignalOnEnemyDeath signal)
     {
-        //float reward = GetReward(killRewardCurve, killReward);
-        //UpdateRewardValue(reward);
+        float reward = GetReward(killRewardCurve, killReward);
+        UpdateRewardValue(reward);
     }
 
     public void TouchBorder(SignalOnObstacleTouch signal)
     {
         if (signal.Presenter.Equals(presenter))
         {
-            UpdateRewardValue(-0.1f);
+            UpdateRewardValue(-0.05f);
         }
     }
 
@@ -272,6 +272,8 @@ public class PlayerAgent : Agent
         cts.Cancel();
         isEpisodeEnd = true;
         EndEpisode();
+
+        cumulative_reward = 0;
     }
 
 

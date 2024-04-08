@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b2e38f3a3da444197bd7a999aaa882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 07359741b7929dd418ef95c34a86ce12, type: 2}
+  settings: {fileID: 11400000, guid: 0b444efecb342484abb19105594b8c7a, type: 2}
 --- !u!114 &5865941083765694682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +143,10 @@ PrefabInstance:
     - target: {fileID: 185492, guid: 0e5de1d4446e4be409b2bc4025c90341, type: 3}
       propertyPath: m_Name
       value: BulletMeshFatBlue
+      objectReference: {fileID: 0}
+    - target: {fileID: 185492, guid: 0e5de1d4446e4be409b2bc4025c90341, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 193050, guid: 0e5de1d4446e4be409b2bc4025c90341, type: 3}
       propertyPath: m_IsActive

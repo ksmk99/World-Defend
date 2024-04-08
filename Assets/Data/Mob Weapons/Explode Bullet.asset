@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Explode Bullet
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 10
-  <Radius>k__BackingField: 10
+  <Radius>k__BackingField: 5

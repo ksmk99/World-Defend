@@ -37,6 +37,7 @@ namespace Unit
             nicknameText.text = name;   
 
             cts = new CancellationTokenSource();
+            gameObject.SetActive(false);    
         }
 
         private void OnEnable()

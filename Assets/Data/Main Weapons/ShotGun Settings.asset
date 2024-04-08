@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21c435d1fe9500146991342f23adefc1, type: 3}
   m_Name: ShotGun Settings
   m_EditorClassIdentifier: 
-  <Distance>k__BackingField: 10
-  <MinDistance>k__BackingField: 1
+  <Distance>k__BackingField: 15
+  <MinDistance>k__BackingField: 5
   <TargetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 1024
@@ -26,9 +26,9 @@ MonoBehaviour:
     type: 3}
   <HitPrefab>k__BackingField: {fileID: -9082463660586353062, guid: 570c93b66c983284495e6cc387cee2d1,
     type: 3}
-  <BulletPrespawnCount>k__BackingField: 6
+  <BulletPrespawnCount>k__BackingField: 1
   ReloadTime: 2
-  BulletInWave: 6
-  WaveCount: 3
+  BulletInWave: 1
+  WaveCount: 1
   WaveDelay: 0.5
-  Angle: 45
+  Angle: 0

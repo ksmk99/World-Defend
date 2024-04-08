@@ -528,7 +528,7 @@ MonoBehaviour:
     HealCount: 0
   weaponSettings: {fileID: 11400000, guid: b79b0bdafb5ea3f4e96023ce388751dd, type: 2}
   movement:
-    MoveSpeed: 4
+    MoveSpeed: 8
     RotateSpeed: 21
   animator: {fileID: 3280424811924037630}
   healthViewPrefab: {fileID: 2671775819908182200, guid: 504d91682790efc41abe87f2ec3a28e0,
