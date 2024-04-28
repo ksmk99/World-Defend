@@ -65,19 +65,30 @@ public class PlayerAgent : Agent
         this.signalBus = signalBus;
         this.weapon = weapon;
         this.levelSettings = levelSettings;
+
+        time = Time.time;
     }
 
+    float time = 0;
     /// <summary>
-    /// Called every step of the engine. Here the agent takes an action.
+    /// Вызывается каждый шаг движка. Здесь агент выполняет действие.
     /// </summary>
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
+        //Установка направления движения юнита
         Vector3 direction = GetMoveDirection(actionBuffers.ContinuousActions);
         inputService.SetMoveDirection(direction);
 
+        //Отрицательная оценка за каждый шаг
         var reward = GetReward(timeRewardCurve, timeReward);
         UpdateRewardValue(-reward);
 
+        //Оценивание дистанции до соперников
+        SetEnemiesDistanceReward();
+    }
+
+    private void SetEnemiesDistanceReward()
+    {
         var enemyUnits = GetNearestUnits(enemySpawner.ActiveUnits, transform.position);
         if (enemyUnits.Length > 0)
         {
@@ -86,22 +97,42 @@ public class PlayerAgent : Agent
 
             if (index > 0)
             {
-                reward = GetReward(distanceRewardCurve, distanceReward);
+                var reward = GetReward(distanceRewardCurve, distanceReward);
                 UpdateRewardValue(reward * index);
             }
         }
+    }
 
-        //var colliders = new Collider[5];
-        //var bulletsCount = Physics.OverlapSphereNonAlloc(transform.position, bulletVisionRadius, colliders, bulletVisionLayer);
-        //bullets = colliders.Where(x => x != null).Select(x => x.transform.position).ToArray();
-        //if (bullets.Length > 0)
-        //{
-        //    var distance = Vector3.Distance(bullets[0], transform.position);
-        //    var index = distance > minBulletDistance ? 1 : -1;
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        var xNormalized = GetNormalizedValue(transform.position.x, enemySpawner.RoomSize.x, enemySpawner.SpawnOffset.x);
+        sensor.AddObservation(xNormalized);
 
-        //    reward = GetReward(bulletDistanceRewardCurve, bulletDistanceReward);
-        //    UpdateRewardValue(reward * index);
-        //}
+        var zNormalized = GetNormalizedValue(transform.position.z, enemySpawner.RoomSize.z, enemySpawner.SpawnOffset.z);
+        sensor.AddObservation(zNormalized);
+
+        AddUnitsObservation(sensor, enemySpawner.ActiveUnits, transform.position, enemySpawner.SpawnOffset);
+        AddUnitsObservation(sensor, mobSpawner.ActiveUnits, transform.position, enemySpawner.SpawnOffset);
+
+        AddBulletsObservation(sensor, transform.position, bulletVisionRadius, bulletVisionLayer);
+    }
+
+
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        var continuousActionsOut = actionsOut.ContinuousActions;
+
+        var x = Input.GetAxis("Horizontal");
+        var y = Input.GetAxis("Vertical");
+
+        var direction = new Vector2(x, y);
+        if(direction.Equals(Vector2.zero))
+        {
+            direction = inputService.GetMoveDirection();
+        }
+
+        continuousActionsOut[0] = direction.x;
+        continuousActionsOut[1] =direction.y;   
     }
 
     private void UpdateRewardValue(float reward)
@@ -109,18 +140,6 @@ public class PlayerAgent : Agent
         AddReward(reward);
         cumulative_reward += reward;
         //Debug.Log(cumulative_reward);
-    }
-
-    public override void CollectObservations(VectorSensor sensor)
-    {
-        var value = GetNormalizedValue(transform.position.x, enemySpawner.RoomSize.x, enemySpawner.SpawnOffset.x);
-        sensor.AddObservation(value);
-        value = GetNormalizedValue(transform.position.z, enemySpawner.RoomSize.z, enemySpawner.SpawnOffset.z);
-        sensor.AddObservation(value);
-
-        AddUnitsObservation(sensor, enemySpawner.ActiveUnits, transform.position, enemySpawner.SpawnOffset);
-        AddUnitsObservation(sensor, mobSpawner.ActiveUnits, transform.position, enemySpawner.SpawnOffset);
-        AddBulletsObservation(sensor, transform.position, bulletVisionRadius, bulletVisionLayer);
     }
 
     private float GetNormalizedValue(float value, float roomSize, float offset)
@@ -273,12 +292,15 @@ public class PlayerAgent : Agent
         isEpisodeEnd = true;
         EndEpisode();
 
+        Debug.Log("Level duration " + (Time.time - time).ToString());
         cumulative_reward = 0;
     }
 
 
     private async void StartEndEpisodeTimer(CancellationTokenSource cts)
     {
+        return;
+
         await Task.Delay((int)(levelSettings.Duration * 1000));
 
         if (cts.IsCancellationRequested)
@@ -291,13 +313,5 @@ public class PlayerAgent : Agent
             isEpisodeEnd = true;
             signalBus.TryFire(new SignalOnTimeRoomReset(presenter.RoomIndex));
         }
-    }
-
-    public override void Heuristic(in ActionBuffers actionsOut)
-    {
-        var continuousActionsOut = actionsOut.ContinuousActions;
-
-        continuousActionsOut[0] = Input.GetAxis("Horizontal");
-        continuousActionsOut[1] = Input.GetAxis("Vertical");
     }
 }

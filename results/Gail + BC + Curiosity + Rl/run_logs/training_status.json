@@ -2,22 +2,58 @@
     "PlayerAgent": {
         "checkpoints": [
             {
-                "steps": 0,
-                "file_path": "results\\Gail + BC + Curiosity + Rl\\PlayerAgent\\PlayerAgent-0.onnx",
-                "reward": null,
-                "creation_time": 1712600743.17094,
+                "steps": 1499905,
+                "file_path": "results\\Gail + BC + Curiosity + Rl\\PlayerAgent\\PlayerAgent-1499905.onnx",
+                "reward": 6.749231219291687,
+                "creation_time": 1712641508.1719239,
                 "auxillary_file_paths": [
-                    "results\\Gail + BC + Curiosity + Rl\\PlayerAgent\\PlayerAgent-0.pt"
+                    "results\\Gail + BC + Curiosity + Rl\\PlayerAgent\\PlayerAgent-1499905.pt"
+                ]
+            },
+            {
+                "steps": 1999894,
+                "file_path": "results\\Gail + BC + Curiosity + Rl\\PlayerAgent\\PlayerAgent-1999894.onnx",
+                "reward": 13.44000107049942,
+                "creation_time": 1712657365.8420496,
+                "auxillary_file_paths": [
+                    "results\\Gail + BC + Curiosity + Rl\\PlayerAgent\\PlayerAgent-1999894.pt"
+                ]
+            },
+            {
+                "steps": 2499966,
+                "file_path": "results\\Gail + BC + Curiosity + Rl\\PlayerAgent\\PlayerAgent-2499966.onnx",
+                "reward": 11.706000983715057,
+                "creation_time": 1712675636.815829,
+                "auxillary_file_paths": [
+                    "results\\Gail + BC + Curiosity + Rl\\PlayerAgent\\PlayerAgent-2499966.pt"
+                ]
+            },
+            {
+                "steps": 2999967,
+                "file_path": "results\\Gail + BC + Curiosity + Rl\\PlayerAgent\\PlayerAgent-2999967.onnx",
+                "reward": 18.855001121759415,
+                "creation_time": 1712691461.566614,
+                "auxillary_file_paths": [
+                    "results\\Gail + BC + Curiosity + Rl\\PlayerAgent\\PlayerAgent-2999967.pt"
+                ]
+            },
+            {
+                "steps": 3186278,
+                "file_path": "results\\Gail + BC + Curiosity + Rl\\PlayerAgent\\PlayerAgent-3186278.onnx",
+                "reward": null,
+                "creation_time": 1712697257.292342,
+                "auxillary_file_paths": [
+                    "results\\Gail + BC + Curiosity + Rl\\PlayerAgent\\PlayerAgent-3186278.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 0,
+            "steps": 3186278,
             "file_path": "results\\Gail + BC + Curiosity + Rl\\PlayerAgent.onnx",
             "reward": null,
-            "creation_time": 1712600743.17094,
+            "creation_time": 1712697257.292342,
             "auxillary_file_paths": [
-                "results\\Gail + BC + Curiosity + Rl\\PlayerAgent\\PlayerAgent-0.pt"
+                "results\\Gail + BC + Curiosity + Rl\\PlayerAgent\\PlayerAgent-3186278.pt"
             ]
         }
     },

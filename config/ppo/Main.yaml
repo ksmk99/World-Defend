@@ -2,11 +2,11 @@ behaviors:
   PlayerAgent:
     trainer_type: ppo
     hyperparameters:
-      batch_size: 512
-      buffer_size: 5120
+      batch_size: 128
+      buffer_size: 2040
       learning_rate: 0.0003
       beta: 0.01
-      epsilon: 0.2
+      epsilon: 0.3
       lambd: 0.95
       num_epoch: 3
       learning_rate_schedule: linear
@@ -21,11 +21,11 @@ behaviors:
         strength: 1.0
       curiosity:
         gamma: 0.99
-        strength: 0.02
+        strength: 0.5
         network_settings:
           hidden_units: 256
         learning_rate: 0.0003
     keep_checkpoints: 5
-    max_steps: 50000000
+    max_steps: 3000000
     time_horizon: 128
     summary_freq: 30000

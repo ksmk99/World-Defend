@@ -27,8 +27,8 @@ MonoBehaviour:
   <HitPrefab>k__BackingField: {fileID: -9082463660586353062, guid: 570c93b66c983284495e6cc387cee2d1,
     type: 3}
   <BulletPrespawnCount>k__BackingField: 1
-  ReloadTime: 2
+  ReloadTime: 0.5
   BulletInWave: 1
   WaveCount: 1
-  WaveDelay: 0.5
+  WaveDelay: 0.2
   Angle: 0
