@@ -15,7 +15,6 @@ public class PlayerAgent : Agent
 {
     [SerializeField] private bool isDebug;
     [Space]
-    [SerializeField] private float minCumulativeReward = -1000;
     [SerializeField] private float bulletVisionRadius = 5f;
     [SerializeField] private LayerMask bulletVisionLayer;
     [Space]

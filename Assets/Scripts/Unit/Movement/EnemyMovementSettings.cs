@@ -1,8 +1,9 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Unit
 {
-    [Serializable]
+    [CreateAssetMenu()]
     public class EnemyMovementSettings : MovementSettings
     {
         public float MaxDistance = 10f;

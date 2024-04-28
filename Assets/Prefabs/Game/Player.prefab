@@ -3496,7 +3496,6 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
   isDebug: 0
-  minCumulativeReward: -99999
   bulletVisionRadius: 10
   bulletVisionLayer:
     serializedVersion: 2

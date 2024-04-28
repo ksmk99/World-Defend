@@ -1,9 +1,10 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Unit
 {
-    [Serializable]
-    public class MovementSettings
+    [CreateAssetMenu()]
+    public class MovementSettings : ScriptableObject
     {
         public float MoveSpeed;
         public float RotateSpeed;
