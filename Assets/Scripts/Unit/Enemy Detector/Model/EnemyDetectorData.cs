@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Unit
 {
-    [CreateAssetMenu()]
-    public class EnemyDetectorData : ScriptableObject
+    [Serializable]
+    public class EnemyDetectorData 
     {
         [field: SerializeField]
         public float RotationSpeed { get; private set; }

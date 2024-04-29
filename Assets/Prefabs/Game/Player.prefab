@@ -3349,17 +3349,10 @@ MonoBehaviour:
   settings:
     <Transform>k__BackingField: {fileID: 632017414469642739}
     <Animator>k__BackingField: {fileID: 718323420605218998}
-  movementSettings:
-    MoveSpeed: 8
-    RotateSpeed: 10
-  healthSettings:
-    MaxHealth: 5000
-    IsAutoHeal: 1
-    HealDelay: 3
-    HealRate: 0.5
-    HealCount: 50
+  movementSettings: {fileID: 11400000, guid: fc5302c80ef15944781303c5228af7f7, type: 2}
+  healthSettings: {fileID: 11400000, guid: 4b19efbc4138a1b4ca8bb840680ada8a, type: 2}
   enemyDetectorData:
-    <RotationSpeed>k__BackingField: 5
+    <RotationSpeed>k__BackingField: 55
   weaponSettings: {fileID: 11400000, guid: 16fb455fc19a9d544a522c99422f4865, type: 2}
   healthPrefab: {fileID: 2671775819908182200, guid: 504d91682790efc41abe87f2ec3a28e0,
     type: 3}
@@ -3470,7 +3463,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 2fdc0905ad54a4848bee8843f5944fda, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: PlayerAgent

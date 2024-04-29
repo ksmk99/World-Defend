@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Unit
 {
-    [Serializable]
-    public struct HealthSettings
+    [CreateAssetMenu()]
+    public class HealthSettings : ScriptableObject
     {
         public float MaxHealth;
         [Space]
