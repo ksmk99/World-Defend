@@ -53,9 +53,9 @@ namespace Unit.Bullet
             presenter.Reinitialize(p1);
         }
 
-        private void OnTriggerEnter(Collider other)
+        public void OnTriggerEnter(Collider other)
         {
-            presenter.Collide(other);
+            presenter.Collide(other.gameObject);
         }
 
         public class Factory : PlaceholderFactory<BulletRuntimeSettings, BulletView>

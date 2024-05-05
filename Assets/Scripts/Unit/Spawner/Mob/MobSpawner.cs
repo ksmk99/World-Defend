@@ -66,6 +66,12 @@ namespace Unit
                 UnityEngine.Random.Range(-settings.Offset.x, settings.Offset.x), 0,
                 UnityEngine.Random.Range(-settings.Offset.z, settings.Offset.z));
 
+            UnityEngine.AI.NavMeshHit hit;
+            if (UnityEngine.AI.NavMesh.SamplePosition(randomPosition, out hit, 4f, UnityEngine.AI.NavMesh.AllAreas))
+            {
+                randomPosition = hit.position;
+            }
+
             view.transform.position = randomPosition + settings.StartPoint.position;
             view.transform.SetParent(parent);
             view.gameObject.SetActive(true);

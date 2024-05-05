@@ -10,7 +10,9 @@ namespace Unit
 
         public bool CanCollide { get; set; }
         public bool IsSubscribed { get; set; }
-        public AWeaponPresenter Weapon { get; internal set; }
+        public float MovedDistance { get; set; }
+
+        public AWeaponPresenter Weapon { get; set; }
 
         public BulletModel(IBulletSettings settings)
         {

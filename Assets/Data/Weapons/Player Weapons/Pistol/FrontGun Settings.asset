@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977a023fd14550f46a3f02b3aaec1c4a, type: 3}
+  m_Name: FrontGun Settings
+  m_EditorClassIdentifier: 
+  <Distance>k__BackingField: 3
+  <MinDistance>k__BackingField: 8
+  <TargetLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 1024
+  <BlockLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 64
+  <Effects>k__BackingField:
+  - {fileID: 11400000, guid: 5ae54f018d759ba40a17cf6966c24013, type: 2}
+  <BulletPrefab>k__BackingField: {fileID: 5865941083765694682, guid: 18f5ef88f204b7e4d8fe68cb3e768192,
+    type: 3}
+  <HitPrefab>k__BackingField: {fileID: -9082463660586353062, guid: 570c93b66c983284495e6cc387cee2d1,
+    type: 3}
+  <BulletPrespawnCount>k__BackingField: 1
+  BulletCount: 1
+  ReloadTime: 0.75
+  BulletDelay: 1

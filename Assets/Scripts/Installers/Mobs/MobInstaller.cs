@@ -25,8 +25,8 @@ public class MobInstaller : MonoInstaller<MobInstaller>
         Container.BindInterfacesAndSelfTo<HealthPresenter>().AsSingle();
         Container.BindInterfacesAndSelfTo<HealthView>()
             .FromComponentInNewPrefab(healthViewPrefab)
-            .AsSingle()
-            .WithArguments(healthBarIcon, "");
+            .AsSingle();
+            //.WithArguments(healthBarIcon, "");
 
         Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
         Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();

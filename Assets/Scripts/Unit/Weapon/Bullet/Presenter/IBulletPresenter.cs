@@ -5,7 +5,7 @@ namespace Unit.Bullet
     public interface IBulletPresenter
     {
         bool CheckEnd();
-        void Collide(Collider other);
+        void Collide(GameObject target);
         void Move();
         void Tick();
     }

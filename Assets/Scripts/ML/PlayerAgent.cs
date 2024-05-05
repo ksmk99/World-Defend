@@ -35,6 +35,10 @@ public class PlayerAgent : Agent
     [SerializeField] private float minBulletDistance = 3f;
     [SerializeField] private float bulletDistanceReward = 100f;
     [SerializeField] private AnimationCurve bulletDistanceRewardCurve;
+    [Space]
+    [SerializeField] private AnimationCurve deathRewardCurve;
+    [SerializeField] private float deathReward;
+
 
     private IInputService inputService;
 
@@ -54,8 +58,8 @@ public class PlayerAgent : Agent
     private Vector3 roomSize => enemySpawner.RoomSize * 1.2f;
 
     [Inject]
-    public void Init(IInputService inputService, LevelSettingsData levelSettings, 
-        EnemySpawner enemySpawner, MobSpawner mobSpawner, 
+    public void Init(IInputService inputService, LevelSettingsData levelSettings,
+        EnemySpawner enemySpawner, MobSpawner mobSpawner,
         PlayerPresenter presenter, SignalBus signalBus, IWeaponPresenter weapon)
     {
         this.inputService = inputService;
@@ -92,7 +96,7 @@ public class PlayerAgent : Agent
         var enemyUnits = GetNearestUnits(enemySpawner.ActiveUnits, transform.position);
         if (enemyUnits.Length > 0)
         {
-            var distance = Vector3.Distance(enemyUnits[0], transform.position);
+            var distance = Vector3.Distance(enemyUnits[0].transform.position, transform.position);
             var index = distance > weapon.Settings.MinDistance && distance < weapon.Settings.Distance ? 1 : -1;
 
             if (index > 0)
@@ -126,20 +130,19 @@ public class PlayerAgent : Agent
         var y = Input.GetAxis("Vertical");
 
         var direction = new Vector2(x, y);
-        if(direction.Equals(Vector2.zero))
+        if (direction.Equals(Vector2.zero))
         {
             direction = inputService.GetMoveDirection();
         }
 
         continuousActionsOut[0] = direction.x;
-        continuousActionsOut[1] =direction.y;   
+        continuousActionsOut[1] = direction.y;
     }
 
     private void UpdateRewardValue(float reward)
     {
         AddReward(reward);
         cumulative_reward += reward;
-        //Debug.Log(cumulative_reward);
     }
 
     private float GetNormalizedValue(float value, float roomSize, float offset)
@@ -155,7 +158,7 @@ public class PlayerAgent : Agent
     {
         var colliders = new Collider[1];
         var bulletsCount = Physics.OverlapSphereNonAlloc(position, radius, colliders, layer);
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 3; i++)
         {
             var bulletPos = Vector3.zero;
             if (bulletsCount > i)
@@ -171,6 +174,12 @@ public class PlayerAgent : Agent
 
 
         bullets = colliders.Where(x => x != null).Select(x => x.transform.position).ToArray();
+    }
+
+    public void PlayerDeath(SignalOnPlayerDeath signal)
+    {
+        float reward = GetReward(deathRewardCurve, deathReward);
+        UpdateRewardValue(reward);
     }
 
     private void OnDrawGizmos()
@@ -202,18 +211,6 @@ public class PlayerAgent : Agent
         }
     }
 
-    public void UnitDamage(SignalOnDamage signal)
-    {
-        //float reward = GetReward(damageRewardCurve, damageReward);
-        //if (signal.Team == Team.Enemy)
-        //{
-        //    UpdateRewardValue(reward);
-        //}
-        //else
-        //{
-        //    UpdateRewardValue(-reward);
-        //}
-    }
 
     private float GetReward(AnimationCurve rewardCurve, float rewardIndex)
     {
@@ -230,15 +227,20 @@ public class PlayerAgent : Agent
 
     private void AddUnitsObservation(VectorSensor sensor, List<UnitView> views, Vector3 position, Vector3 offset)
     {
-        var enemyUnits = GetNearestUnits(views, position);
-        for (int i = 0; i < 1; i++)
+        var enemyUnits = GetNearestUnits(views, position, 3);
+        foreach (var unit in enemyUnits) 
         {
             var observation = Vector3.zero;
-            if (enemyUnits.Length > i)
+            var id = 0;
+            if (unit != null)
             {
-                observation = enemyUnits[i];
+                observation = unit.transform.position;
                 observation -= offset;
+
+                id = unit.GetPoolID();
             }
+
+            sensor.AddObservation(id);
 
             var value = GetNormalizedValue(observation.x, roomSize.x, enemySpawner.SpawnOffset.x);
             sensor.AddObservation(value);
@@ -247,22 +249,12 @@ public class PlayerAgent : Agent
         }
     }
 
-    private Vector3[] GetNearestUnits(List<UnitView> views, Vector3 position)
+    private UnitView[] GetNearestUnits(List<UnitView> views, Vector3 position, int count = 3)
     {
         var units = views
-            .OrderBy(x => Vector3.Distance(position, x.transform.position))
-            .Select(x => x.transform.position);
-
-        return units.Take(1).ToArray();
-    }
-
-    private UnitView[] GetActiveMobs(List<UnitView> views, Vector3 position)
-    {
-        var units = views
-            .Where(x => x.GetPresenter().IsActive)
             .OrderBy(x => Vector3.Distance(position, x.transform.position));
 
-        return units.ToArray();
+        return units.Take(count).ToArray();
     }
 
     private Vector3 GetMoveDirection(ActionSegment<float> continuousActions)
@@ -292,15 +284,17 @@ public class PlayerAgent : Agent
         isEpisodeEnd = true;
         EndEpisode();
 
-        Debug.Log("Level duration " + (Time.time - time).ToString());
+        if (isDebug)
+        {
+            Debug.Log($"Reward: {cumulative_reward}");
+        }
+
         cumulative_reward = 0;
     }
 
 
     private async void StartEndEpisodeTimer(CancellationTokenSource cts)
     {
-        return;
-
         await Task.Delay((int)(levelSettings.Duration * 1000));
 
         if (cts.IsCancellationRequested)

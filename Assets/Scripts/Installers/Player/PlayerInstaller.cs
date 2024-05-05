@@ -68,8 +68,8 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
         Container.BindInterfacesAndSelfTo<HealthPresenter>().AsSingle();
         Container.BindInterfacesAndSelfTo<HealthView>()
             .FromComponentInNewPrefab(healthPrefab)
-            .AsSingle()
-            .WithArguments(healthBarIcon, "Player");
+            .AsSingle();
+            //.WithArguments(healthBarIcon, "Player");
     }
 
     private void BindPlayer()
@@ -144,8 +144,8 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
             .FromResolve();
 
         Container
-            .BindSignal<SignalOnDamage>()
-            .ToMethod<PlayerAgent>(x => x.UnitDamage)
+            .BindSignal<SignalOnPlayerDeath>()
+            .ToMethod<PlayerAgent>(x => x.PlayerDeath)
             .FromResolve();
 
         Container

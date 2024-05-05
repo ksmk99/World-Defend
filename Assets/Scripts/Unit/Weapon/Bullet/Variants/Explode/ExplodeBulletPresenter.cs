@@ -12,14 +12,14 @@ namespace Unit
             setting = (ExplodeBulletSetting)model.Settings;
         }
 
-        public override void Collide(Collider other)
+        public override void Collide(GameObject target)
         {
             if (!model.CanCollide)
             {
                 return;
             }
 
-            if (other.TryGetComponent<UnitView>(out var unitView))
+            if (target.TryGetComponent<UnitView>(out var unitView))
             {
                 UnitPresenter presenter = unitView.GetPresenter();
                 if (presenter.Team == model.Team)

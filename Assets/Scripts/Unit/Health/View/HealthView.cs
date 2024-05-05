@@ -30,11 +30,11 @@ namespace Unit
         private CancellationTokenSource cts;
 
         [Inject]
-        public void Init(SignalBus signalBus, Sprite sprite, string name)
+        public void Init(SignalBus signalBus)//, Sprite sprite, string name)
         {
             this.signalBus = signalBus;
-            healthBar.sprite = sprite;
-            nicknameText.text = name;   
+            //healthBar.sprite = sprite;
+            //nicknameText.text = name;   
 
             cts = new CancellationTokenSource();
             gameObject.SetActive(false);    

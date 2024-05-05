@@ -1,3 +1,4 @@
+using Unit.Bullet;
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour
@@ -9,6 +10,10 @@ public class Obstacle : MonoBehaviour
         {
             var presenter = player.GetPresenter();
             presenter.TouchBorder();
+        }
+        else if(collision.transform.TryGetComponent<BulletView>(out var bullet))
+        {
+            bullet.GetPresenter().Collide(gameObject);
         }
     }
 
