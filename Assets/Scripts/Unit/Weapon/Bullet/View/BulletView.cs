@@ -1,21 +1,45 @@
 ﻿using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
-using static Zenject.SignalSubscription;
 
 namespace Unit.Bullet
 {
-    public class BulletView : MonoBehaviour, IBulletView, IPoolable<BulletRuntimeSettings, IMemoryPool>, IDisposable
+    public class BulletView : ADisposeView, IPoolable<BulletRuntimeSettings, IMemoryPool>
     {
+        private ParticleSystem[] particles;
+
         private IMemoryPool _pool;
 
-        public event Action<Collider> OnCollide;
-        public event Action<BulletView> OnDispose;
-        public event Action<BulletRuntimeSettings> OnReinitialize;
+        private ABulletPresenter presenter;
 
-        public void Dispose()
+        public override event Action<ADisposeView> OnDispose;
+
+        [Inject]
+        public void Init(ABulletPresenter presenter)
         {
+            this.presenter = presenter;
+        }
+
+        public ABulletPresenter GetPresenter()
+        {
+            return presenter;
+        }
+
+        public override void Dispose()
+        {
+            if (particles == null)
+            {
+                particles = GetComponentsInChildren<ParticleSystem>();
+            }
+
+            foreach (ParticleSystem particle in particles)
+            {
+                particle.Stop();
+            }
+
             _pool.Despawn(this);
+            OnDispose?.Invoke(this);
         }
 
         public void OnDespawned()
@@ -26,12 +50,12 @@ namespace Unit.Bullet
         public void OnSpawned(BulletRuntimeSettings p1, IMemoryPool p2)
         {
             _pool = p2;
-            OnReinitialize?.Invoke(p1);
+            presenter.Reinitialize(p1);
         }
 
         public void OnTriggerEnter(Collider other)
         {
-            OnCollide?.Invoke(other);
+            presenter.Collide(other.gameObject);
         }
 
         public class Factory : PlaceholderFactory<BulletRuntimeSettings, BulletView>

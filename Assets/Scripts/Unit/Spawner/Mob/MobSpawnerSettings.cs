@@ -7,6 +7,9 @@ namespace Unit
     public class MobSpawnerSettings
     {
         public int SpawnCount;
-        public Vector3 Offset;
+        [field: SerializeField]
+        public Vector3 Offset { get; set; }
+        [field: SerializeField]
+        public Transform StartPoint { get; set; }
     }
 }

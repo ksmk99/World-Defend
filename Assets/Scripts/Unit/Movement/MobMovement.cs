@@ -1,37 +1,66 @@
-﻿using UnityEngine;
+﻿using Helpers;
+using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
 namespace Unit
 {
     public class MobMovement : IMovement
     {
-        private readonly PlayerPresentor player;
+        private PlayerPresenter player;
+        private readonly SignalBus signalBus;
         private readonly MobMovementSettings settings;
 
         private readonly Transform transform;
         private readonly NavMeshAgent agent;
 
-        public MobMovement(MobMovementSettings settings, Transform transform, PlayerPresentor player)
+        public MobMovement(MobMovementSettings settings, Transform transform, SignalBus signalBus)
         {
-            this.player = player;
+            this.signalBus = signalBus;
             this.settings = settings;
             this.agent = transform.GetComponent<NavMeshAgent>();
             this.transform = transform;
 
             agent.speed = settings.MoveSpeed;
+            agent.updateRotation = false;
 
             ClampPos();
         }
 
-        public void Move(bool isDead)
+        public void Move(bool isDead, Transform target = null)
         {
-            if (isDead)
+            if (isDead || player == null)
             {
                 agent.velocity = Vector3.zero;
                 return;
             }
 
             agent.SetDestination(player.Transform.position);
+            var direction = (player.Transform.position - transform.position);
+            Rotate(direction, target);
+            SendMoveSignal(agent.velocity.sqrMagnitude > 0.05f);
+        }
+
+
+        private void Rotate(Vector3 direction, Transform target)
+        {
+
+            direction = target == null ? direction : target.position - transform.position;
+            if (direction == Vector3.zero)
+            {
+                return;
+            }
+
+            direction = direction.normalized;
+            var angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            var value = Mathf.Lerp(transform.rotation.y, angle, settings.RotateSpeed);
+            transform.rotation = Quaternion.Euler(0, value, 0);
+        }
+
+        private void SendMoveSignal(bool isMoving)
+        {
+            var signal = new SignalOnMove(isMoving, transform);
+            signalBus.TryFire(signal);
         }
 
         private void ClampPos()
@@ -41,6 +70,11 @@ namespace Unit
             {
                 transform.position = hit.position;
             }
+        }
+
+        public void SetTarget(UnitPresenter presenter)
+        {
+            player = (PlayerPresenter)presenter;
         }
     }
 }

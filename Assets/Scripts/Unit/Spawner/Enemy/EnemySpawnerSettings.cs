@@ -6,7 +6,15 @@ namespace Unit
     [Serializable]
     public class EnemySpawnerSettings
     {
-        public float SpawnRate = 2f;
-        public Vector3 Offset;
+        public int Count = 10;
+        public float SpawnRateMin = 2f;
+        public float SpawnRateMax = 2f;
+
+        [field: SerializeField]
+        public Vector3 Offset { get; set; }
+        [field: SerializeField]
+        public Transform StartPoint { get; set; }
+        [field: SerializeField]
+        public Vector3 MapSize { get; set; }
     }
 }

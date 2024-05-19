@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
 
-namespace Unit.Bullet
+namespace Unit
 {
     public interface IBulletSettings
     {
-        [field: SerializeField]
-        public float Speed { get; set; }
+        float Speed { get; set; }
+        Type BulletType { get; }
     }
 }

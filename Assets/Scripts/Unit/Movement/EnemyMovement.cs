@@ -1,30 +1,34 @@
-﻿using UnityEngine;
+﻿using Helpers;
+using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
 namespace Unit
 {
     public class EnemyMovement : IMovement
     {
-        private readonly PlayerPresentor player;
         private readonly EnemyMovementSettings settings;
+        private readonly SignalBus signalBus;
 
         private readonly Transform transform;
         private readonly NavMeshAgent agent;
 
-        public EnemyMovement(EnemyView view, EnemyMovementSettings settings, PlayerPresentor player)
+        private UnitPresenter player = default;
+
+        public EnemyMovement(EnemyView view, EnemyMovementSettings settings, SignalBus signalBus)
         {
-            this.player = player;
             this.transform = view.transform;
             this.settings = settings;
+            this.signalBus = signalBus;
             this.agent = transform.GetComponent<NavMeshAgent>();
             agent.speed = settings.MoveSpeed;
 
             ClampPos();
         }
 
-        public void Move(bool isDead)
+        public void Move(bool isDead, Transform target = null)
         {
-            if (isDead)
+            if (isDead || player == default)
             {
                 agent.velocity = Vector3.zero;
                 return;
@@ -38,9 +42,17 @@ namespace Unit
                 NavMeshHit hit;
                 if (NavMesh.SamplePosition(player.Transform.position, out hit, float.MaxValue, NavMesh.AllAreas))
                 {
-                    agent.SetDestination(hit.position);
+                    agent.SetDestination(player.Transform.position);
                 }
             }
+
+            SendMoveSignal(agent.velocity.magnitude > 0.1f);
+        }
+
+        private void SendMoveSignal(bool isMoving)
+        {
+            var signal = new SignalOnMove(isMoving, transform);
+            signalBus.TryFire(signal);
         }
 
         private void Rotate(Vector3 direction)
@@ -57,6 +69,11 @@ namespace Unit
             {
                 transform.position = hit.position;
             }
+        }
+
+        public void SetTarget(UnitPresenter presenter)
+        {
+            this.player = presenter;
         }
     }
 }

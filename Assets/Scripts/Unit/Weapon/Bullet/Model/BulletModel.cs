@@ -1,6 +1,4 @@
-﻿using System;
-using Unit.Bullet;
-using UnityEngine;
+﻿using Unit.Bullet;
 
 namespace Unit
 {
@@ -11,6 +9,10 @@ namespace Unit
         public Team Team => RuntimeSettings.Team;
 
         public bool CanCollide { get; set; }
+        public bool IsSubscribed { get; set; }
+        public float MovedDistance { get; set; }
+
+        public AWeaponPresenter Weapon { get; set; }
 
         public BulletModel(IBulletSettings settings)
         {
@@ -20,7 +22,6 @@ namespace Unit
         public void Init(BulletRuntimeSettings param3)
         {
             RuntimeSettings = param3;
-
             CanCollide = true;
         }
     }
