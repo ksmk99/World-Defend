@@ -6,12 +6,13 @@ using Zenject;
 
 public class EnemyInstaller : MonoInstaller<EnemyInstaller>
 {
+    [Header("Settings")]
     [SerializeField] private HealthSettings healthSettings;
     [SerializeField] private EnemyMovementSettings enemyMovement;
     [SerializeField] private AWeaponSettings weaponSettings;
     [Space]
     [SerializeField] private HealthView healthPrefab;
-    [SerializeField] private Sprite healthBarIcon;
+    [SerializeField] private HealthViewData healthData;
     [Space]
     [SerializeField] private Animator animator;
     [SerializeField] private Transform unit;
@@ -23,7 +24,7 @@ public class EnemyInstaller : MonoInstaller<EnemyInstaller>
         BindMovement();
         BindHealth();
         BindWeapon();
-        //BindAnimator();
+        BindAnimator();
 
         Container.Bind<EnemyModel>().AsSingle();
         Container.BindInterfacesAndSelfTo<EnemyPresenter>().AsSingle();
@@ -70,7 +71,7 @@ public class EnemyInstaller : MonoInstaller<EnemyInstaller>
         Container.BindInterfacesAndSelfTo<HealthView>()
             .FromComponentInNewPrefab(healthPrefab)
             .AsSingle()
-            .WithArguments(healthBarIcon, "");
+            .WithArguments(healthData);
     }
 
     private void BindWeapon()

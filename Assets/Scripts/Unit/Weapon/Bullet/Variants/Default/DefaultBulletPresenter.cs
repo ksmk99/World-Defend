@@ -2,33 +2,38 @@
 using UnityEngine;
 
 namespace Unit
-{ 
+{
     public class DefaultBulletPresenter : ABulletPresenter
     {
         public DefaultBulletPresenter(BulletModel model, BulletView view) : base(model, view)
         {
         }
 
-        public override void Collide(Collider other)
+        public override void Collide(GameObject target)
         {
             if (!model.CanCollide)
             {
                 return;
             }
 
-            var isSuccess = false;
-            if (other.TryGetComponent<UnitView>(out var view))
+            model.CanCollide = false;
+            if (target.TryGetComponent<UnitView>(out var view))
             {
                 UnitPresenter presenter = view.GetPresenter();
-                isSuccess = presenter.TryApplyEffects(model.Weapon.Settings.Effects, model.Team);
+                var isSuccess = presenter.TryApplyEffects(model.Weapon.Settings.Effects, model.Team);
+                if (isSuccess)
+                {
+                    model.Weapon.CreateHit(view.transform.position);
+                    return;
+                }
             }
-
-            if (isSuccess)
+            else if (target.TryGetComponent<Obstacle>(out var obstacle))
             {
-                model.Weapon.CreateHit(view.transform.position);
+                model.Weapon.CreateHit(this.view.transform.position);
+                return;
             }
 
-            model.CanCollide = !isSuccess;
+            model.CanCollide = true;
         }
     }
 }

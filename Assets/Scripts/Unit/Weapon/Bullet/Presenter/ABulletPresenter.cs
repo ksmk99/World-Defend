@@ -25,7 +25,7 @@ namespace Unit.Bullet
             view.transform.rotation = model.RuntimeSettings.Rotation;
         }
 
-        public abstract void Collide(Collider other);
+        public abstract void Collide(GameObject target);
 
         public void Tick()
         {
@@ -39,7 +39,7 @@ namespace Unit.Bullet
             }
         }
 
-        public void Move()
+        public virtual void Move()
         {
             view.transform.position += view.transform.forward * Time.deltaTime * model.Settings.Speed;
         }
@@ -49,7 +49,7 @@ namespace Unit.Bullet
             view.Dispose();
         }
 
-        public bool CheckEnd()
+        public virtual bool CheckEnd()
         {
             if (!model.CanCollide)
             {

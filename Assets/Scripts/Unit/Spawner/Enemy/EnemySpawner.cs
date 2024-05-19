@@ -1,6 +1,7 @@
 ﻿using Helpers;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 using Random = UnityEngine.Random;
 
@@ -79,6 +80,12 @@ namespace Unit
             Vector3 randomPosition = new Vector3(
                 Random.Range(-settings.Offset.x, settings.Offset.x), 0,
                 Random.Range(-settings.Offset.z, settings.Offset.z));
+
+            NavMeshHit hit;
+            if(NavMesh.SamplePosition(randomPosition, out hit, 1f, NavMesh.AllAreas))   
+            {
+                randomPosition = hit.position;
+            }
 
             enemy.transform.position = randomPosition + settings.StartPoint.position;
             enemy.transform.SetParent(parent);

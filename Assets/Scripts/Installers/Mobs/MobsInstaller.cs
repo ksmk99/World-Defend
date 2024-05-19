@@ -5,7 +5,6 @@ using Zenject;
 
 public class MobsInstaller : AUnitInstaller
 {
-    [SerializeField] private GameObject prefab;
     [SerializeField] private MobSpawnerSettings mobSpawnerSettings;
     [SerializeField] private SpawnerSettings spawnerSettings;
     [SerializeField] private Transform poolParent;

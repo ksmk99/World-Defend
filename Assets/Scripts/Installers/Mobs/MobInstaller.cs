@@ -7,12 +7,14 @@ using Zenject;
 public class MobInstaller : MonoInstaller<MobInstaller>
 {
     [SerializeField] private int RoomIndex = 1;
-    [SerializeField] private HealthSettings healthSettings;
-    [SerializeField] private AWeaponSettings weaponSettings;
+    [Header("Settings")]
     [SerializeField] private MobMovementSettings movement;
+    [SerializeField] private HealthView healthPrefab;
+    [SerializeField] private HealthViewData healthData;
+    [SerializeField] private HealthSettings healthSettings;
+    [Space]
+    [SerializeField] private AWeaponSettings weaponSettings;
     [SerializeField] private Animator animator;
-    [SerializeField] private HealthView healthViewPrefab;
-    [SerializeField] private Sprite healthBarIcon;
 
     public override void InstallBindings()
     {
@@ -24,9 +26,9 @@ public class MobInstaller : MonoInstaller<MobInstaller>
         Container.Bind<HealthModel>().AsTransient().WithArguments(healthSettings);
         Container.BindInterfacesAndSelfTo<HealthPresenter>().AsSingle();
         Container.BindInterfacesAndSelfTo<HealthView>()
-            .FromComponentInNewPrefab(healthViewPrefab)
+            .FromComponentInNewPrefab(healthPrefab)
             .AsSingle()
-            .WithArguments(healthBarIcon, "");
+            .WithArguments(healthData);
 
         Container.DeclareSignalWithInterfaces<SignalOnUnitDamage>();
         Container.DeclareSignalWithInterfaces<SignalOnUnitHeal>();

@@ -28,6 +28,7 @@ namespace Unit
     [Serializable]
     public struct SpawnType
     {
+        public int Index;
         public UnitView Prefab;
     }
 }

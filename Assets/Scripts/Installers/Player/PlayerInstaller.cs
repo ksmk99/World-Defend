@@ -12,11 +12,13 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
     [Header("Settings")]
     [SerializeField] private Settings settings;
     [SerializeField] private MovementSettings movementSettings;
+    [Space]
+    [SerializeField] private HealthView healthPrefab;
+    [SerializeField] private HealthViewData healthData;
     [SerializeField] private HealthSettings healthSettings;
+    [Space]
     [SerializeField] private EnemyDetectorData enemyDetectorData;
     [SerializeField] private AWeaponSettings weaponSettings;
-    [SerializeField] private HealthView healthPrefab;
-    [SerializeField] private Sprite healthBarIcon;
 
     public override void InstallBindings()
     {
@@ -69,7 +71,7 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
         Container.BindInterfacesAndSelfTo<HealthView>()
             .FromComponentInNewPrefab(healthPrefab)
             .AsSingle()
-            .WithArguments(healthBarIcon, "Player");
+            .WithArguments(healthData);
     }
 
     private void BindPlayer()
@@ -144,8 +146,13 @@ public class PlayerInstaller : MonoInstaller<PlayerInstaller>
             .FromResolve();
 
         Container
+            .BindSignal<SignalOnPlayerDeath>()
+            .ToMethod<PlayerAgent>(x => x.PlayerDeath)
+            .FromResolve();
+
+        Container
             .BindSignal<SignalOnDamage>()
-            .ToMethod<PlayerAgent>(x => x.UnitDamage)
+            .ToMethod<PlayerAgent>(x => x.PlayerDamage)
             .FromResolve();
 
         Container
